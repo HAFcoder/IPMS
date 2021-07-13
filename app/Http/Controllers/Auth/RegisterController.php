@@ -81,7 +81,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return Student::create([
+        // return Student::create([
+        Student::create([
             'stuID' => $data['stuID'],
             'name' => $data['name'],
             'icNo' => $data['icNo'],
@@ -93,6 +94,8 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'password' => Hash::make($data['password']),
         ]);
+
+        return redirect()->intended('login');
         
     }
 

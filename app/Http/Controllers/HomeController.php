@@ -11,13 +11,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-        // $this->middleware('auth:admin');
-        // $this->middleware('auth:lecturer');
-        // $this->middleware('auth:sadmin');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     // $this->middleware('auth:admin');
+    //     // $this->middleware('auth:lecturer');
+    //     // $this->middleware('auth:sadmin');
+    // }
 
     /**
      * Show the application dashboard.
@@ -26,21 +26,21 @@ class HomeController extends Controller
      */
     public function studentHome()
     {
-        return view('home');
+        return view('student.index');
     }
 
     public function lecturerHome()
     {
-        return view('lecturer');
+        return view('lecturer.index');
     }
 
     public function adminHome()
     {
-        return view('admin');
+        return view('coordinator.sessionGenerate');
     }
 
     public function sadminHome()
     {
-        return view('sadmin');
+        return view('sadmin.index');
     }
 }

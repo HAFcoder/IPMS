@@ -41,5 +41,7 @@ Route::post('/register/lecturer', [RegisterController::class, 'createLecturer'])
 // homepages of student, lecturer, admin, super admin
 Route::get('/home', [HomeController::class, 'studentHome'])->name('home')->middleware('auth');
 Route::get('/lecturer', [HomeController::class, 'lecturerHome'])->name('lecturer')->middleware('auth:lecturer');
-Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin')->middleware('auth:admin');
+//Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin')->middleware('auth:admin');
 Route::get('/sadmin', [HomeController::class, 'sadminHome'])->name('sadmin')->middleware('auth:sadmin');
+
+Route::get('/admin', [HomeController::class, 'adminHome']);
