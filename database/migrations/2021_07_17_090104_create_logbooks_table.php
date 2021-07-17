@@ -19,6 +19,7 @@ class CreateLogbooksTable extends Migration
             $table->date('date');
             $table->text('description');
             $table->string('status');
+            $table->foreign('intern_id')->references('id')->on('internships');
         });
     }
 

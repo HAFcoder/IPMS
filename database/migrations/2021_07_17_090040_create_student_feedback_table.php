@@ -18,6 +18,7 @@ class CreateStudentFeedbackTable extends Migration
             $table->unsignedInteger('intern_id');
             $table->json('marks');
             $table->date('created_at');
+            $table->foreign('intern_id')->references('id')->on('internships');
         });
     }
 

@@ -34,9 +34,5 @@ class CreateSupervisorsTable extends Migration
     {
         Schema::dropIfExists('supervisors');
 
-        Schema::table('lists', function(Blueprint $table)
-        {
-            $table->dropForeign('company_id'); 
-        });
     }
 }
