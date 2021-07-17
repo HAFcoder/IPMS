@@ -300,17 +300,6 @@ class ClassLoader
     public function register($prepend = false)
     {
         spl_autoload_register(array($this, 'loadClass'), true, $prepend);
-
-        if (null === $this->vendorDir) {
-            return;
-        }
-
-        if ($prepend) {
-            self::$registeredLoaders = array($this->vendorDir => $this) + self::$registeredLoaders;
-        } else {
-            unset(self::$registeredLoaders[$this->vendorDir]);
-            self::$registeredLoaders[$this->vendorDir] = $this;
-        }
     }
 
     /**
