@@ -36,19 +36,29 @@ Route::get('/register/lecturer', [RegisterController::class, 'showLecturerRegist
 Route::post('/login/admin', [LoginController::class, 'adminLogin']);
 Route::post('/login/lecturer', [LoginController::class, 'lecturerLogin']);
 Route::post('/login/sadmin', [LoginController::class, 'superAdminLogin']);
-
 Route::post('/register/lecturer', [RegisterController::class, 'createLecturer']);
 
-// homepages of student, lecturer, admin, super admin
-Route::get('/home', [HomeController::class, 'studentHome'])->name('home')->middleware('auth');
-Route::get('/lecturer', [HomeController::class, 'lecturerHome'])->name('lecturer')->middleware('auth:lecturer');
-//Route::get('/admin', [HomeController::class, 'adminHome'])->name('admin')->middleware('auth:admin');
-Route::get('/sadmin', [HomeController::class, 'sadminHome'])->name('sadmin')->middleware('auth:sadmin');
+//student group route
+Route::group(['middleware' => 'auth'], function() {
+    //Route::post('/logout', [LoginController::class, 'logout'])->name('logout.admin');
+    Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
+});
 
-Route::get('/admin', [HomeController::class, 'adminHome']);
+//coordinator or admin group route
+Route::group(['middleware' => 'auth:admin'], function() {
+    Route::post('/logout/admin', [LoginController::class, 'adminLogout'])->name('logout.admin');
+    Route::get('/admin', [HomeController::class, 'adminHome']);
+});
+
+//lecturer group route
+Route::group(['middleware' => 'auth:lecturer'], function() {
+    Route::post('/logout/lecturer', [LoginController::class, 'lecturerLogout'])->name('logout.lecturer');
+    Route::get('/lecturer', [HomeController::class, 'lecturerHome']);
+});
 
 
-// Internship Form Store
-Route::get('/internform', [InternshipFormsController::class, 'getform']);
-Route::post('/internform', [InternshipFormsController::class, 'uploadform']);
-
+//super amdin group route
+Route::group(['middleware' => 'auth:sadmin'], function() {
+    Route::post('/logout/sadmin', [LoginController::class, 'sadminLogout'])->name('logout.sadmin');
+    Route::get('/sadmin', [HomeController::class, 'sadminHome']);
+});

@@ -56,8 +56,6 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-
-            //return redirect()->route('admin');
             return redirect()->intended('/admin');
         }
         return back()->withInput($request->only('email', 'remember'));
@@ -76,7 +74,6 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('lecturer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-
             return redirect()->intended('/lecturer');
         }
         return back()->withInput($request->only('email', 'remember'));
@@ -95,9 +92,32 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('sadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-
             return redirect()->intended('/sadmin');
         }
         return back()->withInput($request->only('email', 'remember'));
+    }
+
+    protected function adminLogout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect('/login/admin');
+    }
+
+    protected function lecturerLogout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect('/login/lecturer');
+    }
+
+    protected function sadminLogout(Request $request)
+    {
+        $this->guard()->logout();
+        $request->session()->flush();
+        $request->session()->regenerate();
+        return redirect('/login/sadmin');
     }
 }
