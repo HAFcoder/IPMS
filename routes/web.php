@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InternshipFormsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -45,3 +46,9 @@ Route::get('/lecturer', [HomeController::class, 'lecturerHome'])->name('lecturer
 Route::get('/sadmin', [HomeController::class, 'sadminHome'])->name('sadmin')->middleware('auth:sadmin');
 
 Route::get('/admin', [HomeController::class, 'adminHome']);
+
+
+// Internship Form Store
+Route::get('/internform', [InternshipFormsController::class, 'getform']);
+Route::post('/internform', [InternshipFormsController::class, 'uploadform']);
+
