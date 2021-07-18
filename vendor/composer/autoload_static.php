@@ -85,6 +85,7 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Sven\\ArtisanView\\' => 17,
         ),
         'R' => 
         array (
@@ -307,6 +308,10 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         'Symfony\\Component\\Console\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
+        ),
+        'Sven\\ArtisanView\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sven/artisan-view/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -4413,6 +4418,26 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'Sven\\ArtisanView\\BlockBuilder' => __DIR__ . '/..' . '/sven/artisan-view/src/BlockBuilder.php',
+        'Sven\\ArtisanView\\BlockStack' => __DIR__ . '/..' . '/sven/artisan-view/src/BlockStack.php',
+        'Sven\\ArtisanView\\Blocks\\Block' => __DIR__ . '/..' . '/sven/artisan-view/src/Blocks/Block.php',
+        'Sven\\ArtisanView\\Blocks\\Extend' => __DIR__ . '/..' . '/sven/artisan-view/src/Blocks/Extend.php',
+        'Sven\\ArtisanView\\Blocks\\InlineSection' => __DIR__ . '/..' . '/sven/artisan-view/src/Blocks/InlineSection.php',
+        'Sven\\ArtisanView\\Blocks\\Push' => __DIR__ . '/..' . '/sven/artisan-view/src/Blocks/Push.php',
+        'Sven\\ArtisanView\\Blocks\\Section' => __DIR__ . '/..' . '/sven/artisan-view/src/Blocks/Section.php',
+        'Sven\\ArtisanView\\Commands\\MakeView' => __DIR__ . '/..' . '/sven/artisan-view/src/Commands/MakeView.php',
+        'Sven\\ArtisanView\\Commands\\ScrapView' => __DIR__ . '/..' . '/sven/artisan-view/src/Commands/ScrapView.php',
+        'Sven\\ArtisanView\\Config' => __DIR__ . '/..' . '/sven/artisan-view/src/Config.php',
+        'Sven\\ArtisanView\\Destroyer' => __DIR__ . '/..' . '/sven/artisan-view/src/Destroyer.php',
+        'Sven\\ArtisanView\\Generator' => __DIR__ . '/..' . '/sven/artisan-view/src/Generator.php',
+        'Sven\\ArtisanView\\PathHelper' => __DIR__ . '/..' . '/sven/artisan-view/src/PathHelper.php',
+        'Sven\\ArtisanView\\ServiceProvider' => __DIR__ . '/..' . '/sven/artisan-view/src/ServiceProvider.php',
+        'Sven\\ArtisanView\\ViewActor' => __DIR__ . '/..' . '/sven/artisan-view/src/ViewActor.php',
+        'Sven\\ArtisanView\\Voters\\ExtendsParent' => __DIR__ . '/..' . '/sven/artisan-view/src/Voters/ExtendsParent.php',
+        'Sven\\ArtisanView\\Voters\\SectionsInParent' => __DIR__ . '/..' . '/sven/artisan-view/src/Voters/SectionsInParent.php',
+        'Sven\\ArtisanView\\Voters\\StacksFromParent' => __DIR__ . '/..' . '/sven/artisan-view/src/Voters/StacksFromParent.php',
+        'Sven\\ArtisanView\\Voters\\Voter' => __DIR__ . '/..' . '/sven/artisan-view/src/Voters/Voter.php',
+        'Sven\\ArtisanView\\Voters\\YieldsFromParent' => __DIR__ . '/..' . '/sven/artisan-view/src/Voters/YieldsFromParent.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',
         'Symfony\\Component\\Console\\CI\\GithubActionReporter' => __DIR__ . '/..' . '/symfony/console/CI/GithubActionReporter.php',
