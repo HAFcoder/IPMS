@@ -1,6 +1,6 @@
 @extends('layouts.parentAdmin')
 
-{{-- view all registered company --}}
+{{-- view all pending student and change status --}}
 
 @section('head')
     

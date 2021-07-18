@@ -1,6 +1,6 @@
 @extends('layouts.parentAdmin')
 
-{{-- view all registered company --}}
+{{-- view all registered student --}}
 
 @section('head')
     
@@ -24,7 +24,7 @@
             <h4 class="page-title pull-left">Session</h4>
             <ul class="breadcrumbs pull-left">
                 <li><a href="{{ url('/admin') }}">Home</a></li>
-                <li><span>View All Session</span></li>
+                <li><span>View All Student</span></li>
             </ul>
         </div>
     </div>
@@ -39,7 +39,7 @@
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Session Generated</h4>
+                    <h4 class="header-title">Student</h4>
                     <div class="data-tables datatable-primary">
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">

@@ -36,7 +36,7 @@ class HomeController extends Controller
 
     public function adminHome()
     {
-        return view('coordinator.sessionGenerate');
+        return view('coordinator.student.logbookView');
     }
 
     public function sadminHome()

@@ -1,3 +1,4 @@
+{{-- parent layout for coordinator or admin --}}
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -73,8 +74,8 @@
                                     <span>Lecturer </span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">Pending</a></li>
                                     <li><a href="index3-horizontalmenu.html">View All</a></li>
+                                    <li><a href="index.html">Pending</a></li>
                                 </ul>
                             </li>
 
@@ -97,8 +98,8 @@
                                     <i class="ti-briefcase"></i><span>Company</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="accordion.html">View All</a></li>
                                     <li><a href="alert.html">Add New</a></li>
+                                    <li><a href="accordion.html">View All</a></li>
                                 </ul>
                             </li>
 
@@ -274,11 +275,11 @@
                                     class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); 
-                                    document.getElementById('logout-form').submit();">Log Out</a>
+                                <a class="dropdown-item" href="{{ route('logout.admin') }}" onclick="event.preventDefault(); 
+                                    document.getElementById('logout-form').submit();">Log Out
+                                </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    style="display: none;">
+                                <form id="logout-form" action="{{ route('logout.admin') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>
