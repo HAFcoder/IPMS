@@ -6,19 +6,20 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\LecturerInfo;
+use App\Models\Internship;
+use App\Models\Session;
 
 class Lecturer extends Authenticatable
 {
     use HasFactory, Notifiable;
+    protected $guarded = [];
 
     protected $fillable = [
-        'name',
-        'lecID',
-        'faculty',
-        'position',
         'email',
-        'phone',
+        'role',
         'password',
+        'status',
     ];
 
     protected $hidden = [
@@ -29,4 +30,19 @@ class Lecturer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function lecturerInfo()
+    {
+        return $this->hasOne(LecturerInfo::class);
+    }
+
+    public function intership()
+    {
+        return $this->hasMany(Internship::class);
+    }
+
+    public function session()
+    {
+        return $this->hasMany(Session::class);
+    }
 }

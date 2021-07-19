@@ -17,14 +17,16 @@ class CreateInternshipsTable extends Migration
             $table->increments('id');
 
             $table->unsignedInteger('company_id');
-            $table->unsignedInteger('lecturer_id');  
-            $table->unsignedInteger('supervisor_id');
+            $table->unsignedInteger('lecturer_id')->nullable();  
+            $table->unsignedInteger('supervisor_id')->nullable();
             $table->unsignedInteger('session_id');
+            $table->unsignedInteger('student_id');
             
             $table->foreign('company_id')->references('id')->on('companies')->onDelete('cascade');
             $table->foreign('lecturer_id')->references('id')->on('lecturers')->onDelete('cascade');
             $table->foreign('supervisor_id')->references('id')->on('supervisors')->onDelete('cascade');
-            $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');    
+            $table->foreign('session_id')->references('id')->on('sessions')->onDelete('cascade');   
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');  
             
             $table->integer('duration');
             $table->date('start_date');
