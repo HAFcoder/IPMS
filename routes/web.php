@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\InternshipFormsController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -55,9 +56,11 @@ Route::group(['middleware' => 'auth:lecturer'], function() {
     Route::get('/lecturer', [HomeController::class, 'lecturerHome']);
 });
 
-
 //super amdin group route
 Route::group(['middleware' => 'auth:sadmin'], function() {
     Route::post('/logout/sadmin', [LoginController::class, 'sadminLogout'])->name('logout.sadmin');
     Route::get('/sadmin', [HomeController::class, 'sadminHome']);
 });
+
+Route::get('/internform', [InternshipFormsController::class, 'getform']);
+Route::post('/internform', [InternshipFormsController::class, 'uploadform']);
