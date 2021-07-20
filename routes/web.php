@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InternshipFormsController;
+use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -50,11 +51,14 @@ Route::group(['middleware' => 'auth:admin'], function() {
     Route::get('/admin', [HomeController::class, 'adminHome']);
 });
 
+
 //lecturer group route
 Route::group(['middleware' => 'auth:lecturer'], function() {
     Route::post('/logout/lecturer', [LoginController::class, 'lecturerLogout'])->name('logout.lecturer');
-    Route::get('/lecturer', [HomeController::class, 'lecturerHome']);
+    //Route::get('/lecturer', [HomeController::class, 'lecturerHome']);
 });
+
+Route::get('/lecturer', [HomeController::class, 'lecturerHome']);
 
 //super amdin group route
 Route::group(['middleware' => 'auth:sadmin'], function() {
@@ -64,3 +68,7 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 
 Route::get('/internform', [InternshipFormsController::class, 'getform']);
 Route::post('/internform', [InternshipFormsController::class, 'uploadform']);
+
+// session route
+Route::get('/session_add', [SessionController::class, 'session_generate']);
+Route::post('/session_insert', [SessionController::class, 'session_insert']);
