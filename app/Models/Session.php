@@ -21,4 +21,9 @@ class Session extends Model
     {
         return $this->hasMany(StudentSession::class);
     }
+
+    protected $casts = [
+        'programme' => 'array'
+    ];
+
 }

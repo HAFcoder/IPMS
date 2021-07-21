@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Programme;
+use App\Models\Session;
 
 class SessionController extends Controller
 {
@@ -87,7 +89,9 @@ class SessionController extends Controller
     
     public function session_generate()
     {
-        $programme = DB::table('programmes')->get();
+        //$programme = DB::table('programmes')->get();
+
+        $programme = Programme::all();
 
         $rand_code = "SS" . rand(100000,99999999);
 
@@ -96,8 +100,33 @@ class SessionController extends Controller
 
     public function session_insert(Request $request){
 
-        print_r($request->post());
+        //dump($request->post());
+        
+        $session = new Session;
+        $status = 'active';
 
+        $request->validate([
+            'session_code'=>'required',
+            'start_date'=>'required',
+            'end_date'=>'required',
+            'programme'=>'required',
+        ]);
+
+
+        $session->session_code = $request->session_code;
+        $session->start_date = $request->start_date;
+        $session->end_date = $request->end_date;
+        $session->description = $request->description;
+        $session->programme = $request->programme;
+        $session->status = $status;
+        $session->lecturer_id = 3; //set dummy id for lecturer
+        $session->created_at = now();
+
+        $session->save();
+
+        
+
+        
     }
 
 }
