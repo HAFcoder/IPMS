@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\InternshipFormsController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\FileManagementController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -67,9 +67,12 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
     Route::get('/sadmin', [HomeController::class, 'sadminHome']);
 });
 
-Route::get('/internform', [InternshipFormsController::class, 'getform']);
-Route::post('/internform', [InternshipFormsController::class, 'uploadform']);
-
 // session route
 Route::get('/session_add', [SessionController::class, 'session_generate']);
 Route::post('/session_insert', [SessionController::class, 'session_insert']);
+
+// s3 amazon file management route
+Route::get('/file', [FileManagementController::class, 'index']);
+Route::post('/file/store', [FileManagementController::class, 'store']);
+Route::get('file/download/{file}',[FileManagementController::class, 'download']);
+Route::delete('file/remove/{file}',[FileManagementController::class, 'destroy']);
