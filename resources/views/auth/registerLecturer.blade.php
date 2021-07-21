@@ -12,16 +12,24 @@
                 <p style="color: red">Fill in your details to register.</p>
             </div>
             <div class="login-form-body">
+
                 <div class="form-gp">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" required autocomplete="name">                  
+                    <label for="f_name">First Name</label>
+                    <input type="text" id="f_name" name="f_name" value="{{ old('f_name') }}" required autocomplete="f_name">                  
                     <i class="ti-user"></i>
                     <div class="text-danger"></div>
                 </div>
 
                 <div class="form-gp">
-                    <label for="lecID">Lecturer ID</label>
-                    <input type="text" id="lecID" name="lecID" value="{{ old('lecID') }}" required autocomplete="lecID">                
+                    <label for="l_name">Last Name</label>
+                    <input type="text" id="l_name" name="l_name" value="{{ old('l_name') }}" required autocomplete="l_name">                  
+                    <i class="ti-user"></i>
+                    <div class="text-danger"></div>
+                </div>
+
+                <div class="form-gp">
+                    <label for="lecturerID">Lecturer ID</label>
+                    <input type="text" id="lecturerID" name="lecturerID" value="{{ old('lecturerID') }}" required autocomplete="lecturerID">                
                     <i class="ti-id-badge"></i>
                     <div class="text-danger"></div>
                 </div>
@@ -33,11 +41,14 @@
                     <div class="text-danger"></div>
                 </div>
 
-                <div class="form-gp">
-                    <label for="faculty">Faculty</label>
-                    <input type="text" id="faculty" name="faculty" value="{{ old('faculty') }}" required autocomplete="faculty">                  
-                    <i class="ti-agenda"></i>
-                    <div class="text-danger"></div>
+                <div class="form-group">
+                    <label for="faculty_id">Faculty</label>
+                    <select name="faculty_id" id="faculty_id" class="custom-select">
+                        <option selected="selected">Open this select menu</option>
+                        @foreach ($faculties as $faculty)
+                            <option value="{{ $faculty->id }}" name="faculty_id">{{ $faculty->faculty_name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-gp">
@@ -48,8 +59,8 @@
                 </div>
 
                 <div class="form-gp">
-                    <label for="phone">Phone Number</label>
-                    <input type="text" id="phone" name="phone" value="{{ old('phone') }}" required autocomplete="phone">                  
+                    <label for="telephone">Phone Number</label>
+                    <input type="text" id="telephone" name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone">                  
                     <i class="ti-mobile"></i>
                     <div class="text-danger"></div>
                 </div>

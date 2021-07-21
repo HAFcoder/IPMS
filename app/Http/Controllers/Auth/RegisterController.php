@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faculty;
 use App\Models\Lecturer;
+use App\Models\LecturerInfo;
 use App\Providers\RouteServiceProvider;
 use App\Models\Student;
+use App\Models\StudentInfo;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -70,7 +73,8 @@ class RegisterController extends Controller
 
     public function showLecturerRegisterForm()
     {
-        return view('auth.registerLecturer', ['url' => 'lecturer']);
+        $faculties = Faculty::all();
+        return view('auth.registerLecturer', ['url' => 'lecturer'], compact('faculties'));
     }
 
     /**
@@ -102,25 +106,31 @@ class RegisterController extends Controller
     protected function createLecturer(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'lecID' => ['required', 'string', 'max:55', 'unique:lecturers'],
-            'faculty' => ['required', 'string', 'max:255'],
+            'f_name' => ['required', 'string', 'max:255'],
+            'l_name' => ['required', 'string', 'max:255'],
+            'lecturerID' => ['required', 'string', 'max:255'],
             'position' => ['required', 'string', 'max:255'],
+            'telephone' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:lecturers'],
-            'phone' => ['required', 'string', 'max:25'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         // $this->validator($request->all())->validate();
-        Lecturer::create([
-            'name' => $request->name,
-            'lecID' => $request->lecID,
-            'faculty' => $request->faculty,
-            'position' => $request->position,
+        $data = Lecturer::create([
             'email' => $request->email,
-            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
+
+        LecturerInfo::create([
+            'f_name' => $request->f_name,
+            'l_name' => $request->l_name,
+            'lec_id' => $data->id,
+            'lecturerID' => $request->lecturerID,
+            'telephone' => $request->telephone,
+            'faculty_id' => $request->faculty_id,
+            'position' => $request->position,
+        ]);
+
         return redirect()->intended('login/lecturer');
     }
 }

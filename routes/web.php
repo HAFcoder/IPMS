@@ -17,11 +17,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Auth::routes();
 
 // display login page
@@ -41,6 +36,7 @@ Route::post('/register/lecturer', [RegisterController::class, 'createLecturer'])
 //student group route
 Route::group(['middleware' => 'auth'], function() {
     //Route::post('/logout', [LoginController::class, 'logout'])->name('logout.admin');
+    Route::get('/', [HomeController::class, 'studentHome'])->name('home');
     Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
 });
 

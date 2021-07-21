@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => 'a9539651db21bbc6e234c0e620668c6dcad2a17c',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -29,6 +29,15 @@
       ),
       'reference' => 'dff976c2f3487d42c1db75a3b180e2b9f0e72ce0',
     ),
+    'composer/package-versions-deprecated' => 
+    array (
+      'pretty_version' => '1.11.99.2',
+      'version' => '1.11.99.2',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c6522afe5540d5fc46675043d3ed5a45a740b27c',
+    ),
     'cordoval/hamcrest-php' => 
     array (
       'replaced' => 
@@ -42,6 +51,42 @@
       array (
         0 => '*',
       ),
+    ),
+    'doctrine/cache' => 
+    array (
+      'pretty_version' => '2.1.1',
+      'version' => '2.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '331b4d5dbaeab3827976273e9356b3b453c300ce',
+    ),
+    'doctrine/dbal' => 
+    array (
+      'pretty_version' => '3.1.1',
+      'version' => '3.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8e0fde2b90e3f61361013d1e928621beeea07bc0',
+    ),
+    'doctrine/deprecations' => 
+    array (
+      'pretty_version' => 'v0.5.3',
+      'version' => '0.5.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9504165960a1f83cc1480e2be1dd0a0478561314',
+    ),
+    'doctrine/event-manager' => 
+    array (
+      'pretty_version' => '1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '41370af6a30faa9dc0368c4a6814d596e81aba7f',
     ),
     'doctrine/inflector' => 
     array (
@@ -431,12 +476,12 @@
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => 'a9539651db21bbc6e234c0e620668c6dcad2a17c',
     ),
     'laravel/sail' => 
     array (
@@ -556,6 +601,13 @@
       array (
       ),
       'reference' => '41b7e9999133d5082700d31a1d0977161df8322a',
+    ),
+    'ocramius/package-versions' => 
+    array (
+      'replaced' => 
+      array (
+        0 => '1.11.99',
+      ),
     ),
     'opis/closure' => 
     array (
