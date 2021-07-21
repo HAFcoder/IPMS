@@ -119,12 +119,12 @@ class SessionController extends Controller
         $session->description = $request->description;
         $session->programme = $request->programme;
         $session->status = $status;
-        $session->lecturer_id = 3; //set dummy id for lecturer
+        $session->lecturer_id = 1; //set dummy id for lecturer
         $session->created_at = now();
 
         $session->save();
 
-        
+        return redirect()->back()->with('success', 'Session data has been successfully added.');
 
         
     }

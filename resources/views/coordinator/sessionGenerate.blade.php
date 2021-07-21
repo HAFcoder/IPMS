@@ -33,6 +33,29 @@
 
                     <form method="POST" action='{{ url("session_insert") }}'>
                         @csrf
+                    
+                        @if ($errors->any())
+                        <div class="form-group">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if (session()->has('success'))
+                        <div class="form-group">
+                            <div class="alert alert-success">
+                                <ul>
+                                    <li>{{ session()->get('success') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Session Code</label>
                             <input class="form-control" type="text" value="{{ $randcode }}" readonly name="session_code" placeholder="Enter session code" required>
@@ -67,18 +90,6 @@
                             <label for="example-search-input" class="col-form-label">Description</label>
                             <textarea name="description" rows="5" placeholder="Enter session description" class="form-control"></textarea>
                         </div>
-                    
-                        @if ($errors->any())
-                        <div class="form-group">
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </div>
-                        @endif
 
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                     </form>
