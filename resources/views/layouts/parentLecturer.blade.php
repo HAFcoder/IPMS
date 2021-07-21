@@ -62,7 +62,7 @@
                                     <i class="ti-calendar"></i> <span>Session</span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">View All</a></li>
+                                    <li><a href="{{ url('/session_view') }}">View All</a></li>
                                     <li><a href="{{ url('/session_add') }}">Generate New</a></li>
                                 </ul>
                             </li>

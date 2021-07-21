@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\StudentSession;
 use App\Models\Lecturer;
+use App\Models\LecturerInfo;
 
 class Session extends Model
 {
@@ -15,6 +16,11 @@ class Session extends Model
     public function lecturer()
     {
         return $this->belongsTo(Lecturer::class, 'lecturer_id');
+    }
+
+    public function lecturerInfo()
+    {
+        return $this->belongsTo(LecturerInfo::class, 'lecturer_id');
     }
 
     public function studSession()

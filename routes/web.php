@@ -71,5 +71,6 @@ Route::get('/internform', [InternshipFormsController::class, 'getform']);
 Route::post('/internform', [InternshipFormsController::class, 'uploadform']);
 
 // session route
-Route::get('/session_add', [SessionController::class, 'session_generate']);
-Route::post('/session_insert', [SessionController::class, 'session_insert']);
+Route::get('/session_view', [SessionController::class, 'index']);
+Route::get('/session_add', [SessionController::class, 'create']);
+Route::post('/session_insert', [SessionController::class, 'store']);
