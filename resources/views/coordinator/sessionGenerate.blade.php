@@ -22,10 +22,11 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Register New Session</h4>
-                    <form action="#">
+                    <form method="POST" action='{{ url("session_insert") }}'>
+                        @csrf
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Session Code</label>
-                            <input class="form-control" type="text" name="session_code" placeholder="Enter session code" required>
+                            <input class="form-control" type="text" value="{{ $randcode }}" disabled name="session_code" placeholder="Enter session code" required>
                         </div>
 
                         <div class="form-group">
@@ -39,12 +40,13 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label">Status</label>
-                            <select class="custom-select">
-                                <option selected="selected">Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <label class="col-form-label">Programme Available</label>
+                            <select class="custom-select" multiple name="programme[]">
+
+                            @foreach($programme as $key => $data)
+                                <option value="{{ $data->id }}">{{ $data->name }} ({{ $data->code }})</option>
+                            @endforeach
+
                             </select>
                         </div>
 
