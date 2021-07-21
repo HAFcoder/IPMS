@@ -24,6 +24,7 @@ class CreateLecturerInfo extends Migration
             $table->string('position');
             $table->foreign('faculty_id')->references('id')->on('faculties');
             $table->foreign('lect_id')->references('id')->on('lecturers')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

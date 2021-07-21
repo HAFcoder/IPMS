@@ -74,7 +74,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('lecturer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            return redirect()->intended('/lecturer');
+            //return redirect()->intended('/lecturer');
+            if (Auth::user()->role == 'coordinator') {
+                return redirect()->route('coordinator.index');
+            }elseif (Auth::user()->role == 'lecturer' && Auth::user()->status == 'approve'){
+                return redirect()->route('lecturer.index');
+            }else{
+                return redirect()->route('lecturer.pending');
+            }
         }
         return back()->withInput($request->only('email', 'remember'));
     }

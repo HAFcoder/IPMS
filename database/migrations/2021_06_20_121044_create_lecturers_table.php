@@ -16,11 +16,11 @@ class CreateLecturersTable extends Migration
         Schema::create('lecturers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('role');
+            $table->string('role')->default('lecturer');
             $table->string('password',255);
             $table->rememberToken();
+            $table->string('status')->default('pending');
             $table->timestamps();
-            $table->string('status');
         });
     }
 

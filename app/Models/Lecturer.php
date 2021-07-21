@@ -14,6 +14,7 @@ class Lecturer extends Authenticatable
 {
     use HasFactory, Notifiable;
     protected $guarded = [];
+    protected $table = 'lecturers';
 
     protected $fillable = [
         'email',

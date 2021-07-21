@@ -11,6 +11,8 @@ class LecturerInfo extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'lecturer_info';
+    protected $primaryKey = 'id';
 
     public function faculty()
     {

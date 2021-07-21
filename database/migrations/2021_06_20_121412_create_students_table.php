@@ -16,11 +16,11 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
             $table->string('email')->unique();
-            $table->string('role');
+            $table->string('role')->default('student');
             $table->string('password',255);
             $table->rememberToken();
+            $table->string('status')->default('pending');
             $table->timestamps();
-            $table->string('status');
         });
     }
 

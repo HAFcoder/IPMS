@@ -116,20 +116,22 @@ class RegisterController extends Controller
         ]);
 
         // $this->validator($request->all())->validate();
-        $data = Lecturer::create([
+        $data = new Lecturer([
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+        $data->save();
 
-        LecturerInfo::create([
+        $info = new LecturerInfo([
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
-            'lec_id' => $data->id,
+            'lect_id' => $data->id,
             'lecturerID' => $request->lecturerID,
             'telephone' => $request->telephone,
             'faculty_id' => $request->faculty_id,
             'position' => $request->position,
         ]);
+        $info->save();
 
         return redirect()->intended('login/lecturer');
     }

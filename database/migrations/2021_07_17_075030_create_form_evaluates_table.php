@@ -18,6 +18,7 @@ class CreateFormEvaluatesTable extends Migration
             $table->json('question');
             $table->string('role');
             $table->string('status');
+            $table->timestamps();
         });
     }
 

@@ -17,6 +17,7 @@ class CreateFacultiesTable extends Migration
             $table->increments('id');
             $table->string('faculty_name');
             $table->string('status');
+            $table->timestamps();
         });
     }
 

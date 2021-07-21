@@ -17,8 +17,9 @@ class CreateCompanyFeedbackTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('intern_id');
             $table->json('marks');
-            $table->date('created_at');
+            $table->date('create_at');
             $table->foreign('intern_id')->references('id')->on('internships');
+            $table->timestamps();
         });
     }
 

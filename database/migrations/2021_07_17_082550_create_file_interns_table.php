@@ -18,6 +18,7 @@ class CreateFileInternsTable extends Migration
             $table->string('name');
             $table->binary('doc');
             $table->string('status');
+            $table->timestamps();
         });
     }
 

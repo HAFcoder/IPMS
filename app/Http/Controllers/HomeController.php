@@ -34,7 +34,7 @@ class HomeController extends Controller
         return view('lecturer.index');
     }
 
-    public function adminHome()
+    public function coordinatorHome()
     {
         return view('coordinator.student.logbookView');
     }
@@ -42,6 +42,13 @@ class HomeController extends Controller
     public function sadminHome()
     {
         return view('sadmin.index');
+    }
+
+    public function pending()
+    {
+        // $users = User::all();
+
+        return view('lecturer.index');
     }
     
 }

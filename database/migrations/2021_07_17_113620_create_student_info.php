@@ -27,6 +27,7 @@ class CreateStudentInfo extends Migration
             $table->unsignedInteger('programme_id');
             $table->foreign('stud_id')->references('id')->on('students')->onDelete('cascade');
             $table->foreign('programme_id')->references('id')->on('programmes');
+            $table->timestamps();
             
         });
     }
