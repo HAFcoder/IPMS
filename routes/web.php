@@ -68,9 +68,12 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 });
 
 // session route
-Route::get('/session_view', [SessionController::class, 'index']);
-Route::get('/session_add', [SessionController::class, 'create']);
-Route::post('/session_insert', [SessionController::class, 'store']);
+//Route::get('/session_view', [SessionController::class, 'index']);
+//Route::get('/session_add', [SessionController::class, 'create']);
+//Route::post('/session_insert', [SessionController::class, 'store']);
+//Route::get('/session/edit/{id}', [SessionController::class, 'edit'])->name('session.edit');
+Route::resource('session', SessionController::class);
+//Route::get('/session/delete/{id}', [SessionController::class, 'delete'])->name('session.delete');
 
 // s3 amazon file management route
 Route::get('/file', [FileManagementController::class, 'index']);

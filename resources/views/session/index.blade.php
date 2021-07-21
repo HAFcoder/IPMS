@@ -42,19 +42,23 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th></th>
                                     <th>Code</th>
                                     <th>Duration</th>
                                     <th>Creator</th>
                                     <th>Description</th>
                                     <th>Programme</th>
                                     <th>Status</th>
-                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach($sessions as $ss)
                                 <tr>
+                                    <td>
+                                        <a href="{{ route('session.edit',$ss->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('session.destroy',$ss->id) }}" class="btn btn-danger">Delete</a>
+                                    </td>
                                     <td>{{ $ss->session_code }}</td>
                                     <td>{{ date('d/m/Y', strtotime($ss->start_date)) }} - {{ date('d/m/Y', strtotime($ss->end_date)) }}</td>
                                     <td>
@@ -100,10 +104,6 @@
                                     </td>
 
                                     <td>{{  ucfirst(trans($ss->status)) }}</td>
-                                    <td>
-                                        <button class="btn btn-success">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
                                 </tr>
                                 @endforeach
 

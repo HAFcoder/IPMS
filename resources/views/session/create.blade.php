@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <h4 class="header-title">Register New Session</h4>
 
-                    <form method="POST" action='{{ url("session_insert") }}'>
+                    <form method="POST" action='{{ route("session.create") }}'>
                         @csrf
                     
                         @if ($errors->any())

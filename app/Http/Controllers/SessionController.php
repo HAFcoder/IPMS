@@ -57,7 +57,7 @@ class SessionController extends Controller
         $status = 'active';
 
         $request->validate([
-            'session_code'=>'required',
+            'session_code'=>'required|unique:posts|max:15',
             'start_date'=>'required',
             'end_date'=>'required',
             'programme'=>'required',
@@ -96,7 +96,12 @@ class SessionController extends Controller
      */
     public function edit($id)
     {
-        //
+        //print $id;
+        $sessions = Session::find($id)->first();
+        $programme = Programme::all();
+        //print_r($sessions);
+
+        return view('session.edit',compact('sessions','programme'));
     }
 
     /**
@@ -108,7 +113,27 @@ class SessionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //print_r($request->all());
+        
+        //print $id;
+        
+        $request->validate([
+            'start_date'=>'required',
+            'end_date'=>'required',
+            'programme'=>'required',
+        ]);
+
+        $session = Session::find($id)->first();
+        $session->session_code = $request->session_code;
+        $session->start_date = $request->start_date;
+        $session->end_date = $request->end_date;
+        $session->description = $request->description;
+        $session->programme = $request->programme;
+
+        $session->save();
+
+        return redirect()->back()->with('success', 'Session data has been successfully updated.');
+
     }
 
     /**
@@ -119,7 +144,7 @@ class SessionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        print $id;
     }
 
 
