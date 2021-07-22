@@ -14,7 +14,9 @@ class CreateFileManagementTable extends Migration
     public function up()
     {
         Schema::create('file_management', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->string('filename');
+            $table->string('url');
             $table->timestamps();
         });
     }

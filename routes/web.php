@@ -76,7 +76,10 @@ Route::resource('session', SessionController::class);
 //Route::get('/session/delete/{id}', [SessionController::class, 'delete'])->name('session.delete');
 
 // s3 amazon file management route
-Route::get('/file', [FileManagementController::class, 'index']);
-Route::post('/file/store', [FileManagementController::class, 'store']);
-Route::get('file/download/{file}',[FileManagementController::class, 'download']);
-Route::delete('file/remove/{file}',[FileManagementController::class, 'destroy']);
+// Route::get('/file', [FileManagementController::class, 'index']);
+// Route::post('/file/store', [FileManagementController::class, 'store']);
+// Route::get('file/{file}',[FileManagementController::class, 'download']);
+// Route::delete('file/remove/{file}',[FileManagementController::class, 'destroy']);
+Route::get('/internfile', [FileManagementController::class, 'create']);
+Route::post('/internfile', [FileManagementController::class, 'store']);
+Route::get('/internfile/{file}',[FileManagementController::class, 'show']);
