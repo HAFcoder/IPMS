@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\LecturerInfo;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,11 @@ class HomeController extends Controller
      */
     // public function __construct()
     // {
-    //     $this->middleware('auth');
+    //     // $this->middleware('auth');
+    //     // $this->middleware('role:coordinator');
+    //     // $this->middleware('role:lecturer');
+    //     // $this->middleware('status:approve');
+    //     // $this->middleware('status:pending');
     //     // $this->middleware('auth:admin');
     //     // $this->middleware('auth:lecturer');
     //     // $this->middleware('auth:sadmin');
@@ -24,6 +30,40 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    public function logout(Request $request) {
+        // $role = auth()->user()->role;
+        // $this->guard()->logout();
+        // $request->session()->flush();
+        // $request->session()->regenerate();
+        // if ($role == 'lecturer' || $role == 'coordinator') {
+        //     return redirect('/login/lecturer');
+        // } elseif ($role == 'student') {
+        //     return redirect('/login');
+        // } else {
+        //     return redirect('/login/admin');
+        // }
+        // $this->guard()->logout();
+        // // return redirect('/login/admin');
+
+        if(Auth::guard('lecturer')->check()){
+            $this->guard()->logout();
+            $request->session()->flush();
+            $request->session()->regenerate();
+            return redirect('/login/lecturer');
+        }elseif(Auth::guard('sadmin')->check()){
+            $this->guard()->logout();
+            $request->session()->flush();
+            $request->session()->regenerate();
+            return redirect('/login/admin');
+        }else{
+            $this->guard()->logout();
+            $request->session()->flush();
+            $request->session()->regenerate();
+            return redirect('/login');
+        }
+        
+    }
+
     public function studentHome()
     {
         return view('student.index');
@@ -31,12 +71,20 @@ class HomeController extends Controller
 
     public function lecturerHome()
     {
-        return view('lecturer.index');
+        $uid = Auth::user()->id;
+        $lect = LecturerInfo::where([
+            'lect_id' => $uid,
+         ])->first(); 
+        return view('lecturer.index', compact('lect'));
     }
 
     public function coordinatorHome()
     {
-        return view('coordinator.student.logbookView');
+        $uid = Auth::user()->id;
+        $lect = LecturerInfo::where([
+            'lect_id' => $uid,
+         ])->first(); 
+        return view('coordinator.student.logbookView', compact('lect'));
     }
 
     public function sadminHome()
@@ -46,9 +94,12 @@ class HomeController extends Controller
 
     public function pending()
     {
-        // $users = User::all();
+        $uid = Auth::user()->id;
+        $lect = LecturerInfo::where([
+            'lect_id' => $uid,
+         ])->first(); 
 
-        return view('lecturer.index');
+        return view('lecturer.pending', compact('lect'));
     }
     
 }

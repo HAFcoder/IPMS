@@ -14,7 +14,11 @@
                 <div class="logo">
                     <img src="{{asset('assets/images/icon/kuptm_logo.png')}}" alt="logo"></a>
                 </div>
-                <p style="color: red">Sign in with your registered details.</p>
+                @if (\Request::getRequestUri() === '/login/lecturer')
+                    <p style="color: red">Lecturer.</p>
+                @elseif (\Request::getRequestUri() === '/login')
+                    <p style="color: red">Student.</p>
+                @endif
             </div>
             <div class="login-form-body">
                 <div class="form-gp">

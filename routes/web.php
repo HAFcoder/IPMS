@@ -34,38 +34,42 @@ Route::post('/login/lecturer', [LoginController::class, 'lecturerLogin']);
 Route::post('/login/sadmin', [LoginController::class, 'superAdminLogin']);
 Route::post('/register/lecturer', [RegisterController::class, 'createLecturer']);
 
+Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
+
 //student group route
 Route::group(['middleware' => 'auth'], function() {
     //Route::post('/logout', [LoginController::class, 'logout'])->name('logout.admin');
-    Route::get('/', [HomeController::class, 'studentHome'])->name('home');
+    Route::get('/', [HomeController::class, 'studentHome']);
     Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
 });
 
 //coordinator or admin group route
 Route::group(['middleware' => ['auth:admin']], function() {
-    Route::post('/logout/admin', [LoginController::class, 'adminLogout'])->name('logout.admin');
     Route::get('/admin', [HomeController::class, 'adminHome']);
 });
 
-
 //lecturer group route
-Route::group(['middleware' => ['auth:lecturer']], function() {
-    Route::post('/logout/lecturer', [LoginController::class, 'lecturerLogout'])->name('logout.lecturer');
+Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function() {
     // if user is approve [coordinator]
-    Route::get('/coordinator', [HomeController::class, 'coordinatorHome']);
+    Route::get('/lecturer/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
 
-    // if user is approve [lecturer]
-    Route::get('/lecturer', [HomeController::class, 'lecturerHome']);
 });
 
- // redirect user if not approve
- Route::get('/lecturer/pending', [HomeController::class, 'pending'])->middleware(['auth:lecturer', 'role']);;
+Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:approve']], function() {
+    // if user is approve [lecturer]
+    Route::get('/lecturer', [HomeController::class, 'lecturerHome'])->name('lecturer.index');
+});
+
+Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:pending']], function() {
+    // redirect user if not approve
+    Route::get('/lecturer/pending', [HomeController::class, 'pending'])->name('lecturer.pending');
+});
 
 //super amdin group route
 Route::group(['middleware' => 'auth:sadmin'], function() {
-    Route::post('/logout/sadmin', [LoginController::class, 'sadminLogout'])->name('logout.sadmin');
     Route::get('/sadmin', [HomeController::class, 'sadminHome']);
 });
+// Route::get('/coordinator', [HomeController::class, 'coordinatorHome']);
 
 // session route
 //Route::get('/session_view', [SessionController::class, 'index']);
