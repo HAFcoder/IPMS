@@ -62,9 +62,11 @@
                 <div class="form-footer text-center mt-5">
                     {{-- check url to redirect to register page --}}
                     @if (\Request::getRequestUri() === '/login/lecturer')
-                        <p class="text-muted">Don't have an account? <a href="{{ url("register/lecturer") }}" style="color: #f3302c">Sign up</a></p>
+                        <p class="text-muted">Don't have an account? <a href="{{ url('register/lecturer') }}" style="color: #f3302c">Sign up</a></p>
+                        <p class="text-muted">Are you student? <a href="{{ url('login') }}" style="color: #f3302c">Login here</a></p>
                     @elseif (\Request::getRequestUri() === '/login')
-                        <p class="text-muted">Don't have an account? <a href="{{ url("register") }}" style="color: #f3302c">Sign up</a></p>
+                        <p class="text-muted">Don't have an account? <a href="{{ url('register') }}" style="color: #f3302c">Sign up</a></p>
+                        <p class="text-muted">Are you lecturer? <a href="{{ url('login/lecturer') }}" style="color: #f3302c">Login here</a></p>
                     @endif
                 </div>
             </div>

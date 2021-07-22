@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Auth;
 */
 Auth::routes();
 
+//dashboard
+Route::get('/dashboard', [HomeController::class, 'dashboard']);
+
 // display login page
 Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
 Route::get('/login/lecturer', [LoginController::class, 'showLecturerLoginForm']);
@@ -83,6 +86,8 @@ Route::resource('session', SessionController::class);
 //company route
 Route::get('/companylist', [companiesController::class, 'list'])->name('company.list');
 Route::get('/companyadd', [companiesController::class, 'create'])->name('company.create');
+Route::get('/getpostal', [companiesController::class, 'getpostal'])->name('getpostal');
+Route::get('/getcity', [companiesController::class, 'getcity'])->name('getcity');
 
 // s3 amazon file management route
 Route::get('/file', [FileManagementController::class, 'index']);

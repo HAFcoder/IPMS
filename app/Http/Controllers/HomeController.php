@@ -25,6 +25,12 @@ class HomeController extends Controller
     //     // $this->middleware('auth:sadmin');
     // }
 
+    public function dashboard()
+    {
+        return view('welcome');
+    }
+
+
     /**
      * Show the application dashboard.
      *
@@ -75,6 +81,7 @@ class HomeController extends Controller
         $lect = LecturerInfo::where([
             'lect_id' => $uid,
          ])->first(); 
+        //print_r($lect);
         return view('lecturer.index', compact('lect'));
     }
 

@@ -40,34 +40,33 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label">City</label>
+                            <label class="col-form-label">Postal Code</label>
+                            <div id="postal_area">
+                                <select id="postalcode" onchange="getcity()" class="custom-select" name="postal_code">
+                                    <option selected="selected">Select Postal Code</option>
+                                    @foreach($postcode as $key => $ps)
+                                        <option value="{{ $ps->postcode }}">{{ $ps->postcode }}</option>
+                                    @endforeach
 
-                            <select class="custom-select form-control" name="city">
-                                <option selected="selected">Select City</option>
-                                @foreach($city as $key => $ct)
-                                    <option value="{{ $ct->city }}">{{ $ct->city }}</option>
-                                @endforeach
+                                </select>
+                            </div>
 
-                            </select>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label">Postal Code</label>
+                            <label class="col-form-label">City</label>
 
-                            <select class="custom-select form-control" name="postal_code">
-                                <option selected="selected">Select Postal Code</option>
-                                @foreach($postcode as $key => $pc)
-                                    <option value="{{ $pc->postcode }}">{{ $pc->postcode }}</option>
-                                @endforeach
-
-                            </select>
-
+                            <div id="city_area">
+                                <select id="city" class="custom-select" name="city">
+                                    <option selected="selected">Select City</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <label class="col-form-label">State</label>
 
-                            <select class="custom-select form-control" name="state">
+                            <select id="state" class="custom-select" name="state">
                                 <option selected="selected">Select State</option>
                                 @foreach($state as $key => $st)
                                     <option value="{{ $st->state }}">{{ $st->state }}</option>
@@ -76,6 +75,7 @@
                             </select>
                         </div>
 
+                        
                         <div class="form-group">
                             <label class="col-form-label">Status</label>
 
@@ -108,7 +108,92 @@
     $(document).ready(function() {
         //alert('oii');
         $('.custom-select').select2();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
     });
+
+    function getpostal(){
+
+        var city = $('#city').val();
+
+        $.ajax({
+            url:'{{ route("getpostal") }}',
+            type: 'GET',
+            data: {
+                city : city
+            },
+            success: function (data){
+            
+                //console.log(data);
+
+                var slc = '<select id="postalcode" class="custom-select" name="postal_code">';
+                slc += '<option selected="selected">Select Postal Code</option>';
+
+                $.each( data, function( key, value ) {
+                    console.log( value.postcode );
+                    slc += '<option value="'+value.postcode+'">'+value.postcode+'</option>';
+                });
+
+                slc += '</select>';
+                $('#postal_area').html(slc);
+
+                $('#state').val(data[0].state).change();
+            
+            },
+            error: function(x,e){
+                alert(x+e);
+            }
+        
+        
+        });
+
+    }
+
+    
+    function getcity(){
+
+        var postalcode = $('#postalcode').val();
+        $( "#city_area" ).load(window.location.href + " #city_area" );
+        console.log("postalcode "+postalcode);
+
+        $.ajax({
+            url:'{{ route("getcity") }}',
+            type: 'GET',
+            data: {
+                postalcode : postalcode
+            },
+            success: function (data){
+            
+                console.log(data);
+
+                var slc = '<select id="city" class="custom-select" name="city">';
+                slc += '<option selected="selected">Select City</option>';
+
+                $.each( data, function( key, value ) {
+                    console.log( value.city );
+                    slc += '<option value="'+value.city+'">'+value.city+'</option>';
+                });
+
+                slc += '</select>';
+                $('#city_area').html(slc);
+
+                $('#state').val(data[0].state).change();
+            
+            },
+            error: function(x,e){
+                alert(x+e);
+            }
+        
+        
+        });
+
+
+    }
 
     </script>
 
