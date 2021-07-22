@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\FileManagementController;
+use App\Http\Controllers\companiesController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -74,6 +75,10 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 //Route::get('/session/edit/{id}', [SessionController::class, 'edit'])->name('session.edit');
 Route::resource('session', SessionController::class);
 //Route::get('/session/delete/{id}', [SessionController::class, 'delete'])->name('session.delete');
+
+//company route
+Route::get('/companylist', [companiesController::class, 'list'])->name('company.list');
+Route::get('/companyadd', [companiesController::class, 'create'])->name('company.create');
 
 // s3 amazon file management route
 Route::get('/file', [FileManagementController::class, 'index']);

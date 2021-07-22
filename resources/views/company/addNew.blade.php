@@ -1,4 +1,10 @@
-@extends('layouts.parentAdmin')
+@extends('layouts.parentLecturer')
+
+@section('head')
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+@endsection
 
 @section('breadcrumbs')
 
@@ -24,33 +30,60 @@
                     <h4 class="header-title">Register New Company</h4>
                     <form action="#">
                         <div class="form-group">
-                            <label for="example-text-input" class="col-form-label">Session Code</label>
-                            <input class="form-control" type="text" name="session_code" placeholder="Enter session code" required>
+                            <label for="example-text-input" class="col-form-label">Name</label>
+                            <input class="form-control" type="text" name="name" placeholder="Enter company name" required>
                         </div>
 
                         <div class="form-group">
-                            <label for="example-date-input" class="col-form-label">Start Date</label>
-                            <input class="form-control" type="date" name="start_date" placeholder="Enter start date" required>
+                            <label for="example-search-input" class="col-form-label">Address</label>
+                            <textarea name="address" rows="5" placeholder="Enter company address" class="form-control" required></textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="example-date-input" class="col-form-label">End Date</label>
-                            <input class="form-control" type="date" name="end_date" placeholder="Enter end date" required>
-                        </div>
+                            <label class="col-form-label">City</label>
 
-                        <div class="form-group">
-                            <label class="col-form-label">Status</label>
-                            <select class="custom-select">
-                                <option selected="selected">Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select class="custom-select form-control" name="city">
+                                <option selected="selected">Select City</option>
+                                @foreach($city as $key => $ct)
+                                    <option value="{{ $ct->city }}">{{ $ct->city }}</option>
+                                @endforeach
+
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="example-search-input" class="col-form-label">Description</label>
-                            <textarea name="description" rows="5" placeholder="Enter session description" class="form-control" required></textarea>
+                            <label class="col-form-label">Postal Code</label>
+
+                            <select class="custom-select form-control" name="postal_code">
+                                <option selected="selected">Select Postal Code</option>
+                                @foreach($postcode as $key => $pc)
+                                    <option value="{{ $pc->postcode }}">{{ $pc->postcode }}</option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label">State</label>
+
+                            <select class="custom-select form-control" name="state">
+                                <option selected="selected">Select State</option>
+                                @foreach($state as $key => $st)
+                                    <option value="{{ $st->state }}">{{ $st->state }}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label">Status</label>
+
+                            <select class="custom-select form-control" name="status">
+                                <option value="">Select status</option>
+                                <option value="approved">Approved</option>
+                                <option selected value="pending">Pending</option>
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
@@ -61,4 +94,23 @@
 
     </div>
     
+@endsection
+
+
+
+@section('scripts')
+
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+
+    $(document).ready(function() {
+        //alert('oii');
+        $('.custom-select').select2();
+    });
+
+    </script>
+
+
 @endsection

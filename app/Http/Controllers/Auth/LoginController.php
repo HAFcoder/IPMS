@@ -75,6 +75,7 @@ class LoginController extends Controller
 
         if (Auth::guard('lecturer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
             //return redirect()->intended('/lecturer');
+            
             if (Auth::user()->role == 'coordinator') {
                 return redirect()->route('coordinator.index');
             }elseif (Auth::user()->role == 'lecturer' && Auth::user()->status == 'approve'){
@@ -114,6 +115,7 @@ class LoginController extends Controller
 
     protected function lecturerLogout(Request $request)
     {
+        
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();

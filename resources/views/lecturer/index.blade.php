@@ -36,7 +36,7 @@
                         <div class="seo-fact sbg2">
                             <div class="p-4 d-flex justify-content-between align-items-center">
                                 <div class="seofct-icon"><i class="ti-share"></i> Share</div>
-                                <h2>3,984</h2>
+                                <h2>3,000</h2>
                             </div>
                             <canvas id="seolinechart2" height="50"></canvas>
                         </div>
