@@ -18,8 +18,7 @@ class IsCoordinator
     {
         if(auth()->check() && auth()->user()->role == 'coordinator'){
             return $next($request);
-        }
-        elseif(auth()->check() && auth()->user()->status == 'approve'){
+        }elseif(auth()->check() && auth()->user()->status == 'approve'){
             return $next($request);
         }
         return redirect('lecturer/pending')->with('error',"Only authorized user can access!");

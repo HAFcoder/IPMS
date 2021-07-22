@@ -56,10 +56,10 @@ Route::group(['middleware' => ['auth:lecturer']], function() {
 
     // if user is approve [lecturer]
     Route::get('/lecturer', [HomeController::class, 'lecturerHome']);
-
-    // redirect user if not approve
-    Route::get('/lecturer/pending', [HomeController::class, 'pending']);
 });
+
+ // redirect user if not approve
+ Route::get('/lecturer/pending', [HomeController::class, 'pending'])->middleware(['auth:lecturer', 'role']);;
 
 //super amdin group route
 Route::group(['middleware' => 'auth:sadmin'], function() {
