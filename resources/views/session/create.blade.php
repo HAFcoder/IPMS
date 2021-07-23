@@ -31,9 +31,9 @@
                 <div class="card-body">
                     <h4 class="header-title">Register New Session</h4>
 
-                    <form method="POST" action='{{ route("session.create") }}'>
+                    <form method="POST" action='{{ route("session.store") }}'>
                         @csrf
-                    
+                        
                         @if ($errors->any())
                         <div class="form-group">
                             <div class="alert alert-danger">
@@ -58,7 +58,8 @@
 
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Session Code</label>
-                            <input class="form-control" type="text" value="{{ $randcode }}" readonly name="session_code" placeholder="Enter session code" required>
+                            <input id="code" class="form-control" type="text" value="{{ $randcode }}" readonly name="session_code" placeholder="Enter session code" required>
+                            <a onclick="generatenew()" class="btn-dark btn btn-sm text-white">Generate Code</a>
                         </div>
 
                         <div class="form-group">
@@ -75,7 +76,7 @@
                             <label class="col-form-label">Select Programme Involved</label>
 
                             <select class="custom-select" multiple name="programme[]">
-
+                                <option>Select Programme</option>
                             @foreach($programme as $key => $data)
                                 <option value="{{ $data->id }}">{{ $data->name }} ({{ $data->code }})</option>
                             @endforeach
@@ -91,7 +92,7 @@
                             <textarea name="description" rows="5" placeholder="Enter session description" class="form-control"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
+                        <button type="submit" class="btn btn-success mt-4 pr-4 pl-4">Submit</button>
                     </form>
                 </div>
             </div>
@@ -111,10 +112,16 @@
 
     <script>
 
-    $(document).ready(function() {
-        //alert('oii');
-        $('.custom-select').select2();
-    });
+        $(document).ready(function() {
+            //alert('oii');
+            $('.custom-select').select2();
+        });
+
+        function generatenew(){
+            //var code = "SS" + rand(100000,99999999);
+            var code = "SS" + Math.floor(100000 + Math.random() * 900000);
+            $("#code").val(code);
+        }
 
     </script>
 

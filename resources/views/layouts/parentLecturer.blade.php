@@ -101,8 +101,8 @@
                                     <i class="ti-briefcase"></i><span>Company</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="alert.html">Add New</a></li>
-                                    <li><a href="accordion.html">View All</a></li>
+                                    <li><a href="{{ route('company.create') }}">Add New</a></li>
+                                    <li><a href="{{ route('company.list') }}">View All</a></li>
                                 </ul>
                             </li>
 
@@ -274,15 +274,15 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="{{ asset('assets/images/author/avatar.png') }}" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i
-                                    class="fa fa-angle-down"></i></h4>
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ $lect->f_name }} {{ $lect->l_name }}
+                                <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="{{ route('logout.admin') }}" onclick="event.preventDefault(); 
+                                <a class="dropdown-item" href="{{ route('logout.home') }}" onclick="event.preventDefault(); 
                                     document.getElementById('logout-form').submit();">Log Out
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout.admin') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout.home') }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>

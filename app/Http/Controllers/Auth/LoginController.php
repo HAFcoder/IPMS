@@ -74,10 +74,14 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('lecturer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            //return redirect()->intended('/lecturer');
-            if (Auth::user()->role == 'coordinator') {
+            // return redirect()->intended('/lecturer');
+            $coor = "coordinator";
+            $lect = "lecturer";
+            $stat = "approve";
+
+            if (Auth::guard('lecturer')->user()->role == $coor) {
                 return redirect()->route('coordinator.index');
-            }elseif (Auth::user()->role == 'lecturer' && Auth::user()->status == 'approve'){
+            }elseif (Auth::guard('lecturer')->user()->role == $lect && Auth::guard('lecturer')->user()->status == $stat){
                 return redirect()->route('lecturer.index');
             }else{
                 return redirect()->route('lecturer.pending');
@@ -102,29 +106,5 @@ class LoginController extends Controller
             return redirect()->intended('/sadmin');
         }
         return back()->withInput($request->only('email', 'remember'));
-    }
-
-    protected function adminLogout(Request $request)
-    {
-        $this->guard()->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
-        return redirect('/login/admin');
-    }
-
-    protected function lecturerLogout(Request $request)
-    {
-        $this->guard()->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
-        return redirect('/login/lecturer');
-    }
-
-    protected function sadminLogout(Request $request)
-    {
-        $this->guard()->logout();
-        $request->session()->flush();
-        $request->session()->regenerate();
-        return redirect('/login/sadmin');
     }
 }
