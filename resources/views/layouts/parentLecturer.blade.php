@@ -57,6 +57,7 @@
                         <ul class="metismenu" id="menu">
                             <li><a href="{{ url('/admin') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
 
+                            @if (auth()->guard('lecturer')->user()->status == 'approve')
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
                                     <i class="ti-calendar"></i> <span>Session</span>
@@ -101,8 +102,8 @@
                                     <i class="ti-briefcase"></i><span>Company</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="{{ route('company.create') }}">Add New</a></li>
                                     <li><a href="{{ route('company.list') }}">View All</a></li>
+                                    <li><a href="{{ route('company.create') }}">Add New</a></li>
                                 </ul>
                             </li>
 
@@ -166,6 +167,7 @@
                                     <li><a href="#">Academic Supervisor</a></li>
                                 </ul>
                             </li>
+                            @endif
                         </ul>
                     </nav>
                 </div>

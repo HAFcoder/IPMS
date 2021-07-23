@@ -81,10 +81,8 @@ class LoginController extends Controller
 
             if (Auth::guard('lecturer')->user()->role == $coor) {
                 return redirect()->route('coordinator.index');
-            }elseif (Auth::guard('lecturer')->user()->role == $lect && Auth::guard('lecturer')->user()->status == $stat){
+            }elseif (Auth::guard('lecturer')->user()->role == $lect){
                 return redirect()->route('lecturer.index');
-            }else{
-                return redirect()->route('lecturer.pending');
             }
         }
         return back()->withInput($request->only('email', 'remember'));
