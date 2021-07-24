@@ -34,7 +34,7 @@ final class Versions
      */
     const VERSIONS          = array (
   'asm89/stack-cors' => 'v2.0.3@9cb795bf30988e8c96dd3c40623c48a877bc6714',
-  'aws/aws-sdk-php' => '3.185.17@3f639e8a6fff677f788700940a68dc138ea5da71',
+  'aws/aws-sdk-php' => '3.185.20@41aae0221d449b29e400cfead948a6b0343756db',
   'brick/math' => '0.9.2@dff976c2f3487d42c1db75a3b180e2b9f0e72ce0',
   'composer/package-versions-deprecated' => '1.11.99.2@c6522afe5540d5fc46675043d3ed5a45a740b27c',
   'doctrine/cache' => '2.1.1@331b4d5dbaeab3827976273e9356b3b453c300ce',
@@ -147,7 +147,7 @@ final class Versions
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'sven/artisan-view' => '3.4.0@d7ea982974767ee69753294a8141259bf6d75703',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'laravel/laravel' => 'dev-main@9aa8c2e492da98d40ffa9d345f753e4ac21a71ad',
+  'laravel/laravel' => 'dev-main@e9536301c55761887689a0f4f7059f8ac863d50d',
 );
 
     private function __construct()

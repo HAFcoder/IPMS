@@ -90,10 +90,10 @@ Route::get('/getpostal', [companiesController::class, 'getpostal'])->name('getpo
 Route::get('/getcity', [companiesController::class, 'getcity'])->name('getcity');
 
 // s3 amazon file management route
-// Route::get('/file', [FileManagementController::class, 'index']);
-// Route::post('/file/store', [FileManagementController::class, 'store']);
-// Route::get('file/{file}',[FileManagementController::class, 'download']);
-// Route::delete('file/remove/{file}',[FileManagementController::class, 'destroy']);
-Route::get('/internfile', [FileManagementController::class, 'create']);
-Route::post('/internfile', [FileManagementController::class, 'store']);
-Route::get('/internfile/{file}',[FileManagementController::class, 'show']);
+Route::get('/internfile', [FileManagementController::class, 'index']);
+Route::post('/internfile/store', [FileManagementController::class, 'store']);
+Route::get('/internfile/download/{filename}',[FileManagementController::class, 'download']);
+// Route::delete('/internfile/remove/{file}',[FileManagementController::class, 'destroy']);
+// Route::get('/internfile', [FileManagementController::class, 'create']);
+// Route::post('/internfile', [FileManagementController::class, 'store']);
+// Route::get('/internfile/{file}',[FileManagementController::class, 'show']);

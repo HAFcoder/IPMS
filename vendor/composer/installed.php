@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '16f232a346adf77adf0cf0b0dffa4c266179e74a',
+        'reference' => 'e9536301c55761887689a0f4f7059f8ac863d50d',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -20,12 +20,12 @@
             'dev_requirement' => false,
         ),
         'aws/aws-sdk-php' => array(
-            'pretty_version' => '3.185.17',
-            'version' => '3.185.17.0',
+            'pretty_version' => '3.185.20',
+            'version' => '3.185.20.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../aws/aws-sdk-php',
             'aliases' => array(),
-            'reference' => '3f639e8a6fff677f788700940a68dc138ea5da71',
+            'reference' => '41aae0221d449b29e400cfead948a6b0343756db',
             'dev_requirement' => false,
         ),
         'brick/math' => array(
@@ -454,7 +454,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '16f232a346adf77adf0cf0b0dffa4c266179e74a',
+            'reference' => 'e9536301c55761887689a0f4f7059f8ac863d50d',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
