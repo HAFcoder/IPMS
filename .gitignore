@@ -2,4 +2,4 @@
 vendor/composer/autoload_classmap.php
 vendor/composer/autoload_static.php
 .env.example
-.env
+/.env
