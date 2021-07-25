@@ -13,7 +13,7 @@ class FileManagementController extends Controller
     public function index()
     {
 
-        $files = Storage::disk('s3')->files('intern-diploma-form/');
+        $files = Storage::disk('s3')->files('intern-forms/');
  
         $data = [];
         foreach($files as $file) {
@@ -52,7 +52,7 @@ class FileManagementController extends Controller
     public function download($filename) 
     {
         $filename = base64_decode($filename);
-        return Storage::disk('s3')->response('intern-diploma-form/'. $filename);
+        return Storage::disk('s3')->response('intern-forms/'. $filename);
     }
 
 }

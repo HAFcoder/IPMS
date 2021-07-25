@@ -155,6 +155,8 @@
 
                             <li><a href="maps.html"><i class="ti-agenda"></i> <span>Logbook</span></a></li>
 
+                            <li><a href="{{ url('/internfile') }}"><i class="ti-folder"></i> <span>Internship Form</span></a></li>
+
                             <li><a href="invoice.html"><i class="ti-file"></i> <span>Report</span></a></li>
 
                             <li>
