@@ -86,6 +86,7 @@ Route::resource('session', SessionController::class);
 //company route
 Route::get('/companylist', [companiesController::class, 'list'])->name('company.list');
 Route::get('/companyadd', [companiesController::class, 'create'])->name('company.create');
+Route::post('/companyadd', [companiesController::class, 'storeLecturer'])->name('company.storeLecturer');
 Route::get('/getpostal', [companiesController::class, 'getpostal'])->name('getpostal');
 Route::get('/getcity', [companiesController::class, 'getcity'])->name('getcity');
 

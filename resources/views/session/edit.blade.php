@@ -80,7 +80,7 @@
 
                             @foreach($programme as $key => $data)
 
-                                @foreach($ses_prog as $key => $prog)
+                                @foreach($sessions->sessionProgramme as $key => $prog)
 
 
                                     <option @if ($data->id==$prog->programme_id) selected  @endif value="{{ $data->id }}">{{ $data->name }} ({{ $data->code }})</option>

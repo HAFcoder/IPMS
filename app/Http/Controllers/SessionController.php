@@ -32,7 +32,7 @@ class SessionController extends Controller
     {
         $lect = $this->getLecturerInfo();
         $sessions = Session::with('sessionProgramme')->get();
-        dump($sessions);
+        //dump($sessions);
 
         return view('session.index',compact('sessions','lect'));
     }
@@ -116,15 +116,12 @@ class SessionController extends Controller
     {
         $lect = $this->getLecturerInfo();
         //dump("id = " . $id);
-        $sessions = Session::find($id);
+        //$sessions = Session::find($id);
+        $sessions = Session::find($id)->with('sessionProgramme')->first();
         $programme = Programme::all();
-        //print_r($sessions);
+        //dump($sessions);
 
-        $ses_prog = SessionProgramme::where('session_id','=',$id)->get();
-
-        //dump($ses_prog);
-
-        return view('session.edit',compact('sessions','programme','lect','ses_prog'));
+        return view('session.edit',compact('sessions','programme','lect'));
     }
 
     /**
@@ -136,6 +133,9 @@ class SessionController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $status = 'active';
+
         $request->validate([
             'start_date'=>'required',
             'end_date'=>'required',
@@ -147,9 +147,21 @@ class SessionController extends Controller
         $session->start_date = $request->start_date;
         $session->end_date = $request->end_date;
         $session->description = $request->description;
-        $session->programme = $request->programme;
 
         $session->save();
+
+        SessionProgramme::where('session_id', $id)->delete();
+
+        foreach($request->programme as $prog){
+
+            //dump($prog);
+            $ses_prog = new SessionProgramme;
+            $ses_prog->session_id = $id;
+            $ses_prog->programme_id = $prog;
+            $ses_prog->status = $status;
+            $ses_prog->save();
+
+        }
 
         return redirect()->back()->with('success', 'Session data has been successfully updated.');
 
