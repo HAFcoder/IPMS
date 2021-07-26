@@ -10,6 +10,7 @@ use App\Models\Programme;
 use App\Models\Session;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
+use App\Models\SessionProgramme;
 
 class SessionController extends Controller
 {
@@ -29,10 +30,11 @@ class SessionController extends Controller
 
     public function index()
     {
-        $sessions = Session::all();
-        //print_r($sessions);
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme')->get();
+        dump($sessions);
 
-        return view('session.index',compact('sessions'));
+        return view('session.index',compact('sessions','lect'));
     }
 
     /**
@@ -60,6 +62,7 @@ class SessionController extends Controller
     {
         $uid = Auth::guard("lecturer")->user()->id;
         $session = new Session;
+
         $status = 'active';
 
         $request->validate([
@@ -72,11 +75,22 @@ class SessionController extends Controller
         $session->start_date = $request->start_date;
         $session->end_date = $request->end_date;
         $session->description = $request->description;
-        $session->programme = $request->programme;
         $session->status = $status;
         $session->lecturer_id = $uid;
 
         $session->save();
+        $sid = $session->id;
+
+        foreach($request->programme as $prog){
+
+            //dump($prog);
+            $ses_prog = new SessionProgramme;
+            $ses_prog->session_id = $sid;
+            $ses_prog->programme_id = $prog;
+            $ses_prog->status = $status;
+            $ses_prog->save();
+
+        }
 
         return redirect()->back()->with('success', 'Session data has been successfully added.');
     }
@@ -106,7 +120,11 @@ class SessionController extends Controller
         $programme = Programme::all();
         //print_r($sessions);
 
-        return view('session.edit',compact('sessions','programme','lect'));
+        $ses_prog = SessionProgramme::where('session_id','=',$id)->get();
+
+        //dump($ses_prog);
+
+        return view('session.edit',compact('sessions','programme','lect','ses_prog'));
     }
 
     /**

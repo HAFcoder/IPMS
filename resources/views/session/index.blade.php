@@ -32,7 +32,7 @@
 @section('content')
 
     <div class="row">
-
+        
         <!-- table start -->
         <div class="col-12 mt-5">
             <div class="card">
@@ -65,12 +65,12 @@
                                         
                                         @php
 
-                                        $lect = DB::table('lecturer_info')
+                                        $lects = DB::table('lecturer_info')
                                                 ->select('f_name','l_name')
                                                 ->where('lect_id', '=', $ss->lecturer_id)
                                                 ->first();
 
-                                        echo $lect->f_name . " " . $lect->l_name;
+                                        echo $lects->f_name . " " . $lects->l_name;
 
                                         @endphp
 
@@ -78,29 +78,20 @@
                                     <td>{{ $ss->description }}</td>
 
                                     <td>
-                                        <ul>
-                                        @foreach($ss->programme as $pg)
-
-                                            <li>
+                                        @foreach($ss->sessionProgramme as $sp)
+                                        
                                             @php
 
-                                                $prog = DB::table('programmes')
-                                                        ->select('name')
-                                                        ->where('id', '=', $pg)
-                                                        ->get()->toArray();
+                                            $prg = DB::table('programmes')
+                                                    ->select('name','code')
+                                                    ->where('id', '=', $sp->programme_id)
+                                                    ->first();
 
-                                                foreach($prog as $p){
-
-                                                    echo $p->name;
-
-                                                }
+                                            echo $prg->name . '<br>';
 
                                             @endphp
 
-                                            </li>
-
                                         @endforeach
-                                        </ul>
                                     </td>
 
                                     <td>{{  ucfirst(trans($ss->status)) }}</td>
