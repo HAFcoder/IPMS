@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\FileManagement;
+use App\Models\Lecturer;
+use App\Models\LecturerInfo;
 
 class FileManagementController extends Controller
 {
  
-    public function index()
+    public function getFile()
     {
+        $lect = $this->getLecturerInfo();
 
         $files = Storage::disk('s3')->files('intern-forms/');
  
@@ -23,7 +26,7 @@ class FileManagementController extends Controller
             ];
         }
  
-        return view('files.upload', ['files' => $data]);
+        return view('files.index', ['files' => $data, 'lect' => $lect]);
     }
  
     public function store(Request $request)

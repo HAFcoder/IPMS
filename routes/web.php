@@ -87,11 +87,12 @@ Route::resource('session', SessionController::class);
 //company route
 Route::get('/companylist', [companiesController::class, 'list'])->name('company.list');
 Route::get('/companyadd', [companiesController::class, 'create'])->name('company.create');
+Route::post('/companyadd', [companiesController::class, 'storeLecturer'])->name('company.storeLecturer');
 Route::get('/getpostal', [companiesController::class, 'getpostal'])->name('getpostal');
 Route::get('/getcity', [companiesController::class, 'getcity'])->name('getcity');
 
 // s3 amazon file management route
-Route::get('/internfile', [FileManagementController::class, 'index']);
+Route::get('/internfile', [FileManagementController::class, 'getFile']);
 Route::post('/internfile/store', [FileManagementController::class, 'store']);
 Route::get('/internfile/download/{filename}',[FileManagementController::class, 'download']);
 // Route::delete('/internfile/remove/{file}',[FileManagementController::class, 'destroy']);

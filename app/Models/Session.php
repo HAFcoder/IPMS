@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\StudentSession;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
+use App\Models\SessionProgramme;
 
 class Session extends Model
 {
@@ -28,8 +29,9 @@ class Session extends Model
         return $this->hasMany(StudentSession::class);
     }
 
-    protected $casts = [
-        'programme' => 'array'
-    ];
+    public function sessionProgramme()
+    {
+        return $this->hasMany(SessionProgramme::class);
+    }
 
 }

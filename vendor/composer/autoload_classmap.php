@@ -62,6 +62,7 @@ return array(
     'App\\Models\\Programme' => $baseDir . '/app/Models/Programme.php',
     'App\\Models\\Sadmin' => $baseDir . '/app/Models/Sadmin.php',
     'App\\Models\\Session' => $baseDir . '/app/Models/Session.php',
+    'App\\Models\\SessionProgramme' => $baseDir . '/app/Models/SessionProgramme.php',
     'App\\Models\\Student' => $baseDir . '/app/Models/Student.php',
     'App\\Models\\StudentFeedback' => $baseDir . '/app/Models/StudentFeedback.php',
     'App\\Models\\StudentInfo' => $baseDir . '/app/Models/StudentInfo.php',

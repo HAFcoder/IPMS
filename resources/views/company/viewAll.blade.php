@@ -44,6 +44,7 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th></th>
                                     <th>Name</th>
                                     <th>Address</th>
                                     <th>Registered Date</th>
@@ -60,10 +61,14 @@
 
                                 @foreach($company as $comp)
                                 <tr>
-                                    <td>{{ $comp->status }}</td>
+                                    <td>
+                                        <a href="{{ route('session.edit',$comp->id) }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ route('session.destroy',$comp->id) }}" class="btn btn-danger">Delete</a>
+                                    </td>
+                                    <td>{{ $comp->name }}</td>
                                     <td>{{ $comp->address }} , <br> {{ $comp->city }} , {{ $comp->postal_code }} , {{ $comp->state }}</td>
                                     <td>{{ $comp->created_at }}</td>
-                                    <td>{{ $comp->status }}</td>
+                                    <td>{{ ucfirst(trans($comp->status)) }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

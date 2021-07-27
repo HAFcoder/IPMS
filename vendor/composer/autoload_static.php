@@ -616,6 +616,7 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         'App\\Models\\Programme' => __DIR__ . '/../..' . '/app/Models/Programme.php',
         'App\\Models\\Sadmin' => __DIR__ . '/../..' . '/app/Models/Sadmin.php',
         'App\\Models\\Session' => __DIR__ . '/../..' . '/app/Models/Session.php',
+        'App\\Models\\SessionProgramme' => __DIR__ . '/../..' . '/app/Models/SessionProgramme.php',
         'App\\Models\\Student' => __DIR__ . '/../..' . '/app/Models/Student.php',
         'App\\Models\\StudentFeedback' => __DIR__ . '/../..' . '/app/Models/StudentFeedback.php',
         'App\\Models\\StudentInfo' => __DIR__ . '/../..' . '/app/Models/StudentInfo.php',

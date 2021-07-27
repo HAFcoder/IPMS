@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\LookupAddress;
 
@@ -39,6 +40,34 @@ class companiesController extends Controller
         $city = LookupAddress::orderBy('city', 'ASC')->distinct(['city'])->get(['city']);
 
         return view('company.addNew',compact('postcode','state','city','lect'));
+    }
+    
+    public function storeLecturer(Request $request)
+    {
+        $lect_id = Auth::guard("lecturer")->user()->id;
+        $companies = new Company;
+
+        $status = 'active';
+
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'postal_code'=>'required',
+            'city'=>'required',
+            'state'=>'required',
+        ]);
+
+        $companies->name = $request->name;
+        $companies->address = $request->address;
+        $companies->postal_code = $request->postal_code;
+        $companies->city = $request->city;
+        $companies->state = $request->state;
+        $companies->lecturer_id = $request->lect_id;
+        $companies->status = $request->status;
+
+        $companies->save();
+
+        return redirect()->back()->with('success', 'Company data has been successfully added.');
     }
 
     

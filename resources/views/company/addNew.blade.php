@@ -28,15 +28,39 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Register New Company</h4>
-                    <form action="#">
+                    <form method="post" action='{{ route("company.storeLecturer") }}'>
+                        @csrf
+                        
+                        @if ($errors->any())
+                        <div class="form-group">
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+                        
+                        @if (session()->has('success'))
+                        <div class="form-group">
+                            <div class="alert alert-success">
+                                <ul>
+                                    <li>{{ session()->get('success') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Name</label>
-                            <input class="form-control" type="text" name="name" placeholder="Enter company name" required>
+                            <input class="form-control" type="text" name="name" placeholder="Enter company name" required value="{{ old('name') }}">
                         </div>
 
                         <div class="form-group">
                             <label for="example-search-input" class="col-form-label">Address</label>
-                            <textarea name="address" rows="5" placeholder="Enter company address" class="form-control" required></textarea>
+                            <textarea name="address" rows="5" placeholder="Enter company address" class="form-control" required>{{ old('address') }}</textarea>
                         </div>
 
                         <div class="form-group">

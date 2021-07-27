@@ -15,4 +15,9 @@ class Programme extends Model
     {
         return $this->hasOne(StudentInfo::class);
     }
+
+    public function sessionProgramme()
+    {
+        return $this->hasMany(SessionProgramme::class);
+    }
 }
