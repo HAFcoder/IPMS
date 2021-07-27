@@ -47,15 +47,14 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href="{{ url('/admin') }}"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}"
-                            alt="logo"></a>
+                    <a href="{{ url('/lecturer') }}"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="{{ url('/admin') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="{{ url('/lecturer') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
 
                             @if (auth()->guard('lecturer')->user()->status == 'approve')
                             <li>
@@ -278,7 +277,7 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="{{ asset('assets/images/author/avatar.png') }}" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ $lect->f_name }} {{ $lect->l_name }}
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ $lect->f_name }} 
                                 <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile</a>

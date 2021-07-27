@@ -30,6 +30,7 @@ Route::get('/login/lecturer', [LoginController::class, 'showLecturerLoginForm'])
 Route::get('/login/sadmin', [LoginController::class, 'showSuperAdminLoginForm']);
 
 // display register page
+Route::post('api/fetch-cities', [RegisterController::class, 'fetchCity']);
 Route::get('/register/lecturer', [RegisterController::class, 'showLecturerRegisterForm']);
 
 // process login and register
@@ -41,7 +42,7 @@ Route::post('/register/lecturer', [RegisterController::class, 'createLecturer'])
 Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
 
 //student group route
-Route::group(['middleware' => 'auth'], function() {
+Route::group(['middleware' => 'auth', 'role:student'], function() {
     //Route::post('/logout', [LoginController::class, 'logout'])->name('logout.admin');
     Route::get('/', [HomeController::class, 'studentHome']);
     Route::get('/home', [HomeController::class, 'studentHome'])->name('home');

@@ -11,6 +11,7 @@ class StudentInfo extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'student_info';
 
     public function programme()
     {

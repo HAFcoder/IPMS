@@ -7,9 +7,20 @@
 
             <div class="login-form-head">
                 <div class="logo">
-                    <img src="{{asset('assets/images/icon/kuptm_logo.png')}}" alt="logo"></a>
+                    <img src="{{asset('assets/images/icon/loginlogo.png')}}" alt="logo"></a>
                 </div>
-                <p style="color: red">Fill in your details to register.</p>
+                <p style="color: red">Fill in your lecturer's details to register.</p>
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
             </div>
             <div class="login-form-body">
 
@@ -43,8 +54,8 @@
 
                 <div class="form-group">
                     <label for="faculty_id">Faculty</label>
-                    <select name="faculty_id" id="faculty_id" class="custom-select">
-                        <option selected="selected">Open this select menu</option>
+                    <select name="faculty_id" id="faculty_id" class="custom-select" required>
+                        <option value="">Open this select menu</option>
                         @foreach ($faculties as $faculty)
                             <option value="{{ $faculty->id }}" name="faculty_id">{{ $faculty->faculty_name }}</option>
                         @endforeach
@@ -75,7 +86,8 @@
 
                 <div class="form-gp">
                     <label for="password-confirm">Confirm Password</label>
-                    <input type="password" id="password-confirm" name="password_confirmation" required autocomplete="new-password">                  
+                    <input type="password" id="password-confirm" name="password_confirmation" required
+                        autocomplete="new-password">
                     <i class="ti-lock"></i>
                     <div class="text-danger"></div>
                 </div>

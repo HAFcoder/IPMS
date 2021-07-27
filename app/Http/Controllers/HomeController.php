@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
+use App\Models\Session;
+use App\Models\StudentInfo;
 
 class HomeController extends Controller
 {
@@ -30,12 +32,6 @@ class HomeController extends Controller
         return view('welcome');
     }
 
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function logout(Request $request) {
         // $role = auth()->user()->role;
         // $this->guard()->logout();
@@ -72,7 +68,12 @@ class HomeController extends Controller
 
     public function studentHome()
     {
-        return view('student.index');
+        $uid = Auth::user()->id;
+        $stud = StudentInfo::where([
+            'stud_id' => $uid,
+         ])->first(); 
+
+        return view('student.index', compact('stud'));
     }
 
     public function lecturerHome()

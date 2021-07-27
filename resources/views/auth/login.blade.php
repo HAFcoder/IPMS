@@ -12,7 +12,7 @@
 
             <div class="login-form-head">
                 <div class="logo">
-                    <img src="{{asset('assets/images/icon/kuptm_logo.png')}}" alt="logo"></a>
+                    <img src="{{asset('assets/images/icon/loginlogo.png')}}" alt="logo"></a>
                 </div>
                 @if (\Request::getRequestUri() === '/login/lecturer')
                     <p style="color: red">Lecturer.</p>

@@ -77,7 +77,6 @@ class LoginController extends Controller
             // return redirect()->intended('/lecturer');
             $coor = "coordinator";
             $lect = "lecturer";
-            $stat = "approve";
 
             if (Auth::guard('lecturer')->user()->role == $coor) {
                 return redirect()->route('coordinator.index');

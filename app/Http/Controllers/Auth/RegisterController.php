@@ -9,10 +9,13 @@ use App\Models\LecturerInfo;
 use App\Providers\RouteServiceProvider;
 use App\Models\Student;
 use App\Models\StudentInfo;
+use App\Models\LookupAddress;
+use App\Models\Programme;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
@@ -55,54 +58,85 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+
+    public function showRegistrationForm()
     {
-        return Validator::make($data, [
-            'stuID' => ['required', 'string', 'max:55', 'unique:students'],
-            'name' => ['required', 'string', 'max:255'],
-            'icNo' => ['required', 'string', 'max:55', 'unique:students'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
-            'programme' => ['required', 'string', 'max:255'],
-            'mentor' => ['required', 'string', 'max:255'],
-            'session' => ['required', 'string', 'max:25'],
-            'phone' => ['required', 'string', 'max:25'],
-            'address' => ['required'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $state = LookupAddress::orderBy('state', 'ASC')
+                ->distinct()
+                ->get(['state']);
+        $programmes = Programme::orderBy('name', 'ASC')
+                    ->where('status', '=', 'active')
+                    ->get();
+        return view('auth.register', ['url' => '/'], compact('state', 'programmes'));
+    }
+
+    public function fetchCity(Request $request)
+    {
+        $data['city'] = LookupAddress::orderBy('city', 'ASC')
+                        ->where("state",$request->state)
+                        ->distinct()
+                        ->get(["city", "city"]);
+        return response()->json($data);
     }
 
     public function showLecturerRegisterForm()
     {
-        $faculties = Faculty::all();
+        $faculties = Faculty::orderBy('faculty_name', 'ASC')
+                    ->where('status', '=', 'active')
+                    ->get();
         return view('auth.registerLecturer', ['url' => 'lecturer'], compact('faculties'));
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Models\User
-     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'programme_id' => ['required'],
+            'studentID' => ['required', 'string', 'max:55'],
+            'f_name' => ['required', 'string', 'max:255'],
+            'l_name' => ['required', 'string', 'max:255'],
+            'no_ic' => ['required', 'string', 'max:55', 'unique:student_info'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
+            'telephone' => ['required', 'string', 'max:25'],
+            'add1' => ['required'],
+            'add2' => ['required'],
+            'state' => ['required'],
+            'city' => ['required'],
+            'postcode' => ['required', 'min:5'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
     protected function create(array $data)
     {
-        // return Student::create([
-        Student::create([
-            'stuID' => $data['stuID'],
-            'name' => $data['name'],
-            'icNo' => $data['icNo'],
+        $stud = new Student([
             'email' => $data['email'],
-            'programme' => $data['programme'],
-            'mentor' => $data['mentor'],
-            'session' => $data['session'],
-            'phone' => $data['phone'],
-            'address' => $data['address'],
             'password' => Hash::make($data['password']),
+            'status' => 'noRequest',
         ]);
+        $stud->save();
 
-        return redirect()->intended('login');
+        $address = $data['add1'] . ', ' . $data['add2'];
+
+        $info = new StudentInfo([
+            'f_name' => $data['f_name'],
+            'l_name' => $data['l_name'],
+            'stud_id' => $stud->id,
+            'no_ic' => $data['no_ic'],
+            'studentID' => $data['studentID'],
+            'telephone' => $data['telephone'],
+            'address' => $address,
+            'programme_id' => $data['programme_id'],
+            'state' =>  $data['state'],
+            'city' =>  $data['city'],
+            'postcode' =>  $data['postcode'],
+        ]);
+        $info->save();
+
+        return redirect()->intended('login')->with(Auth::login($stud));
         
     }
 
+    //create lecturer
     protected function createLecturer(Request $request)
     {
         $request->validate([
