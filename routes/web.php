@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\companiesController;
+use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -90,9 +91,10 @@ Route::get('/company', [companiesController::class, 'create'])->name('company.cr
 Route::post('/company', [companiesController::class, 'storeLecturer'])->name('company.storeLecturer');
 Route::get('/company/{id}/edit', [companiesController::class, 'edit'])->name('company.edit');
 Route::put('/company/{id}', [companiesController::class, 'update'])->name('company.update');
+Route::delete('/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
 
-Route::get('/getpostal', [companiesController::class, 'getpostal'])->name('getpostal');
-Route::get('/getcity', [companiesController::class, 'getcity'])->name('getcity');
+Route::get('/getpostal', [AddressController::class, 'getpostal'])->name('getpostal');
+Route::get('/getcity', [AddressController::class, 'getcity'])->name('getcity');
 
 // s3 amazon file management route
 Route::get('/internfile', [FileManagementController::class, 'getFile']);

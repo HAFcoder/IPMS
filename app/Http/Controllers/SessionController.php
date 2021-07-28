@@ -175,7 +175,13 @@ class SessionController extends Controller
      */
     public function destroy($id)
     {
-        print $id;
+        $session = Session::find($id)->first();
+        $code = $session->session_code;
+        $session->delete();
+
+        SessionProgramme::where('session_id', $id)->delete();
+
+        return redirect()->back()->with('delete', $code.' has been successfully deleted.');
     }
 
 

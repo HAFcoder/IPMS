@@ -117,21 +117,11 @@ class companiesController extends Controller
 
     public function destroy($id)
     {
-        print $id;
-    }
-    
-    public function getpostal(Request $request)
-    {
-        $city = $request->get('city');
-        $city = LookupAddress::where('city','=',$city)->orderBy('postcode', 'ASC')->distinct(['postcode'])->get(['postcode','state']);
-        return $city;
-    }
-    
-    public function getcity(Request $request)
-    {
-        $postalcode = $request->get('postalcode');
-        $postcode = LookupAddress::where('postcode','=',$postalcode)->orderBy('city', 'ASC')->distinct(['city'])->get(['city','state']);
-        return $postcode;
+        //dump($id);
+        $companies = Company::find($id)->first();
+        $name = $companies->name;
+        $companies->delete();
+        return redirect()->back()->with('delete', $name.' has been successfully deleted.');
     }
 
 }
