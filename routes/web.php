@@ -85,9 +85,12 @@ Route::resource('session', SessionController::class);
 //Route::get('/session/delete/{id}', [SessionController::class, 'delete'])->name('session.delete');
 
 //company route
-Route::get('/companylist', [companiesController::class, 'list'])->name('company.list');
-Route::get('/companyadd', [companiesController::class, 'create'])->name('company.create');
-Route::post('/companyadd', [companiesController::class, 'storeLecturer'])->name('company.storeLecturer');
+Route::get('/company/list', [companiesController::class, 'list'])->name('company.list');
+Route::get('/company', [companiesController::class, 'create'])->name('company.create');
+Route::post('/company', [companiesController::class, 'storeLecturer'])->name('company.storeLecturer');
+Route::get('/company/{id}/edit', [companiesController::class, 'edit'])->name('company.edit');
+Route::put('/company/{id}', [companiesController::class, 'update'])->name('company.update');
+
 Route::get('/getpostal', [companiesController::class, 'getpostal'])->name('getpostal');
 Route::get('/getcity', [companiesController::class, 'getcity'])->name('getcity');
 

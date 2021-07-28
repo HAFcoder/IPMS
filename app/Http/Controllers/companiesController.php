@@ -69,7 +69,56 @@ class companiesController extends Controller
 
         return redirect()->back()->with('success', 'Company data has been successfully added.');
     }
+    
+    public function edit($id)
+    {
+        $lect = $this->getLecturerInfo();
+        //dump("id = " . $id);
 
+        $company = Company::find($id)->first();
+        //dump($company->postal_code);
+
+        $postcode = LookupAddress::orderBy('postcode', 'ASC')->distinct()->get(['postcode']);
+
+        $state = LookupAddress::orderBy('state', 'ASC')->distinct()->get(['state']);
+
+        $city = LookupAddress::where("postcode",$company->postal_code)->orderBy('city', 'ASC')->distinct(['city'])->get(['city']);
+
+        //dump($city);
+        
+        return view('company.edit',compact('company','lect','postcode','state','city'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        
+        $companies = Company::find($id);
+
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'postal_code'=>'required',
+            'city'=>'required',
+            'state'=>'required',
+        ]);
+
+        $companies->name = $request->name;
+        $companies->address = $request->address;
+        $companies->postal_code = $request->postal_code;
+        $companies->city = $request->city;
+        $companies->state = $request->state;
+        $companies->status = $request->status;
+
+        $companies->save();
+
+        return redirect()->back()->with('success', 'Company data has been successfully updated.');
+
+    }
+
+    public function destroy($id)
+    {
+        print $id;
+    }
     
     public function getpostal(Request $request)
     {

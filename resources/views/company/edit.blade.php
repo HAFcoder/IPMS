@@ -1,4 +1,10 @@
-@extends('layouts.parentAdmin')
+@extends('layouts.parentLecturer')
+
+@section('head')
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+@endsection
 
 @section('breadcrumbs')
 
@@ -7,7 +13,7 @@
             <h4 class="page-title pull-left">Session</h4>
             <ul class="breadcrumbs pull-left">
                 <li><a href="{{ url('/admin') }}">Home</a></li>
-                <li><span>Generate New Session</span></li>
+                <li><span>Edit Company</span></li>
             </ul>
         </div>
     </div>
@@ -21,36 +27,91 @@
         <div class="col-8 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Register New Company</h4>
-                    <form action="#">
+                    <h4 class="header-title">Edit Company</h4>
+                    <form method="post" action="{{ route('company.update',$company->id) }}">
+                        @method('PUT') 
+                        @csrf
+                        
+                        @if ($errors->any())
                         <div class="form-group">
-                            <label for="example-text-input" class="col-form-label">Session Code</label>
-                            <input class="form-control" type="text" name="session_code" placeholder="Enter session code" required>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+                        
+                        @if (session()->has('success'))
+                        <div class="form-group">
+                            <div class="alert alert-success">
+                                <ul>
+                                    <li>{{ session()->get('success') }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+
+                        <div class="form-group">
+                            <label for="example-text-input" class="col-form-label">Name</label>
+                            <input class="form-control" type="text" name="name" placeholder="Enter company name" required value="{{ $company->name }}">
                         </div>
 
                         <div class="form-group">
-                            <label for="example-date-input" class="col-form-label">Start Date</label>
-                            <input class="form-control" type="date" name="start_date" placeholder="Enter start date" required>
+                            <label for="example-search-input" class="col-form-label">Address</label>
+                            <textarea name="address" rows="5" placeholder="Enter company address" class="form-control" required>{{ $company->address }}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="example-date-input" class="col-form-label">End Date</label>
-                            <input class="form-control" type="date" name="end_date" placeholder="Enter end date" required>
+                            <label class="col-form-label">Postal Code</label>
+                            <div id="postal_area">
+                                <select id="postalcode" onchange="getcity()" class="custom-select" name="postal_code">
+                                    <option selected="selected">Select Postal Code</option>
+                                    @foreach($postcode as $key => $ps)
+                                        <option @if($ps->postcode==$company->postal_code) selected  @endif value="{{ $ps->postcode }}">{{ $ps->postcode }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
                         </div>
 
                         <div class="form-group">
-                            <label class="col-form-label">Status</label>
-                            <select class="custom-select">
-                                <option selected="selected">Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <label class="col-form-label">City</label>
+
+                            <div id="city_area">
+                                <select id="city" class="custom-select" name="city">
+                                    <option selected="selected">Select City</option>
+                                    @foreach($city as $key => $ct)
+                                        <option @if($ct->city==$company->city) selected  @endif value="{{ $ct->city }}">{{ $ct->city }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label">State</label>
+
+                            <select id="state" class="custom-select" name="state">
+                                <option selected="selected">Select State</option>
+                                @foreach($state as $key => $st)
+                                    <option @if($st->state==$company->state) selected  @endif value="{{ $st->state }}">{{ $st->state }}</option>
+                                @endforeach
+
                             </select>
                         </div>
 
+                        
                         <div class="form-group">
-                            <label for="example-search-input" class="col-form-label">Description</label>
-                            <textarea name="description" rows="5" placeholder="Enter session description" class="form-control" required></textarea>
+                            <label class="col-form-label">Status</label>
+
+                            <select class="custom-select form-control" name="status">
+                                <option @if($company->status=="") selected @endif value="">Select status</option>
+                                <option @if($company->status=="approved") selected @endif value="approved">Approved</option>
+                                <option @if($company->status=="pending") selected @endif value="pending">Pending</option>
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
@@ -61,4 +122,109 @@
 
     </div>
     
+@endsection
+
+
+
+
+@section('scripts')
+
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script>
+
+    $(document).ready(function() {
+        //alert('oii');
+        $('.custom-select').select2();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+    });
+
+    function getpostal(){
+
+        var city = $('#city').val();
+
+        $.ajax({
+            url:'{{ route("getpostal") }}',
+            type: 'GET',
+            data: {
+                city : city
+            },
+            success: function (data){
+            
+                //console.log(data);
+
+                var slc = '<select id="postalcode" class="custom-select" name="postal_code">';
+                slc += '<option selected="selected">Select Postal Code</option>';
+
+                $.each( data, function( key, value ) {
+                    console.log( value.postcode );
+                    slc += '<option value="'+value.postcode+'">'+value.postcode+'</option>';
+                });
+
+                slc += '</select>';
+                $('#postal_area').html(slc);
+
+                $('#state').val(data[0].state).change();
+            
+            },
+            error: function(x,e){
+                alert(x+e);
+            }
+        
+        
+        });
+
+    }
+
+    
+    function getcity(){
+
+        var postalcode = $('#postalcode').val();
+        $( "#city_area" ).load(window.location.href + " #city_area" );
+        console.log("postalcode "+postalcode);
+
+        $.ajax({
+            url:'{{ route("getcity") }}',
+            type: 'GET',
+            data: {
+                postalcode : postalcode
+            },
+            success: function (data){
+            
+                console.log(data);
+
+                var slc = '<select id="city" class="custom-select" name="city">';
+                slc += '<option selected="selected">Select City</option>';
+
+                $.each( data, function( key, value ) {
+                    console.log( value.city );
+                    slc += '<option value="'+value.city+'">'+value.city+'</option>';
+                });
+
+                slc += '</select>';
+                $('#city_area').html(slc);
+
+                $('#state').val(data[0].state).change();
+            
+            },
+            error: function(x,e){
+                alert(x+e);
+            }
+        
+        
+        });
+
+
+    }
+
+    </script>
+
+
 @endsection
