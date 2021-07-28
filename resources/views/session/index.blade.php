@@ -112,7 +112,21 @@
                                         @endforeach
                                     </td>
 
-                                    <td>{{  ucfirst(trans($ss->status)) }}</td>
+                                    <td>
+                                        @if(\Carbon\Carbon::now() < $ss->start_date)
+                                            
+                                            <b class="text-warning">Pending</b>
+
+                                        @elseif(\Carbon\Carbon::now() > $ss->end_date)
+                                            
+                                            <b class="text-danger">Expired</b>
+
+                                        @else
+
+                                            <b class="text-success">Ongoing</b>
+
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
 
