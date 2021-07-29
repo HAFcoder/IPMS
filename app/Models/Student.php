@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\StudentInfo;
 use App\Models\Internship;
-
+use App\Models\StudentSession;
 
 class Student extends Authenticatable
 {
@@ -39,5 +39,10 @@ class Student extends Authenticatable
     public function intership()
     {
         return $this->hasMany(Internship::class, 'student_id', 'id');
+    }
+
+    public function student_session()
+    {
+        return $this->hasMany(StudentSession::class, 'student_id', 'id');
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\companiesController;
 use App\Http\Controllers\StudentSessionController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\StudentController;
 use App\Models\StudentSession;
 use Illuminate\Support\Facades\Auth;
 
@@ -62,7 +63,13 @@ Route::group(['middleware' => ['auth:admin']], function() {
 Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function() {
     // if user is approve [coordinator]
     Route::get('/lecturer/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
+
+    // student menu
+    // student view all
+    Route::get('/lecturer/coordinator/student-all', [StudentController::class, 'index']);
+    // student pending
     Route::get('/lecturer/coordinator/student-pending', [StudentSessionController::class, 'index']);
+    Route::get('/lecturer/coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
 });
 
 Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:approve']], function() {

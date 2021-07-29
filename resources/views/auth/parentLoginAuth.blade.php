@@ -38,7 +38,7 @@
     <div class="login-area login-bg">
         <div class="container-fluid p-0">
             <div class="row no-gutters">
-                <div class="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6">
+                <div class="col-xl-4 offset-xl-8 col-lg-6 offset-lg-6 mx-auto">
                     @yield('content')
                 </div>
             </div>

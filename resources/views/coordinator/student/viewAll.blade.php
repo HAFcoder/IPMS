@@ -44,103 +44,63 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start Date</th>
-                                    <th>salary</th>
+                                    <th>Student Name</th>
+                                    <th>Student ID</th>
+                                    <th>IC Number</th>
+                                    <th>Status</th>
+                                    {{-- <th>View Details</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>33</td>
-                                    <td>2008/11/28</td>
-                                    <td>$162,700</td>
-                                </tr>
-                                <tr>
-                                    <td>Angelica Ramos</td>
-                                    <td>Chief Executive Officer (CEO)</td>
-                                    <td>London</td>
-                                    <td>47</td>
-                                    <td>2009/10/09</td>
-                                    <td>$1,200,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Ashton Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td>San Francisco</td>
-                                    <td>66</td>
-                                    <td>2009/01/12</td>
-                                    <td>$86,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Bradley Greer</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>41</td>
-                                    <td>2012/10/13</td>
-                                    <td>$132,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Brenden Wagner</td>
-                                    <td>Software Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>28</td>
-                                    <td>2011/06/07</td>
-                                    <td>$206,850</td>
-                                </tr>
-                                <tr>
-                                    <td>Caesar Vance</td>
-                                    <td>Pre-Sales Support</td>
-                                    <td>New York</td>
-                                    <td>29</td>
-                                    <td>2011/12/12</td>
-                                    <td>$106,450</td>
-                                </tr>
-                                <tr>
-                                    <td>Bruno Nash</td>
-                                    <td>Software Engineer</td>
-                                    <td>Edinburgh</td>
-                                    <td>21</td>
-                                    <td>2012/03/29</td>
-                                    <td>$433,060</td>
-                                </tr>
-                                <tr>
-                                    <td>Bradley Greer</td>
-                                    <td>Software Engineer</td>
-                                    <td>London</td>
-                                    <td>41</td>
-                                    <td>2012/10/13</td>
-                                    <td>$132,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Brenden Wagner</td>
-                                    <td>Software Engineer</td>
-                                    <td>San Francisco</td>
-                                    <td>28</td>
-                                    <td>2011/06/07</td>
-                                    <td>$206,850</td>
-                                </tr>
-                                <tr>
-                                    <td>Caesar Vance</td>
-                                    <td>Pre-Sales Support</td>
-                                    <td>New York</td>
-                                    <td>29</td>
-                                    <td>2011/12/12</td>
-                                    <td>$106,450</td>
-                                </tr>
-                                <tr>
-                                    <td>Bruno Nash</td>
-                                    <td>Software Engineer</td>
-                                    <td>Edinburgh</td>
-                                    <td>21</td>
-                                    <td>2012/03/29</td>
-                                    <td>$433,060</td>
-                                </tr>
+                                @foreach($stud as $data)
+                                    <tr>
+                                        <td>{{$data->student_info->f_name}} {{$data->student_info->l_name}}</td>
+                                        <td>{{$data->student_info->studentID}}</td>
+                                        <td>{{$data->student_info->no_ic}}</td>
+                                        <td>
+                                            @if ($data->status == 'noRequest')
+                                                Didn't register session yet
+                                            @elseif ($data->status == 'approve')
+                                                Approved
+                                            @else
+                                                Pending approval
+                                            @endif 
+                                        </td>
+                                        {{-- need fix --}}
+                                        {{-- <td>
+                                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalCenter">View</button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalCenter">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">
+                                                                {{$data->student_info->f_name}} {{$data->student_info->l_name}}
+                                                                 ({{$data->student_info->studentID}})
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p><strong>Email:</strong>{{ $data->email}}</p>
+                                                            <p><strong>IC Number:</strong>{{$data->student_info->no_ic}} </p>
+                                                            <p><strong>Telephone:</strong>{{$data->student_info->telephone}} </p>
+                                                            <p>
+                                                                <strong>Address:</strong>{{$data->student_info->address}}, 
+                                                                                        {{$data->student_info->postcode}}, 
+                                                                                        {{$data->student_info->city}}, 
+                                                                                        {{$data->student_info->state}}
+                                                            </p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td> --}}
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

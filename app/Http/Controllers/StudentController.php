@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -14,7 +15,16 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
+        // view student all
+        $stud = Student::all();
+        return view('coordinator.student.viewAll', compact('stud'));
+    }
+
+    public function viewDetails()
+    {
+        // view student all
+        $stud = Student::all();
+        return view('coordinator.student.viewAll', compact('stud'));
     }
 
     /**

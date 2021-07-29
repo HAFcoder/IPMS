@@ -132,7 +132,7 @@
                                     <i class="ti-user"></i><span>Student</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="table-basic.html">View All</a></li>
+                                    <li><a href="{{ url ('/lecturer/coordinator/student-all') }}">View All</a></li>
                                     <li><a href="{{ url ('/lecturer/coordinator/student-pending') }}">Pending Registration</a></li>
                                 </ul>
                             </li>
