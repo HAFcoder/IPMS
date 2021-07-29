@@ -67,6 +67,7 @@ class SessionController extends Controller
         $status = 'active';
 
         $request->validate([
+            'session_code'=>'required|unique:sessions',
             'start_date'=>'required',
             'end_date'=>'required',
             'programme'=>'required',
@@ -104,7 +105,13 @@ class SessionController extends Controller
      */
     public function show($id)
     {
-        //
+        //dump($id);
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::find($id)->with('sessionProgramme')->first();
+        $programme = Programme::all();
+        dump($sessions);
+
+        return view('session.show',compact('sessions','programme','lect'));
     }
 
     /**

@@ -67,7 +67,7 @@
                                 @foreach($sessions as $ss)
                                 <tr>
                                     <td>
-                                        <a href="#" class="btn btn-warning">View</a>
+                                        <a href="{{ route('session.show',$ss->id) }}" class="btn btn-warning">View</a>
                                         <a href="{{ route('session.edit',$ss->id) }}" class="btn btn-primary">Edit</a>
 
                                         <form class="col" action="{{ route('session.destroy',$ss->id) }}" method="post">
