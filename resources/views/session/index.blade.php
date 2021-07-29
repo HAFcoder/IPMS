@@ -38,6 +38,17 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">List of Session</h4>
+                        
+                    @if (session()->has('delete'))
+                    <div class="form-group">
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{{ session()->get('delete') }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    @endif
+
                     <div class="data-tables datatable-primary">
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
@@ -56,8 +67,15 @@
                                 @foreach($sessions as $ss)
                                 <tr>
                                     <td>
+                                        <a href="#" class="btn btn-warning">View</a>
                                         <a href="{{ route('session.edit',$ss->id) }}" class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('session.destroy',$ss->id) }}" class="btn btn-danger">Delete</a>
+
+                                        <form class="col" action="{{ route('session.destroy',$ss->id) }}" method="post">
+                                            @method('DELETE') 
+                                            @csrf
+                                            <button class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this session?')" type="submit">Delete</button>
+                                        </form>
+
                                     </td>
                                     <td>{{ $ss->session_code }}</td>
                                     <td>{{ date('d/m/Y', strtotime($ss->start_date)) }} - {{ date('d/m/Y', strtotime($ss->end_date)) }}</td>
@@ -94,7 +112,21 @@
                                         @endforeach
                                     </td>
 
-                                    <td>{{  ucfirst(trans($ss->status)) }}</td>
+                                    <td>
+                                        @if(\Carbon\Carbon::now() < $ss->start_date)
+                                            
+                                            <b class="text-warning">Pending</b>
+
+                                        @elseif(\Carbon\Carbon::now() > $ss->end_date)
+                                            
+                                            <b class="text-danger">Expired</b>
+
+                                        @else
+
+                                            <b class="text-success">Ongoing</b>
+
+                                        @endif
+                                    </td>
                                 </tr>
                                 @endforeach
 

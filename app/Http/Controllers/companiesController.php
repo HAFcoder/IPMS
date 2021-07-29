@@ -69,20 +69,59 @@ class companiesController extends Controller
 
         return redirect()->back()->with('success', 'Company data has been successfully added.');
     }
+    
+    public function edit($id)
+    {
+        $lect = $this->getLecturerInfo();
+        //dump("id = " . $id);
 
-    
-    public function getpostal(Request $request)
-    {
-        $city = $request->get('city');
-        $city = LookupAddress::where('city','=',$city)->orderBy('postcode', 'ASC')->distinct(['postcode'])->get(['postcode','state']);
-        return $city;
+        $company = Company::find($id)->first();
+        //dump($company->postal_code);
+
+        $postcode = LookupAddress::orderBy('postcode', 'ASC')->distinct()->get(['postcode']);
+
+        $state = LookupAddress::orderBy('state', 'ASC')->distinct()->get(['state']);
+
+        $city = LookupAddress::where("postcode",$company->postal_code)->orderBy('city', 'ASC')->distinct(['city'])->get(['city']);
+
+        //dump($city);
+        
+        return view('company.edit',compact('company','lect','postcode','state','city'));
     }
-    
-    public function getcity(Request $request)
+
+    public function update(Request $request, $id)
     {
-        $postalcode = $request->get('postalcode');
-        $postcode = LookupAddress::where('postcode','=',$postalcode)->orderBy('city', 'ASC')->distinct(['city'])->get(['city','state']);
-        return $postcode;
+        
+        $companies = Company::find($id);
+
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'postal_code'=>'required',
+            'city'=>'required',
+            'state'=>'required',
+        ]);
+
+        $companies->name = $request->name;
+        $companies->address = $request->address;
+        $companies->postal_code = $request->postal_code;
+        $companies->city = $request->city;
+        $companies->state = $request->state;
+        $companies->status = $request->status;
+
+        $companies->save();
+
+        return redirect()->back()->with('success', 'Company data has been successfully updated.');
+
+    }
+
+    public function destroy($id)
+    {
+        //dump($id);
+        $companies = Company::find($id)->first();
+        $name = $companies->name;
+        $companies->delete();
+        return redirect()->back()->with('delete', $name.' has been successfully deleted.');
     }
 
 }

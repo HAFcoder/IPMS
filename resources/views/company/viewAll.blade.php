@@ -40,6 +40,16 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">List of Company</h4>
+                        
+                    @if (session()->has('delete'))
+                    <div class="form-group">
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{{ session()->get('delete') }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    @endif
                     <div class="data-tables datatable-primary">
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
@@ -62,12 +72,19 @@
                                 @foreach($company as $comp)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('session.edit',$comp->id) }}" class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('session.destroy',$comp->id) }}" class="btn btn-danger">Delete</a>
+                                        <a href="#" class="btn btn-warning d-print-none">View</a>
+                                        <a href="{{ route('company.edit',$comp->id) }}" class="btn btn-primary">Edit</a>
+
+                                        <form class="col" action="{{ route('company.destroy',$comp->id) }}" method="post">
+                                            @method('DELETE') 
+                                            @csrf
+                                            <button class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this company?')" type="submit">Delete</button>
+                                        </form>
+                                        
                                     </td>
                                     <td>{{ $comp->name }}</td>
                                     <td>{{ $comp->address }} , <br> {{ $comp->city }} , {{ $comp->postal_code }} , {{ $comp->state }}</td>
-                                    <td>{{ $comp->created_at }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($comp->created_at)) }}</td>
                                     <td>{{ ucfirst(trans($comp->status)) }}</td>
                                 </tr>
                                 @endforeach

@@ -210,7 +210,7 @@
             
             },
             error: function(x,e){
-                alert(x+e);
+                alert(x.responseText);
             }
         
         

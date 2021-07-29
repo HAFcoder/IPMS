@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Address;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\LookupAddress;
 
 class AddressController extends Controller
 {
@@ -82,5 +83,20 @@ class AddressController extends Controller
     public function destroy(Address $address)
     {
         //
+        
+    }
+    
+    public function getpostal(Request $request)
+    {
+        $city = $request->get('city');
+        $city = LookupAddress::where('city','=',$city)->orderBy('postcode', 'ASC')->distinct(['postcode'])->get(['postcode','state']);
+        return $city;
+    }
+    
+    public function getcity(Request $request)
+    {
+        $postalcode = $request->get('postalcode');
+        $postcode = LookupAddress::where('postcode','=',$postalcode)->orderBy('city', 'ASC')->distinct(['city'])->get(['city','state']);
+        return $postcode;
     }
 }
