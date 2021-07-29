@@ -82,12 +82,7 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 // Route::get('/coordinator', [HomeController::class, 'coordinatorHome']);
 
 // session route
-//Route::get('/session_view', [SessionController::class, 'index']);
-//Route::get('/session_add', [SessionController::class, 'create']);
-//Route::post('/session_insert', [SessionController::class, 'store']);
-//Route::get('/session/edit/{id}', [SessionController::class, 'edit'])->name('session.edit');
 Route::resource('session', SessionController::class);
-//Route::get('/session/delete/{id}', [SessionController::class, 'delete'])->name('session.delete');
 
 //company route
 Route::get('/company/list', [companiesController::class, 'list'])->name('company.list');
@@ -97,6 +92,7 @@ Route::get('/company/{id}/edit', [companiesController::class, 'edit'])->name('co
 Route::put('/company/{id}', [companiesController::class, 'update'])->name('company.update');
 Route::delete('/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
 
+//get address route
 Route::get('/getpostal', [AddressController::class, 'getpostal'])->name('getpostal');
 Route::get('/getcity', [AddressController::class, 'getcity'])->name('getcity');
 
