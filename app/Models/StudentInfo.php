@@ -13,13 +13,13 @@ class StudentInfo extends Model
     protected $guarded = [];
     protected $table = 'student_info';
 
-    public function programme()
+    public function programmes()
     {
         return $this->belongsTo(Programme::class, 'programme_id');
     }
 
-    public function student()
+    public function students()
     {
-        return $this->belongsTo(Student::class, 'stud_id');
+        return $this->belongsTo(Student::class, 'stud_id', 'id');
     }
 }

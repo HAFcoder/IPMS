@@ -8,11 +8,13 @@ use App\Models\StudentSession;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
 use App\Models\SessionProgramme;
+use App\Models\Programme;
 
 class Session extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    protected $table = 'sessions';
 
     public function lecturer()
     {
@@ -32,6 +34,11 @@ class Session extends Model
     public function sessionProgramme()
     {
         return $this->hasMany(SessionProgramme::class);
+    }
+
+    public function programmes()
+    {
+        return $this->belongsToMany(Programme::class, 'session_programmes', 'session_id')->wherePivot('status','active');
     }
 
 }

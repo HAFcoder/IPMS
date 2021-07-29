@@ -29,6 +29,7 @@ return array(
     'App\\Http\\Controllers\\SessionController' => $baseDir . '/app/Http/Controllers/SessionController.php',
     'App\\Http\\Controllers\\StudentController' => $baseDir . '/app/Http/Controllers/StudentController.php',
     'App\\Http\\Controllers\\StudentFeedbackController' => $baseDir . '/app/Http/Controllers/StudentFeedbackController.php',
+    'App\\Http\\Controllers\\StudentSessionController' => $baseDir . '/app/Http/Controllers/StudentSessionController.php',
     'App\\Http\\Controllers\\companiesController' => $baseDir . '/app/Http/Controllers/companiesController.php',
     'App\\Http\\Controllers\\supervisorsController' => $baseDir . '/app/Http/Controllers/supervisorsController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

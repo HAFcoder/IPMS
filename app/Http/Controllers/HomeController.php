@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
-use App\Models\Session;
+use App\Models\Programme;
+use App\models\Session;
 use App\Models\StudentInfo;
 
 class HomeController extends Controller
@@ -68,12 +69,10 @@ class HomeController extends Controller
 
     public function studentHome()
     {
-        $uid = Auth::user()->id;
-        $stud = StudentInfo::where([
-            'stud_id' => $uid,
-         ])->first(); 
-
-        return view('student.index', compact('stud'));
+        $sessions = Session::where('status', '=', 'active')->get();
+        $session = Session::all();
+        $programmes = Programme::all();
+        return view('student.index', compact('sessions', 'session', 'programmes'));
     }
 
     public function lecturerHome()

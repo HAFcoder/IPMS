@@ -31,9 +31,9 @@ class Student extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function studentInfo()
+    public function student_info()
     {
-        return $this->hasOne(StudentInfo::class);
+        return $this->hasOne(StudentInfo::class, 'stud_id');
     }
 
     public function intership()

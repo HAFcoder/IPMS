@@ -1,8 +1,9 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
+    @yield('meta')
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>IPMS KUPTM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -165,7 +166,7 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ $stud->f_name }}
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->student_info->f_name }}
                                 <i class="fa fa-angle-down"></i>
                             </h4>
                             <div class="dropdown-menu">
@@ -225,6 +226,9 @@
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+    @yield('scripts')
+    
     <!-- all line chart activation -->
     <script src="{{ asset('assets/js/line-chart.js') }}"></script>
     <!-- all pie chart -->
