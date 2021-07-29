@@ -34,7 +34,7 @@ class Lecturer extends Authenticatable
 
     public function lecturerInfo()
     {
-        return $this->hasOne(LecturerInfo::class);
+        return $this->hasOne(LecturerInfo::class, 'lect_id');
     }
 
     public function intership()

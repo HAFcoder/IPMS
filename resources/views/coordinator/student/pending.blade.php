@@ -44,12 +44,11 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start Date</th>
-                                    <th>salary</th>
+                                    <th>Student Name</th>
+                                    <th>Student ID</th>
+                                    <th>Session ID</th>
+                                    <th>Programme ID</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>

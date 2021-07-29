@@ -36,4 +36,10 @@ class StudentSessionController extends Controller
         return view('student.index', compact('sessions'));
         
     }
+
+    public function index()
+    {
+        $studSesion = StudentSession::where('status', '=', 'pending')->get();
+        return view('coordinator.student.pending');
+    }
 }

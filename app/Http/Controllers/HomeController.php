@@ -85,11 +85,7 @@ class HomeController extends Controller
 
     public function coordinatorHome()
     {
-        $uid = Auth::user()->id;
-        $lect = LecturerInfo::where([
-            'lect_id' => $uid,
-         ])->first(); 
-        return view('coordinator.student.logbookView', compact('lect'));
+        return view('coordinator.index');
     }
 
     public function sadminHome()

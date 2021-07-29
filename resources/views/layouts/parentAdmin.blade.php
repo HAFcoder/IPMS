@@ -133,7 +133,7 @@
                                 </a>
                                 <ul class="collapse">
                                     <li><a href="table-basic.html">View All</a></li>
-                                    <li><a href="table-layout.html">Pending</a></li>
+                                    <li><a href="{{ url ('/lecturer/coordinator/student-pending') }}">Pending Registration</a></li>
                                 </ul>
                             </li>
                             
@@ -271,7 +271,7 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ $lect->f_name }} {{ $lect->l_name }} <i
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->lecturerInfo->f_name }} <i
                                     class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile</a>
