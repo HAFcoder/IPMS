@@ -47,7 +47,7 @@ Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
 Route::group(['middleware' => 'auth', 'role:student'], function() {
     //Route::post('/logout', [LoginController::class, 'logout'])->name('logout.admin');
     Route::get('/', [HomeController::class, 'studentHome']);
-    // Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
+    Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
     Route::post('student/fetch-programmes', [StudentSessionController::class, 'fetchProgramme']);
     Route::get('/student/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
 });

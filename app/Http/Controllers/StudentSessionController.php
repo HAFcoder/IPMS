@@ -33,9 +33,7 @@ class StudentSessionController extends Controller
         $user->save();
 
         $sessions = Session::where('status', '=', 'active')->get();
-        $session = Session::all();
-        $programmes = Programme::all();
-        return view('student.index', compact('sessions', 'session', 'programmes'));
+        return view('student.index', compact('sessions'));
         
     }
 }
