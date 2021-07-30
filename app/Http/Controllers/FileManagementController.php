@@ -12,7 +12,7 @@ use App\Models\LecturerInfo;
 class FileManagementController extends Controller
 {
  
-    public function getFile()
+    public function listInternFile()
     {
         $lect = $this->getLecturerInfo();
 
@@ -29,7 +29,7 @@ class FileManagementController extends Controller
         return view('files.index', ['files' => $data, 'lect' => $lect]);
     }
  
-    public function store(Request $request)
+    public function storeInternFile(Request $request)
     {
         $this->validate($request, [
             'internfile' => 'required|max:2048'
@@ -45,14 +45,15 @@ class FileManagementController extends Controller
         return back()->withSuccess('File uploaded successfully');
     }
  
-    public function destroy()
+    public function destroyInternFile()
     {
-
-        Storage::disk('s3')->delete('intern/FAQ - Nexent Chatbot.docx');
-        return back()->withSuccess('File was deleted successfully');
+        //DIPLOMA REPORT AND LOGBOOK EVALUATION FORM(CC101).pdf
+        $file_url = 'intern-forms/testform.pdf';
+        $file_path = parse_url($file_url);
+        Storage::disk('s3')->delete($file_path);
     }
  
-    public function download($filename) 
+    public function downloadInternFile($filename) 
     {
         $filename = base64_decode($filename);
         return Storage::disk('s3')->response('intern-forms/'. $filename);

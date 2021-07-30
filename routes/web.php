@@ -10,6 +10,7 @@ use App\Http\Controllers\companiesController;
 use App\Http\Controllers\StudentSessionController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ResumeManagementController;
 use App\Models\StudentSession;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,11 +104,14 @@ Route::delete('/company/{id}', [companiesController::class, 'destroy'])->name('c
 Route::get('/getpostal', [AddressController::class, 'getpostal'])->name('getpostal');
 Route::get('/getcity', [AddressController::class, 'getcity'])->name('getcity');
 
-// s3 amazon file management route
-Route::get('/internfile', [FileManagementController::class, 'getFile']);
-Route::post('/internfile/store', [FileManagementController::class, 'store']);
-Route::get('/internfile/download/{filename}',[FileManagementController::class, 'download']);
-// Route::delete('/internfile/remove/{file}',[FileManagementController::class, 'destroy']);
-// Route::get('/internfile', [FileManagementController::class, 'create']);
-// Route::post('/internfile', [FileManagementController::class, 'store']);
-// Route::get('/internfile/{file}',[FileManagementController::class, 'show']);
+//internship forms - s3 amazon file management route
+Route::get('/internfile', [FileManagementController::class, 'listInternFile']);
+Route::post('/internfile/store', [FileManagementController::class, 'storeInternFile']);
+Route::delete('/internfile/delete', [FileManagementController::class, 'destroyInternFile']);
+Route::get('/internfile/download/{filename}',[FileManagementController::class, 'downloadInternFile']);
+
+//internship resumes - s3 amazon file management route
+Route::get('/resume', [ResumeManagementController::class, 'listResume']);
+Route::post('/resume/store', [ResumeManagementController::class, 'storeResume']);
+Route::delete('/resume/delete', [ResumeManagementController::class, 'destroyResume']);
+Route::get('/resume/download/{filename}',[ResumeManagementController::class, 'downloadResume']);
