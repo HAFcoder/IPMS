@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Models\Lecturer;
+use App\Models\LecturerInfo;
 
 class ResumeManagementController extends Controller
 {
@@ -10,7 +14,7 @@ class ResumeManagementController extends Controller
     {
         $lect = $this->getLecturerInfo();
 
-        $files = Storage::disk('s3')->files('intern-forms/');
+        $files = Storage::disk('s3')->files('intern-resumes/');
  
         $data = [];
         foreach($files as $file) {
@@ -20,7 +24,7 @@ class ResumeManagementController extends Controller
             ];
         }
  
-        return view('files.index', ['files' => $data, 'lect' => $lect]);
+        return view('resume.index', ['files' => $data, 'lect' => $lect]);
     }
  
     public function storeResume(Request $request)

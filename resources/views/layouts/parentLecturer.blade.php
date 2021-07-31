@@ -156,6 +156,8 @@
 
                             <li><a href="{{ url('/internfile') }}"><i class="ti-folder"></i> <span>Internship Form</span></a></li>
 
+                            <li><a href="{{ url('/resume') }}"><i class="ti-id-badge"></i> <span>Internship Resume</span></a></li>
+
                             <li><a href="invoice.html"><i class="ti-file"></i> <span>Report</span></a></li>
 
                             <li>
