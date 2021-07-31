@@ -72,13 +72,19 @@
                                 @foreach($company as $comp)
                                 <tr>
                                     <td>
-                                        <a href="#" class="btn btn-warning d-print-none">View</a>
-                                        <a href="{{ route('company.edit',$comp->id) }}" class="btn btn-primary">Edit</a>
 
                                         <form class="col" action="{{ route('company.destroy',$comp->id) }}" method="post">
                                             @method('DELETE') 
                                             @csrf
-                                            <button class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this company?')" type="submit">Delete</button>
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="#" class="btn btn-info  btn-xs"><span class="ti-eye"></span></a>
+
+                                            <a data-toggle="tooltip" data-placement="top" title="Edit" 
+                                            href="{{ route('company.edit',$comp->id) }}" class="btn btn-primary  btn-xs"><span class="ti-pencil"></span></a>
+
+                                            <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger  btn-xs"
+                                             onclick="return confirm('Are you sure you want to delete this company?')" type="submit"><span class="ti-trash"></span></button>
+
                                         </form>
                                         
                                     </td>
