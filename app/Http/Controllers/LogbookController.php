@@ -13,9 +13,10 @@ class LogbookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function listLogbook()
     {
-        //
+        $lect = $this->getLecturerInfo();
+        return view('logbook.index', ['lect' => $lect]);
     }
 
     /**

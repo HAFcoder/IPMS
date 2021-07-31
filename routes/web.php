@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SessionController;
@@ -115,3 +116,6 @@ Route::get('/resume', [ResumeManagementController::class, 'listResume']);
 Route::post('/resume/store', [ResumeManagementController::class, 'storeResume']);
 Route::delete('/resume/delete', [ResumeManagementController::class, 'destroyResume']);
 Route::get('/resume/download/{filename}',[ResumeManagementController::class, 'downloadResume']);
+
+//Logbook
+Route::get('/logbook', [LogbookController::class, 'listLogbook']);
