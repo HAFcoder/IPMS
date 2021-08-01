@@ -23,6 +23,7 @@
 @section('content')
 
     <div class="row mt-3">
+        
         <div class="card col-sm-12">
             <form action="{{ url('/resume/store') }}" method="POST" enctype="multipart/form-data" class="form-inline">
                 @csrf
