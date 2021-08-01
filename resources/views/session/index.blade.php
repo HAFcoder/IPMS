@@ -67,13 +67,19 @@
                                 @foreach($sessions as $ss)
                                 <tr>
                                     <td>
-                                        <a href="{{ route('session.show',$ss->id) }}" class="btn btn-warning">View</a>
-                                        <a href="{{ route('session.edit',$ss->id) }}" class="btn btn-primary">Edit</a>
 
                                         <form class="col" action="{{ route('session.destroy',$ss->id) }}" method="post">
                                             @method('DELETE') 
                                             @csrf
-                                            <button class="btn btn-danger"  onclick="return confirm('Are you sure you want to delete this session?')" type="submit">Delete</button>
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="{{ route('session.show',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
+
+                                            <a data-toggle="tooltip" data-placement="top" title="Edit" 
+                                            href="{{ route('session.edit',$ss->id) }}" class="btn btn-primary btn-xs"><span class="ti-pencil"></span></a>
+
+                                            <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs"
+                                             onclick="return confirm('Are you sure you want to delete this session?')" type="submit"><span class="ti-trash"></span></button>
+
                                         </form>
 
                                     </td>

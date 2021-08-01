@@ -25,37 +25,126 @@
 @section('content')
 
     <div class="container">
-        <h2>Weekly task</h2>
-        <div class="row">
-            <div class="col-md-12 col-lg-12">
-                <div class="tracking-item">
-                    <div class="tracking-date">Aug 10, 2018<span>05:01 PM</span></div>
-                    <div class="tracking-content">DESTROYEDPER SHIPPER INSTRUCTION<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span></div>
-                </div>     
-            </div>
+        <div class="mt-3">
+            <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseLog" aria-expanded="false" aria-controls="collapseExample">
+                    Week 1
+                </button>
+            </p>
+            <div class="collapse" id="collapseLog">
+                <div class="card card-body">
+                    <span class="border border-primary mt-2">
+                        <h6>Monday</h6>
+                        <p id='monday'>
+                            Report on duty
+                        </p>
+                    </span>
+                    
+                    <span class="border border-primary mt-2">
+                        <h6>Tuesday</h6>
+                        <p id='tuesday'>
+                            Assigned task
+                        </p>
+                    </span>
 
-            <div class="col-md-12 col-lg-12">
-                <div class="tracking-item">
-                    <div class="tracking-date">Aug 10, 2018<span>05:01 PM</span></div>
-                    <div class="tracking-content">DESTROYEDPER SHIPPER INSTRUCTION<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span></div>
-                </div>     
-            </div>
+                    <span class="border border-primary mt-2">
+                        <h6>Wednesday</h6>
+                        <p id='wednesday'>
+                            Daily meeting
+                        </p>
+                    </span>
 
-            <div class="col-md-12 col-lg-12">
-                <div class="tracking-item">
-                    <div class="tracking-date">Aug 10, 2018<span>05:01 PM</span></div>
-                    <div class="tracking-content">DESTROYEDPER SHIPPER INSTRUCTION<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span></div>
-                </div>     
-            </div>
+                    <span class="border border-primary mt-2">
+                        <h6>Thursday</h6>
+                        <p id='thursday'>
+                            Performance Review
+                        </p>
+                    </span>
 
-            <div class="col-md-12 col-lg-12">
-                <div class="tracking-item">
-                    <div class="tracking-date">Aug 10, 2018<span>05:01 PM</span></div>
-                    <div class="tracking-content">DESTROYEDPER SHIPPER INSTRUCTION<span>KUALA LUMPUR (LOGISTICS HUB), MALAYSIA, MALAYSIA</span></div>
-                </div>     
-            </div>  
+                    <span class="border border-primary mt-2">
+                        <h6>Friday</h6>
+                        <p id='friday'>
+                            Sick Leave
+                        </p>
+                    </span>
+
+                    <span class="border border-primary mt-2">
+                        <h6>Saturday</h6>
+                        <p id='saturday'>
+                            On Holiday
+                        </p>
+                    </span>
+
+                    <span class="border border-primary mt-2">
+                        <h6>Sunday</h6>
+                        <p id='sunday'>
+                            On Holiday
+                        </p>
+                    </span>
+                </div>
+            </div>
         </div>
-    </div>
+
+        <div class="mt-3">
+            <p>
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseLog2" aria-expanded="false" aria-controls="collapseExample">
+                    Week 2
+                </button>
+            </p>
+            <div class="collapse" id="collapseLog2">
+                <div class="card card-body">
+                    <span class="border border-primary mt-2">
+                        <h6>Monday</h6>
+                        <p id='monday'>
+                            Report on duty
+                        </p>
+                    </span>
+                    
+                    <span class="border border-primary mt-2">
+                        <h6>Tuesday</h6>
+                        <p id='tuesday'>
+                            Assigned task
+                        </p>
+                    </span>
+
+                    <span class="border border-primary mt-2">
+                        <h6>Wednesday</h6>
+                        <p id='wednesday'>
+                            Daily meeting
+                        </p>
+                    </span>
+
+                    <span class="border border-primary mt-2">
+                        <h6>Thursday</h6>
+                        <p id='thursday'>
+                            Performance Review
+                        </p>
+                    </span>
+
+                    <span class="border border-primary mt-2">
+                        <h6>Friday</h6>
+                        <p id='friday'>
+                            Sick Leave
+                        </p>
+                    </span>
+
+                    <span class="border border-primary mt-2">
+                        <h6>Saturday</h6>
+                        <p id='saturday'>
+                            On Holiday
+                        </p>
+                    </span>
+
+                    <span class="border border-primary mt-2">
+                        <h6>Sunday</h6>
+                        <p id='sunday'>
+                            On Holiday
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    
     </div>
 
 
