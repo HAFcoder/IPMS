@@ -1,6 +1,6 @@
 {{-- parent layout for coordinator or admin --}}
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -132,7 +132,7 @@
                                     <i class="ti-user"></i><span>Student</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="{{ url ('/lecturer/coordinator/student-all') }}">View All</a></li>
+                                    <li><a href="{{ url ('/lecturer/coordinator/students') }}">View All</a></li>
                                     <li><a href="{{ url ('/lecturer/coordinator/student-pending') }}">Pending Registration</a></li>
                                 </ul>
                             </li>

@@ -48,7 +48,8 @@
                                     <th>Student ID</th>
                                     <th>IC Number</th>
                                     <th>Status</th>
-                                    {{-- <th>View Details</th> --}}
+                                    <th>Edit</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,39 +67,18 @@
                                                 Pending approval
                                             @endif 
                                         </td>
-                                        {{-- need fix --}}
-                                        {{-- <td>
-                                            <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalCenter">View</button>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModalCenter">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">
-                                                                {{$data->student_info->f_name}} {{$data->student_info->l_name}}
-                                                                 ({{$data->student_info->studentID}})
-                                                            </h5>
-                                                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <p><strong>Email:</strong>{{ $data->email}}</p>
-                                                            <p><strong>IC Number:</strong>{{$data->student_info->no_ic}} </p>
-                                                            <p><strong>Telephone:</strong>{{$data->student_info->telephone}} </p>
-                                                            <p>
-                                                                <strong>Address:</strong>{{$data->student_info->address}}, 
-                                                                                        {{$data->student_info->postcode}}, 
-                                                                                        {{$data->student_info->city}}, 
-                                                                                        {{$data->student_info->state}}
-                                                            </p>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td> --}}
+                                        <td>
+                                            <a href="{{ route('students.edit',$data->id)}}" class="btn btn-primary">Edit</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('students.destroy', $data->id)}}" method="post">
+                                              @csrf
+                                              @method('DELETE')
+                                              <button class="btn btn-danger" type="submit" 
+                                              onclick="return confirm('Are you sure you want to delete this data?')">
+                                                Delete</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -68,7 +68,8 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
 
     // student menu
     // student view all
-    Route::get('/lecturer/coordinator/student-all', [StudentController::class, 'index']);
+    Route::resource('/lecturer/coordinator/students', StudentController::class);
+    Route::post('/edit-student/api/fetch-cities', [RegisterController::class, 'fetchCity']);
     // student pending
     Route::get('/lecturer/coordinator/student-pending', [StudentSessionController::class, 'index']);
     Route::get('/lecturer/coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');

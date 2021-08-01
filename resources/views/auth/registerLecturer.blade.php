@@ -7,7 +7,7 @@
 
             <div class="login-form-head">
                 <div class="logo">
-                    <img src="{{asset('assets/images/icon/loginlogo.png')}}" alt="logo"></a>
+                    <img style="width: 350px" src="{{ asset('assets/images/icon/login_lecturer.png') }}" alt="logo"></a>
                 </div>
                 <p style="color: red">Fill in your lecturer's details to register.</p>
 

@@ -12,13 +12,17 @@
 
             <div class="login-form-head">
                 <div class="logo">
-                    <img src="{{asset('assets/images/icon/loginlogo.png')}}" alt="logo"></a>
+                    @if (\Request::getRequestUri() === '/login/lecturer')
+                        <img style="width: 350px" src="{{ asset('assets/images/icon/login_lecturer.png') }}" alt="logo"></a>
+                    @elseif (\Request::getRequestUri() === '/login')
+                        <img style="width: 350px" src="{{ asset('assets/images/icon/login_student.png') }}" alt="logo"></a>
+                    @endif
                 </div>
-                @if (\Request::getRequestUri() === '/login/lecturer')
+                {{-- @if (\Request::getRequestUri() === '/login/lecturer')
                     <p style="color: red">Lecturer.</p>
                 @elseif (\Request::getRequestUri() === '/login')
                     <p style="color: red">Student.</p>
-                @endif
+                @endif --}}
             </div>
             <div class="login-form-body">
                 <div class="form-gp">

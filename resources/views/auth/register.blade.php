@@ -5,15 +5,29 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
+@section('head')
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var inputmask = new Inputmask("######-##-####");
+            inputmask.mask($('[id*=no_ic]'));
+        });
+    </script>
+    
+@endsection
+
 @section('content')
     <div class="login-box-s2 ptb--100">
-        
+
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div class="login-form-head">
                 <div class="logo">
-                    <img src="{{ asset('assets/images/icon/loginlogo.png') }}" alt="logo"></a>
+                    <img style="width: 350px" src="{{ asset('assets/images/icon/login_student.png') }}" alt="logo"></a>
                 </div>
                 <p style="color: red">Fill in your student's details to register.</p>
 
@@ -21,7 +35,7 @@
                     <div class="alert alert-danger">
                         <ul>
                             @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
+                                <li>{{ $error }}</li>
                             @endforeach
                         </ul>
                     </div>
@@ -47,10 +61,10 @@
 
                 <div class="form-gp">
                     <label for="no_ic">IC Number</label>
-                    <input type="text" id="no_ic" pattern="\d{6}-\d{2}-\d{4}" name="no_ic" value="{{ old('no_ic') }}" required autocomplete="no_ic">
+                    <input type="text" id="no_ic" name="no_ic" value="{{ old('no_ic') }}"
+                        required autocomplete="no_ic" maxlength="14">
                     <i class="ti-id-badge"></i>
                     <div class="text-danger"></div>
-                    <small class="form-text text-muted">Format:123456-04-2345</small>
                 </div>
 
                 <div class="form-group">
@@ -65,9 +79,8 @@
 
                 <div class="form-gp">
                     <label for="studentID">KUPTM Student ID</label>
-                    <input type="text" id="studentID" pattern="[A-Za-z]{2}\d{2}-[A-Za-z]{3}-\d{3}" name="studentID" value="{{ old('studentID') }}" required
-                        autocomplete="studentID">
-                        {{-- SP18-BEE-000 eg patern --}}
+                    <input type="text" id="studentID" pattern="[A-Za-z]{2}\d{9}" name="studentID"
+                        value="{{ old('studentID') }}" required autocomplete="studentID">
                     <i class="ti-id-badge"></i>
                     <div class="text-danger"></div>
                 </div>
@@ -81,8 +94,8 @@
 
                 <div class="form-gp">
                     <label for="telephone">Phone Number</label>
-                    <input type="text" id="telephone" onkeypress="validate(event)" name="telephone" value="{{ old('telephone') }}" required
-                        autocomplete="telephone">
+                    <input type="text" id="telephone" onkeypress="validate(event)" name="telephone"
+                        value="{{ old('telephone') }}" required autocomplete="telephone">
                     <i class="ti-mobile"></i>
                     <div class="text-danger"></div>
                 </div>
@@ -102,8 +115,8 @@
 
                 <div class="form-gp">
                     <label for="postcode">Postcode</label>
-                    <input type="text" id="postcode" pattern="\d{5}" name="postcode" value="{{ old('postcode') }}" required
-                        autocomplete="postcode">
+                    <input type="text" id="postcode" pattern="\d{5}" name="postcode" value="{{ old('postcode') }}"
+                        onkeypress="validate(event)" required autocomplete="postcode" maxlength="5">
                     <i class="ti-home"></i>
                     <div class="text-danger"></div>
                 </div>
@@ -126,7 +139,8 @@
 
                 <div class="form-gp">
                     <label for="password">Password</label>
-                    <input type="password" id="password" name="password" pattern=".{6,}" required autocomplete="new-password">
+                    <input type="password" id="password" name="password" pattern=".{6,}" required
+                        autocomplete="new-password">
                     <i class="ti-lock"></i>
                     <div class="text-danger"></div>
                     <small class="form-text text-muted">*min 8 character or more.</small>
@@ -194,16 +208,15 @@
             if (theEvent.type === 'paste') {
                 key = event.clipboardData.getData('text/plain');
             } else {
-            // Handle key press
+                // Handle key press
                 var key = theEvent.keyCode || theEvent.which;
                 key = String.fromCharCode(key);
             }
             var regex = /[0-9]|\.\d{0,2}$/;
-            if( !regex.test(key) ) {
+            if (!regex.test(key)) {
                 theEvent.returnValue = false;
-                if(theEvent.preventDefault) theEvent.preventDefault();
+                if (theEvent.preventDefault) theEvent.preventDefault();
             }
         }
     </script>
 @endsection
-
