@@ -32,7 +32,7 @@ class SessionController extends Controller
     public function index()
     {
         $lect = $this->getLecturerInfo();
-        $sessions = Session::with('sessionProgramme')->get();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
         //dump($sessions);
 
         return view('session.index',compact('sessions','lect'));
@@ -105,13 +105,11 @@ class SessionController extends Controller
      */
     public function show($id)
     {
-        //dump($id);
-        $lect = $this->getLecturerInfo();
         $sessions = Session::find($id)->with('sessionProgramme')->first();
         $programme = Programme::all();
-        dump($sessions);
+        //dump($sessions);
 
-        return view('session.show',compact('sessions','programme','lect'));
+        return view('session.show',compact('sessions','programme'));
     }
 
     /**
@@ -122,14 +120,13 @@ class SessionController extends Controller
      */
     public function edit($id)
     {
-        $lect = $this->getLecturerInfo();
         //dump("id = " . $id);
         //$sessions = Session::find($id);
         $sessions = Session::find($id)->with('sessionProgramme')->first();
         $programme = Programme::all();
         //dump($sessions);
 
-        return view('session.edit',compact('sessions','programme','lect'));
+        return view('session.edit',compact('sessions','programme'));
     }
 
     /**

@@ -23,7 +23,7 @@ class Session extends Model
 
     public function lecturerInfo()
     {
-        return $this->belongsTo(LecturerInfo::class, 'lecturer_id');
+        return $this->hasOne(LecturerInfo::class, 'lect_id','lecturer_id');
     }
 
     public function studSession()

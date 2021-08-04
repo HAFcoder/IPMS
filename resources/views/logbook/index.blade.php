@@ -1,4 +1,4 @@
-@extends('layouts.parentLecturer')
+@extends('layouts.parentStudent')
 
 @section('head')
 

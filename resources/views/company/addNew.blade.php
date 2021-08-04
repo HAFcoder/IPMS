@@ -10,10 +10,10 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Session</h4>
+            <h4 class="page-title pull-left">Company</h4>
             <ul class="breadcrumbs pull-left">
                 <li><a href="{{ url('/admin') }}">Home</a></li>
-                <li><span>Generate New Session</span></li>
+                <li><span>Add New Company</span></li>
             </ul>
         </div>
     </div>

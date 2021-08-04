@@ -101,8 +101,22 @@
                                     <i class="ti-briefcase"></i><span>Company</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="{{ route('company.list') }}">View All</a></li>
-                                    <li><a href="{{ route('company.create') }}">Add New</a></li>
+                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                                    <li><a href="{{ route('company.list.coordinator') }}">View All</a></li>
+
+                                    @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
+                                    <li><a href="{{ route('company.list.lecturer') }}">View All</a></li>
+
+                                    @endif
+
+                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                                    <li><a href="{{ route('company.create.coordinator') }}">Add New</a></li>
+
+                                    @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
+                                    <li><a href="{{ route('company.create.lecturer') }}">Add New</a></li>
+
+                                    @endif
+
                                 </ul>
                             </li>
 
@@ -279,7 +293,7 @@
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
                             <img class="avatar user-thumb" src="{{ asset('assets/images/author/avatar.png') }}" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ $lect->f_name }} {{ $lect->l_name }} 
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->lecturerInfo->f_name }}
                                 <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile</a>
