@@ -27,10 +27,31 @@
 
     <div class="row">
 
-        <div class="col-8 mt-5 mx-auto">
+        <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">View Session</h4>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Details</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Student List</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="myTabContent">
+
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <p><b>Details of Session</b></p>
+                            <p></p>
+                        </div>
+
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <p><b>List of Student</b></p>
+                        </div>
+                        
+                    </div>
                     
                 </div>
             </div>

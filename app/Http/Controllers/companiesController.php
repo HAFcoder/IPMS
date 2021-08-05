@@ -19,8 +19,8 @@ class companiesController extends Controller
     {
         $lect = $this->getLecturerInfo();
         
-        $company = Company::all();
-        //print_r($company);
+        $company = Company::orderBy('status', 'ASC')->with('lecturerInfo','studentInfo')->get();
+        //dump($company);
         
         return view('company.viewAll',compact('company','lect'));
     }
@@ -122,6 +122,24 @@ class companiesController extends Controller
         $name = $companies->name;
         $companies->delete();
         return redirect()->back()->with('delete', $name.' has been successfully deleted.');
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $status = $request->get('status');
+        $comp_id = $request->get('comp_id');
+        
+        foreach($comp_id as $id){
+
+            $companies = Company::find($id);
+            $companies->status = $status;
+    
+            $companies->save();
+
+        }
+
+        return 0;
+
     }
 
 }

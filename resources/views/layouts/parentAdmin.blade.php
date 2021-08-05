@@ -98,8 +98,8 @@
                                     <i class="ti-briefcase"></i><span>Company</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="alert.html">Add New</a></li>
-                                    <li><a href="accordion.html">View All</a></li>
+                                    <li><a href="#">View All</a></li>
+                                    <li><a href="#">Add New</a></li>
                                 </ul>
                             </li>
 

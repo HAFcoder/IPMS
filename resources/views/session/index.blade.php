@@ -53,12 +53,12 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th></th>
+                                    <th class="noExport"></th>
                                     <th>Code</th>
                                     <th>Duration</th>
-                                    <th>Creator</th>
                                     <th>Description</th>
                                     <th>Programme</th>
+                                    <th>Created By</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -74,31 +74,20 @@
                                             <a data-toggle="tooltip" data-placement="top" title="View" 
                                             href="{{ route('session.show',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
 
+                                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
+
                                             <a data-toggle="tooltip" data-placement="top" title="Edit" 
                                             href="{{ route('session.edit',$ss->id) }}" class="btn btn-primary btn-xs"><span class="ti-pencil"></span></a>
 
                                             <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs"
                                              onclick="return confirm('Are you sure you want to delete this session?')" type="submit"><span class="ti-trash"></span></button>
 
+                                            @endif
                                         </form>
 
                                     </td>
                                     <td>{{ $ss->session_code }}</td>
                                     <td>{{ date('d/m/Y', strtotime($ss->start_date)) }} - {{ date('d/m/Y', strtotime($ss->end_date)) }}</td>
-                                    <td>
-                                        
-                                        @php
-
-                                        $lects = DB::table('lecturer_info')
-                                                ->select('f_name','l_name')
-                                                ->where('lect_id', '=', $ss->lecturer_id)
-                                                ->first();
-
-                                        echo $lects->f_name . " " . $lects->l_name;
-
-                                        @endphp
-
-                                    </td>
                                     <td>{{ $ss->description }}</td>
 
                                     <td>
@@ -117,19 +106,20 @@
 
                                         @endforeach
                                     </td>
+                                    <td>{{ $ss->lecturerInfo->f_name }} {{ $ss->lecturerInfo->l_name }}</td>
 
                                     <td>
-                                        @if(\Carbon\Carbon::now() < $ss->start_date)
+                                        @if($ss->status == 'inactive' || \Carbon\Carbon::now() > $ss->end_date)
                                             
-                                            <b class="text-warning">Pending</b>
+                                            <span class="badge badge-pill badge-danger">Inactive</span>
 
-                                        @elseif(\Carbon\Carbon::now() > $ss->end_date)
+                                        @elseif(\Carbon\Carbon::now() < $ss->start_date && $ss->status == 'active')
                                             
-                                            <b class="text-danger">Expired</b>
+                                            <span class="badge badge-pill badge-primary">Pending</span>
 
-                                        @else
+                                        @elseif(\Carbon\Carbon::now() < $ss->end_date && \Carbon\Carbon::now() > $ss->start_date)
 
-                                            <b class="text-success">Ongoing</b>
+                                            <span class="badge badge-pill badge-success">Ongoing</span>
 
                                         @endif
                                     </td>
@@ -152,15 +142,50 @@
 
 <script>
     $(document).ready(function() {
+        
         $('#dataTableSession').DataTable( {
             language : {
                 sLengthMenu: "Show _MENU_"
             },
             dom: 'lBfrtip',
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ]
+            buttons:{
+                        buttons: [
+                                    {
+                                        extend: 'pdfHtml5',
+                                        text: '<i class="fa fa-file-pdf-o"></i>',
+                                        titleAttr: 'PDF',
+                                        footer: true,
+                                        messageTop: 'This is the list of company under IPMS database.',
+                                        exportOptions: {
+                                             columns:"thead th:not(.noExport)"
+                                        }
+                                    },
+                                    {
+                                        extend: 'csvHtml5',
+                                        text: '<i class="fa fa-file-text-o"></i>',
+                                        titleAttr: 'CSV',
+                                        exportOptions: {
+                                             columns:"thead th:not(.noExport)"
+                                        }
+                                    
+                                    },
+                                    {
+                                        extend: 'excelHtml5',
+                                        text: '<i class="fa fa-file-excel-o"></i>',
+                                        titleAttr: 'EXCEL',
+                                        exportOptions: {
+                                             columns:"thead th:not(.noExport)"
+                                        }
+                                    }  
+                            ],
+                         dom: {
+                                button: {
+                                    className: 'btn btn-xs'
+                                }
+                            } 
+                             
+                    }
         } );
     
     } );

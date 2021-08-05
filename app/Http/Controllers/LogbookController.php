@@ -8,25 +8,26 @@ use Illuminate\Http\Request;
 
 class LogbookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function listLogbook()
     {
         $lect = $this->getLecturerInfo();
         return view('logbook.index', ['lect' => $lect]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function createLogbook()
     {
-        //
+        return Null;
+    }
+
+    public function updateLogbook()
+    {
+        return Null;
+    }
+
+    public function deleteLogbook()
+    {
+        return Null;
     }
 
     /**

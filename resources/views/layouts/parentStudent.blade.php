@@ -49,10 +49,9 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="{{ url('/') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
-                            <li><a href="{{ url('/') }}"><i class="ti-receipt"></i> <span>Resume</span></a></li>
+                            <li><a href="#"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="#"><i class="ti-receipt"></i> <span>Resume</span></a></li>
 
-                            @if (auth()->user()->status == 'approve')
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i
                                         class="ti-layout-sidebar-left"></i><span>Sidebar
@@ -63,7 +62,6 @@
                                     <li><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
                                 </ul>
                             </li>
-                            @endif
                         </ul>
                     </nav>
                 </div>
