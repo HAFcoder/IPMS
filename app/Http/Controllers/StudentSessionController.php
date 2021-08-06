@@ -56,4 +56,22 @@ class StudentSessionController extends Controller
 
         return redirect()->back();
     }
+
+    public function updateStatus(Request $request)
+    {
+        $status = $request->get('status');
+        $studSession_id = $request->get('studSession_id');
+        
+        foreach($studSession_id as $id){
+
+            $studSess = StudentSession::find($id);
+            $studSess->status = $status;
+    
+            $studSess->save();
+
+        }
+
+        return 0;
+
+    }
 }
