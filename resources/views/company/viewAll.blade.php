@@ -251,7 +251,10 @@
                     //window.location.reload();
                     $( "#dataTableCompany" ).load(window.location.href + " #dataTableCompany" );
                     
-                    setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
+                    $('#dataTableCompany').bind('DOMNodeInserted DOMNodeRemoved', function() {
+                        $('#btnCloseLoad').click();
+                    });
+                    //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
                 
                 },
                 error: function(x,e){

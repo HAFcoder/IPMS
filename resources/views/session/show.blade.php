@@ -163,15 +163,15 @@
                                                 
                                                 @if($stud_ss->status == 'approve')
 
-                                                    <span class="badge badge-pill badge-success">Approved</span>
+                                                    <span class="status-p bg-success">Approved</span>
 
                                                 @elseif($stud_ss->status == 'reject')
 
-                                                    <span class="badge badge-pill badge-danger">Rejected</span>
+                                                    <span class="status-p bg-danger">Rejected</span>
 
                                                 @else
 
-                                                    <span class="badge badge-pill badge-primary">Pending</span>
+                                                    <span class="status-p bg-primary">Pending</span>
 
                                                 @endif
 
@@ -325,9 +325,14 @@
                 
                     console.log("final value = "+data);
                     //window.location.reload();
+
                     $( "#dataTableArea" ).load(window.location.href + " #dataTableArea" );
 
-                    setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
+                    $('#dataTableArea').bind('DOMNodeInserted DOMNodeRemoved', function() {
+                        $('#btnCloseLoad').click();
+                    });
+
+                    //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
                 
                 },
                 error: function(x,e){
@@ -340,6 +345,7 @@
         }
 
     }
+    
 
     function selectAllRow(){
         var chk_arr =  document.getElementsByName("studsession_id");
