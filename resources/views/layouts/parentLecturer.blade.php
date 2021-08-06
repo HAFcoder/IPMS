@@ -63,7 +63,10 @@
                                     </a>
                                 <ul class="collapse">
                                     <li><a href="{{ route('session.index') }}">View All</a></li>
+
+                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                     <li><a href="{{ route('session.create') }}">Generate New</a></li>
+                                    @endif
                                 </ul>
                             </li>
 

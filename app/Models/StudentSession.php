@@ -8,6 +8,7 @@ use App\Models\Session;
 use App\Models\Programme;
 use App\Models\Student;
 use App\Models\Internship;
+use App\Models\StudentInfo;
 
 class StudentSession extends Model
 {
@@ -21,12 +22,17 @@ class StudentSession extends Model
 
     public function student()
     {
-        return $this->belongsTo(Student::class, 'student_id');
+        return $this->belongsTo(Student::class,'student_id');
+    }
+
+    public function studentInfo()
+    {
+        return $this->hasOne(StudentInfo::class, 'stud_id' ,'student_id');
     }
 
     public function programme()
     {
-        return $this->belongsTo(Programme::class, 'programme_id');
+        return $this->hasOne(Programme::class, 'id' , 'programme_id');
     }
 
     public function internship()

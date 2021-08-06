@@ -11,6 +11,7 @@ use App\Models\Session;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
 use App\Models\SessionProgramme;
+use App\Models\StudentSession;
 use Carbon\Carbon;
 
 class SessionController extends Controller
@@ -105,11 +106,11 @@ class SessionController extends Controller
      */
     public function show($id)
     {
-        $sessions = Session::find($id)->with('sessionProgramme')->first();
-        $programme = Programme::all();
-        //dump($sessions);
+        $sessions = Session::find($id)->with('sessionProgramme','lecturerInfo')->first();
+        $student_session = StudentSession::orderBy('status', 'ASC')->where('session_id',$id)->with('studentInfo','programme')->get();
+        //dump($student_session);
 
-        return view('session.show',compact('sessions','programme'));
+        return view('session.show',compact('sessions','student_session'));
     }
 
     /**
