@@ -152,8 +152,13 @@
                                     <i class="ti-user"></i><span>Student</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="table-basic.html">View All</a></li>
-                                    <li><a href="table-layout.html">Pending</a></li>
+                                    {{-- view all registered students --}}
+                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                                    <li><a href="{{ url('coordinator/students') }}">View All</a></li>
+
+                                    {{-- approve pending student registration session --}}
+                                    <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             

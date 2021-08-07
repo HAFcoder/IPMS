@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth:admin']], function() {
 //lecturer group route
 Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function() {
     // if user is approve [coordinator]
-    Route::get('/lecturer/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
+    Route::get('/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
     
     //company route
     Route::get('coordinator/company/list', [companiesController::class, 'list'])->name('company.list.coordinator');
@@ -77,11 +77,11 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
 
     // student menu
     // student view all
-    Route::resource('/lecturer/coordinator/students', StudentController::class);
+    Route::resource('coordinator/students', StudentController::class);
     Route::post('/edit-student/api/fetch-cities', [RegisterController::class, 'fetchCity']);
     // student pending
-    Route::get('/lecturer/coordinator/student-pending', [StudentSessionController::class, 'index']);
-    Route::get('/lecturer/coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
+    Route::get('coordinator/student-pending', [StudentSessionController::class, 'index']);
+    Route::get('coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
     Route::get('coordinator/student/session/status', [StudentSessionController::class, 'updateStatus'])->name('studentSession.update.status');
 });
 
