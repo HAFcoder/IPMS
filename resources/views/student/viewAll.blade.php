@@ -48,8 +48,11 @@
                                     <th>Student ID</th>
                                     <th>IC Number</th>
                                     <th>Status</th>
+
+                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                     <th>Edit</th>
                                     <th>Delete</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,6 +70,8 @@
                                                 Pending approval
                                             @endif 
                                         </td>
+
+                                        @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                         <td>
                                             <a href="{{ route('students.edit',$data->id)}}" class="btn btn-primary">Edit</a>
                                         </td>
@@ -79,6 +84,7 @@
                                                 Delete</button>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

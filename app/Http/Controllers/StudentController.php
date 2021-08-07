@@ -23,14 +23,14 @@ class StudentController extends Controller
     {
         // view student all
         $stud = Student::all();
-        return view('coordinator.student.viewAll', compact('stud'));
+        return view('student.viewAll', compact('stud'));
     }
 
     public function viewDetails()
     {
         // view student all
         $stud = Student::all();
-        return view('coordinator.student.viewAll', compact('stud'));
+        return view('student.viewAll', compact('stud'));
     }
 
     /**
@@ -82,7 +82,7 @@ class StudentController extends Controller
 
         $state = LookupAddress::orderBy('state', 'ASC')->distinct()->get(['state']);
         $city = LookupAddress::orderBy('city', 'ASC')->distinct()->get(['city']);
-        return view('coordinator.student.editStudent', compact('stud', 'studInfo', 'studSession', 'state', 'city', 'sessions', 'programmes'));
+        return view('student.editStudent', compact('stud', 'studInfo', 'studSession', 'state', 'city', 'sessions', 'programmes'));
     }
 
     /**

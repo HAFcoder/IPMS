@@ -40,7 +40,7 @@ class StudentSessionController extends Controller
     public function index()
     {
         $studSession = StudentSession::where('status', '=', 'pending')->get();
-        return view('coordinator.student.pending', compact('studSession'));
+        return view('student.pending', compact('studSession'));
     }
 
     public function approve($id)
