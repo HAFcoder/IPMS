@@ -24,9 +24,9 @@ class CreateLogbooksTable extends Migration
             $table->text('saturday');
             $table->text('sunday');
             $table->string('status');
-            $table->foreign('intern_id')->references('id')->on('internships');
             $table->date('date');
             $table->timestamps();
+            $table->foreign('intern_id')->references('id')->on('internships');
         });
     }
 

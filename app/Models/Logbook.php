@@ -12,18 +12,6 @@ class Logbook extends Model
     protected $guarded = [];
     protected $table = 'logbooks';
 
-    protected $fillable = [
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        'saturday',
-        'sunday',
-        'status',
-        'date'
-    ];
-
     public function internship()
     {
         return $this->belongsTo(Internship::class, 'intern_id');

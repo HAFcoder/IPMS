@@ -25,9 +25,28 @@ class LogbookController extends Controller
         return view('logbook.index', ['lect' => $lect]);
     }
 
-    public function createLogbook()
+    public function createLogbook(Request $request)
     {
-        return Null;
+ 
+        $logbook = new Logbook;
+
+        $request->validate([
+            'date'=>'required',
+        ]);
+
+        $logbook->monday = 'No Task';
+        $logbook->tuesday = 'No Task';
+        $logbook->wednesday = 'No Task';
+        $logbook->thursday = 'No Task';
+        $logbook->friday = 'No Task';
+        $logbook->saturday = 'On Holiday';
+        $logbook->sunday = 'On Holiday';
+        $logbook->status = 'Unvalidate';
+        $logbook->date = $request->date;
+        
+        $logbook->save();
+
+        return redirect()->back()->with('success', 'Company data has been successfully updated.');
     }
 
     public function updateLogbook()
