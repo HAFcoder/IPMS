@@ -113,6 +113,10 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
     Route::resource('/sadmin/faculty', FacultyController::class);
     Route::get('/faculty/status', [FacultyController::class, 'updateStatus'])->name('faculty.update.status');
 
+    //address menu
+    Route::resource('/sadmin/address', AddressController::class);
+    Route::get('/address/status', [AddressController::class, 'updateStatus'])->name('address.update.status');
+
 });
 
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');

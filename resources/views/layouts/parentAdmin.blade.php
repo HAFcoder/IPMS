@@ -98,8 +98,8 @@
                                     <i class="fa fa-map"></i> <span>Address</span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">View All</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Generate New</a></li>
+                                    <li><a href="{{ route('address.index') }}">View All</a></li>
+                                    <li><a href="{{ route('address.create') }}">Generate New</a></li>
                                 </ul>
                             </li>
 
