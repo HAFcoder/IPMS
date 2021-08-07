@@ -87,7 +87,7 @@
 
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-write"></i><span>Evaluaton</span>
+                                    <i class="ti-write"></i><span>Evaluation</span>
                                 </a>
                                 <ul class="collapse">
                                     <li><a href="barchart.html">Student</a></li>
@@ -295,7 +295,7 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="{{ asset('assets/images/author/avatar.png') }}" alt="avatar">
+                            <img class="avatar user-thumb" src="{{ asset('assets/images/author/lecturer.png') }}" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->lecturerInfo->f_name }}
                                 <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">

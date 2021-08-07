@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentSessionController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ResumeManagementController;
+use App\Http\Controllers\ProgrammeController;
+use App\Http\Controllers\FacultyController;
 use App\Models\StudentSession;
 use Illuminate\Support\Facades\Auth;
 
@@ -101,16 +103,17 @@ Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:pending
 //super amdin group route
 Route::group(['middleware' => 'auth:sadmin'], function() {
     Route::get('/sadmin', [HomeController::class, 'sadminHome']);
+
+
+    //programme menu
+    Route::resource('/sadmin/programme', ProgrammeController::class);
+    Route::get('/programme/status', [ProgrammeController::class, 'updateStatus'])->name('programme.update.status');
+
+    //faculty menu
+    Route::resource('/sadmin/faculty', FacultyController::class);
+    Route::get('/faculty/status', [FacultyController::class, 'updateStatus'])->name('faculty.update.status');
+
 });
-// Route::get('/coordinator', [HomeController::class, 'coordinatorHome']);
-
-
-//company route
-//Route::get('/company/list', [companiesController::class, 'list'])
-//    ->name('company.list')
-//    ->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
-//Route::get('/company', [companiesController::class, 'create'])->name('company.create');
-
 
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 

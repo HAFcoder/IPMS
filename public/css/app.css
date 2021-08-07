@@ -10001,4 +10001,13 @@ h3 {
     color: inherit;
     border-color: #dee2e6;
   }
+
+  .text-underline-hover {
+    text-decoration: none;
+  }
+  
+  .text-underline-hover:hover {
+      text-decoration: underline;
+  }
+
 }

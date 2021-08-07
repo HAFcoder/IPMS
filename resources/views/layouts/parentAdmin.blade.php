@@ -53,10 +53,49 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li><a href="{{ url('/admin') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                            
+                            {{-- admin menu --}}
+                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                <p class="font-weight-normal mb-3">ADMIN</p>
+                            </div>
 
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-calendar"></i> <span>Session</span>
+                                    <i class="fa fa-users"></i> <span>Admin - Lecturer</span>
+                                    </a>
+                                <ul class="collapse">
+                                    <li><a href="index.html">View Details</a></li>
+                                </ul>
+                            </li>
+
+                            {{-- lookup data menu --}}
+                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                <p class="font-weight-normal mb-3">LOOKUP DATA</p>
+                            </div>
+
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="fa fa-graduation-cap"></i> <span>Programme</span>
+                                    </a>
+                                <ul class="collapse">
+                                    <li><a href="{{ route('programme.index') }}">View All</a></li>
+                                    <li><a href="{{ route('programme.create') }}">Generate New</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="fa fa-institution"></i> <span>Faculty</span>
+                                    </a>
+                                <ul class="collapse">
+                                    <li><a href="{{ route('faculty.index') }}">View All</a></li>
+                                    <li><a href="{{ route('faculty.create') }}">Generate New</a></li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="fa fa-map"></i> <span>Address</span>
                                     </a>
                                 <ul class="collapse">
                                     <li><a href="index.html">View All</a></li>
@@ -64,103 +103,29 @@
                                 </ul>
                             </li>
 
-                            {{-- Lecturer menu --}}
+
+                            {{-- form menu --}}
                             <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">LECTURER</p>
+                                <p class="font-weight-normal mb-3">FORM COMPILATION</p>
                             </div>
 
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
-                                    <span>Lecturer </span>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="fa fa-file-text"></i> <span>Form Evaluation</span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index3-horizontalmenu.html">View All</a></li>
-                                    <li><a href="index.html">Pending</a></li>
+                                    <li><a href="index.html">List Question</a></li>
+                                    <li><a href="index3-horizontalmenu.html">Generate New</a></li>
                                 </ul>
                             </li>
 
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-write"></i><span>Evaluaton</span>
-                                </a>
+                                    <i class="fa fa-file-text"></i> <span>Form Feedback</span>
+                                    </a>
                                 <ul class="collapse">
-                                    <li><a href="barchart.html">Student</a></li>
-                                </ul>
-                            </li>
-
-                            {{-- company menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">COMPANY</p>
-                            </div>
-
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-briefcase"></i><span>Company</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="#">View All</a></li>
-                                    <li><a href="#">Add New</a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-email"></i><span>Generate Letter</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="fontawesome.html">Acceptance Letter</a></li>
-                                    <li><a href="fontawesome.html">Decline Letter</a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-write"></i><span>Evaluation</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="fontawesome.html">Student</a></li>
-                                </ul>
-                            </li>
-
-                            {{-- Student menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">STUDENT</p>
-                            </div>
-                            
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-user"></i><span>Student</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="{{ url ('/lecturer/coordinator/students') }}">View All</a></li>
-                                    <li><a href="{{ url ('/lecturer/coordinator/student-pending') }}">Pending Registration</a></li>
-                                </ul>
-                            </li>
-                            
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-briefcase"></i><span>Company</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="login.html">All Applications</a></li>
-                                    <li><a href="login2.html">Accepted</a></li>
-                                    <li><a href="login3.html">Rejected</a></li>
-                                    <li><a href="register.html">Decline</a></li>
-                                </ul>
-                            </li>
-
-                            <li><a href="maps.html"><i class="ti-agenda"></i> <span>Logbook</span></a></li>
-
-                            <li><a href="invoice.html"><i class="ti-file"></i> <span>Report</span></a></li>
-
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-write"></i><span>Feedback & Evaluation</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="#">Student</a></li>
-                                    <li><a href="#">Company</a></li>
-                                    <li><a href="#">Academic Supervisor</a></li>
+                                    <li><a href="index.html">List Question</a></li>
+                                    <li><a href="index3-horizontalmenu.html">Generate New</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -270,8 +235,8 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->lecturerInfo->f_name }} <i
-                                    class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="{{ asset('assets/images/author/admin.png') }}" alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout.home') }}" onclick="event.preventDefault(); 
