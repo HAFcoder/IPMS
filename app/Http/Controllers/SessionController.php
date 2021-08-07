@@ -106,9 +106,9 @@ class SessionController extends Controller
      */
     public function show($id)
     {
-        $sessions = Session::find($id)->with('sessionProgramme','lecturerInfo')->first();
+        $sessions = Session::where('id',$id)->with('sessionProgramme','lecturerInfo')->first();
         $student_session = StudentSession::orderBy('status', 'ASC')->where('session_id',$id)->with('studentInfo','programme')->get();
-        //dump($student_session);
+        //dump($sessions);
 
         return view('session.show',compact('sessions','student_session'));
     }

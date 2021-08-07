@@ -52,16 +52,22 @@
                             <li><a href="#"><i class="ti-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#"><i class="ti-receipt"></i> <span>Resume</span></a></li>
 
+                            {{-- Session menu --}}
                             <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i
-                                        class="ti-layout-sidebar-left"></i><span>Sidebar
-                                        Types
-                                    </span></a>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="ti-user"></i><span>Session</span>
+                                </a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">Left Sidebar</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Horizontal Sidebar</a></li>
+                                    <li><a href="table-basic.html">Register</a></li>
+                                    <li><a href="table-layout.html">View Status</a></li>
                                 </ul>
                             </li>
+
+                            @if (auth()->guard('student')->user()->status == 'approve')
+                            
+
+                            @endif
+                            
                         </ul>
                     </nav>
                 </div>

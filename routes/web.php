@@ -80,6 +80,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     // student pending
     Route::get('/lecturer/coordinator/student-pending', [StudentSessionController::class, 'index']);
     Route::get('/lecturer/coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
+    Route::get('coordinator/student/session/status', [StudentSessionController::class, 'updateStatus'])->name('studentSession.update.status');
 });
 
 Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:approve']], function() {
@@ -117,8 +118,8 @@ Route::post('/company', [companiesController::class, 'storeLecturer'])->name('co
 ///Route::get('/company/{id}/edit', [companiesController::class, 'edit'])->name('company.edit');
 Route::put('/company/{id}', [companiesController::class, 'update'])->name('company.update');
 Route::delete('/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
-
 Route::get('/company/status', [companiesController::class, 'updateStatus'])->name('company.update.status');
+
 
 //get address route
 Route::get('/getpostal', [AddressController::class, 'getpostal'])->name('getpostal');

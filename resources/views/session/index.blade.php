@@ -109,19 +109,21 @@
                                     <td>{{ $ss->lecturerInfo->f_name }} {{ $ss->lecturerInfo->l_name }}</td>
 
                                     <td>
+                                                
                                         @if($ss->status == 'inactive' || \Carbon\Carbon::now() > $ss->end_date)
-                                            
-                                            <span class="badge badge-pill badge-danger">Inactive</span>
+
+                                            <span class="status-p bg-danger">Inactive</span>
 
                                         @elseif(\Carbon\Carbon::now() < $ss->start_date && $ss->status == 'active')
-                                            
-                                            <span class="badge badge-pill badge-primary">Pending</span>
+
+                                            <span class="status-p bg-primary">Pending</span>
 
                                         @elseif(\Carbon\Carbon::now() < $ss->end_date && \Carbon\Carbon::now() > $ss->start_date)
 
-                                            <span class="badge badge-pill badge-success">Ongoing</span>
+                                            <span class="status-p bg-success">Ongoing</span>
 
                                         @endif
+
                                     </td>
                                 </tr>
                                 @endforeach

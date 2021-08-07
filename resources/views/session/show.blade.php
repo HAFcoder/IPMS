@@ -130,9 +130,10 @@
                             <p><b>List of Student</b></p>
 
                             <div class="data-tables datatable-primary">
-                                <table id="dataTableSession" class="text-center display ">
+                                <table id="dataTableArea" class="text-center display" style="width:100%">
                                     <thead class="text-capitalize">
                                         <tr>
+                                            <th class="noExport"></th>
                                             <th>Student ID</th>
                                             <th>Name</th>
                                             <th>Programme</th>
@@ -145,6 +146,15 @@
                                         @foreach($student_session as $stud_ss)
 
                                         <tr>
+                                            
+                                
+                                            <td>
+                                                @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                                                <div class="form-check form-group">
+                                                     <input type="checkbox" value="{{ $stud_ss->id }}" name="studsession_id" class="form-control form-check-input" id="studsession_id">
+                                                </div>
+                                                @endif
+                                            </td>
                                             <td>{{ $stud_ss->studentInfo->studentID }}</td>
                                             <td>{{ $stud_ss->studentInfo->f_name }} {{ $stud_ss->studentInfo->l_name }}</td>
                                             <td>{{ $stud_ss->programme->code }} - {{ $stud_ss->programme->name }}</td>
@@ -153,15 +163,15 @@
                                                 
                                                 @if($stud_ss->status == 'approve')
 
-                                                    <span class="badge badge-pill badge-success">Approved</span>
+                                                    <span class="status-p bg-success">Approved</span>
 
                                                 @elseif($stud_ss->status == 'reject')
 
-                                                    <span class="badge badge-pill badge-dangar">Rejected</span>
+                                                    <span class="status-p bg-danger">Rejected</span>
 
                                                 @else
 
-                                                    <span class="badge badge-pill badge-primary">Pending</span>
+                                                    <span class="status-p bg-primary">Pending</span>
 
                                                 @endif
 
@@ -174,6 +184,21 @@
                                 </table>
                             </div>
 
+                        </div>
+
+                        
+                        <!-- Button trigger modal -->
+                        <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3" data-toggle="modal" data-target="#loadingModal">loading modal</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="loadingModal">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <i class="fa fa-spinner fa-spin"></i> Please wait updating table...
+                                    </div>
+                                    <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
                         </div>
                         
                     </div>
@@ -194,7 +219,7 @@
     <script>
         $(document).ready(function() {
 
-            $('#dataTableSession').DataTable( {
+            $('#dataTableArea').DataTable( {
                 language : {
                     sLengthMenu: "Show _MENU_"
                 },
@@ -202,6 +227,38 @@
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 buttons:{
                             buttons: [
+                                        {
+                                            text: 'Approve',
+                                            className: 'btn-success',
+                                            action: function ( e, dt, node, config ) {
+                                                //alert( 'Button Approved' );
+                                                var status = "approve";
+                                                updateStatus(status);
+                                            }
+                                        }, 
+                                        {
+                                            text: 'Reject',
+                                            className: 'btn-danger',
+                                            action: function ( e, dt, node, config ) {
+                                                //alert( 'Button Rejected' );
+                                                var status = "reject";
+                                                updateStatus(status);
+                                            }
+                                        }, 
+                                        {
+                                            text: '<i class="fa fa-check-square-o"></i> Select All',
+                                            action: function ( e, dt, node, config ) {
+                                                //alert( 'Button Select All' );
+                                                selectAllRow();
+                                            }
+                                        }, 
+                                        {
+                                            text: '<i class="fa fa-square-o"></i> Unselect All',
+                                            action: function ( e, dt, node, config ) {
+                                                //alert( 'Button Select All' );
+                                                unselectAllRow();
+                                            }
+                                        },
                                         {
                                             extend: 'pdfHtml5',
                                             text: '<i class="fa fa-file-pdf-o"></i>',
@@ -230,7 +287,7 @@
                                             }
                                         }  
                                 ],
-                             dom: {
+                            dom: {
                                     button: {
                                         className: 'btn btn-xs'
                                     }
@@ -240,6 +297,75 @@
             } );
         
         } );
+
+        
+    function updateStatus(status){
+
+        arr_comp = [];
+        status_comp = status;
+
+        $("input:checkbox[name=studsession_id]:checked").each(function(){
+            arr_comp.push($(this).val());
+        });
+
+        console.log(arr_comp.length);
+
+        if(arr_comp.length>0){
+        
+            $('#btnLoad').click();
+        
+            $.ajax({
+                url:'{{ route("studentSession.update.status") }}',
+                type: 'GET',
+                data: {
+                    studSession_id : arr_comp,
+                    status : status_comp,
+                },
+                success: function (data){
+                
+                    console.log("final value = "+data);
+                    //window.location.reload();
+
+                    $( "#dataTableArea" ).load(window.location.href + " #dataTableArea" );
+
+                    $('#dataTableArea').bind('DOMNodeInserted DOMNodeRemoved', function() {
+                        $('#btnCloseLoad').click();
+                    });
+
+                    //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
+                
+                },
+                error: function(x,e){
+                    alert(x+e);
+                }
+            
+            
+            });
+        
+        }
+
+    }
+    
+
+    function selectAllRow(){
+        var chk_arr =  document.getElementsByName("studsession_id");
+        var chklength = chk_arr.length;             
+        
+        for(k=0;k< chklength;k++)
+        {
+            chk_arr[k].checked = true;
+        }
+    }
+
+    function unselectAllRow(){
+        var chk_arr =  document.getElementsByName("studsession_id");
+        var chklength = chk_arr.length;             
+        
+        for(k=0;k< chklength;k++)
+        {
+            chk_arr[k].checked = false;
+        }
+    }
 
     </script>
 
