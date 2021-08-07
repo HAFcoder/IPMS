@@ -169,7 +169,7 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Faizal
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->student_info->f_name }}
                                 <i class="fa fa-angle-down"></i>
                             </h4>
                             <div class="dropdown-menu">
