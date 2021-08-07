@@ -1,7 +1,4 @@
-
-@extends('layouts.parentLecturer')
-
-{{-- view all registered company --}}
+@extends('layouts.parentAdmin')
 
 @section('head')
     
@@ -16,12 +13,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
 
-    
     <style>
         .text-underline-hover {
             text-decoration: none;
         }
-        
+
         .text-underline-hover:hover {
             text-decoration: underline;
         }
@@ -33,10 +29,10 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Company</h4>
+            <h4 class="page-title pull-left">Faculty</h4>
             <ul class="breadcrumbs pull-left">
                 <li><a href="{{ url('/admin') }}">Home</a></li>
-                <li><span>View All Company</span></li>
+                <li><span>Faculties</span></li>
             </ul>
         </div>
     </div>
@@ -46,98 +42,74 @@
 @section('content')
 
     <div class="row">
-
+        
         <!-- table start -->
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">List of Company</h4>
+                    <h4 class="header-title">List of Faculty</h4>
                     
-                    <div class="data-tables datatable-primary" id="table_area">
-                        <table id="dataTableCompany" class="text-center display " style="width:100%">
+                    <div class="data-tables datatable-primary">
+                        <table id="dataTableArea" class="text-center display " style="width:100%">
                             <thead class="text-capitalize">
                                 <tr>
                                     <th class="noExport"></th>
                                     <th>Name</th>
-                                    <th>Address</th>
-                                    <th>Registered Date</th>
-                                    <th>Registered By</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @if($company->isEmpty())
+                                @foreach($faculty as $fact)
                                 <tr>
-                                    <td colspan="10" class="bg-dark text-white">Sorry, there is no company data yet.</td>
+                                    <td>
+                                        <div class="form-check form-group">
+                                             <input type="checkbox" value="{{ $fact->id }}" name="checkid" class="form-control form-check-input" id="checkid">
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <a href="{{ route('faculty.edit',$fact->id) }}" class="text-underline-hover">
+                                            {{ $fact->faculty_name }}
+                                        </a>
+
+                                    </td>
+
+                                    <td>
+                                                
+                                        @if($fact->status == 'inactive')
+
+                                            <span class="status-p bg-danger">Inactive</span>
+
+                                        @elseif($fact->status == 'active')
+
+                                            <span class="status-p bg-success">Active</span>
+
+                                        @endif
+
+                                    </td>
                                 </tr>
-                                @endif
-
-                                @foreach($company as $comp)
-                                
-                                        <td>
-                                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                                            <div class="form-check form-group">
-                                                 <input type="checkbox" value="{{ $comp->id }}" name="comp_id" class="form-control form-check-input" id="comp_id">
-                                            </div>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                                            <a href="{{ route('company.edit.coordinator',$comp->id) }}" class="text-underline-hover">{{ $comp->name }}</a>
-
-                                            @else
-                                            {{ $comp->name }}
-
-                                            @endif
-                                        </td>
-                                        <td>{{ $comp->address }} , <br> {{ $comp->city }} , {{ $comp->postal_code }} , {{ $comp->state }}</td>
-                                        <td>{{ date('d/m/Y', strtotime($comp->created_at)) }}</td>
-                                        <td>
-                                            @if($comp->lecturerInfo->f_name != '')
-
-                                                <b>Lecturer : </b>{{ $comp->lecturerInfo->f_name }} {{ $comp->lecturerInfo->l_name }} ( {{ $comp->lecturerInfo->lecturerID }} )
-
-                                            @elseif($comp->studentInfo->f_name != '')
-
-                                                <b>Student : </b>{{ $comp->studentInfo->f_name }} {{ $comp->studentInfo->l_name }} ( {{ $comp->studentInfo->studentID }} )
-
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @php
-                                                if($comp->status=='pending')
-                                                    $style = 'badge-secondary';
-                                                else if($comp->status=='approved')
-                                                    $style = 'badge-success';
-                                                else if($comp->status=='rejected')
-                                                    $style = 'badge-danger';
-
-                                            @endphp
-                                            <span class="badge badge-pill {{ $style }}">{{ ucfirst(trans($comp->status)) }}</span>
-                                        </td>
-                                    </tr>
-
                                 @endforeach
+
                             </tbody>
                         </table>
-                    </div>
 
-                    
-                    <!-- Button trigger modal -->
-                    <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3" data-toggle="modal" data-target="#loadingModal">loading modal</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="loadingModal">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body text-center">
-                                    <i class="fa fa-spinner fa-spin"></i> Please wait updating table...
+                        
+                        <!-- Button trigger modal -->
+                        <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3" data-toggle="modal" data-target="#loadingModal">loading modal</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="loadingModal">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <i class="fa fa-spinner fa-spin"></i> Please wait updating table...
+                                    </div>
+                                    <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
-                                <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -151,7 +123,8 @@
 
 <script>
     $(document).ready(function() {
-        $('#dataTableCompany').DataTable( {
+        
+        $('#dataTableArea').DataTable( {
             language : {
                 sLengthMenu: "Show _MENU_"
             },
@@ -160,20 +133,20 @@
             buttons:{
                         buttons: [
                                     {
-                                        text: 'Approve',
+                                        text: 'Active',
                                         className: 'btn-success',
                                         action: function ( e, dt, node, config ) {
                                             //alert( 'Button Approved' );
-                                            var status = "approved";
+                                            var status = "active";
                                             updateStatus(status);
                                         }
                                     }, 
                                     {
-                                        text: 'Reject',
+                                        text: 'Inactive',
                                         className: 'btn-danger',
                                         action: function ( e, dt, node, config ) {
                                             //alert( 'Button Rejected' );
-                                            var status = "rejected";
+                                            var status = "inactive";
                                             updateStatus(status);
                                         }
                                     }, 
@@ -196,7 +169,7 @@
                                         text: '<i class="fa fa-file-pdf-o"></i>',
                                         titleAttr: 'PDF',
                                         footer: true,
-                                        messageTop: 'This is the list of company under IPMS database.',
+                                        messageTop: 'This is the list of programme under IPMS database.',
                                         exportOptions: {
                                              columns:"thead th:not(.noExport)"
                                         }
@@ -205,7 +178,6 @@
                                         extend: 'csvHtml5',
                                         text: '<i class="fa fa-file-text-o"></i>',
                                         titleAttr: 'CSV',
-                                        messageTop: 'This is the list of company under IPMS database.',
                                         exportOptions: {
                                              columns:"thead th:not(.noExport)"
                                         }
@@ -215,7 +187,6 @@
                                         extend: 'excelHtml5',
                                         text: '<i class="fa fa-file-excel-o"></i>',
                                         titleAttr: 'EXCEL',
-                                        messageTop: 'This is the list of company under IPMS database.',
                                         exportOptions: {
                                              columns:"thead th:not(.noExport)"
                                         }
@@ -228,41 +199,39 @@
                             } 
                              
                     }
-
         } );
-        
     
     } );
 
     function updateStatus(status){
 
-        arr_comp = [];
-        status_comp = status;
+        arr_id = [];
+        status = status;
 
-        $("input:checkbox[name=comp_id]:checked").each(function(){
-            arr_comp.push($(this).val());
+        $("input:checkbox[name=checkid]:checked").each(function(){
+            arr_id.push($(this).val());
         });
 
-        console.log(arr_comp.length);
+        console.log(arr_id.length);
 
-        if(arr_comp.length>0){
+        if(arr_id.length>0){
 
             $('#btnLoad').click();
 
             $.ajax({
-                url:'{{ route("company.update.status") }}',
+                url:'{{ route("faculty.update.status") }}',
                 type: 'GET',
                 data: {
-                    comp_id : arr_comp,
-                    status : status_comp,
+                    arr_id : arr_id,
+                    status : status,
                 },
                 success: function (data){
                 
                     console.log("final value = "+data);
                     //window.location.reload();
-                    $( "#dataTableCompany" ).load(window.location.href + " #dataTableCompany" );
+                    $( "#dataTableArea" ).load(window.location.href + " #dataTableArea" );
                     
-                    $('#dataTableCompany').bind('DOMNodeInserted DOMNodeRemoved', function() {
+                    $('#dataTableArea').bind('DOMNodeInserted DOMNodeRemoved', function() {
                         $('#btnCloseLoad').click();
                     });
                     //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
@@ -280,7 +249,7 @@
     }
 
     function selectAllRow(){
-        var chk_arr =  document.getElementsByName("comp_id");
+        var chk_arr =  document.getElementsByName("checkid");
         var chklength = chk_arr.length;             
 
         for(k=0;k< chklength;k++)
@@ -290,7 +259,7 @@
     }
 
     function unselectAllRow(){
-        var chk_arr =  document.getElementsByName("comp_id");
+        var chk_arr =  document.getElementsByName("checkid");
         var chklength = chk_arr.length;             
 
         for(k=0;k< chklength;k++)
@@ -312,5 +281,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
 
 @endsection

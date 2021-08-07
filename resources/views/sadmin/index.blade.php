@@ -1,4 +1,4 @@
-@extends('layouts.parentLecturer')
+@extends('layouts.parentAdmin')
 
 @section('breadcrumbs')
 

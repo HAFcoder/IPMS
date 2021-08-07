@@ -90,6 +90,8 @@ class HomeController extends Controller
 
     public function sadminHome()
     {
+        $name = Auth::user()->name;
+        //dump($uid);
         return view('sadmin.index');
     }
 

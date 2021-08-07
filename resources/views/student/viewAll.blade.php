@@ -1,4 +1,4 @@
-@extends('layouts.parentAdmin')
+@extends('layouts.parentLecturer')
 
 {{-- view all registered student --}}
 
@@ -23,7 +23,7 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Session</h4>
             <ul class="breadcrumbs pull-left">
-                <li><a href="{{ url('/admin') }}">Home</a></li>
+                <li><a href="{{ url('/lecturer') }}">Home</a></li>
                 <li><span>View All Student</span></li>
             </ul>
         </div>
@@ -48,8 +48,11 @@
                                     <th>Student ID</th>
                                     <th>IC Number</th>
                                     <th>Status</th>
+
+                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                     <th>Edit</th>
                                     <th>Delete</th>
+                                    @endif
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,6 +70,8 @@
                                                 Pending approval
                                             @endif 
                                         </td>
+
+                                        @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                         <td>
                                             <a href="{{ route('students.edit',$data->id)}}" class="btn btn-primary">Edit</a>
                                         </td>
@@ -79,6 +84,7 @@
                                                 Delete</button>
                                             </form>
                                         </td>
+                                        @endif
                                     </tr>
                                 @endforeach
                             </tbody>

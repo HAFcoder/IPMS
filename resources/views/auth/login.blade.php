@@ -16,6 +16,8 @@
                         <img style="width: 350px" src="{{ asset('assets/images/icon/login_lecturer.png') }}" alt="logo"></a>
                     @elseif (\Request::getRequestUri() === '/login')
                         <img style="width: 350px" src="{{ asset('assets/images/icon/login_student.png') }}" alt="logo"></a>
+                    @elseif (\Request::getRequestUri() === '/login/admin')
+                        <img style="width: 350px" src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
                     @endif
                 </div>
                 {{-- @if (\Request::getRequestUri() === '/login/lecturer')
@@ -71,6 +73,9 @@
                     @elseif (\Request::getRequestUri() === '/login')
                         <p class="text-muted">Don't have an account? <a href="{{ url('register') }}" style="color: #f3302c">Sign up</a></p>
                         <p class="text-muted">Are you lecturer? <a href="{{ url('login/lecturer') }}" style="color: #f3302c">Login here</a></p>
+                    @elseif (\Request::getRequestUri() === '/login/admin')
+                        <p class="text-muted">Are you lecturer? <a href="{{ url('login/lecturer') }}" style="color: #f3302c">Login here</a></p>
+                        <p class="text-muted">Are you student? <a href="{{ url('login') }}" style="color: #f3302c">Login here</a></p>
                     @endif
                 </div>
             </div>

@@ -12,6 +12,8 @@ use App\Http\Controllers\StudentSessionController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ResumeManagementController;
+use App\Http\Controllers\ProgrammeController;
+use App\Http\Controllers\FacultyController;
 use App\Models\StudentSession;
 use Illuminate\Support\Facades\Auth;
 
@@ -64,7 +66,7 @@ Route::group(['middleware' => ['auth:admin']], function() {
 //lecturer group route
 Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function() {
     // if user is approve [coordinator]
-    Route::get('/lecturer/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
+    Route::get('/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
     
     //company route
     Route::get('coordinator/company/list', [companiesController::class, 'list'])->name('company.list.coordinator');
@@ -75,11 +77,11 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
 
     // student menu
     // student view all
-    Route::resource('/lecturer/coordinator/students', StudentController::class);
+    Route::resource('coordinator/students', StudentController::class);
     Route::post('/edit-student/api/fetch-cities', [RegisterController::class, 'fetchCity']);
     // student pending
-    Route::get('/lecturer/coordinator/student-pending', [StudentSessionController::class, 'index']);
-    Route::get('/lecturer/coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
+    Route::get('coordinator/student-pending', [StudentSessionController::class, 'index']);
+    Route::get('coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
     Route::get('coordinator/student/session/status', [StudentSessionController::class, 'updateStatus'])->name('studentSession.update.status');
 });
 
@@ -101,16 +103,17 @@ Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:pending
 //super amdin group route
 Route::group(['middleware' => 'auth:sadmin'], function() {
     Route::get('/sadmin', [HomeController::class, 'sadminHome']);
+
+
+    //programme menu
+    Route::resource('/sadmin/programme', ProgrammeController::class);
+    Route::get('/programme/status', [ProgrammeController::class, 'updateStatus'])->name('programme.update.status');
+
+    //faculty menu
+    Route::resource('/sadmin/faculty', FacultyController::class);
+    Route::get('/faculty/status', [FacultyController::class, 'updateStatus'])->name('faculty.update.status');
+
 });
-// Route::get('/coordinator', [HomeController::class, 'coordinatorHome']);
-
-
-//company route
-//Route::get('/company/list', [companiesController::class, 'list'])
-//    ->name('company.list')
-//    ->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
-//Route::get('/company', [companiesController::class, 'create'])->name('company.create');
-
 
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 
