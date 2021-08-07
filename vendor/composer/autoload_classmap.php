@@ -60,6 +60,7 @@ return array(
     'App\\Models\\Lecturer' => $baseDir . '/app/Models/Lecturer.php',
     'App\\Models\\LecturerInfo' => $baseDir . '/app/Models/LecturerInfo.php',
     'App\\Models\\Logbook' => $baseDir . '/app/Models/Logbook.php',
+    'App\\Models\\Logbooktest' => $baseDir . '/app/Models/Logbooktest.php',
     'App\\Models\\LookupAddress' => $baseDir . '/app/Models/LookupAddress.php',
     'App\\Models\\Programme' => $baseDir . '/app/Models/Programme.php',
     'App\\Models\\ResumeManagement' => $baseDir . '/app/Models/ResumeManagement.php',

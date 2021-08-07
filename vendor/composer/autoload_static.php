@@ -614,6 +614,7 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         'App\\Models\\Lecturer' => __DIR__ . '/../..' . '/app/Models/Lecturer.php',
         'App\\Models\\LecturerInfo' => __DIR__ . '/../..' . '/app/Models/LecturerInfo.php',
         'App\\Models\\Logbook' => __DIR__ . '/../..' . '/app/Models/Logbook.php',
+        'App\\Models\\Logbooktest' => __DIR__ . '/../..' . '/app/Models/Logbooktest.php',
         'App\\Models\\LookupAddress' => __DIR__ . '/../..' . '/app/Models/LookupAddress.php',
         'App\\Models\\Programme' => __DIR__ . '/../..' . '/app/Models/Programme.php',
         'App\\Models\\ResumeManagement' => __DIR__ . '/../..' . '/app/Models/ResumeManagement.php',

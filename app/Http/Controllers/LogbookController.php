@@ -3,8 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Logbook;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Programme;
+use App\Models\Session;
+use App\Models\Lecturer;
+use App\Models\LecturerInfo;
+use App\Models\SessionProgramme;
+use App\Models\StudentSession;
+use App\Models\Student;
+use App\Models\StudentInfo;
+use Carbon\Carbon;
 
 class LogbookController extends Controller
 {
@@ -30,59 +40,25 @@ class LogbookController extends Controller
         return Null;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function testlistLogbook()
     {
-        //
+        return view('logbook.testindex');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Logbook  $logbook
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Logbook $logbook)
+    public function testcreateLogbook()
     {
-        //
+        return Null;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Logbook  $logbook
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Logbook $logbook)
+    public function testupdateLogbook()
     {
-        //
+        return Null;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Logbook  $logbook
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Logbook $logbook)
+    public function testdeleteLogbook()
     {
-        //
+        return Null;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Logbook  $logbook
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Logbook $logbook)
-    {
-        //
-    }
+    
 }
