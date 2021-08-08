@@ -19,21 +19,18 @@ use Carbon\Carbon;
 class LogbookController extends Controller
 {
     
-    public function listLogbook()
-    {
-        $lect = $this->getLecturerInfo();
-        return view('logbook.index', ['lect' => $lect]);
-    }
-
     public function createLogbook(Request $request)
     {
- 
+        $student_id = Auth::user()->id;
+        $intern = Internship::where('intern_id', $student_id)->first();
+
         $logbook = new Logbook;
 
         $request->validate([
             'date'=>'required',
         ]);
 
+        $logbook->intern_id = $intern->intern_id;
         $logbook->monday = 'No Task';
         $logbook->tuesday = 'No Task';
         $logbook->wednesday = 'No Task';
@@ -46,7 +43,7 @@ class LogbookController extends Controller
         
         $logbook->save();
 
-        return redirect()->back()->with('success', 'Company data has been successfully updated.');
+        return redirect('/logbook');
     }
 
     public function updateLogbook()
@@ -78,6 +75,5 @@ class LogbookController extends Controller
     {
         return Null;
     }
-
     
 }
