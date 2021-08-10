@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ResumeManagement extends Model
 {
     use HasFactory;
+
+    protected $timestamps = false;
 }
