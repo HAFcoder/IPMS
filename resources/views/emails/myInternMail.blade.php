@@ -8,5 +8,5 @@ Button Text
 @endcomponent
    
 Thanks,<br>
-KUPTM Internship placement management system
+KUPTM Internship Placement Management System
 @endcomponent
