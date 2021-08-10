@@ -14,6 +14,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ResumeManagementController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\MailingController;
 use App\Models\StudentSession;
 use Illuminate\Support\Facades\Auth;
 
@@ -150,3 +151,7 @@ Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
 // Route::post('/logbook', [LogbookController::class, 'testcreateLogbook']);
 // Route::put('/logbook/week/{week_number}', [LogbookController::class, 'testupdateLogbook']);
 // Route::delete('/logbook/week/week_number', [LogbookController::class, 'testdeleteLogbook']);
+
+
+//Mailing
+Route::get('internship/mail/decline', [MailingController::class, 'declineMail']);
