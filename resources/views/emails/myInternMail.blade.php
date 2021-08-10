@@ -8,5 +8,5 @@ Button Text
 @endcomponent
    
 Thanks,<br>
-{{ config('app.name') }}
+KUPTM Internship placement management system
 @endcomponent
