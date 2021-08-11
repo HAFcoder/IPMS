@@ -77,6 +77,9 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/company/list', [companiesController::class, 'list'])->name('company.list.coordinator');
     Route::get('coordinator/company', [companiesController::class, 'create'])->name('company.create.coordinator');
     Route::get('coordinator/company/{id}/edit', [companiesController::class, 'edit'])->name('company.edit.coordinator');
+    Route::put('coordinator/company/{id}', [companiesController::class, 'update'])->name('company.update');
+    Route::delete('coordinator/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
+    Route::get('coordinator/company/status', [companiesController::class, 'updateStatus'])->name('company.update.status');
 
     //session route
 
@@ -129,11 +132,10 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 
-Route::post('/company', [companiesController::class, 'storeLecturer'])->name('company.storeLecturer');
-///Route::get('/company/{id}/edit', [companiesController::class, 'edit'])->name('company.edit');
-Route::put('/company/{id}', [companiesController::class, 'update'])->name('company.update');
-Route::delete('/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
-Route::get('/company/status', [companiesController::class, 'updateStatus'])->name('company.update.status');
+//company route for store - lecturer
+Route::post('/company', [companiesController::class, 'storeLecturer'])
+        ->name('company.storeLecturer')
+        ->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 
 
 //get address route
