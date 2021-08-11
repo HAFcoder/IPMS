@@ -30,6 +30,10 @@ class StudentController extends Controller
     {
         // view student all
         $stud = Student::all();
+
+        //$std = StudentInfo::all()->groupBy('programme_id'); //grouping student by programme id
+        //dump($std);
+
         return view('student.viewAll', compact('stud'));
     }
 

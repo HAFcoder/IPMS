@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\FormFeedback;
+use App\Models\StudentInfo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,13 @@ class FormFeedbackController extends Controller
      */
     public function index()
     {
-        //
+        $company = 'company';
+        $student = 'student';
+
+        $company = FormFeedback::where('role',$company)->get();
+        $student = FormFeedback::where('role',$student)->get();
+
+        return view('feedback.index',compact('company','student'));
     }
 
     /**
@@ -26,6 +33,7 @@ class FormFeedbackController extends Controller
     public function create()
     {
         //
+        return view('feedback.create');
     }
 
     /**

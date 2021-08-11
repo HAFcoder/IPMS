@@ -63,7 +63,7 @@
                                 </ul>
                             </li>
 
-                            @if (auth()->guard('student')->user()->status == 'approve')
+                            @if (auth()->user()->status == 'approve')
                             
 
                             @endif

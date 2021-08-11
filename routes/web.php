@@ -14,6 +14,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ResumeManagementController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\FormFeedbackController;
+
 use App\Http\Controllers\MailingController;
 use App\Models\StudentSession;
 use Illuminate\Support\Facades\Auth;
@@ -62,6 +64,8 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 //coordinator or admin group route
 Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/admin', [HomeController::class, 'adminHome']);
+
+
 });
 
 //lecturer group route
@@ -117,6 +121,9 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
     //address menu
     Route::resource('/sadmin/address', AddressController::class);
     Route::get('/address/status', [AddressController::class, 'updateStatus'])->name('address.update.status');
+
+    //form feedback route
+    Route::resource('sadmin/formFeedback', FormFeedbackController::class); 
 
 });
 

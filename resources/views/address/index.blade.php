@@ -30,8 +30,8 @@
                     <h4 class="header-title">List of Address</h4>
                     
                     <div class="table-responsive">
-                        <table id="dataTableArea" class="table text-center">
-                            <thead class="text-capitalize bg-primary text-white table-bordered">
+                        <table class="table table-bordered">
+                            <thead class="text-uppercase bg-primary text-white">
                                 <tr>
                                     <th>Address</th>
                                     <th>Postcode</th>
@@ -59,21 +59,6 @@
 
                             </tbody>
                         </table>
-
-                        
-                        <!-- Button trigger modal -->
-                        <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3" data-toggle="modal" data-target="#loadingModal">loading modal</button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="loadingModal">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body text-center">
-                                        <i class="fa fa-spinner fa-spin"></i> Please wait updating table...
-                                    </div>
-                                    <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
