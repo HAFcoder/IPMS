@@ -130,6 +130,7 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 
 });
 
+//session route for all lecturer and coordinator
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 
 //company route for store - lecturer
