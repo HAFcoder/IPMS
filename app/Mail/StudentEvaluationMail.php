@@ -7,11 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InternMail extends Mailable
+class StudentEvaluationMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $details;
-
     /**
      * Create a new message instance.
      *
@@ -29,7 +28,7 @@ class InternMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.declineMail')
+        return $this->markdown('emails.studentEvaluationMail')
                     ->with('details', $this->details);
     }
 }

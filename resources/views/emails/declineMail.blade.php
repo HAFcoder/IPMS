@@ -1,10 +1,10 @@
 @component('mail::message')
 # {{ $details['title'] }}
   
-We're sorry this student declined your internship offer
+We're sorry our student Hamzah Botak has declined your internship offer
    
 @component('mail::button', ['url' => $details['url']])
-Button Text
+Visit KUPTM Website
 @endcomponent
    
 Thanks,<br>

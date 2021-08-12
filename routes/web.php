@@ -164,4 +164,6 @@ Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
 
 
 //Mailing
-Route::get('internship/mail/decline', [MailingController::class, 'declineMail']);
+Route::get('internship/mail/send', [MailingController::class, 'declineMail']);
+Route::get('logbook/mail/send', [MailingController::class, 'logbookApprovalMail']);
+Route::get('evaluation/mail/send', [MailingController::class, 'studentEvaluationMail']);
