@@ -94,7 +94,7 @@ class HomeController extends Controller
     {
         $name = Auth::user()->name;
         //dump($uid);
-        return view('sadmin.index');
+        return view('sadmin.index'); 
     }
 
     public function pending()
