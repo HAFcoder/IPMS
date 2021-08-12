@@ -19,46 +19,77 @@ use Carbon\Carbon;
 class LogbookController extends Controller
 {
     
-    public function listLogbook()
+    public function createLogbook(Request $request)
     {
-        $lect = $this->getLecturerInfo();
-        return view('logbook.index', ['lect' => $lect]);
+        $student_id = Auth::user()->id;
+        $intern = Internship::where('intern_id', $student_id)->first();
+
+        $logbook = new Logbook;
+
+        $request->validate([
+            'date'=>'required',
+        ]);
+
+        $date = $request->date;
+        $date = strtotime($date);
+        $dateformat = date('d/M/Y',$date);
+
+        $logbook->intern_id = $intern->intern_id;
+        $logbook->monday = 'No Task';
+        $logbook->tuesday = 'No Task';
+        $logbook->wednesday = 'No Task';
+        $logbook->thursday = 'No Task';
+        $logbook->friday = 'No Task';
+        $logbook->saturday = 'On Holiday';
+        $logbook->sunday = 'On Holiday';
+        $logbook->status = 'Unvalidate';
+        $logbook->date = $dateformat;
+        
+        $logbook->save();
+
+        return redirect('/logbook');
     }
 
-    public function createLogbook()
-    {
-        return Null;
+    public function showLogbook(Request $request){
+        $student_id = Auth::user()->id;
+        $intern = Internship::where('intern_id', $student_id)->first();
+        $logbooks = Logbook::where('intern_id', $student_id)->get();
+        
+        return view('logbook.index', compact('logbooks'));
     }
 
-    public function updateLogbook()
+    public function updateLogbook(Request $request, $intern_id, $week)
     {
-        return Null;
+
+        $request->validate([
+            'date'=>'required',
+        ]);
+
+        $date = $request->date;
+        $date = strtotime($date);
+        $dateformat = date('d/M/Y',$date);
+
+        $logbook = Logbook::where('intern_id', $intern_id)
+                    ->where('week', $week)
+                    ->update([
+                       'monday'-> $request->monday,
+                       'tuesday'-> $request->tuesday,
+                       'wednesday'-> $request->wednesday,
+                       'thursday'-> $request->thursday,
+                       'friday'-> $request->friday,
+                       'saturday'-> $request->saturday,
+                       'sunday'-> $request->sunday,
+                       'date'-> $dateformat,
+                    ]);
+
+        return redirect('/logbook');
     }
 
-    public function deleteLogbook()
+    public function deleteLogbook($intern_id, $week)
     {
-        return Null;
+        $logbook = Logbook::where('intern_id', $intern_id)
+                    ->where('week', $week)
+                    ->delete();
     }
-
-    public function testlistLogbook()
-    {
-        return view('logbook.testindex');
-    }
-
-    public function testcreateLogbook()
-    {
-        return Null;
-    }
-
-    public function testupdateLogbook()
-    {
-        return Null;
-    }
-
-    public function testdeleteLogbook()
-    {
-        return Null;
-    }
-
-    
+ 
 }

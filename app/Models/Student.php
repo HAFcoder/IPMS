@@ -36,7 +36,7 @@ class Student extends Authenticatable
         return $this->hasOne(StudentInfo::class, 'stud_id');
     }
 
-    public function intership()
+    public function internship()
     {
         return $this->hasMany(Internship::class, 'student_id', 'id');
     }

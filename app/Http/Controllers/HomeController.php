@@ -71,6 +71,7 @@ class HomeController extends Controller
     public function studentHome()
     {
         $sessions = Session::where('status', '=', 'active')->get();
+        //dump($sessions);
         return view('student.index', compact('sessions'));
     }
 

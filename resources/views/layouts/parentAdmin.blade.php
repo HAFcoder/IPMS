@@ -98,8 +98,8 @@
                                     <i class="fa fa-map"></i> <span>Address</span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">View All</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Generate New</a></li>
+                                    <li><a href="{{ route('address.index') }}">View All</a></li>
+                                    <li><a href="{{ route('address.create') }}">Generate New</a></li>
                                 </ul>
                             </li>
 
@@ -111,21 +111,21 @@
 
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="fa fa-file-text"></i> <span>Form Evaluation</span>
+                                    <i class="fa fa-file-text"></i> <span>Form Feedback</span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">List Question</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Generate New</a></li>
+                                    <li><a href="{{ route('formFeedback.index') }}">List Question</a></li>
+                                    <li><a href="{{ route('formFeedback.create') }}">Generate New</a></li>
                                 </ul>
                             </li>
 
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="fa fa-file-text"></i> <span>Form Feedback</span>
+                                    <i class="fa fa-file-text"></i> <span>Form Evaluation</span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index.html">List Question</a></li>
-                                    <li><a href="index3-horizontalmenu.html">Generate New</a></li>
+                                    <li><a href="#">List Question</a></li>
+                                    <li><a href="#">Generate New</a></li>
                                 </ul>
                             </li>
                         </ul>

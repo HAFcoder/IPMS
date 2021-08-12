@@ -11,18 +11,7 @@ class Logbook extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'logbooks';
-
-    protected $fillable = [
-        'monday',
-        'tuesday',
-        'wednesday',
-        'thursday',
-        'friday',
-        'saturday',
-        'sunday',
-        'status',
-        'date'
-    ];
+    protected $timestamps = false;
 
     public function internship()
     {

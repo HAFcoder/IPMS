@@ -16,6 +16,9 @@ use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LectStatusController;
+use App\Http\Controllers\FormFeedbackController;
+
+use App\Http\Controllers\MailingController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -66,6 +69,8 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 //coordinator or admin group route
 Route::group(['middleware' => ['auth:admin']], function() {
     Route::get('/admin', [HomeController::class, 'adminHome']);
+
+
 });
 
 //lecturer group route
@@ -84,6 +89,9 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/company/list', [companiesController::class, 'list'])->name('company.list.coordinator');
     Route::get('coordinator/company', [companiesController::class, 'create'])->name('company.create.coordinator');
     Route::get('coordinator/company/{id}/edit', [companiesController::class, 'edit'])->name('company.edit.coordinator');
+    Route::put('coordinator/company/{id}', [companiesController::class, 'update'])->name('company.update');
+    Route::delete('coordinator/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
+    Route::get('coordinator/company/status', [companiesController::class, 'updateStatus'])->name('company.update.status');
 
     //session route
 
@@ -125,15 +133,22 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
     Route::resource('/sadmin/faculty', FacultyController::class);
     Route::get('/faculty/status', [FacultyController::class, 'updateStatus'])->name('faculty.update.status');
 
+    //address menu
+    Route::resource('/sadmin/address', AddressController::class);
+    Route::get('/address/status', [AddressController::class, 'updateStatus'])->name('address.update.status');
+
+    //form feedback route
+    Route::resource('sadmin/formFeedback', FormFeedbackController::class); 
+
 });
 
+//session route for all lecturer and coordinator
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 
-Route::post('/company', [companiesController::class, 'storeLecturer'])->name('company.storeLecturer');
-///Route::get('/company/{id}/edit', [companiesController::class, 'edit'])->name('company.edit');
-Route::put('/company/{id}', [companiesController::class, 'update'])->name('company.update');
-Route::delete('/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
-Route::get('/company/status', [companiesController::class, 'updateStatus'])->name('company.update.status');
+//company route for store - lecturer
+Route::post('/company', [companiesController::class, 'storeLecturer'])
+        ->name('company.storeLecturer')
+        ->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 
 
 //get address route
@@ -158,3 +173,9 @@ Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
 // Route::post('/logbook', [LogbookController::class, 'testcreateLogbook']);
 // Route::put('/logbook/week/{week_number}', [LogbookController::class, 'testupdateLogbook']);
 // Route::delete('/logbook/week/week_number', [LogbookController::class, 'testdeleteLogbook']);
+
+
+//Mailing
+Route::get('internship/mail/send', [MailingController::class, 'declineMail']);
+Route::get('logbook/mail/send', [MailingController::class, 'logbookApprovalMail']);
+Route::get('evaluation/mail/send', [MailingController::class, 'studentEvaluationMail']);

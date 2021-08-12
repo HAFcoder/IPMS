@@ -17,6 +17,10 @@ class AddressController extends Controller
     public function index()
     {
         //
+        $address = LookupAddress::orderBy('postcode', 'ASC')->get();
+        //dump($sessions);
+
+        return view('address.index',compact('address'));
     }
 
     /**

@@ -7,12 +7,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
+use App\Models\ResumeManagement;
 
 class ResumeManagementController extends Controller
 {
     public function listResume()
     {
-        $lect = $this->getLecturerInfo();
+        // GET STUDENT MATRIX INFO
 
         $files = Storage::disk('s3')->files('intern-resumes/');
  
@@ -30,22 +31,41 @@ class ResumeManagementController extends Controller
     public function storeResume(Request $request)
     {
         $this->validate($request, [
-            'resumefile' => 'required|max:2048'
+            'resumefile' => 'required|mimes:application/pdf|max:8192'
         ]);
+
+        $resume = new ResumeManagement;
+
+        $student_id = '2017559699';
  
         if ($request->hasFile('resumefile')) {
             $file = $request->file('resumefile');
-            $name = $file->getClientOriginalName();
+            $name =  strval($student_id) . '-resume';
             $filePath = 'intern-resumes/' . $name;
+
+            $resume->student_id = $student_id;
+            $resume->name = $name;
+            $resume->filetype = $file->getMimeType();
+
+            $resume->save();
+
             Storage::disk('s3')->put($filePath, file_get_contents($file));
         }
+
+        // if ($request->hasFile('resumefile')) {
+        //     $file = $request->file('resumefile');
+        //     $name = $file->getClientOriginalName();
+        //     $filePath = 'intern-resumes/' . $name;
+        //     Storage::disk('s3')->put($filePath, file_get_contents($file));
+        // }
  
         return back()->withSuccess('File uploaded successfully');
     }
  
-    public function destroyResume()
+    public function destroyResume($filename)
     {
-        Storage::disk('s3')->delete($file_path);
+        $filepath = 'intern-resumes/' . $filename;
+        Storage::disk('s3')->delete($filepath);
     }
  
     public function downloadResume($filename) 

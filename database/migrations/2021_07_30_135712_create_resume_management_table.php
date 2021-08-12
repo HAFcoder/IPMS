@@ -15,7 +15,11 @@ class CreateResumeManagementTable extends Migration
     {
         Schema::create('resume_management', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedInteger('student_id');
+            $table->string('name');
+            $table->string('filetype');
+
+            $table->foreign('student_id')->references('id')->on('students');
         });
     }
 
