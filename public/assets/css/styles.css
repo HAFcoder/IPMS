@@ -2839,7 +2839,9 @@ table.dataTable thead td {
 
 /* profile menu */
 
-.profile-page-user {}
+.profile-page-user {
+    
+}
 
 .profile-page-content {
     padding: 5px !important;
