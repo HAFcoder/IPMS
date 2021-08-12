@@ -2835,3 +2835,30 @@ table.dataTable thead td {
 }
 
 /*-------------------- END Offset Sidebar ------------------- */
+
+
+/* profile menu */
+
+.profile-page-user {}
+
+.profile-page-content {
+    padding: 5px !important;
+}
+
+.profile-page-name {
+    font-size: 17px;
+    font-weight: bold;
+    display: inline-block;
+    width: 20%;
+    text-align: right;
+    color: #502BA7;
+}
+
+.profile-page-amount {
+    /* float: right; */
+    color: #3d405c;
+    font-size: 17px;
+    display: inline-block;
+    width: 75%;
+    padding-left: 20px;
+}

@@ -22,14 +22,7 @@ class StudentController extends Controller
     public function index()
     {
         // view student all
-        $stud = Student::all();
-        return view('student.viewAll', compact('stud'));
-    }
-
-    public function viewDetails()
-    {
-        // view student all
-        $stud = Student::all();
+        $stud = StudentInfo::all();
         return view('student.viewAll', compact('stud'));
     }
 
@@ -60,9 +53,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
-        //
+        return view('students.show', compact('student'));
     }
 
     /**
@@ -136,7 +129,7 @@ class StudentController extends Controller
             $studSession->save();
         }
 
-        return redirect('/lecturer/coordinator/students');
+        return redirect('/coordinator/students');
     }
 
     /**

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
 use App\Models\Programme;
 use App\models\Session;
+use App\Models\Student;
 use App\Models\StudentInfo;
 
 class HomeController extends Controller
@@ -97,12 +98,22 @@ class HomeController extends Controller
 
     public function pending()
     {
-        $uid = Auth::user()->id;
-        $lect = LecturerInfo::where([
-            'lect_id' => $uid,
-         ])->first(); 
-
         return view('lecturer.pending', compact('lect'));
+    }
+
+    public function profileLect()
+    {
+        $lect = $this->getLecturerInfo();
+        return view('lecturer.profile', compact('lect'));
+
+    }
+
+    public function profileStudent()
+    {
+        $id = Auth::user()->id;
+        $stud = Student::find($id);
+        $stud_info = StudentInfo::find($id);
+        return view('student.profile', compact('stud', 'stud_info'));
     }
     
 }

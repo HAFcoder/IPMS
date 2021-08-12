@@ -38,6 +38,7 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
+        '6b34c85f7b1ad6faa15aa12109e030f2' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -91,6 +92,7 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         ),
         'R' => 
         array (
+            'RealRashid\\SweetAlert\\' => 22,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -326,6 +328,10 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         array (
             0 => __DIR__ . '/..' . '/sven/artisan-view/src',
         ),
+        'RealRashid\\SweetAlert\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/realrashid/sweet-alert/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -560,6 +566,7 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\MakeViewCommand' => __DIR__ . '/../..' . '/app/Console/Commands/MakeViewCommand.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AddressController' => __DIR__ . '/../..' . '/app/Http/Controllers/AddressController.php',
@@ -572,14 +579,17 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         'App\\Http\\Controllers\\CompanyEvaluateController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompanyEvaluateController.php',
         'App\\Http\\Controllers\\CompanyFeedbackController' => __DIR__ . '/../..' . '/app/Http/Controllers/CompanyFeedbackController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\FacultyController' => __DIR__ . '/../..' . '/app/Http/Controllers/FacultyController.php',
         'App\\Http\\Controllers\\FileInternController' => __DIR__ . '/../..' . '/app/Http/Controllers/FileInternController.php',
         'App\\Http\\Controllers\\FileManagementController' => __DIR__ . '/../..' . '/app/Http/Controllers/FileManagementController.php',
         'App\\Http\\Controllers\\FormEvaluateController' => __DIR__ . '/../..' . '/app/Http/Controllers/FormEvaluateController.php',
         'App\\Http\\Controllers\\FormFeedbackController' => __DIR__ . '/../..' . '/app/Http/Controllers/FormFeedbackController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LectEvaluateController' => __DIR__ . '/../..' . '/app/Http/Controllers/LectEvaluateController.php',
+        'App\\Http\\Controllers\\LectStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/LectStatusController.php',
         'App\\Http\\Controllers\\LecturerController' => __DIR__ . '/../..' . '/app/Http/Controllers/LecturerController.php',
         'App\\Http\\Controllers\\LogbookController' => __DIR__ . '/../..' . '/app/Http/Controllers/LogbookController.php',
+        'App\\Http\\Controllers\\ProgrammeController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgrammeController.php',
         'App\\Http\\Controllers\\ResumeManagementController' => __DIR__ . '/../..' . '/app/Http/Controllers/ResumeManagementController.php',
         'App\\Http\\Controllers\\SessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/SessionController.php',
         'App\\Http\\Controllers\\StudentController' => __DIR__ . '/../..' . '/app/Http/Controllers/StudentController.php',
@@ -1526,6 +1536,7 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\CreateFacultiesSeeder' => __DIR__ . '/../..' . '/database/seeders/CreateFacultiesSeeder.php',
+        'Database\\Seeders\\CreateSuperAdmin' => __DIR__ . '/../..' . '/database/seeders/CreateSuperAdmin.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\LecturerSeeder' => __DIR__ . '/../..' . '/database/seeders/LecturerSeeder.php',
         'Database\\Seeders\\Programme' => __DIR__ . '/../..' . '/database/seeders/Programme.php',
@@ -5371,6 +5382,13 @@ class ComposerStaticInit9d620d522d8cb99622d7dcba1412e93a
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'RealRashid\\SweetAlert\\Console\\PublishCommand' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Console/PublishCommand.php',
+        'RealRashid\\SweetAlert\\Facades\\Alert' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Facades/Alert.php',
+        'RealRashid\\SweetAlert\\Storage\\AlertSessionStore' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Storage/AlertSessionStore.php',
+        'RealRashid\\SweetAlert\\Storage\\SessionStore' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Storage/SessionStore.php',
+        'RealRashid\\SweetAlert\\SweetAlertServiceProvider' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/SweetAlertServiceProvider.php',
+        'RealRashid\\SweetAlert\\ToSweetAlert' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/ToSweetAlert.php',
+        'RealRashid\\SweetAlert\\Toaster' => __DIR__ . '/..' . '/realrashid/sweet-alert/src/Toaster.php',
         'SebastianBergmann\\CliParser\\AmbiguousOptionException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/AmbiguousOptionException.php',
         'SebastianBergmann\\CliParser\\Exception' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/Exception.php',
         'SebastianBergmann\\CliParser\\OptionDoesNotAllowArgumentException' => __DIR__ . '/..' . '/sebastian/cli-parser/src/exceptions/OptionDoesNotAllowArgumentException.php',

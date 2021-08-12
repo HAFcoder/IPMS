@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faculty;
+use App\Models\Lecturer;
+use App\Models\LecturerInfo;
 use Illuminate\Http\Request;
 
 class LecturerController extends Controller
@@ -14,7 +17,9 @@ class LecturerController extends Controller
      */
     public function index()
     {
-        //
+        $faculties = Faculty::all();
+
+        return view('lecturer.viewFaculty',compact('faculties'));
     }
 
     /**
@@ -46,7 +51,11 @@ class LecturerController extends Controller
      */
     public function show($id)
     {
-        //
+        $faculty = Faculty::where('id',$id)->first();
+        $lectInfo = LecturerInfo::orderBy('lecturerID', 'ASC')->where('faculty_id',$id)->get();
+        //dump($sessions);
+
+        return view('lecturer.show',compact('faculty','lectInfo'));
     }
 
     /**
@@ -80,6 +89,9 @@ class LecturerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lect = Lecturer::find($id);
+        $lect->delete();
+        return redirect()->back();
     }
+
 }

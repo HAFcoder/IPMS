@@ -20,7 +20,7 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Session</h4>
             <ul class="breadcrumbs pull-left">
-                <li><a href="{{ url('/lecturer/coordinator') }}">Home</a></li>
+                <li><a href="{{ url('/coordinator') }}">Home</a></li>
                 <li><span>Generate New Session</span></li>
             </ul>
         </div>

@@ -14,7 +14,8 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ResumeManagementController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\FacultyController;
-use App\Models\StudentSession;
+use App\Http\Controllers\LecturerController;
+use App\Http\Controllers\LectStatusController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -54,6 +55,10 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     //Route::post('/logout', [LoginController::class, 'logout'])->name('logout.admin');
     Route::get('/', [HomeController::class, 'studentHome']);
     Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
+
+    // profile
+    Route::get('/profile', [HomeController::class, 'profileStudent']);
+
     Route::post('student/fetch-programmes', [StudentSessionController::class, 'fetchProgramme']);
     Route::get('/student/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
 });
@@ -67,7 +72,14 @@ Route::group(['middleware' => ['auth:admin']], function() {
 Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function() {
     // if user is approve [coordinator]
     Route::get('/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
-    
+    Route::get('/coordinator/profile', [HomeController::class, 'profileLect']);
+
+    //lecturer menu
+    Route::get('coordinator/lecturers/update-status', [LectStatusController::class, 'updateStatus'])->name('lecturer.update.status');
+    Route::resource('coordinator/lecturers', LecturerController::class);
+    Route::get('changeRole', [LectStatusController::class, 'changeRole'])->name('lecturer.update.role');
+    Route::get('coordinator/lecturers-all', [LectStatusController::class, 'viewAll'])->name('lecturer.viewAll');
+
     //company route
     Route::get('coordinator/company/list', [companiesController::class, 'list'])->name('company.list.coordinator');
     Route::get('coordinator/company', [companiesController::class, 'create'])->name('company.create.coordinator');

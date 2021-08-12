@@ -24,10 +24,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/responsive.css') }}">
     <!-- modernizr css -->
     <script src="{{ asset('assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
-    
+
     @yield('head')
-    
-    
 
 </head>
 
@@ -54,7 +52,11 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
+                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                            <li><a href="{{ url('/coordinator') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                            @else
                             <li><a href="{{ url('/lecturer') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                            @endif
 
                             @if (auth()->guard('lecturer')->user()->status == 'approve')
                             <li>
@@ -70,6 +72,7 @@
                                 </ul>
                             </li>
 
+                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
                             {{-- Lecturer menu --}}
                             <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
                                 <p class="font-weight-normal mb-3">LECTURER</p>
@@ -80,10 +83,11 @@
                                     <span>Lecturer </span>
                                     </a>
                                 <ul class="collapse">
-                                    <li><a href="index3-horizontalmenu.html">View All</a></li>
-                                    <li><a href="index.html">Pending</a></li>
+                                    <li><a href="{{ route('lecturer.viewAll') }}">View All</a></li>
+                                    <li><a href="{{ url('coordinator/lecturers') }}">By Faculty</a></li>
                                 </ul>
                             </li>
+                            @endif
 
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
@@ -148,18 +152,17 @@
                             </div>
                             
                             <li>
+                                @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                 <a href="javascript:void(0)" aria-expanded="true">
                                     <i class="ti-user"></i><span>Student</span>
                                 </a>
                                 <ul class="collapse">
                                     {{-- view all registered students --}}
-                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                     <li><a href="{{ url('coordinator/students') }}">View All</a></li>
-
                                     {{-- approve pending student registration session --}}
-                                    <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li>
-                                    @endif
+                                    {{-- <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li> --}}
                                 </ul>
+                                @endif
                             </li>
                             
                             <li>
@@ -304,7 +307,7 @@
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->lecturerInfo->f_name }}
                                 <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Profile</a>
+                                <a class="dropdown-item" href="{{ url('/coordinator/profile') }}">Profile</a>
                                 <a class="dropdown-item" href="{{ route('logout.home') }}" onclick="event.preventDefault(); 
                                     document.getElementById('logout-form').submit();">Log Out
                                 </a>
