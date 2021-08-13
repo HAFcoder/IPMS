@@ -22,6 +22,7 @@
 
     <div class="row">
         <!-- seo fact area start -->
+        {{-- if the role is coordiiniator --}}
         <div class="col-lg-8">
             <div class="row">
                 <div class="col-md-6 mt-5 mb-3">
