@@ -176,6 +176,12 @@ Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
 
 
 //Mailing
-Route::get('internship/mail/send', [MailingController::class, 'declineMail']);
-Route::get('logbook/mail/send', [MailingController::class, 'logbookApprovalMail']);
-Route::get('evaluation/mail/send', [MailingController::class, 'studentEvaluationMail']);
+Route::get('internship/mail/send/{encryptedstudentid}', [MailingController::class, 'declineMail']);
+Route::get('logbook/mail/send/', [MailingController::class, 'logbookApprovalMail']);
+Route::get('evaluation/mail/send/{encryptedstudentid}', [MailingController::class, 'studentEvaluationMail']);
+
+Route::get('/logbook/show', [LogbookController::class, 'testShowLogbook']);
+Route::get('logbook/mail/send/{week}/{encryptedstudentid}', [MailingController::class, 'testlogbookApprovalMail']);
+//Encryption
+// /{{Crypt::encryptString($studentid)}}
+// $decrypted = Crypt::decryptString($encryptedValue);

@@ -30,6 +30,11 @@
                 <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#week1" aria-expanded="false" aria-controls="collapseExample">
                     Week 1
                 </button>
+
+                <form method="post" action="{{ url('/internship/mail/send/{{ Crypt::encryptString('id') }}') }}">
+                    <button class="btn btn-secondary btn-sm" type="submit">Request Approval</button>
+                </form>
+
             </p>
             <div class="collapse" id="week1">
                 <div class="card card-body">

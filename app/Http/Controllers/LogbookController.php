@@ -50,7 +50,7 @@ class LogbookController extends Controller
         return redirect('/logbook');
     }
 
-    public function showLogbook(Request $request){
+    public function showLogbook(){
         $student_id = Auth::user()->id;
         $intern = Internship::where('intern_id', $student_id)->first();
         $logbooks = Logbook::where('intern_id', $student_id)->get();
@@ -91,5 +91,11 @@ class LogbookController extends Controller
                     ->where('week', $week)
                     ->delete();
     }
- 
+    
+    public function testShowLogbook(){
+        $studentid = "15";
+        $weeks = [1,2];
+        
+        return view('logbook.backup', compact('studentid','weeks'));
+    }
 }
