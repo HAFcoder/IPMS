@@ -23,13 +23,24 @@
         @foreach ($weeks as $week)
             <div class="mt-3">
                 <p>
-                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#{{ $week }}" aria-expanded="false" aria-controls="collapseExample">
+                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#" aria-expanded="false" aria-controls="collapseExample">
                         Week {{ $week }}
                     </button>
-                    <form method="get" action="/logbook/mail/send/{{ $week }}/{{ Crypt::encryptString($studentid) }}">
+                    <form method="get" action="/logbook/mail/{{ $week }}/{{ Crypt::encryptString($studentid) }}">
                         @csrf 
                         <button class="btn btn-secondary btn-sm" type="submit">Request Approval</button>
                     </form>
+
+                    <form method="get" action="/evaluation/mail/{{ Crypt::encryptString($studentid) }}">
+                        @csrf 
+                        <button class="btn btn-secondary btn-sm" type="submit">Send Evaluation Form</button>
+                    </form>
+
+                    <form method="get" action="/declination/mail/{{ Crypt::encryptString($studentid) }}">
+                        @csrf 
+                        <button class="btn btn-secondary btn-sm" type="submit">Decline Offer</button>
+                    </form>
+                    
                 </p>
                 <div class="collapse" id="{{ $week }}">
                     <div class="card card-body">

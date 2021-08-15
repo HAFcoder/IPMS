@@ -32,7 +32,9 @@ class MailingController extends Controller
    
         $details = [
             'title' => 'Internship weekly logbook Update',
-            'url' => 'http://www.kuptm.edu.my/'
+            'url' => 'http://www.kuptm.edu.my/',
+            'name' => 'Hamzah Botak',
+            'company' => 'Nova Tech'
         ];
   
         Mail::to($myEmail)->send(new LogbookApprovalMail($details));
@@ -46,12 +48,32 @@ class MailingController extends Controller
    
         $details = [
             'title' => 'Student Evaluation Form',
-            'url' => 'http://www.kuptm.edu.my/'
+            'url' => 'http://www.dummyipms.com/evaluation/' . $encryptedstudentid
         ];
   
         Mail::to($myEmail)->send(new StudentEvaluationMail($details));
    
         return "Email sent successfully";
+    }
+
+
+    // TEST 
+
+
+    public function testdeclineMail($encryptedstudentid)
+    {
+        $myEmail = 'novatechdevelopers@gmail.com';
+   
+        $details = [
+            'title' => 'Internship Declination',
+            'url' => 'http://www.dummyipms.com/declination/' . $encryptedstudentid,
+            'name' => 'Hamzah Botak',
+            'company' => 'Nova Tech'
+        ];
+  
+        Mail::to($myEmail)->send(new InternMail($details));
+   
+        return "Declination mail sent successfully";
     }
 
     public function testlogbookApprovalMail($week,$encryptedstudentid)
@@ -61,11 +83,28 @@ class MailingController extends Controller
         $details = [
             'title' => 'Internship weekly logbook Update',
             'week' => $week,
-            'url' => 'http://www.dummyipms.com/dummy/' . $week . '/' . $encryptedstudentid
+            'url' => 'http://www.dummyipms.com/dummy/' . $week . '/' . $encryptedstudentid,
+            'name' => 'Hamzah Botak',
+            'company' => 'Nova Tech'
         ];
   
         Mail::to($myEmail)->send(new LogbookApprovalMail($details));
    
-        return "Email sent successfully";
+        return "Logbook approval mail sent successfully";
+    }
+
+    public function teststudentEvaluationMail($encryptedstudentid)
+    {
+        $myEmail = 'novatechdevelopers@gmail.com';
+        $details = [
+            'title' => 'Internship Evaluation',
+            'url' => 'http://www.dummyipms.com/dummy/' . $encryptedstudentid,
+            'name' => 'Hamzah Botak',
+            'company' => 'Nova Tech'
+        ];
+  
+        Mail::to($myEmail)->send(new studentEvaluationMail($details));
+   
+        return "Evaluation mail sent successfully";
     }
 }
