@@ -49,7 +49,7 @@ Route::post('/login/lecturer', [LoginController::class, 'lecturerLogin']);
 Route::post('/login/sadmin', [LoginController::class, 'superAdminLogin']);
 Route::post('/register/lecturer', [RegisterController::class, 'createLecturer']);
 
-// Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
+Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
 
 //student group route
 Route::group(['middleware' => 'auth', 'role:student'], function() {
