@@ -1,4 +1,4 @@
-vendor/composer/autoload_classmap.php
-vendor/composer/autoload_static.php
+/vendor
+/node_modules
 .env.example
 .env
