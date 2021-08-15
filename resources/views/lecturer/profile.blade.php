@@ -6,7 +6,13 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Profile</h4>
             <ul class="breadcrumbs pull-left">
-                <li><a ref="{{ url('/coordinator') }}">Home</a></li>
+
+                @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                @else
+                <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                @endif
+
                 <li><span>Profile</span></li>
             </ul>
         </div>
@@ -40,9 +46,17 @@
                                         </li>
 
                                         <li class="profile-page-content list-group-item ">
+                                            
+                                        @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                             <span class="profile-page-name">Role:</span>
                                             <span class="profile-page-amount">{{ ucfirst($lect->lecturer->role) }}</span>
+                                        @else
+                                            <span class="profile-page-name">Status:</span>
+                                            <span class="profile-page-amount">{{ ucfirst($lect->lecturer->status) }}</span>
+                                        @endif
+                                        
                                         </li>
+
 
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">Lecturer ID:</span>

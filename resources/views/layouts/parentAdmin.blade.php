@@ -287,6 +287,9 @@
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
+    {{-- sweetalert plugins --}}
+    @include('sweetalert::alert')
+
 </body>
 
 </html>

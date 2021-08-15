@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class LoginController extends Controller
 {
@@ -42,23 +44,25 @@ class LoginController extends Controller
         $this->middleware('guest:lecturer')->except('logout');
         $this->middleware('guest:sadmin')->except('logout');
     }
-    
-    public function showAdminLoginForm()
-    {
-        return view('auth.login', ['url' => 'admin']);
-    }
 
-    public function adminLogin(Request $request)
+    public function login(Request $request)
     {
+        $input = $request->all();
+
         $this->validate($request, [
-            'email'   => 'required|email',
-            'password' => 'required|min:6'
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        if (Auth::guard('sadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            return redirect()->intended('/admin');
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            Alert::success('Welcome', 'to IPMS');
+            return redirect('/');
+        }else{
+            Alert::error('Error', 'Email address or password are wrong');
+            return redirect()->back()->withInput();
         }
-        return back()->withInput($request->only('email', 'remember'));
+
     }
 
     public function showLecturerLoginForm()
@@ -79,11 +83,14 @@ class LoginController extends Controller
             $lect = "lecturer";
 
             if (Auth::guard('lecturer')->user()->role == $coor) {
+                Alert::success('Welcome', 'to IPMS');
                 return redirect()->route('coordinator.index');
             }elseif (Auth::guard('lecturer')->user()->role == $lect){
+                Alert::success('Welcome', 'to IPMS');
                 return redirect()->route('lecturer.index');
             }
         }
+        Alert::error('Error', 'Email address or password are wrong');
         return back()->withInput($request->only('email', 'remember'));
     }
 
@@ -102,6 +109,7 @@ class LoginController extends Controller
         if (Auth::guard('sadmin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
             return redirect()->intended('/sadmin');
         }
+        Alert::error('Error', 'Email address or password are wrong');
         return back()->withInput($request->only('email', 'remember'));
     }
 }

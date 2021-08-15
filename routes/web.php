@@ -37,7 +37,6 @@ Auth::routes();
 Route::get('/dashboard', [HomeController::class, 'dashboard']);
 
 // display login page
-Route::get('/login/admin', [LoginController::class, 'showAdminLoginForm']);
 Route::get('/login/lecturer', [LoginController::class, 'showLecturerLoginForm']);
 Route::get('/login/sadmin', [LoginController::class, 'showSuperAdminLoginForm']);
 
@@ -46,12 +45,11 @@ Route::post('api/fetch-cities', [RegisterController::class, 'fetchCity']);
 Route::get('/register/lecturer', [RegisterController::class, 'showLecturerRegisterForm']);
 
 // process login and register
-Route::post('/login/admin', [LoginController::class, 'adminLogin']);
 Route::post('/login/lecturer', [LoginController::class, 'lecturerLogin']);
 Route::post('/login/sadmin', [LoginController::class, 'superAdminLogin']);
 Route::post('/register/lecturer', [RegisterController::class, 'createLecturer']);
 
-Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
+// Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
 
 //student group route
 Route::group(['middleware' => 'auth', 'role:student'], function() {
@@ -64,13 +62,6 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 
     Route::post('student/fetch-programmes', [StudentSessionController::class, 'fetchProgramme']);
     Route::get('/student/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
-});
-
-//coordinator or admin group route
-Route::group(['middleware' => ['auth:admin']], function() {
-    Route::get('/admin', [HomeController::class, 'adminHome']);
-
-
 });
 
 //lecturer group route
@@ -105,19 +96,15 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/student/session/status', [StudentSessionController::class, 'updateStatus'])->name('studentSession.update.status');
 });
 
-Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:approve']], function() {
+Route::group(['middleware' => ['auth:lecturer', 'role:lecturer']], function() {
     // if user is approve [lecturer]
     Route::get('/lecturer', [HomeController::class, 'lecturerHome'])->name('lecturer.index');
+    Route::get('/lecturer/profile', [HomeController::class, 'profileLect']);
     
     //company route
     Route::get('lecturer/company/list', [companiesController::class, 'list'])->name('company.list.lecturer');
     Route::get('lecturer/company', [companiesController::class, 'create'])->name('company.create.lecturer');
     
-});
-
-Route::group(['middleware' => ['auth:lecturer', 'role:lecturer', 'status:pending']], function() {
-    // redirect user if not approve
-    Route::get('/lecturer/pending', [HomeController::class, 'pending'])->name('lecturer.pending');
 });
 
 //super amdin group route

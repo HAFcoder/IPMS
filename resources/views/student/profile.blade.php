@@ -1,4 +1,4 @@
-@extends('layouts.parentLecturer')
+@extends('layouts.parentStudent')
 
 @section('breadcrumbs')
 
@@ -29,8 +29,8 @@
                             src="{{ asset('assets/images/author/user.png') }}" alt="image">
                         <div class="media-body">
                             <div class="tstu-content">
-                                <h4 class="tstu-name" style="color: black">{{ $stud_info->f_name }} {{ $stud_info->l_name }}</h4>
-                                <span class="profsn" style="color: black; font-size: 20px;">{{ $stud_info->studentID }}</span>
+                                <h4 class="tstu-name" style="color: black">{{ $stud->student_info->f_name }} {{ $stud->student_info->l_name }}</h4>
+                                <span class="profsn" style="color: black; font-size: 20px;">{{ $stud->student_info->studentID }}</span>
 
                                 <div class="card-body p-0">
                                     <ul class="profile-page-user list-group list-group-flush">
@@ -41,7 +41,7 @@
 
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">IC Number:</span>
-                                            <span class="profile-page-amount">{{ $stud_info->no_ic }}</span>
+                                            <span class="profile-page-amount">{{ $stud->student_info->no_ic }}</span>
                                         </li>
 
                                         <li class="profile-page-content list-group-item ">
@@ -51,12 +51,12 @@
 
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">Telephone:</span>
-                                            <span class="profile-page-amount">{{ $stud_info->telephone }}</span>
+                                            <span class="profile-page-amount">{{ $stud->student_info->telephone }}</span>
                                         </li>
 
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">Address:</span>
-                                            <span class="profile-page-amount">{{ $stud_info->address }}, {{ $stud_info->postcode }}, {{ $stud_info->city }}, {{ $stud_info->state }}</span>
+                                            <span class="profile-page-amount">{{ $stud->student_info->address }}, {{ $stud->student_info->postcode }}, {{ $stud->student_info->city }}, {{ $stud->student_info->state }}</span>
                                         </li>
                                         
                                     </ul>

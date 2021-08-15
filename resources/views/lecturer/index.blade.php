@@ -18,9 +18,34 @@
 
     <div class="row">
 
-        @if ()
+        @if (Auth::user()->status == 'pending')
+
+            <div class="col-lg-8 col-md-10 mt-5 mx-auto">
+                <div class="card card-bordered pt-5">
+                    <img class="card-img-top img-fluid mx-auto" style="height: 300px; width: auto" src="{{ asset('assets/images/media/pending.png') }}" alt="image">
+                    <div class="card-body">
+                        <h1 class="text-center">Dear {{Auth::user()->lecturerInfo->f_name}},</h1><br>
+                        <p class="mb-3 text-center">Your registration is being processed. Please contact the coordinator if you have any inquiries.</p>
+                    </div>
+                </div>
+            </div>
+
+        @elseif(Auth::user()->status == 'rejected')
+
+            <div class="col-lg-8 col-md-10 mt-5 mx-auto">
+                <div class="card card-bordered pt-5">
+                    <img class="card-img-top img-fluid mx-auto" style="height: 100px; width: 100px" src="{{ asset('assets/images/media/sad.png') }}" alt="image">
+                    <div class="card-body">
+                        <h1 class="text-center">Dear {{Auth::user()->lecturerInfo->f_name}},</h1><br>
+                        <p class="mb-3 text-center">Your registration has been rejected. Please contact the coordinator if you have any inquiries.</p>
+                    </div>
+                </div>
+            </div>
             
         @else
+        {{-- status approve --}}
+
+        
             
         @endif
 

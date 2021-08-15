@@ -40,13 +40,13 @@
 
                 <div class="form-gp">
                     <label for="lecturerID">Lecturer ID</label>
-                    <input type="text" id="lecturerID" name="lecturerID" value="{{ old('lecturerID') }}" required autocomplete="lecturerID">                
+                    <input class="text-uppercase" type="text" id="lecturerID" name="lecturerID" value="{{ old('lecturerID') }}" required autocomplete="lecturerID">                
                     <i class="ti-id-badge"></i>
                     <div class="text-danger"></div>
                 </div>
 
                 <div class="form-group">
-                    <label for="faculty_id">Faculty</label>
+                    <label style="color: #f3302c" for="faculty_id">Faculty</label>
                     <select name="faculty_id" id="faculty_id" class="custom-select" required>
                         <option value="">Open this select menu</option>
                         @foreach ($faculties as $faculty)
@@ -64,7 +64,7 @@
 
                 <div class="form-gp">
                     <label for="telephone">Phone Number</label>
-                    <input type="text" id="telephone" name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone">                  
+                    <input type="text" id="telephone" onkeypress="validate(event)" name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone">                  
                     <i class="ti-mobile"></i>
                     <div class="text-danger"></div>
                 </div>
@@ -106,4 +106,28 @@
             </div>
         </form>
     </div>
+@endsection
+
+@section('script')
+
+    {{-- validate phone number --}}
+    <script>
+        function validate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\.\d{0,2}$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+    </script>
 @endsection

@@ -32,8 +32,8 @@ class StudentSessionController extends Controller
         $user->status = 'pending';
         $user->save();
 
-        $sessions = Session::where('status', '=', 'active')->get();
-        return view('student.index', compact('sessions'));
+        // $sessions = Session::where('status', '=', 'active')->get();
+        return view('student.index');
         
     }
 

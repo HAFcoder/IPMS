@@ -69,7 +69,7 @@ class HomeController extends Controller
     }
 
     public function studentHome()
-    {
+    {    
         $sessions = Session::where('status', '=', 'active')->get();
         //dump($sessions);
         return view('student.index', compact('sessions'));
@@ -113,7 +113,7 @@ class HomeController extends Controller
     {
         $id = Auth::user()->id;
         $stud = Student::find($id);
-        $stud_info = StudentInfo::find($id);
+        $stud_info = StudentInfo::where('stud_id', $id)->get();
         return view('student.profile', compact('stud', 'stud_info'));
     }
     

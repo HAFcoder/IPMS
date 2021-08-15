@@ -45,7 +45,11 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
+                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                    <a href="{{ url('/coordinator') }}"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+                    @else
                     <a href="{{ url('/lecturer') }}"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+                    @endif
                 </div>
             </div>
             <div class="main-menu">
@@ -307,7 +311,13 @@
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->lecturerInfo->f_name }}
                                 <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">
+
+                                @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                 <a class="dropdown-item" href="{{ url('/coordinator/profile') }}">Profile</a>
+                                @else
+                                <a class="dropdown-item" href="{{ url('/lecturer/profile') }}">Profile</a>
+                                @endif
+
                                 <a class="dropdown-item" href="{{ route('logout.home') }}" onclick="event.preventDefault(); 
                                     document.getElementById('logout-form').submit();">Log Out
                                 </a>
@@ -355,6 +365,9 @@
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
 
     @yield('scripts')
+
+    {{-- sweetalert plugins --}}
+    @include('sweetalert::alert')
 
 </body>
 

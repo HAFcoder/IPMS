@@ -81,9 +81,7 @@ class RegisterController extends Controller
 
     public function showLecturerRegisterForm()
     {
-        $faculties = Faculty::orderBy('faculty_name', 'ASC')
-                    ->where('status', '=', 'active')
-                    ->get();
+        $faculties = Faculty::orderBy('faculty_name', 'ASC')->where('status', '=', 'active')->get();
         return view('auth.registerLecturer', ['url' => 'lecturer'], compact('faculties'));
     }
 
