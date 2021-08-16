@@ -22,6 +22,14 @@
             background-color: rgba(0, 0, 0, .075);
         }
 
+        div.dataTables_length {
+            margin-right: 1em;
+        }
+
+        div.dataTables_length select
+        {
+        min-width: 75px;
+        }
     </style>
 
     {{-- toggle button --}}
@@ -30,8 +38,6 @@
 
 @endsection
 
-
-
 @section('breadcrumbs')
 
     <div class="col-sm-6">
@@ -39,7 +45,7 @@
             <h4 class="page-title pull-left">Lecturers</h4>
             <ul class="breadcrumbs pull-left">
                 <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                <li><span>View All Lecturers</span></li>
+                <li><span>View Lecturers</span></li>
             </ul>
         </div>
     </div>
@@ -53,7 +59,7 @@
         <div class="col-12 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="header-title">All Lecturers</h3><br>
+                    <h3 class="header-title">All Lecturers</h3>
 
                     <div class="data-tables datatable-primary">
                         @if ($lectInfo != null)
@@ -64,12 +70,12 @@
                                         <th>Lecturer ID</th>
                                         <th>Name</th>
                                         <th>Faculty</th>
-                                        <th>Position</th>
+                                        {{-- <th>Position</th> --}}
                                         <th>Email</th>
                                         <th>Telephone</th>
                                         <th>Status</th>
                                         <th>Coordinator</th>
-                                        <th class="noExport">Delete</th>
+                                        <th class="noExport">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -84,7 +90,7 @@
                                             <td>{{ $lect->lecturerID }}</td>
                                             <td>{{ $lect->f_name }} {{ $lect->l_name }}</td>
                                             <td>{{ $lect->faculty->faculty_name }}</td>
-                                            <td>{{ $lect->position }}</td>
+                                            {{-- <td>{{ $lect->position }}</td> --}}
                                             <td>{{ $lect->lecturer->email }}</td>
                                             <td>{{ $lect->telephone }}</td>
                                             <td>
@@ -110,14 +116,13 @@
                                                     {{ $lect->lecturer->role == 'coordinator' ? 'checked' : '' }}>
                                             </td>
                                             <td>
-                                                <form action="{{ route('lecturers.destroy', $lect->lect_id) }}"
-                                                    method="post">
+                                                <form action="{{ route('lecturers.destroy', $lect->lect_id ) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button data-toggle="tooltip" data-placement="top" title="Delete"
-                                                        class="btn btn-danger btn-xs"
-                                                        onclick="return confirm('Are you sure you want to delete this data?')"
-                                                        type="submit"><span class="ti-trash"></span></button>
+                                                    class="btn btn-danger btn-xs"
+                                                    onclick="return confirm('Are you sure you want to delete this data?')"
+                                                    type="submit"><span class="ti-trash"></span></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -160,9 +165,9 @@
         $(document).ready(function() {
 
             $('#dataTableArea').DataTable({
-                language: {
-                    sLengthMenu: "Show _MENU_"
-                },
+                // language: {
+                //     sLengthMenu: "Show _MENU_"
+                // },
                 dom: 'lBfrtip',
                 "lengthMenu": [
                     [10, 25, 50, -1],
@@ -174,7 +179,7 @@
                             'No') : data);
                         return i;
                     },
-                    "targets": [8]
+                    "targets": [7]
                 }],
                 buttons: {
                     buttons: [{

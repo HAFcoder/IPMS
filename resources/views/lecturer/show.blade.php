@@ -22,6 +22,15 @@
             background-color: rgba(0, 0, 0, .075);
         }
 
+        div.dataTables_length {
+            margin-right: 1em;
+        }
+
+        div.dataTables_length select
+        {
+        min-width: 75px;
+        }
+
     </style>
 
     {{-- toggle button --}}
@@ -29,8 +38,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 
 @endsection
-
-
 
 @section('breadcrumbs')
 
@@ -69,7 +76,7 @@
                                         <th>Telephone</th>
                                         <th>Status</th>
                                         <th>Coordinator</th>
-                                        <th class="noExport">Delete</th>
+                                        <th class="noExport">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -158,9 +165,9 @@
         $(document).ready(function() {
 
             $('#dataTableArea').DataTable({
-                language: {
-                    sLengthMenu: "Show _MENU_"
-                },
+                // language: {
+                //     sLengthMenu: "Show _MENU_"
+                // },
                 dom: 'lBfrtip',
                 "lengthMenu": [
                     [10, 25, 50, -1],

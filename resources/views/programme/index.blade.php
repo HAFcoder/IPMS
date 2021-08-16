@@ -21,6 +21,15 @@
         .text-underline-hover:hover {
             text-decoration: underline;
         }
+
+        div.dataTables_length {
+            margin-right: 1em;
+        }
+
+        div.dataTables_length select
+        {
+            min-width: 75px;
+        }
     </style>
 
 @endsection
@@ -127,9 +136,9 @@
     $(document).ready(function() {
         
         $('#dataTableArea').DataTable( {
-            language : {
-                sLengthMenu: "Show _MENU_"
-            },
+            // language : {
+            //     sLengthMenu: "Show _MENU_"
+            // },
             dom: 'lBfrtip',
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             buttons:{

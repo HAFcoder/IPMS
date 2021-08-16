@@ -3,24 +3,32 @@
 @section('head')
 
     
-<!-- Start datatable css -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+    <!-- Start datatable css -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<style>
-    th{
-        background-color:rgba(0,0,0,.075);
-    }
-</style>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <style>
+        th{
+            background-color:rgba(0,0,0,.075);
+        }
+
+        div.dataTables_length {
+            margin-right: 1em;
+        }
+
+        div.dataTables_length select
+        {
+            min-width: 75px;
+        }
+    </style>
 
 @endsection
-
 
 
 @section('breadcrumbs')
@@ -220,9 +228,9 @@
         $(document).ready(function() {
 
             $('#dataTableArea').DataTable( {
-                language : {
-                    sLengthMenu: "Show _MENU_"
-                },
+                // language : {
+                //     sLengthMenu: "Show _MENU_"
+                // },
                 dom: 'lBfrtip',
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 buttons:{

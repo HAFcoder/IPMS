@@ -94,4 +94,38 @@ class LecturerController extends Controller
         return redirect()->back();
     }
 
+    public function viewAll()
+    {
+        $lectInfo = LecturerInfo::orderBy('lecturerID', 'ASC')->get();
+        // $lectInfo = LecturerInfo::all();
+
+        return view('lecturer.viewAll',compact('lectInfo'));
+    }
+
+    public function updateStatus(Request $request)
+    {
+        $status = $request->get('status');
+        $lect_id = $request->get('lecT_id');
+        
+        foreach($lect_id as $id){
+
+            $lect = Lecturer::find($id);
+            $lect->status = $status;
+    
+            $lect->save();
+        }
+
+        return 0;
+    }
+
+    public function changeRole(Request $request)
+    {
+        $lec = Lecturer::findOrFail($request->id);
+        $lec->role = $request->role;
+        $lec->save();
+    
+        return response()->json(['message' => 'User status updated successfully.']);
+    }
+
+
 }

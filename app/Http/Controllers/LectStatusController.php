@@ -35,7 +35,8 @@ class LectStatusController extends Controller
 
     public function viewAll()
     {
-        $lectInfo = LecturerInfo::all();
+        $lectInfo = LecturerInfo::orderBy('lecturerID', 'ASC')->get();
+        // $lectInfo = LecturerInfo::all();
 
         return view('lecturer.viewAll',compact('lectInfo'));
     }

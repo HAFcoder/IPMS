@@ -23,6 +23,22 @@
         });
     </script>
 
+
+    <style>
+        th {
+            background-color: rgba(0, 0, 0, .075);
+        }
+
+        div.dataTables_length {
+            margin-right: 1em;
+        }
+
+        div.dataTables_length select
+        {
+            min-width: 75px;
+        }
+    </style>
+
 @endsection
 
 @section('breadcrumbs')
@@ -204,9 +220,9 @@
         $(document).ready(function() {
 
             $('#dataTableSession').DataTable({
-                language: {
-                    sLengthMenu: "Show _MENU_"
-                },
+                // language: {
+                //     sLengthMenu: "Show _MENU_"
+                // },
                 dom: 'lBfrtip',
                 "lengthMenu": [
                     [10, 25, 50, -1],

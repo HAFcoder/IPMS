@@ -71,10 +71,11 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('/coordinator/profile', [HomeController::class, 'profileLect']);
 
     //lecturer menu
-    Route::get('coordinator/lecturers/update-status', [LectStatusController::class, 'updateStatus'])->name('lecturer.update.status');
+    Route::get('coordinator/lecturers-all', [LecturerController::class, 'viewAll'])->name('lecturer.viewAll');
+    Route::get('coordinator/lecturers/update-status', [LecturerController::class, 'updateStatus'])->name('lecturer.update.status');
+    Route::get('changeRole', [LecturerController::class, 'changeRole'])->name('lecturer.update.role');
     Route::resource('coordinator/lecturers', LecturerController::class);
-    Route::get('changeRole', [LectStatusController::class, 'changeRole'])->name('lecturer.update.role');
-    Route::get('coordinator/lecturers-all', [LectStatusController::class, 'viewAll'])->name('lecturer.viewAll');
+
 
     //company route
     Route::get('coordinator/company/list', [companiesController::class, 'list'])->name('company.list.coordinator');
