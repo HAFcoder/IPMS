@@ -75,7 +75,7 @@
                                         <th>Email</th>
                                         <th>Telephone</th>
                                         <th>Status</th>
-                                        <th>Coordinator</th>
+                                        <th class="noExport">Coordinator</th>
                                         <th class="noExport">Action</th>
                                     </tr>
                                 </thead>
@@ -173,14 +173,14 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                columnDefs: [{
-                    "render": function(data, type, row) {
-                        var i = (type === 'export' ? ($(data).prop("checked") === true ? 'Yes' :
-                            'No') : data);
-                        return i;
-                    },
-                    "targets": [8]
-                }],
+                // columnDefs: [{
+                //     "render": function(data, type, row) {
+                //         var i = (type === 'export' ? ($(data).prop("checked") === true ? 'Yes' :
+                //             'No') : data);
+                //         return i;
+                //     },
+                //     "targets": [8]
+                // }],
                 buttons: {
                     buttons: [{
                             text: 'Approve',

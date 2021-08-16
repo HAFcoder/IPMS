@@ -72,9 +72,9 @@
                                         <th>Faculty</th>
                                         {{-- <th>Position</th> --}}
                                         <th>Email</th>
-                                        <th>Telephone</th>
+                                        {{-- <th>Telephone</th> --}}
                                         <th>Status</th>
-                                        <th>Coordinator</th>
+                                        <th class="noExport">Coordinator</th>
                                         <th class="noExport">Action</th>
                                     </tr>
                                 </thead>
@@ -92,7 +92,7 @@
                                             <td>{{ $lect->faculty->faculty_name }}</td>
                                             {{-- <td>{{ $lect->position }}</td> --}}
                                             <td>{{ $lect->lecturer->email }}</td>
-                                            <td>{{ $lect->telephone }}</td>
+                                            {{-- <td>{{ $lect->telephone }}</td> --}}
                                             <td>
                                                 @php
                                                     if ($lect->lecturer->status == 'approve') {
@@ -173,14 +173,14 @@
                     [10, 25, 50, -1],
                     [10, 25, 50, "All"]
                 ],
-                columnDefs: [{
-                    "render": function(data, type, row) {
-                        var i = (type === 'export' ? ($(data).prop("checked") === true ? 'Yes' :
-                            'No') : data);
-                        return i;
-                    },
-                    "targets": [7]
-                }],
+                // columnDefs: [{
+                //     "render": function(data, type, row) {
+                //         var i = (type === 'export' ? ($(data).prop("checked") === true ? 'Yes' :
+                //             'No') : data);
+                //         return i;
+                //     },
+                //     targets: 6
+                // }],
                 buttons: {
                     buttons: [{
                             text: 'Approve',
@@ -252,7 +252,7 @@
                         }
                     }
 
-                }
+                },
             });
 
         });
