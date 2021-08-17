@@ -367,6 +367,7 @@
     @yield('scripts')
 
     {{-- sweetalert plugins --}}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     @include('sweetalert::alert')
 
 </body>

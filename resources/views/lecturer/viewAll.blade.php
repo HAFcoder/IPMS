@@ -70,9 +70,9 @@
                                         <th>Lecturer ID</th>
                                         <th>Name</th>
                                         <th>Faculty</th>
-                                        {{-- <th>Position</th> --}}
+                                        <th>Position</th>
                                         <th>Email</th>
-                                        {{-- <th>Telephone</th> --}}
+                                        <th>Telephone</th>
                                         <th>Status</th>
                                         <th class="noExport">Coordinator</th>
                                         <th class="noExport">Action</th>
@@ -90,9 +90,9 @@
                                             <td>{{ $lect->lecturerID }}</td>
                                             <td>{{ $lect->f_name }} {{ $lect->l_name }}</td>
                                             <td>{{ $lect->faculty->faculty_name }}</td>
-                                            {{-- <td>{{ $lect->position }}</td> --}}
+                                            <td>{{ $lect->position }}</td>
                                             <td>{{ $lect->lecturer->email }}</td>
-                                            {{-- <td>{{ $lect->telephone }}</td> --}}
+                                            <td>{{ $lect->telephone }}</td>
                                             <td>
                                                 @php
                                                     if ($lect->lecturer->status == 'approve') {
@@ -116,7 +116,7 @@
                                                     {{ $lect->lecturer->role == 'coordinator' ? 'checked' : '' }}>
                                             </td>
                                             <td>
-                                                <form action="{{ route('lecturers.destroy', $lect->lect_id ) }}" method="post">
+                                                <form action="{{ route('lecturers.destroy', $lect->lect_id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button data-toggle="tooltip" data-placement="top" title="Delete"
@@ -283,7 +283,6 @@
                     success: function(data) {
 
                         console.log("final value = " + data);
-                        //window.location.reload();
 
                         $("#dataTableArea").load(window.location.href + " #dataTableArea");
 
@@ -291,7 +290,8 @@
                             $('#btnCloseLoad').click();
                         });
 
-                        // window.location.reload();
+
+                        location.reload();
                         //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
 
                     },

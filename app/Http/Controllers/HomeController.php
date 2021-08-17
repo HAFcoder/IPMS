@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
-use App\Models\Programme;
 use App\models\Session;
 use App\Models\Student;
 use App\Models\StudentInfo;
@@ -95,26 +94,6 @@ class HomeController extends Controller
         $name = Auth::user()->name;
         //dump($uid);
         return view('sadmin.index'); 
-    }
-
-    public function pending()
-    {
-        return view('lecturer.pending', compact('lect'));
-    }
-
-    public function profileLect()
-    {
-        $lect = $this->getLecturerInfo();
-        return view('lecturer.profile', compact('lect'));
-
-    }
-
-    public function profileStudent()
-    {
-        $id = Auth::user()->id;
-        $stud = Student::find($id);
-        $stud_info = StudentInfo::where('stud_id', $id)->get();
-        return view('student.profile', compact('stud', 'stud_info'));
     }
     
 }

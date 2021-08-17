@@ -7,6 +7,8 @@ use App\Models\Faculty;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class LecturerController extends Controller
 {
@@ -123,8 +125,15 @@ class LecturerController extends Controller
         $lec = Lecturer::findOrFail($request->id);
         $lec->role = $request->role;
         $lec->save();
-    
+
         return response()->json(['message' => 'User status updated successfully.']);
+    }
+
+    public function profileLect()
+    {
+        $lect = $this->getLecturerInfo();
+        return view('lecturer.profile', compact('lect'));
+
     }
 
 

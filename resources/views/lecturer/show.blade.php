@@ -291,7 +291,7 @@
                             $('#btnCloseLoad').click();
                         });
 
-                        // window.location.reload();
+                        location.reload();
                         //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
 
                     },

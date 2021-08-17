@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Student;
 use App\Models\StudentInfo;
 use App\Models\StudentSession;
@@ -143,5 +144,13 @@ class StudentController extends Controller
         $stud = Student::find($id);
         $stud->delete();
         return redirect()->back();
+    }
+
+    public function profileStudent()
+    {
+        $id = Auth::user()->id;
+        $stud = Student::find($id);
+        $stud_info = StudentInfo::where('stud_id', $id)->get();
+        return view('student.profile', compact('stud', 'stud_info'));
     }
 }

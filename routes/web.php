@@ -15,7 +15,6 @@ use App\Http\Controllers\ResumeManagementController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\LecturerController;
-use App\Http\Controllers\LectStatusController;
 use App\Http\Controllers\FormFeedbackController;
 
 use App\Http\Controllers\MailingController;
@@ -58,7 +57,7 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
 
     // profile
-    Route::get('/profile', [HomeController::class, 'profileStudent']);
+    Route::get('/profile', [StudentController::class, 'profileStudent']);
 
     Route::post('student/fetch-programmes', [StudentSessionController::class, 'fetchProgramme']);
     Route::get('/student/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
@@ -68,7 +67,7 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function() {
     // if user is approve [coordinator]
     Route::get('/coordinator', [HomeController::class, 'coordinatorHome'])->name('coordinator.index');
-    Route::get('/coordinator/profile', [HomeController::class, 'profileLect']);
+    Route::get('/coordinator/profile', [LecturerController::class, 'profileLect']);
 
     //lecturer menu
     Route::get('coordinator/lecturers-all', [LecturerController::class, 'viewAll'])->name('lecturer.viewAll');
