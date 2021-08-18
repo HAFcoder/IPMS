@@ -153,4 +153,5 @@ class StudentController extends Controller
         $stud_info = StudentInfo::where('stud_id', $id)->get();
         return view('student.profile', compact('stud', 'stud_info'));
     }
+
 }

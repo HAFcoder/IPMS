@@ -56,7 +56,6 @@ class LoginController extends Controller
 
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
-            Alert::success('Welcome', 'to IPMS');
             return redirect('/');
         }else{
             Alert::error('Error', 'Email address or password are wrong');
@@ -83,10 +82,8 @@ class LoginController extends Controller
             $lect = "lecturer";
 
             if (Auth::guard('lecturer')->user()->role == $coor) {
-                Alert::success('Welcome', 'to IPMS');
                 return redirect()->route('coordinator.index');
             }elseif (Auth::guard('lecturer')->user()->role == $lect){
-                Alert::success('Welcome', 'to IPMS');
                 return redirect()->route('lecturer.index');
             }
         }

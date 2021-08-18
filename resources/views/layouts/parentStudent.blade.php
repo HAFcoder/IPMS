@@ -49,7 +49,7 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            <li><a href="#"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                            <li><a href="{{ url('/') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
                             <li><a href="#"><i class="ti-receipt"></i> <span>Resume</span></a></li>
 
                             {{-- Session menu --}}
@@ -58,8 +58,8 @@
                                     <i class="ti-user"></i><span>Session</span>
                                 </a>
                                 <ul class="collapse">
-                                    <li><a href="table-basic.html">Register</a></li>
-                                    <li><a href="table-layout.html">View Status</a></li>
+                                    <li><a href="{{url('/session/register')}}">Register</a></li>
+                                    <li><a href="{{url('/session/view-status')}}">View Status</a></li>
                                 </ul>
                             </li>
 
@@ -169,7 +169,7 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->student_info->f_name }}
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Hi, {{ Auth::user()->student_info->f_name }}!
                                 <i class="fa fa-angle-down"></i>
                             </h4>
                             <div class="dropdown-menu">
@@ -198,7 +198,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                <p>© Copyright 2018. All right reserved. Template by <a style="color: #8914fe" href="https://colorlib.com/wp/">Colorlib</a>.
                 </p>
             </div>
         </footer>

@@ -1213,8 +1213,9 @@ table.dbkit-table tr td {
 /* Todays Order List */
 
 .dbkit-table .heading-td td {
-    color: #444;
+    color: rgb(12, 12, 12);
     font-weight: 500;
+    text-transform: capitalize;
 }
 
 .pagination_area ul li {

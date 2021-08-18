@@ -69,7 +69,10 @@
                     <img class="card-img-top img-fluid mx-auto" style="height: 300px; width: auto" src="{{ asset('assets/images/media/pending.png') }}" alt="image">
                     <div class="card-body">
                         <h1 class="text-center">Dear {{Auth::user()->student_info->f_name}},</h1><br>
-                        <p class="mb-3 text-center">Your registration is being processed. Please contact the coordinator if you have any inquiries.</p>
+                        <p class="mb-3 text-center">Your session registration is being processed. 
+                            Please check it <a style="color: #8914fe" href="{{url('/session/view-status')}}">HERE</a>. <br>
+                            Please contact the coordinator if you have any inquiries.
+                        </p>
                     </div>
                 </div>
             </div>

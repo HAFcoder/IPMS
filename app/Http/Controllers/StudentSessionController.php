@@ -7,6 +7,7 @@ use App\Models\StudentSession;
 use App\Models\Student;
 use App\Models\Programme;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class StudentSessionController extends Controller
 {
@@ -33,8 +34,14 @@ class StudentSessionController extends Controller
         $user->save();
 
         // $sessions = Session::where('status', '=', 'active')->get();
-        return view('student.index');
-        
+        Alert::success('Success!', 'Your session registration has been successful.');
+
+        $id = Auth::user()->id;
+        // student register sesison in studnet page
+        $sessions = StudentSession::where('student_id', $id)->orderBy('created_at', 'DESC')->get();
+        //dump($sessions);
+        return view('session.viewStatus', compact('sessions'));
+
     }
 
     public function index()
@@ -73,5 +80,22 @@ class StudentSessionController extends Controller
 
         return 0;
 
+    }
+
+    public function registerSession()
+    {
+        // student register sesison in studnet page
+        $sessions = Session::where('status', '=', 'active')->get();
+        //dump($sessions);
+        return view('session.register', compact('sessions'));
+    }
+
+    public function viewStatus()
+    {
+        $id = Auth::user()->id;
+        // student register sesison in studnet page
+        $sessions = StudentSession::where('student_id', $id)->orderBy('created_at', 'DESC')->get();
+        //dump($sessions);
+        return view('session.viewStatus', compact('sessions'));
     }
 }

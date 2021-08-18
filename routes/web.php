@@ -59,8 +59,11 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     // profile
     Route::get('/profile', [StudentController::class, 'profileStudent']);
 
+    // session
+    Route::get('/session/register', [StudentSessionController::class, 'registerSession']);
     Route::post('student/fetch-programmes', [StudentSessionController::class, 'fetchProgramme']);
-    Route::get('/student/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
+    Route::get('/session/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
+    Route::get('/session/view-status', [StudentSessionController::class, 'viewStatus']);
 });
 
 //lecturer group route
