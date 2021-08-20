@@ -15,7 +15,7 @@ class StudentInfo extends Model
 
     public function programmes()
     {
-        return $this->belongsTo(Programme::class, 'programme_id');
+        return $this->belongsTo(Programme::class, 'programme_id', 'id');
     }
 
     public function students()

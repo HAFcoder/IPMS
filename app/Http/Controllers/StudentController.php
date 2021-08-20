@@ -11,6 +11,7 @@ use App\Models\LookupAddress;
 use App\Models\Programme;
 use App\Models\Session;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class StudentController extends Controller
@@ -76,15 +77,12 @@ class StudentController extends Controller
 
         $state = LookupAddress::orderBy('state', 'ASC')->distinct()->get(['state']);
         $city = LookupAddress::orderBy('city', 'ASC')->distinct()->get(['city']);
-        return view('student.editStudent', compact('stud', 'studInfo', 'studSession', 'state', 'city', 'sessions', 'programmes'));
+        return view('student.editProfile', compact('stud', 'studInfo', 'studSession', 'state', 'city', 'sessions', 'programmes'));
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Update student profile in student page
      */
     public function update(Request $request, $id)
     {
@@ -92,27 +90,17 @@ class StudentController extends Controller
             'studentID'=>'required',
             'f_name'=>'required',
             'l_name'=>'required',
-            'no_ic'=>'required',
             'telephone'=>'required',
-            'email'=>'required',
             'address'=>'required',
             'state'=>'required',
             'postcode'=>'required',
-            'status'=>'required',
-            'city'=>'required',
             'programme_id' => 'required',
         ]);
-
-        $stud = Student::find($id);
-        $stud->email = $request->get('email');
-        $stud->status = $request->get('status');
-        $stud->save();
 
         $studInfo = StudentInfo::where('stud_id', $id)->first();
         $studInfo->studentID = $request->get('studentID');
         $studInfo->f_name = $request->get('f_name');
         $studInfo->l_name = $request->get('l_name');
-        $studInfo->no_ic = $request->get('no_ic');
         $studInfo->address = $request->get('address');
         $studInfo->city = $request->get('city');
         $studInfo->state = $request->get('state');
@@ -121,16 +109,11 @@ class StudentController extends Controller
         $studInfo->programme_id = $request->get('programme_id');
         $studInfo->save();
 
-        $studSession = StudentSession::where('student_id', $id)->first();
-        if($studSession != null)
-        {
-            $studSession->session_id = $request->get('session_id');
-            $studSession->programme_id = $request->get('programme_id');
-            $studSession->status = $request->get('status');
-            $studSession->save();
-        }
-
-        return redirect('/coordinator/students');
+        $stud = Student::find($id);
+        $stud_info = StudentInfo::where('stud_id', $id)->first();
+        Alert::success('Updated!', 'Profile updated.');
+        return view('student.profile', compact('stud', 'stud_info'));
+        // return redirect()->back();
     }
 
     /**
@@ -150,8 +133,17 @@ class StudentController extends Controller
     {
         $id = Auth::user()->id;
         $stud = Student::find($id);
-        $stud_info = StudentInfo::where('stud_id', $id)->get();
+        $stud_info = StudentInfo::where('stud_id', $id)->first();
         return view('student.profile', compact('stud', 'stud_info'));
+    }
+
+    public function fetchCity(Request $request)
+    {
+        $data['city'] = LookupAddress::orderBy('city', 'ASC')
+                        ->where("state",$request->state)
+                        ->distinct()
+                        ->get(["city", "city"]);
+        return response()->json($data);
     }
 
 }

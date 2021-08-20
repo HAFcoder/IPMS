@@ -1,4 +1,9 @@
-@extends('layouts.parentLecturer')
+@extends('layouts.parentStudent')
+
+@section('meta')
+    <meta name="csrf-token" content="content">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
 @section('head')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -18,10 +23,11 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Session</h4>
+            <h4 class="page-title pull-left">Edit Profile</h4>
             <ul class="breadcrumbs pull-left">
-                <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                <li><span>Generate New Session</span></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="{{ url('/profile') }}">Profile</a></li>
+                <li><span>View Session</span></li>
             </ul>
         </div>
     </div>
@@ -32,10 +38,10 @@
 
     <div class="row">
 
-        <div class="col-8 mt-5 mx-auto">
+        <div class="col-6 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Edit Student Information</h4>
+                    <h4 class="header-title">Edit Information</h4>
 
                     @if ($errors->any())
                         <div class="alert alert-danger">
@@ -47,13 +53,22 @@
                         </div>
                     @endif
                     
-                    <form method="POST" action="{{ route('students.update', $stud->id) }}">
-                        @method('PATCH') 
+                    <form method="POST" action="{{ route('student.update', $stud->id) }}">
+                        @method('PUT') 
                         @csrf
 
                         <div class="form-group">
                             <label for="studentID" class="col-form-label">KUPTM Student ID</label>
-                            <input class="form-control" id="studentID" name="studentID" type="text" value="{{ $studInfo->studentID }}" required>
+                            <input class="form-control text-uppercase" pattern="[A-Za-z]{2}\d{9}" id="studentID" name="studentID" type="text" value="{{ $studInfo->studentID }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="programme_id">Programme</label>
+                            <select id="programme_id" class="custom-select" name="programme_id" required>
+                                @foreach ($programmes as $data)
+                                    <option value="{{ $data->id }}" @if( $studInfo->programme_id == $data->id) selected @endif>{{ $data->code }} - {{ $data->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="form-group">
@@ -67,28 +82,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="programme_id">Programme</label>
-                            <select id="programme_id" class="custom-select" name="programme_id" required>
-                                @foreach ($programmes as $data)
-                                    <option value="{{ $data->id }}" @if( $studInfo->programme_id == $data->id) selected @endif>{{ $data->code }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
                             <label for="no_ic" class="col-form-label">IC Number</label>
-                            <input class="form-control" id="no_ic" name="no_ic" type="text" pattern="\d{6}-\d{2}-\d{4}" value="{{ $studInfo->no_ic }}" required>
+                            <input class="form-control" id="no_ic" name="no_ic" type="text" value="{{ $studInfo->no_ic }}" disabled>
                         </div>
 
                         <div class="form-group">
                             <label for="telephone" class="col-form-label">Telephone</label>
                             <input class="form-control" id="telephone" onkeypress="validate(event)" 
                             name="telephone" type="text" value="{{ $studInfo->telephone }}" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email" class="col-form-label">Email</label>
-                            <input class="form-control" id="email" name="email" type="email" value="{{ $stud->email }}" required>
                         </div>
 
                         <div class="form-group">
@@ -113,37 +114,34 @@
 
                         <div class="form-group">
                             <label for="city">City</label>
-                            <select id="city" class="custom-select js-example-basic-single" name="city" required>
-                                @foreach ($city as $data)
-                                    <option value="{{ $data->city }}" @if( $studInfo->city == $data->city) selected @endif>{{ $data->city }}</option>
-                                @endforeach
+                            <select id="city" class="custom-select js-example-basic-single" name="city" required disabled>
+                                <option value="{{ $studInfo->city }}" >{{ $studInfo->city }}</option>
                             </select>
+
+                            {{-- send current data --}}
+                            <input type="hidden" name="city" value="{{ $studInfo->city }}" id="hiddeninput" />
                         </div>
-
-                        <div class="form-group">
-                            <label for="status">Student Status</label>
-                            <select class="custom-select " name="status" required>
-                                <option value="noRequest" @if($stud->status == 'noRequest') selected='selected' @endif >Not registered for session</option>
-                                <option value="pending" @if($stud->status == 'pending') selected='selected' @endif>Pending approval</option>
-                                <option value="approve" @if($stud->status == 'approve') selected='selected' @endif>Approved</option>
-                            </select>
-                        </div>
-
-                        @if ($studSession != null)
-
-                        <div class="form-group">
-                            <label for="session_id">Session</label>
-                            <select id="session_id" class="custom-select" name="session_id" required>
-                                @foreach ($sessions as $data)
-                                    <option value="{{ $data->id }}" @if( $studSession->session_id == $data->id) selected @endif>{{ $data->session_code }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        @endif
 
                         <button type="submit" class="btn btn-primary btn-lg btn-block">SAVE</button>
                     </form>
+
+                     <!-- loader -->
+                    <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3"
+                        data-toggle="modal" data-target="#loadingModal">loading modal</button>
+                    <div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" >
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content text-center">
+                                <div class="modal-body">
+                                    <img src="{{ asset('assets/images/media/loader5.gif') }}" >
+                                    <h1><small class="text-muted ">Loading ...</small></h1>
+                                    <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- loader -->
+
                 </div>
             </div>
         </div>
@@ -153,13 +151,42 @@
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
-        // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
-            $('.js-example-basic-single').select2();
+            $('#state').on('change', function() {
+                var state = this.value;
+                $("#city").html('');
+
+                // remove hidden element
+                var element =  document.getElementById('hiddeninput');
+                element.remove();
+
+                $('#btnLoad').click();
+
+                $.ajax({
+                    url: "{{ url('/profile/edit/api/fetch-cities') }}",
+                    type: "POST",
+                    data: {
+                        state: state,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    dataType: 'json',
+                    success: function(res) {
+                        $('#btnCloseLoad').click();
+                        $('#city').prop('disabled', false);
+                        $('#city').html('<option value="">Select City</option>');
+
+                        $.each(res.city, function(key, value) {
+                            $("#city").append('<option value="' + value.city + '">' + value.city + '</option>');
+                        });
+                    }
+                });
+
+            });
         });
     </script>
+
 
     {{-- validate phone number --}}
     <script>

@@ -1542,7 +1542,7 @@ table.dbkit-table tr td {
 }
 
 .tstu-name {
-    font-size: 20px;
+    font-size: 25px;
     color: #fff;
     letter-spacing: 0;
 }
@@ -2855,6 +2855,7 @@ table.dataTable thead td {
     width: 20%;
     text-align: right;
     color: #502BA7;
+    padding-right: 10px;
 }
 
 .profile-page-amount {
@@ -2862,6 +2863,6 @@ table.dataTable thead td {
     color: #3d405c;
     font-size: 17px;
     display: inline-block;
-    width: 75%;
+    width: 70%;
     padding-left: 20px;
 }

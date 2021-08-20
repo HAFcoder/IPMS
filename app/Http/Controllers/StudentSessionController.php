@@ -20,28 +20,29 @@ class StudentSessionController extends Controller
 
     public function createStudSession(Request $request) 
     {
+        $id = Auth::user()->id;
+        
         $sessID = $request->get('session_id');
         $progID = $request->get('programme_id');
 
         $studSess = new StudentSession();
-        $studSess->student()->associate(Auth::user()->id);
+        $studSess->student()->associate($id);
         $studSess->session()->associate($sessID);
         $studSess->programme()->associate($progID);
-        $studSess->save();
 
-        $user = Student::find(Auth::user()->id);
+        $user = Student::find($id);
         $user->status = 'pending';
+
+        $studSess->save();
         $user->save();
 
         // $sessions = Session::where('status', '=', 'active')->get();
         Alert::success('Success!', 'Your session registration has been successful.');
 
-        $id = Auth::user()->id;
         // student register sesison in studnet page
         $sessions = StudentSession::where('student_id', $id)->orderBy('created_at', 'DESC')->get();
         //dump($sessions);
         return view('session.viewStatus', compact('sessions'));
-
     }
 
     public function index()

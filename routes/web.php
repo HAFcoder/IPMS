@@ -58,6 +58,10 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 
     // profile
     Route::get('/profile', [StudentController::class, 'profileStudent']);
+    Route::get('/profile/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
+    Route::put('/profile/edit/{id}/update', [StudentController::class, 'update'])->name('student.update');
+    Route::post('/profile/edit/api/fetch-cities', [StudentController::class, 'fetchCity']);
+
 
     // session
     Route::get('/session/register', [StudentSessionController::class, 'registerSession']);
