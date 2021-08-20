@@ -26,10 +26,10 @@ class StudentSession extends Model
         return $this->belongsTo(Student::class,'student_id');
     }
 
-    // public function studentInfo()
-    // {
-    //     return $this->hasOne(StudentInfo::class, 'stud_id' ,'student_id');
-    // }
+    public function studentInfo()
+    {
+        return $this->hasOne(StudentInfo::class, 'stud_id' ,'student_id');
+    }
 
     public function programme()
     {
