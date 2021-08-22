@@ -43,7 +43,7 @@
 
                                 @php
                                     if ($stud->status == 'noRequest') {
-                                        $style = 'badge-secondary';
+                                        $style = 'badge-info';
                                         $status = 'No registered session';
                                     } elseif ($stud->status == 'approve') {
                                         $style = 'badge-success';
@@ -65,7 +65,7 @@
         
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">Programme:</span>
-                                            <span class="profile-page-amount">{{ $stud_info->programmes->code }}</span>
+                                            <span class="profile-page-amount">{{ $stud_info->programmes->code }} - {{ $stud_info->programmes->name }}</span>
                                         </li>
 
                                         <li class="profile-page-content list-group-item ">

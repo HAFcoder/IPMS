@@ -50,6 +50,9 @@ Route::post('/register/lecturer', [RegisterController::class, 'createLecturer'])
 
 Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
 
+// forgot password
+
+
 //student group route
 Route::group(['middleware' => 'auth', 'role:student'], function() {
     //Route::post('/logout', [LoginController::class, 'logout'])->name('logout.admin');

@@ -27,6 +27,7 @@
                 @endif --}}
             </div>
             <div class="login-form-body">
+                
                 <div class="form-gp">
                     <label for="email">Email address</label>
                     <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
@@ -59,7 +60,14 @@
                         </div>
                     </div>
                     <div class="col-6 text-right">
-                        <a href="#" style="color: #f3302c">Forgot Password?</a>
+
+                        @if (Route::has('password.request'))
+                            <a class="btn btn-link" style="color: #f3302c" href="{{ route('password.request') }}">
+                                {{ __('Forgot Your Password?') }}
+                            </a>
+                        @endif
+
+                        {{-- <a href="#" style="color: #f3302c">Forgot Password?</a> --}}
                     </div>
                 </div>
                 <div class="submit-btn-area">
