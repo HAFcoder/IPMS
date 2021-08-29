@@ -63,8 +63,19 @@
                                 </ul>
                             </li>
 
+                            {{-- Internship menu --}}
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="ti-files"></i><span>Internship</span>
+                                </a>
+                                <ul class="collapse">
+                                    <li><a href="{{url('/internfile')}}">Intern Document</a></li>
+                                    <li><a href="{{url('/logbook')}}">Logbook</a></li>
+                                </ul>
+                            </li>
+
                             @if (auth()->user()->status == 'approve')
-                            
+                                    
 
                             @endif
                             

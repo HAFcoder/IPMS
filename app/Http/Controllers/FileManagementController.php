@@ -14,7 +14,6 @@ class FileManagementController extends Controller
  
     public function listInternFile()
     {
-        $lect = $this->getLecturerInfo();
 
         $files = Storage::disk('s3')->files('intern-forms/');
  
@@ -26,7 +25,7 @@ class FileManagementController extends Controller
             ];
         }
  
-        return view('files.index', ['files' => $data, 'lect' => $lect]);
+        return view('files.index', ['files' => $data]);
     }
  
     public function storeInternFile(Request $request)

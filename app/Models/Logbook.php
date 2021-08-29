@@ -11,7 +11,6 @@ class Logbook extends Model
     use HasFactory;
     protected $guarded = [];
     protected $table = 'logbooks';
-    protected $timestamps = false;
 
     public function internship()
     {

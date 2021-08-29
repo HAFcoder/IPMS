@@ -1,11 +1,9 @@
 @extends('layouts.parentStudent')
+{{-- register student session in studnet page --}}
 
-@section('head')
-
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@section('meta')
+    <meta name="csrf-token" content="content">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('breadcrumbs')
@@ -14,8 +12,9 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Logbook</h4>
             <ul class="breadcrumbs pull-left">
-                <li><a href="{{ url('/admin') }}">Home</a></li>
-                <li><span>Logbook History</span></li>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a >Internship</a></li>
+                <li><span>Logbook</span></li>
             </ul>
         </div>
     </div>
@@ -31,9 +30,9 @@
                     Week 1
                 </button>
 
-                <form method="post" action="{{ url('/internship/mail/send/{{ Crypt::encryptString('id') }}') }}">
+                {{-- <form method="post" action="{{ url('/internship/mail/send/{{ Crypt::encryptString('id') }}') }}">
                     <button class="btn btn-secondary btn-sm" type="submit">Request Approval</button>
-                </form>
+                </form> --}}
 
             </p>
             <div class="collapse" id="week1">

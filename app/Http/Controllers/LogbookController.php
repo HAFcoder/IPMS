@@ -52,7 +52,7 @@ class LogbookController extends Controller
 
     public function showLogbook(){
         $student_id = Auth::user()->id;
-        $intern = Internship::where('intern_id', $student_id)->first();
+        // $intern = Internship::where('intern_id', $student_id)->first();
         $logbooks = Logbook::where('intern_id', $student_id)->get();
         
         return view('logbook.index', compact('logbooks'));

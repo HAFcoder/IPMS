@@ -165,8 +165,8 @@ Route::delete('/resume/delete', [ResumeManagementController::class, 'destroyResu
 Route::get('/resume/download/{filename}',[ResumeManagementController::class, 'downloadResume']);
 
 //Logbook
-// Route::get('/logbook', [LogbookController::class, 'listLogbook']);
-Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
+Route::get('/logbook', [LogbookController::class, 'showLogbook']);
+// Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
 // Route::post('/logbook', [LogbookController::class, 'testcreateLogbook']);
 // Route::put('/logbook/week/{week_number}', [LogbookController::class, 'testupdateLogbook']);
 // Route::delete('/logbook/week/week_number', [LogbookController::class, 'testdeleteLogbook']);
