@@ -10,10 +10,12 @@ use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\companiesController;
 use App\Http\Controllers\StudentSessionController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ResumeManagementController;
 use App\Http\Controllers\ProgrammeController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\FormEvaluateController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\FormFeedbackController;
 
@@ -59,12 +61,25 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::get('/', [HomeController::class, 'studentHome']);
     Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
 
+    // resume
+    Route::get('/create-resume', [StudentController::class, 'resume1']);
+    Route::post('/create-resume1', [StudentController::class, 'postResume1']);
+
+    //company
+    Route::get('/company-all', [companiesController::class, 'companyAll']);
+    Route::get('/apply-list', [companiesController::class, 'applyList']);
+
+    //report
+    Route::get('/report', [StudentController::class, 'report']);
+
+    //feedbacks and survey
+    Route::get('/graduate-survey', [FormEvaluateController::class, 'graduate']);
+
     // profile
     Route::get('/profile', [StudentController::class, 'profileStudent']);
     Route::get('/profile/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
     Route::put('/profile/edit/{id}/update', [StudentController::class, 'update'])->name('student.update');
     Route::post('/profile/edit/api/fetch-cities', [StudentController::class, 'fetchCity']);
-
 
     // session
     Route::get('/session/register', [StudentSessionController::class, 'registerSession']);

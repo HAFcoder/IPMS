@@ -4290,7 +4290,7 @@ tbody.collapse.show {
 .nav-pills .nav-link.active,
 .nav-pills .show>.nav-link {
     color: #fff;
-    background-color: #007bff
+    background-color: #9ba0ec
 }
 
 .nav-fill .nav-item {
@@ -9776,6 +9776,10 @@ a.text-primary:hover {
 
 .text-secondary {
     color: #6c757d !important
+}
+
+.text-indigo {
+    color: #6610f2 !important
 }
 
 a.text-secondary:focus,

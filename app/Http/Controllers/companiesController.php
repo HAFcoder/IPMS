@@ -142,4 +142,18 @@ class companiesController extends Controller
 
     }
 
+    //student website
+    public function companyAll()
+    {
+        $company = Company::orderBy('status', 'ASC')->get();
+        //dump($company);
+        
+        return view('company.viewAllStudent',compact('company'));
+    }
+
+    public function applyList()
+    {
+        return view('company.applyList');
+    }
+
 }

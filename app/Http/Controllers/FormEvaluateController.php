@@ -6,6 +6,11 @@ use App\Models\FormEvaluate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\Student;
+use App\Models\StudentInfo;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class FormEvaluateController extends Controller
 {
     /**
@@ -82,5 +87,14 @@ class FormEvaluateController extends Controller
     public function destroy(FormEvaluate $formEvaluate)
     {
         //
+    }
+
+    //student
+    public function graduate ()
+    {
+        $id = Auth::user()->id;
+        $stud = Student::find($id);
+        $stud_info = StudentInfo::where('stud_id', $id)->first();
+        return view('feedback.graduate', compact('stud', 'stud_info'));
     }
 }

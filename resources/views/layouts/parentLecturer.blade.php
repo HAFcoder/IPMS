@@ -342,7 +342,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                <p>© Copyright 2021. All right reserved.</a>.
                 </p>
             </div>
         </footer>

@@ -65,7 +65,7 @@
         
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">Programme:</span>
-                                            <span class="profile-page-amount">{{ $stud_info->programmes->code }} - {{ $stud_info->programmes->name }}</span>
+                                            <span class="profile-page-amount">{{ $stud_info->programmes->code }} <br> {{ $stud_info->programmes->name }}</span>
                                         </li>
 
                                         <li class="profile-page-content list-group-item ">

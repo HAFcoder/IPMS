@@ -129,19 +129,19 @@ return [
             'provider' => 'students',
             'table' => 'password_resets',
             'expire' => 60,
-            // 'throttle' => 60,
+            'throttle' => 60,
         ],
         'lecturers' => [
             'provider' => 'lecturers',
             'table' => 'password_resets',
             'expire' => 60,
-            // 'throttle' => 60,
+            'throttle' => 60,
         ],
         'sadmins' => [
             'provider' => 'sadmins',
             'table' => 'password_resets',
             'expire' => 60,
-            // 'throttle' => 60,
+            'throttle' => 60,
         ],
     ],
 

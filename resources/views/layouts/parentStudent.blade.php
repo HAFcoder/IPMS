@@ -50,7 +50,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li><a href="{{ url('/') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
-                            <li><a href="#"><i class="ti-receipt"></i> <span>Resume</span></a></li>
+                            <li><a href="{{ url('/create-resume') }}"><i class="ti-receipt"></i> <span>Resume</span></a></li>
 
                             {{-- Session menu --}}
                             <li>
@@ -63,21 +63,33 @@
                                 </ul>
                             </li>
 
+                            {{-- Company menu --}}
+                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                <p class="font-weight-normal mb-3">COMPANY</p>
+                            </div>
+
+                            <li><a href="{{url('/company-all')}}"><i class="ti-receipt"></i> <span>View All</span></a></li>
+                            <li><a href="{{url('/apply-list')}}"><i class="ti-receipt"></i> <span>Application List</span></a></li>
+
                             {{-- Internship menu --}}
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-files"></i><span>Internship</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="{{url('/internfile')}}">Intern Document</a></li>
-                                    <li><a href="{{url('/logbook')}}">Logbook</a></li>
-                                </ul>
-                            </li>
+                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                <p class="font-weight-normal mb-3">INTERNSHIP</p>
+                            </div>
 
-                            @if (auth()->user()->status == 'approve')
-                                    
+                            <li><a href="{{url('/internfile')}}"><i class="ti-receipt"></i> <span>Intern Document</span></a></li>
+                            <li><a href="{{url('/logbook')}}"><i class="ti-receipt"></i> <span>Logbook</span></a></li>
+                            <li><a href="{{url('/report')}}"><i class="ti-receipt"></i> <span>Report</span></a></li>
 
-                            @endif
+                            {{-- @if (auth()->user()->status == 'approve') --}}
+                            
+                            {{-- Survey menu --}}
+                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                <p class="font-weight-normal mb-3">FEEDBACKS & SURVEY</p>
+                            </div>
+
+                            <li><a href="{{url('/graduate-survey')}}"><i class="ti-receipt"></i> <span>Graduate Survey</span></a></li>
+
+                            {{-- @endif --}}
                             
                         </ul>
                     </nav>
@@ -109,19 +121,20 @@
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                             <li class="dropdown">
                                 <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>2</span>
+                                    <span>5</span>
                                 </i>
                                 <div class="dropdown-menu bell-notify-box notify-box">
-                                    <span class="notify-title">You have 3 new notifications <a href="#">view
-                                            all</a></span>
+                                    <span class="notify-title">You have 5 new notifications </span>
                                     <div class="nofity-list">
-                                        <a href="#" class="notify-item">
+
+                                        <a href="#" class="notify-item" >
                                             <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
                                             <div class="notify-text">
                                                 <p>You have Changed Your Password</p>
                                                 <span>Just Now</span>
                                             </div>
                                         </a>
+
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
                                             <div class="notify-text">
@@ -129,6 +142,7 @@
                                                 <span>30 Seconds ago</span>
                                             </div>
                                         </a>
+
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
                                             <div class="notify-text">
@@ -136,6 +150,7 @@
                                                 <span>Just Now</span>
                                             </div>
                                         </a>
+                                        
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
                                             <div class="notify-text">
@@ -146,24 +161,11 @@
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
                                             <div class="notify-text">
-                                                <p>Some special like you</p>
+                                                <p>Welcome</p>
                                                 <span>Just Now</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
+                                      
                                     </div>
                                 </div>
                             </li>
@@ -209,7 +211,7 @@
         <!-- footer area start-->
         <footer>
             <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a style="color: #8914fe" href="https://colorlib.com/wp/">Colorlib</a>.
+                <p>© Copyright 2021. All right reserved.</a>.
                 </p>
             </div>
         </footer>

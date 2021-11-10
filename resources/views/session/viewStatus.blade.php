@@ -48,6 +48,12 @@
                                 </thead>
 
                                 <tbody>
+                                    @if($sessions->isEmpty())
+                                        <tr>
+                                            <td colspan="10" class="bg-light">There is no data.</td>
+                                        </tr>
+                                    @endif
+
                                     @foreach ($sessions as $sess)
                                     <tr>
                                         <td>{{ $sess->created_at->format('d M Y') }}</td>
