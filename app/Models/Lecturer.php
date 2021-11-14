@@ -46,4 +46,6 @@ class Lecturer extends Authenticatable
     {
         return $this->hasMany(Session::class);
     }
+
+
 }

@@ -83,4 +83,34 @@ class LectEvaluateController extends Controller
     {
         //
     }
+
+    //lecturer website
+
+    // view session list lect in charge
+    public function feedbackSess ()
+    {
+        return view('feedback.lectStudSession');
+    }
+
+    // view stud list for feedbacks
+    public function studList ()
+    {
+        return view('feedback.lectStudList');
+    }
+
+    //lect logbook evaluation for student
+    public function logbookRead ()
+    {
+        return view('logbook.lectLogbookReport');
+    }
+
+    public function logbookEva ()
+    {
+        return view('feedback.lectLogbook');
+    }
+
+    public function presentationEva ()
+    {
+        return view('feedback.lectPresentation');
+    }
 }

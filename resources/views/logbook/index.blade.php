@@ -23,16 +23,16 @@
 
 @section('content')
 
-    <div class="container">
+    {{-- <div class="container">
         <div class="mt-3">
             <p>
                 <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#week1" aria-expanded="false" aria-controls="collapseExample">
                     Week 1
                 </button>
 
-                {{-- <form method="post" action="{{ url('/internship/mail/send/{{ Crypt::encryptString('id') }}') }}">
+                <form method="post" action="{{ url('/internship/mail/send/{{ Crypt::encryptString('id') }}') }}">
                     <button class="btn btn-secondary btn-sm" type="submit">Request Approval</button>
-                </form> --}}
+                </form>
 
             </p>
             <div class="collapse" id="week1">
@@ -275,6 +275,38 @@
             </div>
         </div>
     
+    </div> --}}
+
+    {{-- ain buat --}}
+    <div class="row">
+
+        <div class="col-lg-8 mt-5 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="header-title">LOGBOOK </h4>
+                    <div id="log" class="according accordion-s2 gradiant-bg">
+
+                        @for ($i = 1; $i <= 14; $i++)
+                            <div class="card">
+                                <div class="card-header">
+                                    <a class="collapsed card-link" data-toggle="collapse" href="#w{{$i}}">Week {{$i}}</a>
+                                </div>
+                                <div id="w{{$i}}" class="collapse" data-parent="#log">
+                                    <div class="card-body">
+                                        {{-- if else database empty --}}
+                                        <div class="text-center">
+                                            <p>There is no data.</p>
+                                            <a href="#" type="button" class="btn btn-success btn-md mb-3 mt-3"><span class="ti-plus"></span> Add Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 @endsection

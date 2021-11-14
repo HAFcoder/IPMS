@@ -91,4 +91,17 @@ class FormFeedbackController extends Controller
     {
         //
     }
+
+    //coordinator menu
+    //under fedbacks
+    //for compnay
+    public function company()
+    {
+        return view('feedback.coorCompany');
+    }
+
+    public function logbookReport()
+    {
+        return view('feedback.coorLogbook');
+    }
 }

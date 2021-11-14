@@ -136,5 +136,31 @@ class LecturerController extends Controller
 
     }
 
+    //lecturer for view supervisee
+    //view session for lecturer
+    public function superviseeSess()
+    {
+        return view('student.lectSuperviseeSess');
+    }
+
+    //view supervisee for that session
+    public function superviseeList()
+    {
+        return view('student.lectSuperviseeList');
+    }
+
+
+    //coordinatoor
+    //see supervisee for lecturer
+    public function viewSupervisee()
+    {
+        return view ('lecturer.coorSuperviseeView');
+    }
+
+    public function attachSupervisee()
+    {
+        return view ('lecturer.coorSuperviseeAttach');
+    }
+
 
 }

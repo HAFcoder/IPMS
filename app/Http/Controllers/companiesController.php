@@ -148,12 +148,35 @@ class companiesController extends Controller
         $company = Company::orderBy('status', 'ASC')->get();
         //dump($company);
         
-        return view('company.viewAllStudent',compact('company'));
+        return view('company.studViewList',compact('company'));
     }
 
     public function applyList()
     {
         return view('company.applyList');
+    }
+
+    //coordinator menu
+    //letter
+    public function acceptance()
+    {
+        return view('company.coorAcceptanceLetter');
+    }
+
+    public function reject()
+    {
+        return view('company.coorDeclineLetter');
+    }
+
+    public function companySV()
+    {
+        return view('company.coorCompanySVEva');
+    }
+
+    //studnet-company
+    public function statusAll()
+    {
+        return view('company.coorStudentStatusAll');
     }
 
 }

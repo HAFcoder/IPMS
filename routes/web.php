@@ -18,7 +18,7 @@ use App\Http\Controllers\FacultyController;
 use App\Http\Controllers\FormEvaluateController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\FormFeedbackController;
-
+use App\Http\Controllers\LectEvaluateController;
 use App\Http\Controllers\MailingController;
 use Illuminate\Support\Facades\Auth;
 
@@ -119,17 +119,44 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/student-pending', [StudentSessionController::class, 'index']);
     Route::get('coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
     Route::get('coordinator/student/session/status', [StudentSessionController::class, 'updateStatus'])->name('studentSession.update.status');
+
+    //under lecturer
+    Route::get('coordinator/view-all/supervisee', [LecturerController::class, 'viewSupervisee']);
+    Route::get('coordinator/attach/supervisee', [LecturerController::class, 'attachSupervisee']);
+
+    //under company letter
+    Route::get('coordinator/company/acceptence-letter', [companiesController::class, 'acceptance']);
+    Route::get('coordinator/company/decline-letter', [companiesController::class, 'reject']);
+    Route::get('coordinator/company/evaluation-company', [companiesController::class, 'companySV']);
+
+    //under studnet company 
+    Route::get('coordinator/student-company/status-all', [companiesController::class, 'statusAll']);
+
+    //feedback menu
+    Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);
+    Route::get('coordinator/feedback/logbook-report', [FormFeedbackController::class, 'logbookReport']);
+
 });
 
 Route::group(['middleware' => ['auth:lecturer', 'role:lecturer']], function() {
     // if user is approve [lecturer]
     Route::get('/lecturer', [HomeController::class, 'lecturerHome'])->name('lecturer.index');
-    Route::get('/lecturer/profile', [HomeController::class, 'profileLect']);
+    Route::get('/lecturer/profile', [LecturerController::class, 'profileLect']);
     
     //company route
     Route::get('lecturer/company/list', [companiesController::class, 'list'])->name('company.list.lecturer');
     Route::get('lecturer/company', [companiesController::class, 'create'])->name('company.create.lecturer');
-    
+
+    //feedbacks and evaluation
+    Route::get('lecturer/fedbacks-evaluation/session', [LectEvaluateController::class, 'feedbackSess']);
+    Route::get('lecturer/fedbacks-evaluation/student-list', [LectEvaluateController::class, 'studList']);
+    Route::get('lecturer/fedbacks-evaluation/student-list/logbook-report/details', [LectEvaluateController::class, 'logbookRead']);
+    Route::get('lecturer/fedbacks-evaluation/student-list/logbook-report/evaluation', [LectEvaluateController::class, 'logbookEva']);
+    Route::get('lecturer/fedbacks-evaluation/student-list/presentation', [LectEvaluateController::class, 'presentationEva']);
+
+    //lecturer student
+    Route::get('lecturer/supervisee', [LecturerController::class, 'superviseeSess']);
+    Route::get('lecturer/supervisee/list', [LecturerController::class, 'superviseeList']);
 });
 
 //super amdin group route

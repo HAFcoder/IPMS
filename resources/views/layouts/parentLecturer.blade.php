@@ -1,6 +1,6 @@
 {{-- parent layout for coordinator or admin --}}
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/slicknav.min.css') }}">
     <!-- amchart css -->
     <link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-
     <!-- others css -->
     <link rel="stylesheet" href="{{ asset('assets/css/typography.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/default-css.css') }}">
@@ -45,10 +44,12 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                    <a href="{{ url('/coordinator') }}"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                        <a href="{{ url('/coordinator') }}"><img
+                                src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
                     @else
-                    <a href="{{ url('/lecturer') }}"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+                        <a href="{{ url('/lecturer') }}"><img
+                                src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
                     @endif
                 </div>
             </div>
@@ -56,150 +57,178 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                            <li><a href="{{ url('/coordinator') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                <li><a href="{{ url('/coordinator') }}"><i class="ti-home"></i>
+                                        <span>Dashboard</span></a></li>
                             @else
-                            <li><a href="{{ url('/lecturer') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
+                                <li><a href="{{ url('/lecturer') }}"><i class="ti-home"></i>
+                                        <span>Dashboard</span></a></li>
                             @endif
 
-                            @if (auth()->guard('lecturer')->user()->status == 'approve')
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
                                     <i class="ti-calendar"></i> <span>Session</span>
-                                    </a>
+                                </a>
                                 <ul class="collapse">
                                     <li><a href="{{ route('session.index') }}">View All</a></li>
 
-                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                                    <li><a href="{{ route('session.create') }}">Generate New</a></li>
+                                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                        <li><a href="{{ route('session.create') }}">Generate New</a></li>
                                     @endif
                                 </ul>
                             </li>
 
-                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                            {{-- Lecturer menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">LECTURER</p>
-                            </div>
+                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                {{-- Lecturer menu --}}
+                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                    <p class="font-weight-normal mb-3">LECTURER</p>
+                                </div>
 
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
-                                    <span>Lecturer </span>
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
+                                        <span>Lecturer </span>
                                     </a>
-                                <ul class="collapse">
-                                    <li><a href="{{ route('lecturer.viewAll') }}">View All</a></li>
-                                    <li><a href="{{ url('coordinator/lecturers') }}">By Faculty</a></li>
-                                </ul>
-                            </li>
+                                    <ul class="collapse">
+                                        <li><a href="{{ route('lecturer.viewAll') }}">View All</a></li>
+                                        <li><a href="{{ url('coordinator/lecturers') }}">By Faculty</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
+                                        <span>Supervisee </span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/view-all/supervisee') }}">View All</a></li>
+                                        <li><a href="{{ url('coordinator/attach/supervisee') }}">Attach</a></li>
+                                    </ul>
+                                </li>
                             @endif
 
-                            <li>
+                            {{-- <li>
                                 <a href="javascript:void(0)" aria-expanded="true">
                                     <i class="ti-write"></i><span>Evaluation</span>
                                 </a>
                                 <ul class="collapse">
                                     <li><a href="barchart.html">Student</a></li>
                                 </ul>
-                            </li>
+                            </li> --}}
 
                             {{-- company menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">COMPANY</p>
-                            </div>
 
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-briefcase"></i><span>Company</span>
-                                </a>
-                                <ul class="collapse">
-                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                                    <li><a href="{{ route('company.list.coordinator') }}">View All</a></li>
+                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
 
-                                    @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
-                                    <li><a href="{{ route('company.list.lecturer') }}">View All</a></li>
+                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                    <p class="font-weight-normal mb-3">COMPANY</p>
+                                </div>
 
-                                    @endif
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-briefcase"></i><span>Company</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                            <li><a href="{{ route('company.list.coordinator') }}">View All</a></li>
 
-                                    @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                                    <li><a href="{{ route('company.create.coordinator') }}">Add New</a></li>
+                                        @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
+                                            <li><a href="{{ route('company.list.lecturer') }}">View All</a></li>
 
-                                    @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
-                                    <li><a href="{{ route('company.create.lecturer') }}">Add New</a></li>
+                                        @endif
 
-                                    @endif
+                                        @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                            <li><a href="{{ route('company.create.coordinator') }}">Add New</a></li>
 
-                                </ul>
-                            </li>
+                                        @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
+                                            <li><a href="{{ route('company.create.lecturer') }}">Add New</a></li>
 
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-email"></i><span>Generate Letter</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="fontawesome.html">Acceptance Letter</a></li>
-                                    <li><a href="fontawesome.html">Decline Letter</a></li>
-                                </ul>
-                            </li>
+                                        @endif
 
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-write"></i><span>Evaluation</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="fontawesome.html">Student</a></li>
-                                </ul>
-                            </li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-email"></i><span>Generate Letter</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/company/acceptence-letter') }}">Acceptance Letter</a></li>
+                                        <li><a href="{{ url('coordinator/company/decline-letter') }}">Decline Letter</a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-write"></i><span>Evaluation</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/company/evaluation-company') }}">Industrial Supervisor</a></li>
+                                    </ul>
+                                </li>
+
+                            @endif
 
                             {{-- Student menu --}}
                             <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
                                 <p class="font-weight-normal mb-3">STUDENT</p>
                             </div>
-                            
+
                             <li>
-                                @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-user"></i><span>Student</span>
-                                </a>
-                                <ul class="collapse">
-                                    {{-- view all registered students --}}
-                                    <li><a href="{{ url('coordinator/students') }}">View All</a></li>
-                                    {{-- approve pending student registration session --}}
-                                    {{-- <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li> --}}
-                                </ul>
+                                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-user"></i><span>Student</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        {{-- view all registered students --}}
+                                        <li><a href="{{ url('coordinator/students') }}">View All</a></li>
+                                        {{-- approve pending student registration session --}}
+                                        {{-- <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li> --}}
+                                    </ul>
                                 @endif
                             </li>
-                            
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-briefcase"></i><span>Company</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="login.html">All Applications</a></li>
-                                    <li><a href="login2.html">Accepted</a></li>
-                                    <li><a href="login3.html">Rejected</a></li>
-                                    <li><a href="register.html">Decline</a></li>
-                                </ul>
-                            </li>
 
-                            <li><a href="maps.html"><i class="ti-agenda"></i> <span>Logbook</span></a></li>
+                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
 
-                            <li><a href="{{ url('/internfile') }}"><i class="ti-folder"></i> <span>Internship Form</span></a></li>
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-briefcase"></i><span>Company</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/student-company/status-all') }}">All Applications</a></li>
+                                        <li><a href="login2.html">Accepted</a></li>
+                                        <li><a href="login3.html">Rejected</a></li>
+                                        <li><a href="register.html">Decline</a></li>
+                                    </ul>
+                                </li>
 
-                            <li><a href="{{ url('/resume') }}"><i class="ti-id-badge"></i> <span>Internship Resume</span></a></li>
+                                {{-- <li><a href="{{ url('/internfile') }}"><i class="ti-folder"></i><span>Internship Form</span></a></li>
 
-                            <li><a href="invoice.html"><i class="ti-file"></i> <span>Report</span></a></li>
+                                <li><a href="{{ url('/resume') }}"><i class="ti-id-badge"></i> <span>Internship Resume</span></a></li> --}}
 
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-write"></i><span>Feedback & Evaluation</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="#">Student</a></li>
-                                    <li><a href="#">Company</a></li>
-                                    <li><a href="#">Academic Supervisor</a></li>
-                                </ul>
-                            </li>
+                            @else
+
+                                <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li>
+
                             @endif
+
+
+                            {{-- Feedabck and evaluation --}}
+                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                <p class="font-weight-normal mb-3">FEEDBACKS & EVALUATION</p>
+                            </div>
+
+                            {{-- for fedbacks and evaluation --}}
+                            @if (Auth::guard('lecturer')->user()->role == 'lecturer')
+                                <li><a href="{{ url('/lecturer/fedbacks-evaluation/session') }}"><i
+                                            class="ti-agenda"></i> <span>By Session</span></a></li>
+                                {{-- <li><a href="{{ url('/lecturer/report-student') }}"><i class="ti-file"></i> <span>Report</span></a></li> --}}
+                            @else
+                                <li><a href="{{ url('coordinator/feedback/company') }}"><i class="ti-agenda"></i> <span>Company</span></a></li>
+                                <li><a href="{{ url('coordinator/feedback/logbook-report') }}"><i class="ti-agenda"></i> <span>Logbook & Report</span></a></li>
+                                <li><a href="invoice.html"><i class="ti-file"></i> <span>Presentation</span></a>
+                                    <li><a href="invoice.html"><i class="ti-file"></i> <span>Graduate Survey</span></a>
+                                </li>
+                            @endif
+
                         </ul>
                     </nav>
                 </div>
@@ -228,10 +257,10 @@
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                             <li class="dropdown">
                                 <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>2</span>
+                                    <span>3</span>
                                 </i>
                                 <div class="dropdown-menu bell-notify-box notify-box">
-                                    <span class="notify-title">You have 3 new notifications 
+                                    <span class="notify-title">You have 3 new notifications
                                         <a href="#">view all</a>
                                     </span>
 
@@ -245,7 +274,8 @@
                                         </a>
 
                                         <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
+                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i>
+                                            </div>
                                             <div class="notify-text">
                                                 <p>New Commetns On Post</p>
                                                 <span>30 Seconds ago</span>
@@ -259,9 +289,10 @@
                                                 <span>Just Now</span>
                                             </div>
                                         </a>
-                                        
+
                                         <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
+                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i>
+                                            </div>
                                             <div class="notify-text">
                                                 <p>New Commetns On Post</p>
                                                 <span>30 Seconds ago</span>
@@ -307,22 +338,26 @@
 
                     <div class="col-sm-6 clearfix">
                         <div class="user-profile pull-right">
-                            <img class="avatar user-thumb" src="{{ asset('assets/images/author/lecturer.png') }}" alt="avatar">
-                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->lecturerInfo->f_name }}
-                                <i class="fa fa-angle-down"></i></h4>
+                            <img class="avatar user-thumb" src="{{ asset('assets/images/author/lecturer.png') }}"
+                                alt="avatar">
+                            <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
+                                {{ Auth::user()->lecturerInfo->f_name }}
+                                <i class="fa fa-angle-down"></i>
+                            </h4>
                             <div class="dropdown-menu">
 
-                                @if(Auth::guard('lecturer')->user()->role == "coordinator")
-                                <a class="dropdown-item" href="{{ url('/coordinator/profile') }}">Profile</a>
+                                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                    <a class="dropdown-item" href="{{ url('/coordinator/profile') }}">Profile</a>
                                 @else
-                                <a class="dropdown-item" href="{{ url('/lecturer/profile') }}">Profile</a>
+                                    <a class="dropdown-item" href="{{ url('/lecturer/profile') }}">Profile</a>
                                 @endif
 
                                 <a class="dropdown-item" href="{{ route('logout.home') }}" onclick="event.preventDefault(); 
                                     document.getElementById('logout-form').submit();">Log Out
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout.home') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ route('logout.home') }}" method="POST"
+                                    style="display: none;">
                                     @csrf
                                 </form>
                             </div>
@@ -359,12 +394,12 @@
     <script src="{{ asset('assets/js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
-    
+
+    @yield('scripts')
+
     <!-- others plugins -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
-
-    @yield('scripts')
 
     {{-- sweetalert plugins --}}
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

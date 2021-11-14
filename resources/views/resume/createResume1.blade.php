@@ -65,7 +65,6 @@
                         <h2 >Professional Summary</h2>
                         <div class="form-control-feedback">Write 2-4 short & energetic sentences to interest the reader! Mention your role, experience & most importantly - your biggest achievements, best qualities and skills.</div>
 
-
                         <div class="form-group"> 
                             {{-- <label for="example-text-input" class="col-form-label">Description</label>  --}}
                             <textarea class="form-control" name="description" id="description" rows="3" required></textarea> 
@@ -77,47 +76,20 @@
 
                         <div class="form-group">
 
-                            <b class="text-muted mb-3 mt-10 d-block">Technical:</b>
-                            {{-- <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" checked class="custom-control-input" id="html">
-                                <label class="custom-control-label" for="html">HTML</label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="php">
-                                <label class="custom-control-label" for="php">PHP</label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" checked class="custom-control-input" id="java">
-                                <label class="custom-control-label" for="java">Java</label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="js">
-                                <label class="custom-control-label" for="js">JavaScript</label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" checked class="custom-control-input" id="c">
-                                <label class="custom-control-label" for="c">C</label>
-                            </div>
-
-                            <div class="custom-control custom-checkbox custom-control-inline">
-                                <input type="checkbox" class="custom-control-input" id="c++">
-                                <label class="custom-control-label" for="c++">C++</label>
-                            </div> --}}
-
-                            <div class="insert1"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_form_field"><span class="ti-plus"></span> Add information</button>
+                            <h5 class="text-muted mt-10 d-block"><strong>Technical:</strong></h5>
+                            <div class="form-group"> 
+                                {{-- <label for="example-text-input" class="col-form-label">Description</label>  --}}
+                                <textarea class="form-control" name="description" id="description" rows="3" required placeholder="Example: HTML, CSS, PHP, Laravel, Java, JavaScript, C++, C, Firebase, MySQL."></textarea> 
+                            </div> 
                         </div>
 
                         <div class="form-group">
 
-                            <b class="text-muted mb-3 mt-10 d-block">Language:</b>
-                            <div class="insert1"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_form_field"><span class="ti-plus"></span> Add information</button>
-                        </div>
+                            <h5 class="text-muted mt-10 d-block"><strong>Language:</strong></h5>
+                            <div class="form-group"> 
+                                {{-- <label for="example-text-input" class="col-form-label">Description</label>  --}}
+                                <textarea class="form-control" name="description" id="description" rows="3" required placeholder="Example: Fluent in French, English; Conversational Proficiency in Italian, German"></textarea> 
+                            </div>                         </div>
 
                         <hr>
 
@@ -133,8 +105,8 @@
                         <h2 >Enter your Educations</h2> <br> 
 
                         <div class="form-group">
-                            <div class="insert1"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_form_field"><span class="ti-plus"></span> Add information</button>
+                            <div ></div>
+                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg"><span class="ti-plus"></span> Add information</button>
                         </div>
 
                         <hr>
@@ -142,8 +114,8 @@
                         <h2 >Achievements</h2> <br> 
 
                         <div class="form-group">
-                            <div class="insert1"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_form_field"><span class="ti-plus"></span> Add information</button>
+                            <div ></div>
+                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg"><span class="ti-plus"></span> Add information</button>
                         </div>
 
                         <hr>
@@ -151,17 +123,76 @@
                         <h2 >Curricular Activities</h2> <br> 
 
                         <div class="form-group">
-                            <div class="insert1"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_form_field"><span class="ti-plus"></span> Add information</button>
+                            <div ></div>
+                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg "><span class="ti-plus"></span> Add information</button>
                         </div>
 
                         <hr>
 
                         <h2 >References</h2> <br> 
 
-                        <div class="form-group">
-                            <div class="insert1"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_form_field"><span class="ti-plus"></span> Add information</button>
+                        <h5 class="text-muted mt-10 d-block"><strong>Reference 1:</strong></h5>
+
+                        <div class="form-group ">
+                            <label for="example-text-input" class="col-form-label">Full Name</label>
+                            <input class="form-control" type="text" name="name" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Relationship</label>
+                                <input class="form-control" type="text" name="phone" required>
+                            </div>
+    
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Email</label>
+                                <input class="form-control" type="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Phone Number</label>
+                                <input class="form-control" type="text" vname="city" required>
+                            </div>
+    
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Position</label>
+                                <input class="form-control" type="text" name="state" required>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <h5 class="text-muted mt-10 d-block"><strong>Reference 2:</strong></h5>
+
+                        <div class="form-group ">
+                            <label for="example-text-input" class="col-form-label">Full Name</label>
+                            <input class="form-control" type="text" name="name" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Relationship</label>
+                                <input class="form-control" type="text" name="phone" required>
+                            </div>
+    
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Email</label>
+                                <input class="form-control" type="email" name="email" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Phone Number</label>
+                                <input class="form-control" type="text" vname="city" required>
+                            </div>
+    
+                            <div class="form-group col-md-6">
+                                <label for="example-text-input" class="col-form-label">Position</label>
+                                <input class="form-control" type="text" name="state" required>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn btn-rounded btn-primary btn-lg btn-block">Next</button>
