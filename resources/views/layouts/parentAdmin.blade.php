@@ -103,6 +103,20 @@
                                 </ul>
                             </li>
 
+                            {{-- file menu --}}
+                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                <p class="font-weight-normal mb-3">File Management</p>
+                            </div>
+
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true">
+                                    <i class="fa fa-file"></i> <span>File</span>
+                                    </a>
+                                <ul class="collapse">
+                                    <li><a href="#">View All</a></li>
+                                    <li><a href="#">Upload New</a></li>
+                                </ul>
+                            </li>
 
                             {{-- form menu --}}
                             <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
