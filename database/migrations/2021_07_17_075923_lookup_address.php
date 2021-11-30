@@ -13,7 +13,7 @@ class LookupAddress extends Migration
      */
     public function up()
     {
-        Schema::create('lookup_address', function (Blueprint $table) {
+        Schema::create('lookup_addresses', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('postcode');
             $table->text('address');
@@ -29,6 +29,6 @@ class LookupAddress extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('lookup_address');
+        Schema::dropIfExists('lookup_addresses');
     }
 }

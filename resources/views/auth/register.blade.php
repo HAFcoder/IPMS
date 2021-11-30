@@ -84,14 +84,6 @@
                     <i class="ti-id-badge"></i>
                     <div class="text-danger"></div>
                 </div>
-
-                <div class="form-gp">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="email">
-                    <i class="ti-email"></i>
-                    <div class="text-danger"></div>
-                </div>
-
                 <div class="form-gp">
                     <label for="telephone">Phone Number</label>
                     <input type="text" id="telephone" onkeypress="validate(event)" name="telephone"
@@ -136,6 +128,14 @@
                     <select id="city" class="custom-select " name="city" disabled required>
                     </select>
                 </div>
+
+                <div class="form-gp">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required autocomplete="email">
+                    <i class="ti-email"></i>
+                    <div class="text-danger"></div>
+                </div>
+
 
                 <div class="form-gp">
                     <label for="password">Password</label>

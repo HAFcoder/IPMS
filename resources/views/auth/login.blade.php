@@ -73,7 +73,7 @@
                 <div class="submit-btn-area">
                     <button id="form_submit" type="submit">Login <i class="ti-arrow-right"></i></button>
                 </div>
-                <div class="form-footer text-center mt-5">
+            <div class="form-footer text-center mt-5">
                     {{-- check url to redirect to register page --}}
                     @if (\Request::getRequestUri() === '/login/lecturer')
                         <p class="text-muted">Don't have an account? <a href="{{ url('register/lecturer') }}" style="color: #f3302c">Sign up</a></p>
