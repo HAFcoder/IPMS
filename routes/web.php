@@ -119,6 +119,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/student-pending', [StudentSessionController::class, 'index']);
     Route::get('coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
     Route::get('coordinator/student/session/status', [StudentSessionController::class, 'updateStatus'])->name('studentSession.update.status');
+    Route::get('coordinator/student/update-status', [StudentController::class, 'updateStatus'])->name('student.update.status');
 
     //under lecturer
     Route::get('coordinator/view-all/supervisee', [LecturerController::class, 'viewSupervisee']);
@@ -185,9 +186,9 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
 
 //company route for store - lecturer
-Route::post('/company', [companiesController::class, 'storeLecturer'])
-        ->name('company.storeLecturer')
-        ->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
+Route::post('/company', [companiesController::class, 'createCompany'])
+        ->name('company.createCompany')
+        ->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer');
 
 
 //get address route

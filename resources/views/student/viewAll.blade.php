@@ -70,17 +70,45 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th class="noExport">Action</th>
+                                    <th class="noExport"><i class="fa fa-check" aria-hidden="true"></i></th>
                                     <th>Student ID</th>
                                     <th>Student Name</th>
                                     <th>IC Number</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
                                 @foreach ($stud as $data)
                                     <tr>
+                                        <td>
+                                            
+                                            <input name="stud_id" type="checkbox" class="form-control" value="{{ $data->students->id }}" > 
+                                        </td>
+                                        <td>{{ $data->studentID }}</td>
+                                        <td>{{ $data->f_name }} {{ $data->l_name }}</td>
+                                        <td>{{ $data->no_ic }}</td>
+                                        <td>
+                                            @php
+                                                if ($data->students->status == 'noRequest') {
+                                                    $style = 'badge-secondary';
+                                                    $status = 'No registered session';
+                                                } elseif ($data->students->status == 'approve') {
+                                                    $style = 'badge-success';
+                                                    $status = 'Approved';
+                                                } elseif ($data->students->status == 'reject') {
+                                                    $style = 'badge-danger';
+                                                    $status = 'Rejected';
+                                                } else {
+                                                    $style = 'badge-warning';
+                                                    $status = 'Pending';
+                                                }
+                                            @endphp
+                                            <p class="h5"><span
+                                                    class="badge badge-pill {{ $style }}">{{ $status }}</span>
+                                            </p>
+                                        </td>
                                         <td id="student_id_{{ $data->stud_id }}">
                                             <form action="{{ route('students.destroy', $data->stud_id) }}" method="post">
                                                 @method('DELETE')
@@ -178,26 +206,6 @@
                                             </div>
 
                                         </td>
-                                        <td>{{ $data->studentID }}</td>
-                                        <td>{{ $data->f_name }} {{ $data->l_name }}</td>
-                                        <td>{{ $data->no_ic }}</td>
-                                        <td>
-                                            @php
-                                                if ($data->students->status == 'noRequest') {
-                                                    $style = 'badge-secondary';
-                                                    $status = 'No registered session';
-                                                } elseif ($data->students->status == 'approve') {
-                                                    $style = 'badge-success';
-                                                    $status = 'Approved';
-                                                } else {
-                                                    $style = 'badge-warning';
-                                                    $status = 'Pending';
-                                                }
-                                            @endphp
-                                            <p class="h5"><span
-                                                    class="badge badge-pill {{ $style }}">{{ $status }}</span>
-                                            </p>
-                                        </td>
                                     </tr>
                                 @endforeach
 
@@ -229,7 +237,40 @@
                     [10, 25, 50, "All"]
                 ],
                 buttons: {
-                    buttons: [{
+                    buttons: [
+                        {
+                            text: 'Approve',
+                            className: 'btn-success',
+                            action: function(e, dt, node, config) {
+                                //alert( 'Button Approved' );
+                                var status = "approve";
+                                updateStatus(status);
+                            }
+                        },
+                        {
+                            text: 'Reject',
+                            className: 'btn-danger',
+                            action: function(e, dt, node, config) {
+                                //alert( 'Button Rejected' );
+                                var status = "reject";
+                                updateStatus(status);
+                            }
+                        },
+                        {
+                            text: '<i class="fa fa-check-square-o"></i> Select All',
+                            action: function(e, dt, node, config) {
+                                //alert( 'Button Select All' );
+                                selectAllRow();
+                            }
+                        },
+                        {
+                            text: '<i class="fa fa-square-o"></i> Unselect All',
+                            action: function(e, dt, node, config) {
+                                //alert( 'Button Select All' );
+                                unselectAllRow();
+                            }
+                        },
+                        {
                             extend: 'pdfHtml5',
                             text: '<i class="fa fa-file-pdf-o"></i>',
                             titleAttr: 'PDF',
@@ -267,7 +308,83 @@
             });
 
         });
+
+
+        
+        function updateStatus(status) {
+
+            arr_comp = [];
+            status_comp = status;
+
+            $("input:checkbox[name=stud_id]:checked").each(function() {
+                arr_comp.push($(this).val());
+            });
+
+            console.log(arr_comp.length);
+
+            if (arr_comp.length > 0) {
+            
+                $('#btnLoad').click();
+            
+                $.ajax({
+                    url: '{{ route('student.update.status') }}',
+                    type: 'GET',
+                    data: {
+                        stud_id: arr_comp,
+                        status: status_comp,
+                    },
+                    success: function(data) {
+                    
+                        console.log("final value = " + data);
+                    
+                        $("#dataTableArea").load(window.location.href + " #dataTableArea");
+                    
+                        $('#dataTableArea').bind('DOMNodeInserted DOMNodeRemoved', function() {
+                            $('#btnCloseLoad').click();
+                        });
+                    
+                    
+                        location.reload();
+                        //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
+                    
+                    },
+                    error: function(x, e) {
+                        alert(x + e);
+                    }
+                
+                
+                });
+            
+            }
+
+        }
+
+
+        function selectAllRow() {
+            var chk_arr = document.getElementsByName("stud_id");
+            var chklength = chk_arr.length;
+
+            for (k = 0; k < chklength; k++) {
+                chk_arr[k].checked = true;
+            }
+        }
+
+        function unselectAllRow() {
+            var chk_arr = document.getElementsByName("stud_id");
+            var chklength = chk_arr.length;
+
+            for (k = 0; k < chklength; k++) {
+                chk_arr[k].checked = false;
+            }
+        }
+
+
+
+
+
+
     </script>
+    
 
     <!-- Start datatable js -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>

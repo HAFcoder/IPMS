@@ -61,7 +61,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">List of Company</h4>
-                    
+
                     <div class="data-tables datatable-primary" id="table_area">
                         <table id="dataTableCompany" class="text-center display " style="width:100%">
                             <thead class="text-capitalize">

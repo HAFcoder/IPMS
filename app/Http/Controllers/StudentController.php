@@ -180,5 +180,23 @@ class StudentController extends Controller
         return view('logbook.report');
     }
 
+    
+    public function updateStatus(Request $request)
+    {
+        $status = $request->get('status');
+        $stud_id = $request->get('stud_id');
+        
+        foreach($stud_id as $id){
+
+            $student = Student::find($id);
+            $student->status = $status;
+    
+            $student->save();
+        }
+
+        return 0;
+    }
+
+
 
 }

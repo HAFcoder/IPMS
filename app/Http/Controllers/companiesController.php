@@ -42,8 +42,9 @@ class companiesController extends Controller
         return view('company.addNew',compact('postcode','state','city','lect'));
     }
     
-    public function storeLecturer(Request $request)
+    public function createCompany(Request $request)
     {
+        
         $lect_id = Auth::guard("lecturer")->user()->id;
         $companies = new Company;
 
@@ -68,6 +69,7 @@ class companiesController extends Controller
         $companies->save();
 
         return redirect()->back()->with('success', 'Company data has been successfully added.');
+        
     }
     
     public function edit($id)

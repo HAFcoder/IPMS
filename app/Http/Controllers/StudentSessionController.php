@@ -14,7 +14,7 @@ class StudentSessionController extends Controller
     // for student register session
     public function fetchProgramme(Request $request)
     {
-        $session = Session::find($request->session_id);
+        $session['session'] = Session::find($request->session_id);
         return response()->json($session);
     }
 

@@ -40,7 +40,7 @@
                     <div class="card">
                         <div class="seo-fact sbg1">
                             <div class="p-4 d-flex justify-content-between align-items-center">
-                                <div class="seofct-icon"><i class="ti-user"></i> Student Regsitered</div>
+                                <div class="seofct-icon"><i class="ti-user"></i> Student Registered</div>
                                 <h2>153</h2>
                             </div>
                         </div>

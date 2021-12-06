@@ -40,7 +40,7 @@
                                 {{-- @if (count($sessions) > 0) --}}
                                 @foreach ($sessions as $session)
                                     {{-- @foreach ($session->programmes as $key) --}}
-                                        <option value="{{ $session->id }}">{{ $session->session_code }}</option>
+                                        <option value="{{ $session->id }}">{{ $session->session_code }} - {{ $session->description }}</option>
                                     {{-- @endforeach --}}
                                 @endforeach
                                 {{-- @endif   --}}

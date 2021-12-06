@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Register New Company</h4>
-                    <form method="post" action='{{ route("company.storeLecturer") }}'>
+                    <form method="POST" action='{{ route("company.createCompany") }}'>
                         @csrf
                         
                         @if ($errors->any())

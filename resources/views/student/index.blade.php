@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <h1 class="text-center">Dear {{Auth::user()->student_info->f_name}},</h1><br>
                         <p class="mb-3 text-center">You have no session registration. 
-                            Please regisser <a style="color: #8914fe" href="{{url('/session/register')}}">HERE</a>. <br>
+                            Please register <a style="color: #8914fe" href="{{url('/session/register')}}">HERE</a>. <br>
                             Please contact the coordinator if you have any inquiries.
                         </p>
                     </div>
