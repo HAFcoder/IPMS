@@ -67,10 +67,13 @@
                             <thead class="text-capitalize">
                                 <tr>
                                     <th class="noExport"></th>
-                                    <th>Name</th>
+                                    <th>Company Name</th>
+                                    <th>Email</th>
+                                    <th>Telephone Number</th>
                                     <th>Address</th>
                                     <th>Registered Date</th>
                                     <th>Registered By</th>
+                                    <th>Website</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -100,6 +103,8 @@
 
                                             @endif
                                         </td>
+                                        <td>{{ $comp->email }}</td>
+                                        <td>{{ $comp->phoneNumber }}</td>
                                         <td>{{ $comp->address }} , <br> {{ $comp->city }} , {{ $comp->postal_code }} , {{ $comp->state }}</td>
                                         <td>{{ date('d/m/Y', strtotime($comp->created_at)) }}</td>
                                         <td>
@@ -111,6 +116,11 @@
 
                                                 <b>Student : </b>{{ $comp->studentInfo->f_name }} {{ $comp->studentInfo->l_name }} ( {{ $comp->studentInfo->studentID }} )
 
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($comp->webURL != '')
+                                                <a href="{{ $comp->webURL }}" target="_blank" >{{ $comp->webURL }}</a>
                                             @endif
                                         </td>
                                         <td>

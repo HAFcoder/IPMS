@@ -45,13 +45,13 @@ class companiesController extends Controller
     
     public function createCompany(Request $request)
     {
-        print('<script>console.log("hollaaaa create");</script>');
+        //print('<script>console.log("hollaaaa create");</script>');
         
         $lect_id = Auth::guard("lecturer")->user()->id;
         $companies = new Company;
         
 
-        print('<script>console.log("'. $lect_id .'");</script>');
+        //print('<script>console.log("'. $lect_id .'");</script>');
 
         $request->validate([
             'name'=>'required',
@@ -60,6 +60,8 @@ class companiesController extends Controller
             'city'=>'required',
             'state'=>'required',
             'status'=>'required',
+            'email'=>'required',
+            'phoneNumber'=>'required',
         ]);
 
         $companies->name = $request->name;
@@ -69,6 +71,9 @@ class companiesController extends Controller
         $companies->state = $request->state;
         $companies->lecturer_id = $lect_id;
         $companies->status = $request->status;
+        $companies->email = $request->email;
+        $companies->phoneNumber = $request->phoneNumber;
+        $companies->webURL = $request->webURL;
 
         $companies->save();
 
@@ -114,6 +119,9 @@ class companiesController extends Controller
         $companies->city = $request->city;
         $companies->state = $request->state;
         $companies->status = $request->status;
+        $companies->email = $request->email;
+        $companies->phoneNumber = $request->phoneNumber;
+        $companies->webURL = $request->webURL;
 
         $companies->save();
 

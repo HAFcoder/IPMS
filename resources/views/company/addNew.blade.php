@@ -54,8 +54,18 @@
                         @endif
 
                         <div class="form-group">
-                            <label for="example-text-input" class="col-form-label">Name</label>
+                            <label for="example-text-input" class="col-form-label">Company Name</label>
                             <input class="form-control" type="text" name="name" placeholder="Enter company name" required value="{{ old('name') }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-form-label">Contact Number</label>
+                            <input class="form-control" type="text" name="phoneNumber" placeholder="Enter company contact number." required value="{{ old('phoneNumber') }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-form-label">Company Email</label>
+                            <input class="form-control" type="text" name="email" placeholder="Enter company email." required value="{{ old('email') }}">
                         </div>
 
                         <div class="form-group">
@@ -97,6 +107,11 @@
                                 @endforeach
 
                             </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-form-label">Website Company <i>(Optional)</i></label>
+                            <input class="form-control" type="text" name="webURL" placeholder="Enter company website." required value="{{ old('webURL') }}">
                         </div>
 
                         

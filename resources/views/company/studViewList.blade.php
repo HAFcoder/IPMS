@@ -35,11 +35,14 @@
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Company Name</th>
+                                    <th>Email</th>
+                                    <th>Telephone Number</th>
                                     <th>Address</th>
                                     <th>Postcode</th>
                                     <th>City</th>
                                     <th>State</th>
+                                    <th>Website</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,10 +55,17 @@
                             @foreach ($company as $comp)
                             <tr>
                                 <td>{{ $comp->name }}</td>
+                                <td>{{ $comp->email }}</td>
+                                <td>{{ $comp->phoneNumber }}</td>
                                 <td>{{ $comp->address }}</td>
                                 <td>{{ $comp->postal_code }}</td>
                                 <td>{{ $comp->city }}</td>
                                 <td>{{ $comp->state }}</td>
+                                <td>
+                                    @if($comp->webURL != '')
+                                        <a href="{{ $comp->webURL }}" target="_blank" >{{ $comp->webURL }}</a>
+                                    @endif
+                                </td>
                             </tr>
                             @endforeach
                             </tbody>

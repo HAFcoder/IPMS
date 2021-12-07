@@ -58,6 +58,16 @@
                             <label for="example-text-input" class="col-form-label">Name</label>
                             <input class="form-control" type="text" name="name" placeholder="Enter company name" required value="{{ $company->name }}">
                         </div>
+                        
+                        <div class="form-group">
+                            <label class="col-form-label">Contact Number</label>
+                            <input class="form-control" type="text" name="phoneNumber" placeholder="Enter company contact number." required value="{{ $company->phoneNumber }}">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="col-form-label">Company Email</label>
+                            <input class="form-control" type="text" name="email" placeholder="Enter company email." required value="{{ $company->email }}">
+                        </div>
 
                         <div class="form-group">
                             <label for="example-search-input" class="col-form-label">Address</label>
@@ -101,6 +111,11 @@
                                 @endforeach
 
                             </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-form-label">Website Company <i>(Optional)</i></label>
+                            <input class="form-control" type="text" name="webURL" placeholder="Enter company website." required value="{{ $company->webURL }}">
                         </div>
 
                         
