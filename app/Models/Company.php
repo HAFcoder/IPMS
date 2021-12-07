@@ -19,6 +19,10 @@ class Company extends Model
         return $this->hasMany(Supervisor::class);
     }
 
+    public function lectInfo(){
+        return $this->belongsTo(LecturerInfo::class, 'lect_id');
+    }
+
     public function intership()
     {
         return $this->hasMany(Internship::class);
@@ -26,7 +30,7 @@ class Company extends Model
 
     public function lecturerInfo()
     {
-        return $this->hasOne(LecturerInfo::class,'lect_id');
+        return $this->hasOne(LecturerInfo::class,'lect_id','lecturer_id');
     }
 
     public function studentInfo()

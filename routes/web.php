@@ -108,6 +108,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::put('coordinator/company/{id}', [companiesController::class, 'update'])->name('company.update');
     Route::delete('coordinator/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
     Route::get('coordinator/company/status', [companiesController::class, 'updateStatus'])->name('company.update.status');
+    Route::post('coordinator/company/add', [companiesController::class, 'createCompany'])->name('company.create');
 
     //session route
 
@@ -137,6 +138,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);
     Route::get('coordinator/feedback/logbook-report', [FormFeedbackController::class, 'logbookReport']);
 
+
 });
 
 Route::group(['middleware' => ['auth:lecturer', 'role:lecturer']], function() {
@@ -146,7 +148,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:lecturer']], function() {
     
     //company route
     Route::get('lecturer/company/list', [companiesController::class, 'list'])->name('company.list.lecturer');
-    Route::get('lecturer/company', [companiesController::class, 'create'])->name('company.create.lecturer');
+    //Route::get('lecturer/company', [companiesController::class, 'create'])->name('company.create.lecturer');
 
     //feedbacks and evaluation
     Route::get('lecturer/fedbacks-evaluation/session', [LectEvaluateController::class, 'feedbackSess']);
@@ -184,12 +186,6 @@ Route::group(['middleware' => 'auth:sadmin'], function() {
 
 //session route for all lecturer and coordinator
 Route::resource('session', SessionController::class)->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer', 'status:approve');
-
-//company route for store - lecturer
-Route::post('/company', [companiesController::class, 'createCompany'])
-        ->name('company.createCompany')
-        ->middleware('auth:lecturer','auth:admin', 'role:coordinator', 'role:lecturer');
-
 
 //get address route
 Route::get('/getpostal', [AddressController::class, 'getpostal'])->name('getpostal');

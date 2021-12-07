@@ -129,17 +129,10 @@
                                     <ul class="collapse">
                                         @if (Auth::guard('lecturer')->user()->role == 'coordinator')
                                             <li><a href="{{ route('company.list.coordinator') }}">View All</a></li>
-
-                                        @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
-                                            <li><a href="{{ route('company.list.lecturer') }}">View All</a></li>
-
-                                        @endif
-
-                                        @if (Auth::guard('lecturer')->user()->role == 'coordinator')
                                             <li><a href="{{ route('company.create.coordinator') }}">Add New</a></li>
 
                                         @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
-                                            <li><a href="{{ route('company.create.lecturer') }}">Add New</a></li>
+                                            <li><a href="{{ route('company.list.lecturer') }}">View All</a></li>
 
                                         @endif
 

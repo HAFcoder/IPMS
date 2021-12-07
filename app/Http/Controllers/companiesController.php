@@ -17,12 +17,13 @@ class companiesController extends Controller
      */
     public function list()
     {
-        $lect = $this->getLecturerInfo();
+        //$lect = $this->getLecturerInfo();
         
-        $company = Company::orderBy('status', 'ASC')->with('lecturerInfo','studentInfo')->get();
+        $company = Company::with('lecturerInfo','studentInfo')->get();
         //dump($company);
+        //dump($lect);
         
-        return view('company.viewAll',compact('company','lect'));
+        return view('company.viewAll',compact('company'));
     }
 
     /**
@@ -44,11 +45,13 @@ class companiesController extends Controller
     
     public function createCompany(Request $request)
     {
+        print('<script>console.log("hollaaaa create");</script>');
         
         $lect_id = Auth::guard("lecturer")->user()->id;
         $companies = new Company;
+        
 
-        $status = 'active';
+        print('<script>console.log("'. $lect_id .'");</script>');
 
         $request->validate([
             'name'=>'required',
@@ -56,6 +59,7 @@ class companiesController extends Controller
             'postal_code'=>'required',
             'city'=>'required',
             'state'=>'required',
+            'status'=>'required',
         ]);
 
         $companies->name = $request->name;
@@ -63,7 +67,7 @@ class companiesController extends Controller
         $companies->postal_code = $request->postal_code;
         $companies->city = $request->city;
         $companies->state = $request->state;
-        $companies->lecturer_id = $request->lect_id;
+        $companies->lecturer_id = $lect_id;
         $companies->status = $request->status;
 
         $companies->save();
