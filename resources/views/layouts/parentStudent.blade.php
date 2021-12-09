@@ -50,7 +50,7 @@
                     <nav>
                         <ul class="metismenu" id="menu">
                             <li><a href="{{ url('/') }}"><i class="ti-home"></i> <span>Dashboard</span></a></li>
-                            <li><a href="{{ url('/create-resume') }}"><i class="ti-receipt"></i> <span>Resume</span></a></li>
+                            <li><a href="{{ route('student.resume') }}"><i class="ti-receipt"></i> <span>Resume</span></a></li>
 
                             {{-- Session menu --}}
                             <li>

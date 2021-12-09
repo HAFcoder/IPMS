@@ -52,6 +52,9 @@ Route::post('/register/lecturer', [RegisterController::class, 'createLecturer'])
 
 Route::get('logout', [HomeController::class, 'logout'])->name('logout.home');
 
+//test page resume
+Route::get('/resumeview',[ResumeManagementController::class, 'resumeview'])->name('resume.view');
+
 // forgot password
 
 
@@ -62,8 +65,8 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::get('/home', [HomeController::class, 'studentHome'])->name('home');
 
     // resume
-    Route::get('/create-resume', [StudentController::class, 'resume1']);
-    Route::post('/create-resume1', [StudentController::class, 'postResume1']);
+    Route::get('/resume/create', [ResumeManagementController::class, 'resumeForm'])->name('student.resume');
+    Route::post('/resume/show', [ResumeManagementController::class, 'getDataResume'])->name('student.resume.show');
 
     //company
     Route::get('/company-all', [companiesController::class, 'companyAll']);

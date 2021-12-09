@@ -73,4 +73,47 @@ class ResumeManagementController extends Controller
         $filename = base64_decode($filename);
         return Storage::disk('s3')->response('intern-resumes/'. $filename);
     }
+
+    public function resumeview(){
+
+        return view('resume.resumeTemplate');
+
+
+    }
+    
+    //resume create - tak siap lagi
+
+    public function resumeForm()
+    {
+        //$resume = $request->session()->get('resume');
+
+        $stud = $this->getStudentInfo();
+
+        //dump($stud);
+
+        return view('resume.createResume',compact('stud'));
+    }
+
+    public function getDataResume(Request $request)
+    {
+        // $validatedData = $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required',
+        //     'phone' => 'required',
+        //     'city' => 'required',
+        //     'state' => 'required',
+        // ]);
+ 
+        //     $resume = $request->session()->get('resume');
+        //     $resume->fill($validatedData);
+        //     $request->session()->put('resume', $resume);
+
+        $resume = $request;
+        
+        //dump($resume);
+
+
+        return view('resume.showResume',compact('resume'));
+    }
+
 }

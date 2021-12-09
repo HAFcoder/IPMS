@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
+use App\Models\Student;
 
 class Controller extends BaseController
 {
@@ -23,5 +24,17 @@ class Controller extends BaseController
         return $lect;
 
     }
+    
+    public function getStudentInfo(){
+
+        $uid = Auth::guard()->user()->id;
+        $stud = Student::where([
+            'id' => $uid,
+         ])->with('student_info')->first(); 
+
+        return $stud;
+
+    }
+
 
 }

@@ -147,33 +147,6 @@ class StudentController extends Controller
     }
 
 
-    //resume create - tak siap lagi
-
-    public function resume1(Request $request)
-    {
-        $resume = $request->session()->get('resume');
-
-        return view('resume.createResume1',compact('resume'));
-    }
-
-    public function postResume1(Request $request)
-    {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-        ]);
- 
-            $resume = $request->session()->get('resume');
-            $resume->fill($validatedData);
-            $request->session()->put('resume', $resume);
-
-        return view('resume.createResume2');
-    }
-
-
     //report
     public function report()
     {
