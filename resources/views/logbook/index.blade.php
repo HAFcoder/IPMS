@@ -1,6 +1,13 @@
 @extends('layouts.parentStudent')
 {{-- register student session in studnet page --}}
 
+@section('head')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+@endsection
+
 @section('meta')
     <meta name="csrf-token" content="content">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -280,6 +287,18 @@
     {{-- ain buat --}}
     <div class="row">
 
+        <div class="ml-5 mt-3">
+            <div class="row">
+                <h5>Generate new week</h5>
+            </div>
+            <div class="row mt-2">
+                <form action="POST">
+                    @csrf 
+                    <input class="form-control" type="text" id="date_monday" placeholder="Select date for new week"/>
+                </form>
+            </div>   
+        </div>
+
         <div class="col-lg-8 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
@@ -312,7 +331,31 @@
 @endsection
 
 @section('scripts')
-
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.4/themes/redmond/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+    <script> 
+        $(document).ready(function() {
+            $('#date_monday').datepicker({
+                beforeShowDay: enableMonday,
+                dateFormat: 'dd/mm/yy'
+            });
+    
+            function enableMonday(date){
+                var day = date.getDay(); 
+                return [day==1]
+            };
+
+            // function autoGenerateWeek(){
+            //     var date2 = $('#date_monday').datepicker({beforeShowDay: enableMonday,dateFormat: 'dd/mm/yy'});
+            //     for (let i = 0; i < 5; i++) { 
+            //         console.log(date2.getDate()+(i+1))
+            //     }
+            // }
+            // autoGenerateWeek();
+        }); 
+    </script>
+    
 @endsection
