@@ -21,14 +21,15 @@ class CreateSuperAdmin extends Seeder
         $email = 'admin@ipms.com';
         $password = 'password';
 
-        DB::table('sadmins')->insert([
-            [
+        $superadmin = 
+        [
             'name' => $name,
             'email' => $email,
             'password' => Hash::make($password),
             'created_at' => now(),
-            ],
-        ]);
+        ];
+
+        Sadmin::create($superadmin);
 
     }
 }

@@ -44,6 +44,7 @@
                                         <th>Session ID</th>
                                         <th>Programmme</th>
                                         <th>Status</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -63,7 +64,7 @@
                                             @php
                                                 if ($sess->status == 'rejected') {
                                                     $style = 'badge-danger';
-                                                    $status = 'No registered session';
+                                                    $status = 'Rejected';
                                                 } elseif ($sess->status == 'approve') {
                                                     $style = 'badge-success';
                                                     $status = 'Approved';
@@ -75,6 +76,11 @@
                                             <p class="h5"><span
                                                     class="badge badge-pill {{ $style }}">{{ $status }}</span>
                                             </p>
+                                        </td>
+                                        <td>
+                                            @if($sess->status == 'approve')
+                                            <a href="{{url('/internfile')}}" class="btn btn-primary btn-sm">View Document</a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
