@@ -20,7 +20,7 @@
         <div class="card col-sm-12 mt-5">
             @if (count($files) > 0)
                 @foreach ($files as $file)
-                    <a href="{{ url($file['downloadUrl']) }}">{{ $file['filename'] }}</a><br>
+                    <a target="_blank" href="{{ url($file['downloadUrl']) }}">{{ $file['filename'] }}</a><br>
                 @endforeach
             @else
                 <p>Nothing found</p>

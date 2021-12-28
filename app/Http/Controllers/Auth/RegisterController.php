@@ -106,10 +106,12 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
+        $status = 'noRequest';
+
         $stud = new Student([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'status' => 'noRequest',
+            'status' => $status,
         ]);
         $stud->save();
 
