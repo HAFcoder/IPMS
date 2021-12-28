@@ -200,6 +200,7 @@
                             @else
 
                                 <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li>
+                                <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-id-badge"></i><span>View Student</span></a></li>
 
                             @endif
 
