@@ -119,6 +119,8 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     // student view all
     Route::resource('coordinator/students', StudentController::class);
     Route::post('/edit-student/api/fetch-cities', [RegisterController::class, 'fetchCity']);
+    Route::get('coordinator/students/logbook', [StudentController::class, 'viewlogbook']);
+
     // student pending
     Route::get('coordinator/student-pending', [StudentSessionController::class, 'index']);
     Route::get('coordinator/student-pending/{id}', [StudentSessionController::class, 'approve'])->name('student.register.approve');
@@ -134,7 +136,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/company/decline-letter', [companiesController::class, 'reject']);
     Route::get('coordinator/company/evaluation-company', [companiesController::class, 'companySV']);
 
-    //under studnet company 
+    //under student company 
     Route::get('coordinator/student-company/status-all', [companiesController::class, 'statusAll']);
 
     //feedback menu

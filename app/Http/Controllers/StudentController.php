@@ -153,6 +153,12 @@ class StudentController extends Controller
         return view('logbook.report');
     }
 
+    //logbook
+    public function viewlogbook()
+    {
+        return view('logbook.coordinatorview');
+    }
+
     
     public function updateStatus(Request $request)
     {

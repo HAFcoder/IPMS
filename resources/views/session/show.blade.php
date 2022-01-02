@@ -149,6 +149,7 @@
                                             <th>Programme</th>
                                             <th>Register Date</th>
                                             <th>Status</th>
+                                            <th>Other</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -156,8 +157,6 @@
                                         @foreach($student_session as $stud_ss)
 
                                         <tr>
-                                            
-                                
                                             <td>
                                                 @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                                 <div class="form-check form-group">
@@ -185,6 +184,17 @@
 
                                                 @endif
 
+                                            </td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                      Action
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                      <a class="dropdown-item" href="https://www.google.com" target="_blank">Logbook</a>
+                                                      <a class="dropdown-item" href="https://www.google.com" target="_blank">Resume</a>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         

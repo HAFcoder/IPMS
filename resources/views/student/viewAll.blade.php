@@ -191,6 +191,13 @@
                                                                             <span class="profile-page-name">State:</span>
                                                                             <input class="form-control input-rounded profile-page-amount" type="text" 
                                                                             placeholder="{{ $data->state }}" disabled>
+                                                                        </li class="profile-page-content">
+                                                                            
+                                                                        <li class="profile-page-content">
+                                                                            <span class="profile-page-name">Student's Logbook:</span>
+                                                                            <a href="{{ url('/coordinator/students/logbook') }}" target="_blank"  
+                                                                                class="btn btn-secondary btn-xs"><span class="ti-book"></span>
+                                                                            </a>
                                                                         </li>
 
                                                                     </ul>
