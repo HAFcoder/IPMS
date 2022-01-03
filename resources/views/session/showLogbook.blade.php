@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/buttons.dataTables.min.css') }}">
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="{{ asset('assets/dw/jquery-3.5.1.js') }}"></script>
 <script src="{{ asset('assets/dw/jquery-1.10.25.dataTables.min.js') }}"></script>
 
 <style>
@@ -291,7 +291,7 @@
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('assets/dw/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/dw/responsive-2.2.3.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('assets/dw/jszip.min.js') }}"></script>

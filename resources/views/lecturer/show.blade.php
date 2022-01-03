@@ -6,14 +6,11 @@
     <!-- Start datatable css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/jquery.dataTables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css">
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/responsive-2.2.3.bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/responsive.jqueryui.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/buttons.dataTables.min.css') }}">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="{{ asset('assets/dw/jquery-3.5.1.js') }}"></script>
     <script src="{{ asset('assets/dw/jquery-1.10.25.dataTables.min.js') }}"></script>
 
 
@@ -34,8 +31,10 @@
     </style>
 
     {{-- toggle button --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+    <link rel="stylesheet" href="{{ asset('assets/dw/switchery.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/dw/switchery.min.js') }}">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css"> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script> --}}
 
 @endsection
 
@@ -156,9 +155,6 @@
         </div>
 
     </div>
-
-
-
 
 @endsection
 
@@ -366,7 +362,7 @@
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('assets/dw/dataTables.responsive.min.js') }}"></script>
     <script src="{{ asset('assets/dw/responsive-2.2.3.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('assets/dw/jszip.min.js') }}"></script>

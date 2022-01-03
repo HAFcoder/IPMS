@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/jquery.dataTables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/buttons.dataTables.min.css') }}">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="{{ asset('assets/dw/jquery-3.5.1.js') }}"></script>
     <script src="{{ asset('assets/dw/jquery-1.10.25.dataTables.min.js') }}"></script>
     <style>
         th{

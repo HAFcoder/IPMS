@@ -137,6 +137,6 @@
 @section('scripts')
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
-    <script <script src="{{ asset('assets/dw/jquery.dataTables.min.js') }}"></script>></script>
+    <script src="{{ asset('assets/dw/jquery.dataTables.min.js') }}"></script>>
     <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
 @endsection

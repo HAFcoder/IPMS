@@ -321,7 +321,6 @@
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('assets/dw/responsive-2.2.3.bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('assets/dw/jszip.min.js') }}"></script>
