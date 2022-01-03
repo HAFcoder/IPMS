@@ -2,7 +2,7 @@
 
 @section('head')
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('assets/dw/select2.min.css') }}">
 
 @endsection
 
@@ -28,7 +28,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Register New Company</h4>
-                    <form method="POST" action='{{ route("company.create") }}'>
+                    <form method="POST" action="{{ url('/coordinator/company/add') }}">
                         @csrf
                         
                         @if ($errors->any())
@@ -139,8 +139,7 @@
 
 @section('scripts')
 
-
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="{{ asset('assets/dw/select2.min.js') }}"></script>
 
     <script>
 

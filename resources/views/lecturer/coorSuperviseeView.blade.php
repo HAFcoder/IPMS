@@ -2,8 +2,8 @@
 
 @section('head')
     <!-- Start datatable css -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/jquery.dataTables.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/dataTables.bootstrap4.min.css') }}">
 @endsection
 
 @section('breadcrumbs')
@@ -115,7 +115,7 @@
 
 @section('scripts')
     <!-- Start datatable js -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/dw/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
 @endsection
