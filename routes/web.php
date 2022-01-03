@@ -217,8 +217,8 @@ Route::get('/logbook', [LogbookController::class, 'showLogbook']);
 
 
 //Mailing
-Route::get('internship/mail/send/{encryptedstudentid}', [MailingController::class, 'declineMail']);
-Route::get('logbook/mail/send/', [MailingController::class, 'logbookApprovalMail']);
+Route::get('/internship/mail/send/{encryptedstudentid}', [MailingController::class, 'declineMail']);
+Route::get('/logbook/mail/send', [MailingController::class, 'logbookApprovalMail']);
 // Route::get('evaluation/mail/send/{encryptedstudentid}', [MailingController::class, 'studentEvaluationMail']);
 
 //Test Mailing

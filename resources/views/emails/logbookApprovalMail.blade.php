@@ -2,10 +2,10 @@
 # {{ $details['title'] }}
 ## Week {{ $details['week'] }}
 
-Please click on the button below to approve {{ $details['name'] }} logbook weekly updates at {{ $details['company'] }}
+Please click on the button below to look at {{ $details['name'] }} logbook weekly updates at {{ $details['company'] }}
 
 @component('mail::button', ['url' => $details['url']])
-Click Here to Approve
+Go to student's logbook
 @endcomponent
 
 Thanks,<br>

@@ -349,7 +349,7 @@
                                                 
                                                 <div class="form-group-inline ">
                                                     <input class="btn btn-primary btn-sm pull-right mb-3" type="submit" value="Save" id="submit-{{ $i }}" />
-                                                    <button class="btn btn-secondary btn-sm pull-right mb-3 mr-3">Request for Validation</button>
+                                                    <a href="{{ url("/logbook/mail/send") }}" class="btn btn-secondary btn-sm pull-right mb-3 mr-3">Request for Validation</a>
                                                 </div>                                              
                                             </form>
                                         </div>

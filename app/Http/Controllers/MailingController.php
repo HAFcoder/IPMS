@@ -26,14 +26,15 @@ class MailingController extends Controller
         return "Email sent successfully";
     }
 
-    public function logbookApprovalMail($encryptedstudentid)
+    public function logbookApprovalMail()
     {
         $myEmail = 'novatechdevelopers@gmail.com';
    
         $details = [
             'title' => 'Internship weekly logbook Update',
+            'week' => 1,
             'url' => 'http://www.kuptm.edu.my/',
-            'name' => 'Hamzah Botak',
+            'name' => 'Muhammad Hamzah',
             'company' => 'Nova Tech'
         ];
   
@@ -67,7 +68,7 @@ class MailingController extends Controller
         $details = [
             'title' => 'Internship Declination',
             'url' => 'http://www.dummyipms.com/declination/' . $encryptedstudentid,
-            'name' => 'Hamzah Botak',
+            'name' => 'Muhammad Hamzah',
             'company' => 'Nova Tech'
         ];
   
