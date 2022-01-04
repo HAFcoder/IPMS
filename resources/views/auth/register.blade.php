@@ -7,9 +7,9 @@
 
 @section('head')
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/inputmask/inputmask.extensions.min.js"></script>
+    <script type="text/javascript" src="{{ asset('assets/dw/jquery-1.9.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/dw/inputmask.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/dw/inputmask.extensions.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
             var inputmask = new Inputmask("######-##-####");
