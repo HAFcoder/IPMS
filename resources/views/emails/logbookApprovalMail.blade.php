@@ -4,10 +4,14 @@
 
 Please click on the button below to look at {{ $details['name'] }} logbook weekly updates at {{ $details['company'] }}
 
-@component('mail::button', ['url' => $details['url']])
+@component('mail::button', ['url' => $details['logbookurl']])
 Go to student's logbook
 @endcomponent
 
 Thanks,<br>
-KUPTM Internship Placement Management
+KUPTM Internship Placement Management<br>
+@component('mail::button', ['url' => $details['url']])
+Kuptm Official Site
+@endcomponent
+
 @endcomponent

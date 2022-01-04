@@ -58,6 +58,11 @@ class LogbookController extends Controller
         return view('logbook.index', compact('logbooks'));
     }
 
+    public function showLogbookSupervisor(){
+        
+        return view('logbook.supervisorview',['name' => 'Hamzah']);
+    }
+
     public function updateLogbook(Request $request, $intern_id, $week)
     {
 

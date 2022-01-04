@@ -210,6 +210,7 @@ Route::get('/resume/download/{filename}',[ResumeManagementController::class, 'do
 
 //Logbook
 Route::get('/logbook', [LogbookController::class, 'showLogbook']);
+Route::get('/logbook/supervisor/view', [LogbookController::class, 'showLogbookSupervisor']);
 // Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
 // Route::post('/logbooks', [LogbookController::class, 'testcreateLogbook']);
 // Route::put('/logbook/week/{week_number}', [LogbookController::class, 'testupdateLogbook']);

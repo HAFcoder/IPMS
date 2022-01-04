@@ -34,6 +34,7 @@ class MailingController extends Controller
             'title' => 'Internship weekly logbook Update',
             'week' => 1,
             'url' => 'http://www.kuptm.edu.my/',
+            'logbookurl' => "http://localhost:8000/logbook/supervisor/view",
             'name' => 'Muhammad Hamzah',
             'company' => 'Nova Tech'
         ];
