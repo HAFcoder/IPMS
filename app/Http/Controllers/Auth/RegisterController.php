@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RegisterController extends Controller
 {
@@ -108,19 +109,19 @@ class RegisterController extends Controller
     {
         $status = 'noRequest';
 
-        $stud = new Student([
+        $user = new Student([
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'status' => $status,
         ]);
-        $stud->save();
+        $user->save();
 
         $address = $data['add1'] . ', ' . $data['add2'];
 
         $info = new StudentInfo([
             'f_name' => $data['f_name'],
             'l_name' => $data['l_name'],
-            'stud_id' => $stud->id,
+            'stud_id' => $user->id,
             'no_ic' => $data['no_ic'],
             'studentID' => $data['studentID'],
             'telephone' => $data['telephone'],
@@ -132,8 +133,11 @@ class RegisterController extends Controller
         ]);
         $info->save();
 
-        return redirect()->intended('login')->with(Auth::login($stud));
-        
+        // Auth::login($user);
+        // return redirect()->intended('login')->with(Auth::login($user));
+        // return redirect()->intended('login')->with($user);
+        Alert::success('Account Registered!', 'Your account successfully created');
+        return $user;
     }
 
     //create lecturer
@@ -166,7 +170,7 @@ class RegisterController extends Controller
             'position' => $request->position,
         ]);
         $info->save();
-
+        Alert::success('Account Registered!', 'Your account successfully created');
         return redirect()->intended('login/lecturer');
     }
 }
