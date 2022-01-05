@@ -221,6 +221,13 @@ class companiesController extends Controller
         return view('company.studentDeclineForm',compact('internship'));
     }
 
+    public function studentReject($id){
+        //dump($id);
+        $internship = Internship::find($id)->with('company')->first();
+        //dump($internship);
+        return view('company.studentRejectForm',compact('internship'));
+    }
+
     public function studentInternship_update(Request $request, $id){
 
         $internship = Internship::find($id);

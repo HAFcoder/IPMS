@@ -67,9 +67,8 @@
                         
                         <h4 class="header-title text-muted">Internship Confirmation</h4>
 
-                        <input hidden name='status' value='declined'>
-
-                        <h4>Are you sure this company declined your internship request?</h4>
+                        <input hidden name='status' value='rejected'>
+                        <h4>Are you sure want to rejected this company internship?</h4>
                         <button type="submit" class="btn btn-success mt-4 pr-4 pl-4">Confirm</button>
                         <a href="{{ url('/apply-list') }}" class="btn btn-danger mt-4 pr-4 pl-4">Cancel</a>
 

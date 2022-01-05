@@ -139,6 +139,7 @@
                                         @else
                                             <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-success">Accepted</a>
                                             <a href="{{ route('company.student-decline',$intern->id) }}" class="btn btn-sm btn-danger">Declined</a>
+                                            <a href="{{ route('company.student-reject',$intern->id) }}" class="btn btn-sm btn-danger">Rejected</a>
                                         @endif
                                     </td>
                                 </tr>

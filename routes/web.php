@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::post('/apply-company', [companiesController::class, 'addStudentCompany'])->name('apply.student_company');
     Route::get('company/apply/{id}/accept', [companiesController::class, 'studentAccept'])->name('company.student-accept');
     Route::get('company/apply/{id}/decline', [companiesController::class, 'studentDecline'])->name('company.student-decline');
+    Route::get('company/apply/{id}/reject', [companiesController::class, 'studentReject'])->name('company.student-reject');
     Route::put('company/apply/{id}/update', [companiesController::class, 'studentInternship_update'])->name('company.internship.update');
 
     //report
