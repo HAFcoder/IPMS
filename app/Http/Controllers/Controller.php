@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
 use App\Models\Student;
+use App\Models\StudentSession;
 
 class Controller extends BaseController
 {
@@ -33,6 +34,15 @@ class Controller extends BaseController
          ])->with('student_info')->first(); 
 
         return $stud;
+
+    }
+
+    public function getStudentSession(){
+
+        $uid = Auth::guard()->user()->id;
+        $studsession = StudentSession::where('student_id',$uid)->latest('created_at')->first();
+
+        return $studsession;
 
     }
 

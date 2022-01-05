@@ -26,90 +26,75 @@
 
 @endsection
 
+ <!-- access model class inside blade -->
+@inject('programme', 'App\Models\Programme')
+
 @section('content')
 
     <div class="row">
 
-        <div class="col-8 mt-5 mx-auto">
+        <div class="col-12 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">List of Student with Decline Status</h4>
+                    <h4 class="header-title">List of Student Internship Apply Status</h4>
                     <div class="data-tables datatable-primary">
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th>Session Code</th>
                                     <th>Student ID</th>
                                     <th>Name</th>
                                     <th>Programme</th>
                                     <th>Company</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>ABS Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-danger">Rejected</span></td>
-                                </tr>
+                                @if($internship->isEmpty())
+                                   <tr>
+                                       <td colspan="10" class="bg-light">There is no data.</td>
+                                   </tr>
+                               @endif
 
+                               @foreach ($internship as $intern)
                                 <tr>
-                                    <td>65675765675</td>
-                                    <td>Ali</td>
-                                    <td>BK101 -  Diploma of Accounting</td>
-                                    <td>Oil and Gas Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-secondary">Pending</span></td>
+                                    <td>{{ $intern->session->session_code }}</td>
+                                    <td>{{ $intern->studentInfo->studentID }}</td>
+                                    <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
+                                    <td>
+                                        @php
+                                            $prog = $programme->find($intern->studSession->programme_id)->first();
+                                        @endphp
+                                        {{ $prog->code }} - {{ $prog->name }}  
+                                    </td>
+                                    <td>{{ $intern->company->name }}</td>
+                                    <td>
+                                        @php
+                                            if ($intern->status == 'pending') {
+                                                $style = 'badge-secondary';
+                                                $status = 'Pending';
+                                            } elseif ($intern->status == 'accepted') {
+                                                $style = 'badge-success';
+                                                $status = 'Accepted';
+                                            } elseif ($intern->status == 'declined') {
+                                                $style = 'badge-danger';
+                                                $status = 'Declined';
+                                            }
+                                        @endphp
+                                        <span style="font-size:15px" class="badge badge-pill {{ $style }}">{{ $status }}</span>
+                                    </td>
+                                    <td>
+                                        @if($intern->status == 'accepted')
+                                            <button class="btn btn-sm btn-primary">See Details</button>
+                                        @elseif($intern->status == 'declined')
+                                            <button class="btn btn-sm btn-warning">Send Declined Letter</button>
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>One Learning Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-success">Accepted</span></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Ain</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>HJGYTG Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-success">Accepted</span></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Sarah</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>DIY Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-success">Accepted</span></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Amiera</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>MAYBANK Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-success">Accepted</span></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>CIMB Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-danger">Rejected</span></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>TESCO Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-danger">Rejected</span></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Farhan</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>RHB Sdn Bhd</td>
-                                    <td><span style="font-size:15px" class="badge badge-pill badge-danger">Rejected</span></td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

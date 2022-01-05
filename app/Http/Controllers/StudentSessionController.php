@@ -40,7 +40,7 @@ class StudentSessionController extends Controller
         Alert::success('Success!', 'Your session registration has been successful.');
 
         // student register sesison in studnet page
-        return viewStatus();
+        return $this->viewStatus();
     }
 
     public function index()

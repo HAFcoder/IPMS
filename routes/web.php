@@ -71,6 +71,10 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     //company
     Route::get('/company-all', [companiesController::class, 'companyAll']);
     Route::get('/apply-list', [companiesController::class, 'applyList']);
+    Route::post('/apply-company', [companiesController::class, 'addStudentCompany'])->name('apply.student_company');
+    Route::get('company/apply/{id}/accept', [companiesController::class, 'studentAccept'])->name('company.student-accept');
+    Route::get('company/apply/{id}/decline', [companiesController::class, 'studentDecline'])->name('company.student-decline');
+    Route::put('company/apply/{id}/update', [companiesController::class, 'studentInternship_update'])->name('company.internship.update');
 
     //report
     Route::get('/report', [StudentController::class, 'report']);
@@ -89,6 +93,8 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::post('student/fetch-programmes', [StudentSessionController::class, 'fetchProgramme']);
     Route::get('/session/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
     Route::get('/session/view-status', [StudentSessionController::class, 'viewStatus']);
+
+
 });
 
 //lecturer group route
@@ -119,7 +125,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     // student view all
     Route::resource('coordinator/students', StudentController::class);
     Route::post('/edit-student/api/fetch-cities', [RegisterController::class, 'fetchCity']);
-    Route::get('coordinator/students/logbook', [StudentController::class, 'viewlogbook']);
+    Route::get('coordinator/student/view-logbook', [StudentController::class, 'studentLogbook'])->name('coordinator.view.logbook');
 
     // student pending
     Route::get('coordinator/student-pending', [StudentSessionController::class, 'index']);

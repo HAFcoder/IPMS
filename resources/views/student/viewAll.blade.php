@@ -103,8 +103,8 @@
                                                     $status = 'Pending';
                                                 }
                                             @endphp
-                                            <p class="h5"><span
-                                                    class="badge badge-pill {{ $style }}">{{ $status }}</span>
+                                            <p class="h5">
+                                                <span class="badge badge-pill {{ $style }}">{{ $status }}</span>
                                             </p>
                                         </td>
                                         <td id="student_id_{{ $data->stud_id }}">
@@ -193,8 +193,8 @@
                                                                             
                                                                         <li class="profile-page-content">
                                                                             <span class="profile-page-name">Student's Logbook:</span>
-                                                                            <a href="{{ url('/coordinator/students/logbook') }}" target="_blank"  
-                                                                                class="btn btn-secondary btn-xs"><span class="ti-book"></span>
+                                                                            <a href="{{ route('coordinator.view.logbook') }}" target="_blank" class="btn btn-secondary btn-xs">
+                                                                                <span class="ti-book"></span>
                                                                             </a>
                                                                         </li>
 

@@ -12,7 +12,12 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Company</h4>
             <ul class="breadcrumbs pull-left">
-                <li><a href="{{ url('/admin') }}">Home</a></li>
+
+                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                @else
+                    <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                @endif
                 <li><span>Add New Company</span></li>
             </ul>
         </div>
@@ -111,7 +116,7 @@
                         
                         <div class="form-group">
                             <label class="col-form-label">Website Company <i>(Optional)</i></label>
-                            <input class="form-control" type="text" name="webURL" placeholder="Enter company website." required value="{{ old('webURL') }}">
+                            <input class="form-control" type="text" name="webURL" placeholder="Enter company website." value="{{ old('webURL') }}">
                         </div>
 
                         

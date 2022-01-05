@@ -28,100 +28,65 @@
     <div class="row">
 
         {{-- application form --}}
-        <div class="col-lg-12 mt-5">
-                    <button type="button" class="btn btn-primary btn-flat btn-lg float-right" data-toggle="modal" data-target=".bd-example-modal-lg"><span class="ti-plus"></span> Add Application</button>
-                    <div class="modal fade bd-example-modal-lg">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Add Company Application</h5>
-                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-                                </div>
-
-                                <form method="put" action="{{ route('register.session') }}">
-                                    @csrf
-
-                                    <div class="modal-body">
-
-                                            <div class="card">
-                                                <div class="card-body">
-
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="col-form-label">Company Name</label>
-                                                        <input class="form-control" type="text" id="name">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="col-form-label">Address</label>
-                                                        <input class="form-control" type="text" id="address">
-                                                    </div>
-
-                                                    <div class="row">
-
-                                                        <div class="form-group col-md-4">
-                                                            <label for="example-text-input" class="col-form-label">Postcode</label>
-                                                            <input class="form-control" type="text" id="postcode">
-                                                        </div>
-
-                                                        <div class="form-group col-md-4">
-                                                            <label for="example-text-input" class="col-form-label">City</label>
-                                                            <input class="form-control" type="text" id="city">
-                                                        </div>
-
-                                                        <div class="form-group col-md-4">
-                                                            <label for="example-text-input" class="col-form-label">State</label>
-                                                            <input class="form-control" type="text" id="state">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="row">
-
-                                                        <div class="form-group col-md-6">
-                                                            <label for="example-email-input" class="col-form-label">Company Email</label>
-                                                            <input class="form-control" type="email" id="email">
-                                                        </div>
-
-                                                        <div class="form-group col-md-6">
-                                                            <label for="example-tel-input" class="col-form-label">Telephone</label>
-                                                            <input class="form-control" type="tel" id="phone">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label for="example-date-input" class="col-form-label">Apply Date</label>
-                                                        <input class="form-control" type="date" id="apply">
-                                                    </div>
-                                               
-                                                    <div class="form-group">
-                                                        <label class="col-form-label">Status</label>
-                                                        <select class="custom-select">
-                                                            <option selected="selected">Open this select menu</option>
-                                                            <option value="In Process">In Process</option>
-                                                            <option value="Accepted">Accepted</option>
-                                                            <option value="Rejected">Rejected</option>
-                                                        </select>
-                                                    </div>
-                                            
-                                                </div>
-                                            </div>
-                                </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
-                                    </div>
-
-                                </form>
-                            </div>
+        <div class="col-lg-12">
+            <div class="modal fade bd-example-modal-lg">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add Company Application</h5>
+                            <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
                         </div>
+
+                        <form method="post" action="{{ route('apply.student_company') }}">
+                            @csrf
+
+                            <div class="modal-body">
+
+                                <div class="card">
+                                    <div class="card-body">
+
+                                        <input name="session_id" id="session_id" value="{{ $studentsession->session_id }}" class="d-none">
+                                   
+                                        <div class="form-group">
+                                            <label class="col-form-label">Company :</label>
+                                            
+                                            <select id="company" class="form-control" name="company">
+                                                <option selected="selected">Select One</option>
+                                                @foreach($company as $key => $comp)
+                                                    <option value="{{ $comp->id }}">{{ $comp->name }}</option>
+                                                @endforeach
+                                            
+                                            </select>
+                                        </div>
+                                
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-success">Add Application</button>
+                            </div>
+
+                        </form>
                     </div>
+                </div>
+            </div>
         </div>
 
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Application List</h4>
+                    <hr/>
+
+                    @if($studentsession == null)
+                        <h5 class="text-danger">Note : Please register your session first.</h5>
+                    @elseif($studentsession->status == 'pending')
+                        <h5 class="text-danger">Note : Please wait approval of your session first.</h5>
+                    @else
+                        <button type="button" class="btn btn-primary btn-flat btn-lg float-left" data-toggle="modal" data-target=".bd-example-modal-lg"><span class="ti-plus"></span> Add Application</button>
+                    @endif
+                    <br/>
                     <div class="data-tables datatable-primary">
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
@@ -132,24 +97,52 @@
                                     <th>Email</th>
                                     <th>Apply Date</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @if($company->isEmpty())
+                                 @if($internship->isEmpty())
                                     <tr>
                                         <td colspan="10" class="bg-light">There is no data.</td>
                                     </tr>
-                                @endif --}}
+                                @endif
 
-                            {{-- @foreach ($company as $comp)
-                            <tr>
-                                <td>{{ $comp->name }}</td>
-                                <td>{{ $comp->address }}</td>
-                                <td>{{ $comp->postal_code }}</td>
-                                <td>{{ $comp->city }}</td>
-                                <td>{{ $comp->state }}</td>
-                            </tr>
-                            @endforeach --}}
+                                @foreach ($internship as $intern)
+                                <tr>
+                                    <td>{{ $intern->company->name }}</td>
+                                    <td>{{ $intern->company->address }} ,{{ $intern->company->postal_code }}, {{ $intern->company->city }}, {{ $intern->company->state }} </td>
+                                    <td>{{ $intern->company->phone }}</td>
+                                    <td>{{ $intern->company->email }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($intern->created_at)) }}</td>
+                                    <td>
+                                        @php
+                                            if ($intern->status == 'pending') {
+                                                $style = 'badge-secondary';
+                                                $status = 'Pending';
+                                            } elseif ($intern->status == 'accepted') {
+                                                $style = 'badge-success';
+                                                $status = 'Accepted';
+                                            } elseif ($intern->status == 'declined') {
+                                                $style = 'badge-danger';
+                                                $status = 'Declined';
+                                            }
+                                        @endphp
+                                        <p class="h5">
+                                            <span class="badge badge-pill {{ $style }}">{{ $status }}</span>
+                                        </p>
+                                    </td>
+                                    <td>
+                                        @if($intern->status == 'accepted')
+                                            <button class="btn btn-sm btn-primary">See Details</button>
+                                        @elseif($intern->status == 'declined')
+                                            -
+                                        @else
+                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-success">Accepted</a>
+                                            <a href="{{ route('company.student-decline',$intern->id) }}" class="btn btn-sm btn-danger">Declined</a>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -163,10 +156,17 @@
 
 @section('scripts')
 
-
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/dw/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
+
+
+    <script>
+
+
+
+    </script>
+
     
 @endsection

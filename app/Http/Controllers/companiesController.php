@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\LookupAddress;
+use App\Models\Internship;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class companiesController extends Controller
 {
@@ -167,7 +169,82 @@ class companiesController extends Controller
 
     public function applyList()
     {
-        return view('company.applyList');
+        $studentsession = $this->getStudentSession();
+        //dump($studentsession);
+        //dump(now()->addDay());
+        if($studentsession != null){
+
+            $internship = Internship::where('session_id', $studentsession->session_id)->with('company')->get();
+            //dump($internship);
+        }
+
+
+        $company = Company::where('status', 'approved')->get();
+
+        return view('company.applyList',compact('studentsession','company','internship'));
+    }
+
+    public function addStudentCompany(Request $request){
+
+        //dump("hello");
+
+        $studentid = Auth::user()->id;
+        $companyid = $request->company;
+        $sessionid = $request->session_id;
+        $status = 'pending';
+
+        $internship = new Internship;
+
+        $internship->student_id = $studentid;
+        $internship->company_id = $companyid;
+        $internship->session_id = $sessionid;
+        $internship->status = $status;
+
+        $internship->save();
+        Alert::success('Success!', 'Your company application has been added.');
+
+        return $this->applyList();
+    }
+
+    public function studentAccept($id){
+        //dump($id);
+        $internship = Internship::find($id)->with('company')->first();
+        //dump($internship);
+        return view('company.studentAcceptForm',compact('internship'));
+    }
+
+    public function studentDecline($id){
+        //dump($id);
+        $internship = Internship::find($id)->with('company')->first();
+        //dump($internship);
+        return view('company.studentDeclineForm',compact('internship'));
+    }
+
+    public function studentInternship_update(Request $request, $id){
+
+        $internship = Internship::find($id);
+
+        $status = $request->get('status');
+
+        if($status == 'accepted'){ //if status is accepted, get duration,start date, end date data and update
+
+            $duration = $request->get('duration');
+            $start_date = $request->get('start_date');
+            $end_date = $request->get('end_date');
+    
+            $internship->duration = $duration;
+            $internship->start_date = $start_date;
+            $internship->end_date = $end_date;
+        }
+
+        $internship->updated_at = now();
+        $internship->status = $status;
+
+        $internship->save();
+        
+        Alert::success('Success!', 'Your internship details has been updated.');
+
+        return $this->applyList();
     }
 
     //coordinator menu
@@ -190,7 +267,9 @@ class companiesController extends Controller
     //studnet-company
     public function statusAll()
     {
-        return view('company.coorStudentStatusAll');
+        $internship = Internship::with('company','session','studentInfo')->get();
+        //dump($internship);
+        return view('company.coorStudentStatusAll',compact('internship'));
     }
 
 }

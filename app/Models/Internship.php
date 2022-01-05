@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
+use App\Models\Session;
 use App\Models\StudentSession;
 use App\Models\Supervisor;
 use App\Models\Company;
@@ -25,19 +26,34 @@ class Internship extends Model
         return $this->belongsTo(Lecturer::class, 'lecturer_id');
     }
 
+    public function company()
+    {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
+
     public function supervisor()
     {
         return $this->belongsTo(Supervisor::class, 'supervisor_id');
     }
 
+    public function session()
+    {
+        return $this->belongsTo(Session::class, 'session_id');
+    }
+
     public function studSession()
     {
-        return $this->belongsTo(StudentSession::class, 'session_id');
+        return $this->hasOne(StudentSession::class, 'session_id' ,'session_id');
     }
 
     public function student()
     {
-        return $this->belongsTo(Student::class, 'student_id');
+        return $this->hasOne(Student::class, 'student_id');
+    }
+
+    public function studentInfo()
+    {
+        return $this->hasOne(StudentInfo::class, 'stud_id' ,'student_id');
     }
 
     public function lectEvaluate()

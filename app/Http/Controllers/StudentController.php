@@ -23,6 +23,7 @@ class StudentController extends Controller
      */
     public function index()
     {
+        //dump("in");
         // view student all
         $stud = StudentInfo::all();
         return view('student.viewAll', compact('stud'));
@@ -57,6 +58,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
+        //dump("sh");
         return view('students.show', compact('student'));
     }
 
@@ -68,6 +70,7 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
+        //dump("ed");
         $stud = Student::find($id);
         $studInfo = StudentInfo::where('stud_id', $id)->first();
         $studSession = StudentSession::where('student_id', $id)->first();
@@ -86,6 +89,7 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dump('upd');
         $request->validate([
             'studentID'=>'required',
             'f_name'=>'required',
@@ -124,6 +128,7 @@ class StudentController extends Controller
      */
     public function destroy($id)
     {
+        //dump("des");
         $stud = Student::find($id);
         $stud->delete();
         return redirect()->back();
@@ -131,6 +136,7 @@ class StudentController extends Controller
 
     public function profileStudent()
     {
+        //dump("test");
         $id = Auth::user()->id;
         $stud = Student::find($id);
         $stud_info = StudentInfo::where('stud_id', $id)->first();
@@ -154,14 +160,16 @@ class StudentController extends Controller
     }
 
     //logbook
-    public function viewlogbook()
+    public function studentLogbook()
     {
+        //dump("log");
         return view('logbook.coordinatorview');
     }
 
     
     public function updateStatus(Request $request)
     {
+        //dump('up');
         $status = $request->get('status');
         $stud_id = $request->get('stud_id');
         
