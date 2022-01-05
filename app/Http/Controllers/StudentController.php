@@ -9,6 +9,7 @@ use App\Models\StudentInfo;
 use App\Models\StudentSession;
 use App\Models\LookupAddress;
 use App\Models\Programme;
+use App\Models\Internship;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -183,7 +184,6 @@ class StudentController extends Controller
 
         return 0;
     }
-
 
 
 }

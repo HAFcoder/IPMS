@@ -143,7 +143,9 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/company/evaluation-company', [companiesController::class, 'companySV']);
 
     //under student company 
-    Route::get('coordinator/student-company/status-all', [companiesController::class, 'statusAll']);
+    Route::get('coordinator/student-company/status-all', [companiesController::class, 'statusAll'])->name('internship.status-all');
+    Route::get('coordinator/student/internship/{id}', [companiesController::class, 'internship_details'])->name('internship.student.detail');
+    Route::put('coordinator/student/internship/{id}/assign', [companiesController::class, 'internship_assignLect'])->name('internship.assign-lecturer');
 
     //feedback menu
     Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\LookupAddress;
 use App\Models\Internship;
+use App\Models\Lecturer;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class companiesController extends Controller
@@ -270,6 +271,33 @@ class companiesController extends Controller
         $internship = Internship::with('company','session','studentInfo')->get();
         //dump($internship);
         return view('company.coorStudentStatusAll',compact('internship'));
+    }
+    
+    public function internship_details($id)
+    {
+
+        $internship = Internship::find($id)->with('company','session','studentInfo','lecturer')->first();
+        //dump($internship);
+
+        $lecturers = Lecturer::where('status','approve')->with('lecturerInfo')->get();
+
+        return view('company.internshipDetail',compact('internship','lecturers'));
+
+
+    }
+    
+    public function internship_assignLect(Request $request,$id)
+    {
+        $lectid = $request->lecturer;
+
+        $internship = Internship::find($id);
+        $internship->lecturer_id = $lectid;
+
+        $internship->save();
+        Alert::success('Success!', 'Student internship has been successfully assign a lecturer.');
+
+        return $this->internship_details($id);
+
     }
 
 }

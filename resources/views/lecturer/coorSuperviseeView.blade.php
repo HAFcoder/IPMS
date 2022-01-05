@@ -6,6 +6,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/dataTables.bootstrap4.min.css') }}">
 @endsection
 
+ <!-- access model class inside blade -->
+ @inject('programme', 'App\Models\Programme')
+
 @section('breadcrumbs')
 
     <div class="col-sm-6">
@@ -30,7 +33,7 @@
 
     <div class="row">
 
-        <div class="col-8 mt-5 mx-auto">
+        <div class="col-12 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">List of Student</h4>
@@ -38,6 +41,7 @@
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th>Session Code</th>
                                     <th>Student ID</th>
                                     <th>Name</th>
                                     <th>Programme</th>
@@ -45,62 +49,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>No Data</th>
+                                @if($internship->isEmpty())
+                                   <tr>
+                                       <td colspan="10" class="bg-light">There is no data.</td>
+                                   </tr>
+                               @endif
 
+                               @foreach ($internship as $intern)
                                     <tr>
-                                        <th>65675765675</th>
-                                        <th>Ali</th>
-                                        <th>BK101 -  Diploma of Accounting</th>
-                                        <th>Zaleha binti Othman</th>
+                                        <td>{{ $intern->session->session_code }}</td>
+                                        <td>{{ $intern->studentInfo->studentID }}</td>
+                                        <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
+                                        <td>
+                                            @php
+                                                $prog = $programme->find($intern->studSession->programme_id)->first();
+                                            @endphp
+                                            {{ $prog->code }} - {{ $prog->name }}  
+                                        </td>
+                                        <th>{{ $intern->lecturerInfo->f_name }} {{ $intern->lecturerInfo->l_name }}</th>
                                     </tr>
-                                    <tr>
-                                        <th>65675765675</th>
-                                        <th>Muhammd</th>
-                                        <th>BK101 -  Diploma of Language</th>
-                                        <th>No Data</th>
-                                    </tr>
-                                    <tr>
-                                        <th>65675765675</th>
-                                        <th>Ain</th>
-                                        <th>BK101 -  Diploma of Language</th>
-                                        <th>Zaleha binti Othman</th>
-                                    </tr>
-                                    <tr>
-                                        <th>65675765675</th>
-                                        <th>Sarah</th>
-                                        <th>BK101 -  Diploma of Language</th>
-                                        <th>Zaleha binti Othman</th>
-                                    </tr>
-                                    <tr>
-                                        <th>65675765675</th>
-                                        <th>Amiera</th>
-                                        <th>BK101 -  Diploma of Language</th>
-                                        <th>Rolsan bin Ahmad</th>
-                                    </tr>
-                                    <tr>
-                                        <th>65675765675</th>
-                                        <th>Muhammd</th>
-                                        <th>BK101 -  Diploma of Language</th>
-                                        <th>No Data</th>
-                                    </tr>
-                                    <tr>
-                                        <th>65675765675</th>
-                                        <th>Muhammd</th>
-                                        <th>BK101 -  Diploma of Language</th>
-                                        <th>Rolsan bin Ahmad</th>
-                                    </tr>
-                                    <tr>
-                                        <th>65675765675</th>
-                                        <th>Farhan</th>
-                                        <th>BK101 -  Diploma of Language</th>
-                                        <th>Rolsan bin Ahmad</th>
-                                    </tr>
-
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Faculty;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
+use App\Models\Internship;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -154,7 +155,9 @@ class LecturerController extends Controller
     //see supervisee for lecturer
     public function viewSupervisee()
     {
-        return view ('lecturer.coorSuperviseeView');
+        $internship = Internship::where('lecturer_id','!=',null)->with('company','session','studentInfo','lecturerInfo')->get();
+        //dump($internship);
+        return view ('lecturer.coorSuperviseeView',compact('internship'));
     }
 
     public function attachSupervisee()

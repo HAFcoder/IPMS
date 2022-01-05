@@ -24,7 +24,7 @@
 
     <div class="row">
 
-        <div class="col-lg-10 mt-5 mx-auto">
+        <div class="col-10 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">List of Session</h4>

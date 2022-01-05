@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Student;
+use App\Models\StudentInfo;
 use App\Models\Session;
 use App\Models\StudentSession;
 use App\Models\Supervisor;
 use App\Models\Company;
 use App\Models\Lecturer;
+use App\Models\LecturerInfo;
 use App\Models\CompanyEvaluate;
 use App\Models\CompanyFeedback;
 use App\Models\LectEvaluate;
@@ -54,6 +56,11 @@ class Internship extends Model
     public function studentInfo()
     {
         return $this->hasOne(StudentInfo::class, 'stud_id' ,'student_id');
+    }
+
+    public function lecturerInfo()
+    {
+        return $this->hasOne(LecturerInfo::class, 'lect_id' ,'lecturer_id');
     }
 
     public function lectEvaluate()
