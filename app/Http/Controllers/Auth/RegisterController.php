@@ -171,6 +171,8 @@ class RegisterController extends Controller
         ]);
         $info->save();
         Alert::success('Account Registered!', 'Your account successfully created');
-        return redirect()->intended('login/lecturer');
+        // return redirect()->intended('login/lecturer')->with(Auth::login($data));
+        return redirect('login/lecturer');
+        // return view('auth.registerLecturer');
     }
 }
