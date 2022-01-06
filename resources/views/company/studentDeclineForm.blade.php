@@ -12,12 +12,7 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Company</h4>
             <ul class="breadcrumbs pull-left">
-
-                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                @else
-                    <li><a href="{{ url('/lecturer') }}">Home</a></li>
-                @endif
+                <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('/company-all') }}">Company</a></li>
                 <li><a href="{{ url('/apply-list') }}">List</a></li>
                 <li><span>Accept Form</span></li>
@@ -64,12 +59,11 @@
                         </div>
 
                         <hr/>
-                        
                         <h4 class="header-title text-muted">Internship Confirmation</h4>
 
                         <input hidden name='status' value='declined'>
 
-                        <h4>Are you sure this company declined your internship request?</h4>
+                        <h4>Are you sure want to declined this company internship request?</h4>
                         <button type="submit" class="btn btn-success mt-4 pr-4 pl-4">Confirm</button>
                         <a href="{{ url('/apply-list') }}" class="btn btn-danger mt-4 pr-4 pl-4">Cancel</a>
 

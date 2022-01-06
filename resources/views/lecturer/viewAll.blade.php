@@ -87,8 +87,8 @@
                                                         class="form-control form-check-input mx-auto" id="lect_id">
                                                 </div>
                                             </td>
-                                            <td>{{ $lect->lecturerID }}</td>
-                                            <td>{{ $lect->f_name }} {{ $lect->l_name }}</td>
+                                            <td>{{ strtoupper($lect->lecturerID) }}</td>
+                                            <td>{{ ucwords($lect->f_name . " " . $lect->l_name ) }}</td>
                                             <td>{{ $lect->faculty->faculty_name }}</td>
                                             <td>{{ $lect->position }}</td>
                                             <td>{{ $lect->lecturer->email }}</td>

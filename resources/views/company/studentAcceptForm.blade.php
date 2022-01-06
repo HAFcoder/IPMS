@@ -12,12 +12,7 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Company</h4>
             <ul class="breadcrumbs pull-left">
-
-                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                @else
-                    <li><a href="{{ url('/lecturer') }}">Home</a></li>
-                @endif
+                <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a href="{{ url('/company-all') }}">Company</a></li>
                 <li><a href="{{ url('/apply-list') }}">List</a></li>
                 <li><span>Accept Form</span></li>
@@ -82,7 +77,7 @@
                             <input class="form-control" type="date" name="end_date" placeholder="Enter end date" required value="{{ $internship->end_date }}">
                         </div>
 
-                        <input class="d-display-none" name='status' value='accepted'>
+                        <input class="d-display-none" hidden name='status' value='accepted'>
 
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
 

@@ -100,7 +100,9 @@
                                     </a>
                                     <ul class="collapse">
                                         <li><a href="{{ url('coordinator/view-all/supervisee') }}">View All</a></li>
+                                        <!--
                                         <li><a href="{{ url('coordinator/attach/supervisee') }}">Attach</a></li>
+                                        -->
                                     </ul>
                                 </li>
                             @endif
@@ -138,7 +140,7 @@
 
                                     </ul>
                                 </li>
-
+                                <!--
                                 <li>
                                     <a href="javascript:void(0)" aria-expanded="true">
                                         <i class="ti-email"></i><span>Generate Letter</span>
@@ -148,6 +150,7 @@
                                         <li><a href="{{ url('coordinator/company/decline-letter') }}">Decline Letter</a></li>
                                     </ul>
                                 </li>
+                                -->
 
                                 <li>
                                     <a href="javascript:void(0)" aria-expanded="true">
@@ -187,9 +190,11 @@
                                     </a>
                                     <ul class="collapse">
                                         <li><a href="{{ url('coordinator/student-company/status-all') }}">All Applications</a></li>
+                                        <!--
                                         <li><a href="login2.html">Accepted</a></li>
                                         <li><a href="login3.html">Rejected</a></li>
                                         <li><a href="register.html">Decline</a></li>
+                                        -->
                                     </ul>
                                 </li>
 

@@ -84,10 +84,16 @@
                     @elseif($studentsession->status == 'pending')
                         <h5 class="text-danger">Note : Please wait approval of your session first.</h5>
                     @else
-                        <button type="button" class="btn btn-primary btn-flat btn-lg float-left" data-toggle="modal" data-target=".bd-example-modal-lg"><span class="ti-plus"></span> Add Application</button>
+                        <button type="button" class="btn btn-primary btn-flat btn-lg" data-toggle="modal" data-target=".bd-example-modal-lg"><span class="ti-plus"></span> Add Application</button>
                     @endif
                     <br/>
                     <div class="data-tables datatable-primary">
+                        <div class="text-right p-2">
+                            <h5 class="header-title">Action Button Note :</h5>
+                            <p><span class="badge badge-pill badge-success">Accepted</span> - Your internship request have been accepted by company.</p>
+                            <p><span class="badge badge-pill badge-danger">Declined</span> - Your have declined the internship offer from company.</p>
+                            <p><span class="badge badge-pill badge-warning">Rejected</span> - Your internship request have been rejected by company.</p>
+                        </div>
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
@@ -125,6 +131,9 @@
                                             } elseif ($intern->status == 'declined') {
                                                 $style = 'badge-danger';
                                                 $status = 'Declined';
+                                            } elseif ($intern->status == 'rejected') {
+                                                $style = 'badge-warning';
+                                                $status = 'Rejected';
                                             }
                                         @endphp
                                         <p class="h5">
@@ -134,12 +143,12 @@
                                     <td>
                                         @if($intern->status == 'accepted')
                                             <button class="btn btn-sm btn-primary">See Details</button>
-                                        @elseif($intern->status == 'declined')
+                                        @elseif($intern->status == 'declined' || $intern->status == 'rejected')
                                             -
                                         @else
                                             <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-success">Accepted</a>
                                             <a href="{{ route('company.student-decline',$intern->id) }}" class="btn btn-sm btn-danger">Declined</a>
-                                            <a href="{{ route('company.student-reject',$intern->id) }}" class="btn btn-sm btn-danger">Rejected</a>
+                                            <a href="{{ route('company.student-reject',$intern->id) }}" class="btn btn-sm btn-warning">Rejected</a>
                                         @endif
                                     </td>
                                 </tr>

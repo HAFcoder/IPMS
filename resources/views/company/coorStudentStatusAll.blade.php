@@ -80,6 +80,9 @@
                                             } elseif ($intern->status == 'declined') {
                                                 $style = 'badge-danger';
                                                 $status = 'Declined';
+                                            } elseif ($intern->status == 'rejected') {
+                                                $style = 'badge-warning';
+                                                $status = 'Rejected';
                                             }
                                         @endphp
                                         <span style="font-size:15px" class="badge badge-pill {{ $style }}">{{ $status }}</span>
@@ -89,6 +92,8 @@
                                             <a href="{{ route('internship.student.detail',$intern->id) }}" class="btn btn-sm btn-primary">See Details</a>
                                         @elseif($intern->status == 'declined')
                                             <button class="btn btn-sm btn-warning">Send Declined Letter</button>
+                                        @elseif($intern->status == 'rejected')
+                                            -
                                         @else
                                             -
                                         @endif

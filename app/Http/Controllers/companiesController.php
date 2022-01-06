@@ -209,28 +209,28 @@ class companiesController extends Controller
 
     public function studentAccept($id){
         //dump($id);
-        $internship = Internship::find($id)->with('company')->first();
+        $internship = Internship::where('id',$id)->with('company')->first();
         //dump($internship);
         return view('company.studentAcceptForm',compact('internship'));
     }
 
     public function studentDecline($id){
         //dump($id);
-        $internship = Internship::find($id)->with('company')->first();
+        $internship = Internship::where('id',$id)->with('company')->first();
         //dump($internship);
         return view('company.studentDeclineForm',compact('internship'));
     }
 
     public function studentReject($id){
         //dump($id);
-        $internship = Internship::find($id)->with('company')->first();
+        $internship = Internship::where('id',$id)->with('company')->first();
         //dump($internship);
         return view('company.studentRejectForm',compact('internship'));
     }
 
     public function studentInternship_update(Request $request, $id){
 
-        $internship = Internship::find($id);
+        $internship = Internship::where('id',$id)->first();
 
         $status = $request->get('status');
 
@@ -297,7 +297,7 @@ class companiesController extends Controller
     {
         $lectid = $request->lecturer;
 
-        $internship = Internship::find($id);
+        $internship = Internship::where('id',$id);
         $internship->lecturer_id = $lectid;
 
         $internship->save();

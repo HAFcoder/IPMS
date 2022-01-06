@@ -76,7 +76,6 @@
 
 @section('scripts')
 
-ß
     
 @endsection
 

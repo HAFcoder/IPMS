@@ -84,8 +84,8 @@
                                             
                                             <input name="stud_id" type="checkbox" class="form-control" value="{{ $data->students->id }}" > 
                                         </td>
-                                        <td>{{ $data->studentID }}</td>
-                                        <td>{{ $data->f_name }} {{ $data->l_name }}</td>
+                                        <td>{{ strtoupper($data->studentID) }}</td>
+                                        <td>{{ ucwords($data->f_name . " " . $data->l_name ) }}</td>
                                         <td>{{ $data->no_ic }}</td>
                                         <td>
                                             @php
