@@ -15,9 +15,9 @@ class ModifyInternshipColumn extends Migration
     {
         //
         Schema::table('internships', function (Blueprint $table) {
-            $table->integer('duration')->nullable()->change();
-            $table->date('start_date')->nullable()->change();
-            $table->date('end_date')->nullable()->change(); 
+            $table->integer('duration')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable(); 
         });
     }
 

@@ -16,8 +16,8 @@ class HomeController extends Controller
      *
      * @return void
      */
-    // public function __construct()
-    // {
+    public function __construct()
+    {
     //     // $this->middleware('auth');
     //     // $this->middleware('role:coordinator');
     //     // $this->middleware('role:lecturer');
@@ -26,7 +26,8 @@ class HomeController extends Controller
     //     // $this->middleware('auth:admin');
     //     // $this->middleware('auth:lecturer');
     //     // $this->middleware('auth:sadmin');
-    // }
+        $this->middleware(['auth','verified']);
+    }
 
     public function dashboard()
     {

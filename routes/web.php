@@ -57,6 +57,9 @@ Route::get('/resumeview',[ResumeManagementController::class, 'resumeview'])->nam
 
 // forgot password
 
+//verify mail
+Auth::routes(['verify' => true]);
+
 
 //student group route
 Route::group(['middleware' => 'auth', 'role:student'], function() {

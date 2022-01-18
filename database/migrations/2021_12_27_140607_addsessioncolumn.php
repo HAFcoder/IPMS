@@ -14,7 +14,7 @@ class Addsessioncolumn extends Migration
     public function up()
     {
         Schema::Table('logbooktests', function ($table) {
-            $table->unsignedInteger('session_id');
+            $table->unsignedInteger('session_id')->nullable();
         });
     }
 
@@ -25,6 +25,8 @@ class Addsessioncolumn extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logbooktests');
+        Schema::table('logbooktests', function (Blueprint $table) {
+            $table->dropColumn('session_id');
+        });
     }
 }

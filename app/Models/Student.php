@@ -9,8 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Models\StudentInfo;
 use App\Models\Internship;
 use App\Models\StudentSession;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class Student extends Authenticatable
+class Student extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
     protected $guarded = [];
