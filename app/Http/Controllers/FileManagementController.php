@@ -95,7 +95,7 @@ class FileManagementController extends Controller
     }
 
     public function uploadFile($location, $filename) {
-        Storage::put($location.'/'.$filename, $contents);
+        Storage::disk('s3')->put($location.'/'.$filename, $contents);
     }
 
     public function deleteFile($location, $filename) {
