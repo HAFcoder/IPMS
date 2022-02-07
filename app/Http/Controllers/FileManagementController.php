@@ -58,4 +58,66 @@ class FileManagementController extends Controller
         return Storage::disk('s3')->response('intern-forms/'. $filename);
     }
 
+    // Latest Updated Amazon s3 API
+
+    // Directory or Folder Handler
+
+    public function createDirectory(Request $request) {
+
+        $this->validate($request, [
+            'folder_name' => 'required'
+        ]);
+
+        Storage::disk('s3')->makeDirectory($request->folder_name);
+    }
+
+    public function deleteDirectory(Request $request) {
+
+        $this->validate($request, [
+            'folder_name' => 'required'
+        ]);
+
+        Storage::disk('s3')->deleteDirectory($request->folder_name);
+    }
+
+    // File Handler
+
+    public function checkFileExistence($location, $filename){
+        $exists = Storage::disk('s3')->exists($location.'/'.$filename);
+    }
+
+    public function getAllFile($location) {
+        $files = Storage::disk('s3')->files($location.'/');
+    }
+
+    public function getFile($location, $filename) {
+        $contents = Storage::disk('s3')->get($location.'/'.$filename);
+    }
+
+    public function uploadFile($location, $filename) {
+        Storage::put($location.'/'.$filename, $contents);
+    }
+
+    public function deleteFile($location, $filename) {
+        Storage::disk('s3')->delete($location.'/'.$filename);
+    }
+
+    public function copyFile($original_location, $original_filename, $new_location, $new_filename) {
+        Storage::disk('s3')->copy($original_location.'/'.$original_filename, $new_location.'/'.$new_filename);
+    }
+
+    public function moveFile($original_location, $original_filename, $new_location, $new_filename) {
+        Storage::disk('s3')->move($original_location.'/'.$original_filename, $new_location.'/'.$new_filename);
+    }
+
+    public function getFileSize($location, $filename) {
+        Storage::disk('s3')->size($location.'/'.$filename);
+    }
+
+
+
+
+
+
+
 }

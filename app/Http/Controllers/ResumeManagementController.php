@@ -115,5 +115,4 @@ class ResumeManagementController extends Controller
 
         return view('resume.showResume',compact('resume'));
     }
-
 }
