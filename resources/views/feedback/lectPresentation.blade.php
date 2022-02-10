@@ -44,22 +44,39 @@
                 <div class="col-8 mt-3 mx-auto">
                     <div class="card">
 
-                        <form action="" method="post">
-
+                        <form action="{{ route('lecturer.presentation.update',$id) }}" method="post">
+                            @method('POST') 
+                            @csrf
                             <div class="card-body">
 
                                 <h4 class="mb-2">Please fill in the forms</h4>
 
                                 <div class="row">
+                                    <input name="presentId" id="presentId" 
+                                    @if ($yesno == 'yes')
+                                        value="{{$presentMark->id}}"
+                                    @else
+                                        value="0"
+                                    @endif
+                                    style="display: none">
+                                    <input name="internship_id" id="internship_id" value="{{$id}}" style="display: none">
 
                                     <div class="form-group col-6">
                                         <label for="example-number-input" class="col-form-label">Knowledge of the subject</label>
-                                        <input class="form-control" type="number" max="40" id="example-number-input">
+                                        <input required class="form-control" type="number" max="40" id="q1" name="q1"
+                                        @if ($yesno == 'yes')
+                                            value="{{$markArr[0]}}"
+                                        @endif
+                                        > /40
                                     </div>
                                     
                                     <div class="form-group col-6">
                                         <label for="example-number-input" class="col-form-label">Organisation, language and delivery</label>
-                                        <input class="form-control" type="number" max="20" id="example-number-input">
+                                        <input required class="form-control" type="number" max="20" id="q2" name="q2"
+                                        @if ($yesno == 'yes')
+                                            value="{{$markArr[1]}}"
+                                        @endif
+                                        > /20
                                     </div>
 
                                 </div>
@@ -68,19 +85,27 @@
 
                                     <div class="form-group col-6">
                                         <label for="example-number-input" class="col-form-label">Critical/ Analytical / Creative skills</label>
-                                        <input class="form-control" type="number" max="20" id="example-number-input">
+                                        <input required class="form-control" type="number" max="20" id="q3" name="q3"
+                                        @if ($yesno == 'yes')
+                                            value="{{$markArr[2]}}"
+                                        @endif
+                                        > /20
                                     </div>
     
                                     <div class="form-group col-6">
                                         <label for="example-number-input" class="col-form-label">Question handling</label>
-                                        <input class="form-control" type="number" max="20" id="example-number-input">
+                                        <input required class="form-control" type="number" max="20" id="q4" name="q4"
+                                        @if ($yesno == 'yes')
+                                            value="{{$markArr[3]}}"
+                                        @endif
+                                        > /20
                                     </div>
 
                                 </div>
 
                                 <div class="form-group "> 
                                     <label for="example-text-input" class="col-form-label">Comments / Suggestions:</label> 
-                                    <textarea class="form-control" name="description" id="description" rows="3" required></textarea> 
+                                    <textarea class="form-control" name="comment" id="comment" rows="3">{{ $presentMark->comment }}</textarea> 
                                 </div> 
 
                                 <button type="submit" class="btn btn-rounded btn-primary btn-lg btn-block mt-5">Submit</button>

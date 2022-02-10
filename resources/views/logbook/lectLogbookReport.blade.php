@@ -184,7 +184,7 @@
 
     <div class="row mt-5">
         <div class="col-lg-12 text-right">
-            <a href="{{ url('lecturer/fedbacks-evaluation/student-list/logbook-report/evaluation')}}" type="button" class="btn btn-primary btn-flat btn-lg" style="color: white; font-size: 20px;" >Give Evaluation</a>
+            <a href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$id.'/logbook-report/evaluation')}}" type="button" class="btn btn-primary btn-flat btn-lg" style="color: white; font-size: 20px;" >Give Evaluation</a>
         </div>
     </div>
 

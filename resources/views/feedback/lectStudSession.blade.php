@@ -40,56 +40,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($sessions as $session)
+                                        
                                     <tr>
-                                        <th scope="row">SS509556</th>
-                                        <td>04/08/2021 - 10/12/2021</td>
-                                        <td>Diploma in Teaching of English As a Second Language <br>
-                                            Diploma In Corporate Communication <br>
-                                            Bachelor of Accountancy (Hons)</td>
-                                        <td><a href="{{ url('/lecturer/fedbacks-evaluation/student-list') }}"><i class="ti-eye"></i></a></td>
+                                        <th scope="row">{{$session->session_code}}</th>
+                                        <td>{{ date('d M Y', strtotime($session->start_date)) }} - {{ date('d M Y', strtotime($session->end_date)) }}</td>
+                                        <td>
+                                            @foreach ($session->programmes as $prog)
+                                            <b>{{ $prog->code }}</b> - {{ $prog->name }}  <br>  
+                                            @endforeach
+                                        </td>
+                                        <td><a href="{{ route('feedback.session.studentlist',$session->id) }}"><i class="ti-eye"></i></a></td>
                                     </tr>
-
-                                    <tr>
-                                        <th scope="row">SS509557</th>
-                                        <td>04/08/2021 - 10/12/2021</td>
-                                        <td>Diploma in Teaching of English As a Second Language <br>
-                                            Diploma In Corporate Communication <br>
-                                        <td><a href="{{ url('/lecturer/fedbacks-evaluation/student-list') }}"><i class="ti-eye"></i></a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">SS509558</th>
-                                        <td>04/08/2021 - 10/12/2021</td>
-                                        <td>Diploma in Teaching of English As a Second Language <br>
-                                            Diploma In Corporate Communication <br>
-                                            Bachelor of Accountancy (Hons)</td>
-                                        <td><a href="{{ url('/lecturer/fedbacks-evaluation/student-list') }}"><i class="ti-eye"></i></a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">SS509560</th>
-                                        <td>04/08/2021 - 10/12/2021</td>
-                                        <td>Diploma In Corporate Communication <br>
-                                            Bachelor of Accountancy (Hons)</td>
-                                        <td><a href="{{ url('/lecturer/fedbacks-evaluation/student-list') }}"><i class="ti-eye"></i></a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">SS509567</th>
-                                        <td>04/08/2021 - 10/12/2021</td>
-                                        <td>Diploma in Teaching of English As a Second Language <br>
-                                            Diploma In Corporate Communication <br>
-                                            Bachelor of Accountancy (Hons)</td>
-                                        <td><a href="{{ url('/lecturer/fedbacks-evaluation/student-list') }}"><i class="ti-eye"></i></a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">SS504586</th>
-                                        <td>04/08/2021 - 10/12/2021</td>
-                                        <td>Diploma in Teaching of English As a Second Language <br>
-                                            Bachelor of Accountancy (Hons)</td>
-                                        <td><a href="{{ url('/lecturer/fedbacks-evaluation/student-list') }}"><i class="ti-eye"></i></a></td>
-                                    </tr>
+                                    
+                                    @endforeach
                                  
                                 </tbody>
                             </table>

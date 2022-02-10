@@ -77,6 +77,10 @@
                             <input class="form-control" type="date" name="end_date" placeholder="Enter end date" required value="{{ $internship->end_date }}">
                         </div>
 
+                        <hr/>
+                        
+                        <h4 class="header-title text-muted">Document Uploaded</h4>
+
                         <input class="d-display-none" hidden name='status' value='accepted'>
 
                         <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>

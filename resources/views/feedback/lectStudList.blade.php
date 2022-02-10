@@ -41,14 +41,37 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($internship as $intern)
+                                        
                                     <tr>
-                                        <th scope="row">AM123456789</th>
-                                        <td>Muhammad</td>
-                                        <td>BE101 - Diploma in Teaching of English As a Second Language</td>
-                                        <td><i class="fa fa-check-square" style="color: green"></i></td>
-                                        <td><i class="fa fa-times-circle" style="color: red"></i></td>
+                                        <th scope="row">{{ $intern->studentInfo->studentID }}</th>
+                                        <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }}</td>
+                                        <td>
+                                            @foreach ($programme as $prog)
+                                                @if ($prog->id == $intern->studentInfo->programme_id)
+                                                    {{ $prog->code }} - {{ $prog->name }}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($finaleva as $eva)
+                                                @if ($eva->internship_id == $intern->id)
+                                                    <i class="fa fa-check-square" style="color: green"></i>
+                                                @endif
+                                            @endforeach
+                                            <a href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/details') }}"><i class="ti-write"></i></a></td>
+                                        <td>
+                                            @foreach ($presentMarks as $present)
+                                                @if ($present->internship_id == $intern->id)
+                                                    <i class="fa fa-check-square" style="color: green"></i>
+                                                @endif
+                                            @endforeach
+                                            <a href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/presentation') }}"><i class="ti-layout-media-left-alt"></i></a>
+                                        </td>
                                     </tr>
-                                 
+
+                                    @endforeach
+                                {{--
                                     <tr>
                                         <th scope="row">AM123456789</th>
                                         <td>Ain</td>
@@ -80,22 +103,8 @@
                                         <td><i class="fa fa-check-square" style="color: green"></i></td>
                                          <td><i class="fa fa-times-circle" style="color: red"></i></td>
                                     </tr>
+                                --}} 
 
-                                    <tr>
-                                        <th scope="row">AM123456789</th>
-                                        <td>Zaki</td>
-                                        <td>BK101 - Diploma In Corporate Communication</td>
-                                        <td><a href="{{ url('lecturer/fedbacks-evaluation/student-list/logbook-report/details') }}"><i class="ti-write"></i></a></td>
-                                        <td><i class="fa fa-times-circle" style="color: red"></i></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">AM123456789</th>
-                                        <td>Farhan</td>
-                                        <td>BE101 - Diploma in Teaching of English As a Second Language</td>
-                                        <td><a href="{{ url('lecturer/fedbacks-evaluation/student-list/logbook-report/details') }}"><i class="ti-write"></i></a></td>
-                                        <td><i class="fa fa-times-circle" style="color: red"></i></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>

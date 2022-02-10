@@ -85,6 +85,7 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 
     //feedbacks and survey
     Route::get('/graduate-survey', [FormEvaluateController::class, 'graduate']);
+    Route::post('/graduate-survey', [FormEvaluateController::class, 'submit_graduate'])->name('student.graduate.submit');
 
     // profile
     Route::get('/profile', [StudentController::class, 'profileStudent']);
@@ -169,10 +170,14 @@ Route::group(['middleware' => ['auth:lecturer', 'role:lecturer']], function() {
 
     //feedbacks and evaluation
     Route::get('lecturer/fedbacks-evaluation/session', [LectEvaluateController::class, 'feedbackSess']);
-    Route::get('lecturer/fedbacks-evaluation/student-list', [LectEvaluateController::class, 'studList']);
-    Route::get('lecturer/fedbacks-evaluation/student-list/logbook-report/details', [LectEvaluateController::class, 'logbookRead']);
-    Route::get('lecturer/fedbacks-evaluation/student-list/logbook-report/evaluation', [LectEvaluateController::class, 'logbookEva']);
-    Route::get('lecturer/fedbacks-evaluation/student-list/presentation', [LectEvaluateController::class, 'presentationEva']);
+    Route::get('lecturer/fedbacks-evaluation/{id}/student-list', [LectEvaluateController::class, 'studList'])->name('feedback.session.studentlist');
+
+    Route::get('lecturer/fedbacks-evaluation/student-list/{id}/logbook-report/details', [LectEvaluateController::class, 'logbookRead']);
+    Route::get('lecturer/fedbacks-evaluation/student-list/{id}/logbook-report/evaluation', [LectEvaluateController::class, 'logbookEva']);
+    Route::post('lecturer/fedbacks-evaluation/student-list/{id}/logbook-report/update/evaluation', [LectEvaluateController::class, 'update_logbookEva'])->name('lecturer.finalevaluation.update');
+
+    Route::get('lecturer/fedbacks-evaluation/student-list/{id}/presentation', [LectEvaluateController::class, 'presentationEva']);
+    Route::post('lecturer/fedbacks-evaluation/student-list/{id}/update/presentation', [LectEvaluateController::class, 'update_presentationEva'])->name('lecturer.presentation.update');
 
     //lecturer student
     Route::get('lecturer/supervisee', [LecturerController::class, 'superviseeSess']);
@@ -207,6 +212,9 @@ Route::resource('session', SessionController::class)->middleware('auth:lecturer'
 //get address route
 Route::get('/getpostal', [AddressController::class, 'getpostal'])->name('getpostal');
 Route::get('/getcity', [AddressController::class, 'getcity'])->name('getcity');
+
+//get graduate survey student
+Route::get('/getsurvey', [FormEvaluateController::class, 'getsurvey'])->name('getStudentGradSurvey');
 
 //internship forms - s3 amazon file management route
 Route::get('/internfile', [FileManagementController::class, 'listInternFile']);
