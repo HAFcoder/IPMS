@@ -36,6 +36,8 @@
                         @csrf
                         <h4 class="header-title text-muted">Company Details</h4>
 
+                        <input class="d-display-none" hidden name='company_id' value='{{ $internship->company->id }}'>
+
                         <div class="col-12">
                             <label class="col-form-label"><b>Name :</b> </label>
                             <label class="col-form-label">{{ $internship->company->name }}</label>
@@ -61,6 +63,11 @@
                         <hr/>
                         
                         <h4 class="header-title text-muted">Internship Details</h4>
+                        
+                        <div class="form-group">
+                            <label for="example-date-input" class="col-form-label">Job Scope / Position Offered</label>
+                            <input class="form-control" type="text" name="job_scope" placeholder="Enter job scope" required value="{{ $internship->job_scope }}">
+                        </div>
 
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Duration (Month)</label>
@@ -77,9 +84,72 @@
                             <input class="form-control" type="date" name="end_date" placeholder="Enter end date" required value="{{ $internship->end_date }}">
                         </div>
 
+                        <div class="form-group">
+                            <label for="example-date-input" class="col-form-label">Availability of Allowance / Amount (RM)</label>
+                            <input class="form-control" type="text" name="allowance" placeholder="Enter amount of allowance." required value="{{ $internship->allowance }}">
+                        </div>
+
                         <hr/>
                         
-                        <h4 class="header-title text-muted">Document Uploaded</h4>
+                        <h4 class="header-title text-muted">Industry Supervisor Details</h4>
+
+                        <input class="d-display-none" hidden  name='supervisor_id'
+                        @if (!empty($internship->supervisor))
+                        value='{{ $internship->supervisor->id }}'
+                        @else
+                        value='0'
+                        @endif
+                        >
+
+                        <div class="form-group">
+                            <label for="example-date-input" class="col-form-label">Full Name</label>
+                            <input class="form-control" type="text" name="sv_name" placeholder="Enter supervisor name." 
+                            @if (!empty($internship->supervisor))
+                            value='{{ $internship->supervisor->name }}'
+                            @endif
+                            required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="example-date-input" class="col-form-label">Position</label>
+                            <input class="form-control" type="text" name="sv_position" placeholder="Enter supervisor position in company." 
+                            @if (!empty($internship->supervisor))
+                            value='{{ $internship->supervisor->position }}'
+                            @endif
+                            required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="example-date-input" class="col-form-label">Contact Number</label>
+                            <input class="form-control" type="text" name="sv_telephone" placeholder="Enter supervisor contact number."
+                            @if (!empty($internship->supervisor))
+                            value='{{ $internship->supervisor->contact }}'
+                            @endif
+                             required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="example-date-input" class="col-form-label">Email</label>
+                            <input class="form-control" type="text" name="sv_email" placeholder="Enter supervisor email."
+                            @if (!empty($internship->supervisor))
+                            value='{{ $internship->supervisor->email }}'
+                            @endif
+                             required>
+                        </div>
+
+                        <hr/>
+                        
+                        <h4 class="header-title text-muted">Upload Document</h4>
+
+                        <div class="form-group">
+                            <label for="example-text-input" class="col-form-label">Organization Reply Form (ORF)</label>
+                            <input class="form-control" type="file" name="orf_file" placeholder="Select ORF file" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="example-text-input" class="col-form-label">Report Duty Notification (RDN)</label>
+                            <input class="form-control" type="file" name="rdn_file" placeholder="Select RDN file">
+                        </div>
 
                         <input class="d-display-none" hidden name='status' value='accepted'>
 

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\LookupAddress;
 use App\Models\Internship;
+use App\Models\CompanySv;
+use App\Models\Supervisor;
 use App\Models\Lecturer;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -209,7 +211,7 @@ class companiesController extends Controller
 
     public function studentAccept($id){
         //dump($id);
-        $internship = Internship::where('id',$id)->with('company')->first();
+        $internship = Internship::where('id',$id)->with('company','supervisor')->first();
         //dump($internship);
         return view('company.studentAcceptForm',compact('internship'));
     }
@@ -231,18 +233,58 @@ class companiesController extends Controller
     public function studentInternship_update(Request $request, $id){
 
         $internship = Internship::where('id',$id)->first();
-
-        $status = $request->get('status');
+        //dump($request);
+        $status = $request->status;
 
         if($status == 'accepted'){ //if status is accepted, get duration,start date, end date data and update
 
-            $duration = $request->get('duration');
-            $start_date = $request->get('start_date');
-            $end_date = $request->get('end_date');
+            $duration = $request->duration;
+            $start_date = $request->start_date;
+            $end_date = $request->end_date;
+            $job_scope = $request->job_scope;
+            $allowance = $request->allowance;
+            $supervisor_id = $request->supervisor_id;
+
+            if ($request->hasFile('orf_file')) {
+                $orf_file = $request->file('orf_file')->getClientOriginalName();
+                $internship->orf_file = $orf_file;
+            }
+
+            if ($request->hasFile('rdn_file')) {
+                $rdn_file = $request->file('rdn_file')->getClientOriginalName();
+                $internship->rdn_file = $rdn_file;
+            }
+
+            if($supervisor_id == 0){
+                $sv = new Supervisor;
+
+                $sv->company_id = $request->company_id;
+                $sv->name = $request->sv_name;
+                $sv->position = $request->sv_position;
+                $sv->contact = $request->sv_telephone;
+                $sv->email = $request->sv_email;
+
+                $sv->save();
+                $internship->supervisor_id = $sv->id;
+
+            }else{
+                
+                $sv = Supervisor::where('id',$supervisor_id)->first();
+
+                $sv->company_id = $request->company_id;
+                $sv->name = $request->sv_name;
+                $sv->position = $request->sv_position;
+                $sv->contact = $request->sv_telephone;
+                $sv->email = $request->sv_email;
+
+                $sv->save();
+            }
     
             $internship->duration = $duration;
             $internship->start_date = $start_date;
             $internship->end_date = $end_date;
+            $internship->job_scope = $job_scope;
+            $internship->allowance = $allowance;
         }
 
         $internship->updated_at = now();

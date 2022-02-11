@@ -17,6 +17,7 @@ use App\Models\CompanyFeedback;
 use App\Models\LectEvaluate;
 use App\Models\StudentFeedback;
 use App\Models\Logbook;
+use App\Models\CompanySv;
 
 class Internship extends Model
 {

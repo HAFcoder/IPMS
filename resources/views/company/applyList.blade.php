@@ -142,7 +142,7 @@
                                     </td>
                                     <td>
                                         @if($intern->status == 'accepted')
-                                            <button class="btn btn-sm btn-primary">See Details</button>
+                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-primary">See Details</a>
                                         @elseif($intern->status == 'declined' || $intern->status == 'rejected')
                                             -
                                         @else

@@ -100,9 +100,9 @@
                                     </a>
                                     <ul class="collapse">
                                         <li><a href="{{ url('coordinator/view-all/supervisee') }}">View All</a></li>
-                                        <!--
+                                        
                                         <li><a href="{{ url('coordinator/attach/supervisee') }}">Attach</a></li>
-                                        -->
+                                    
                                     </ul>
                                 </li>
                             @endif
