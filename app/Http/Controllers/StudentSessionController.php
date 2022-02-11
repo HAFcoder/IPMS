@@ -38,9 +38,7 @@ class StudentSessionController extends Controller
 
         // $sessions = Session::where('status', '=', 'active')->get();
         Alert::success('Success!', 'Your session registration has been successful.');
-
-        // student register sesison in studnet page
-        return $this->viewStatus();
+        return view('student.index');
     }
 
     public function index()
