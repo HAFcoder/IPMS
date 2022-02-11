@@ -173,12 +173,12 @@ class companiesController extends Controller
     public function applyList()
     {
         $studentsession = $this->getStudentSession();
-        dump($studentsession);
+        //dump($studentsession);
         //dump(now()->addDay());
         if($studentsession != null){
 
             $internship = Internship::where('session_id', $studentsession->session_id)->where('student_id',Auth::user()->id)->with('company')->get();
-            dump($internship);
+            //dump($internship);
         }
 
 
