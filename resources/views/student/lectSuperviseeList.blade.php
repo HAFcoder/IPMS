@@ -47,104 +47,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                <tr>
-                                    <th>65675765675</th>
-                                    <th>Muhammd</th>
-                                    <th>BK101 -  Diploma of Language</th>
-                                    <th>23, Taman Puncak ALam, Selangor</th>
-                                    <th>CABC Sdn Bhd</th>
-                                    <th><a href="#"><i class="fa fa-eye"></i></a></th>
-                                </tr>
-                                
+                                @foreach ($datas as $data)
+                                    <tr>
+                                        <th>{{ $data->studentInfo->studentID }}</th>
+                                        <th>{{ $data->studentInfo->f_name }} {{ $data->studentInfo->l_name }}</th>
+                                        <th>{{ $data->studentInfo->programmes->name }}</th>
+                                        <th>{{ $data->studentInfo->address }}</th>
+                                        <th>{{ $data->company->name }}</th>
+                                        <th><a href="#"><i class="fa fa-eye"></i></a></th>
+                                    </tr>
+                                @endforeach
+                                                                
                                 
                             </tbody>
                         </table>

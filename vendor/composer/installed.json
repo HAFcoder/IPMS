@@ -114,17 +114,17 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.209.18",
-            "version_normalized": "3.209.18.0",
+            "version": "3.209.22",
+            "version_normalized": "3.209.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "db08dfe00bbd68658ebff98b1970c54752b37c90"
+                "reference": "2f8a8c885daf45fe9f919312a66a68115d6733b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/db08dfe00bbd68658ebff98b1970c54752b37c90",
-                "reference": "db08dfe00bbd68658ebff98b1970c54752b37c90",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2f8a8c885daf45fe9f919312a66a68115d6733b5",
+                "reference": "2f8a8c885daf45fe9f919312a66a68115d6733b5",
                 "shasum": ""
             },
             "require": {
@@ -161,7 +161,7 @@
                 "ext-openssl": "Allows working with CloudFront private distributions and verifying received SNS messages",
                 "ext-sockets": "To use client-side monitoring"
             },
-            "time": "2022-02-04T19:56:33+00:00",
+            "time": "2022-02-10T19:14:07+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -202,7 +202,7 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.209.18"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.209.22"
             },
             "install-path": "../aws/aws-sdk-php"
         },
@@ -1208,12 +1208,12 @@
             },
             "installation-source": "dist",
             "autoload": {
-                "psr-4": {
-                    "Facade\\Ignition\\": "src"
-                },
                 "files": [
                     "src/helpers.php"
-                ]
+                ],
+                "psr-4": {
+                    "Facade\\Ignition\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2033,17 +2033,17 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v8.82.0",
-            "version_normalized": "8.82.0.0",
+            "version": "v8.83.0",
+            "version_normalized": "8.83.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "411d5243c58cbf12b0fc89cab1ceb50088968c27"
+                "reference": "29bc8779103909ebc428478b339ee6fa8703e193"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/411d5243c58cbf12b0fc89cab1ceb50088968c27",
-                "reference": "411d5243c58cbf12b0fc89cab1ceb50088968c27",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/29bc8779103909ebc428478b339ee6fa8703e193",
+                "reference": "29bc8779103909ebc428478b339ee6fa8703e193",
                 "shasum": ""
             },
             "require": {
@@ -2162,7 +2162,7 @@
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
                 "wildbit/swiftmailer-postmark": "Required to use Postmark mail driver (^3.0)."
             },
-            "time": "2022-02-01T16:13:57+00:00",
+            "time": "2022-02-08T15:44:51+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2209,17 +2209,17 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.13.1",
-            "version_normalized": "1.13.1.0",
+            "version": "v1.13.2",
+            "version_normalized": "1.13.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "b9749028732eca8080c26d01cd88a2f3549c2e3e"
+                "reference": "ede5e861549be2c3a8b789cdb34203a5aef5b92a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/b9749028732eca8080c26d01cd88a2f3549c2e3e",
-                "reference": "b9749028732eca8080c26d01cd88a2f3549c2e3e",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/ede5e861549be2c3a8b789cdb34203a5aef5b92a",
+                "reference": "ede5e861549be2c3a8b789cdb34203a5aef5b92a",
                 "shasum": ""
             },
             "require": {
@@ -2228,7 +2228,7 @@
                 "illuminate/support": "^8.0|^9.0",
                 "php": "^7.3|^8.0"
             },
-            "time": "2022-01-20T15:31:25+00:00",
+            "time": "2022-02-08T14:14:12+00:00",
             "bin": [
                 "bin/sail"
             ],
@@ -2405,30 +2405,30 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v3.4.2",
-            "version_normalized": "3.4.2.0",
+            "version": "v3.4.3",
+            "version_normalized": "3.4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "e01198123f7f4369d13c1f83a897c3f5e97fc9f4"
+                "reference": "64a0f43492c00780b2261c56cd7007a4f370d95b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/e01198123f7f4369d13c1f83a897c3f5e97fc9f4",
-                "reference": "e01198123f7f4369d13c1f83a897c3f5e97fc9f4",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/64a0f43492c00780b2261c56cd7007a4f370d95b",
+                "reference": "64a0f43492c00780b2261c56cd7007a4f370d95b",
                 "shasum": ""
             },
             "require": {
                 "illuminate/console": "^8.42|^9.0",
                 "illuminate/filesystem": "^8.42|^9.0",
-                "illuminate/support": "^8.42|^9.0",
+                "illuminate/support": "^8.82|^9.0",
                 "illuminate/validation": "^8.42|^9.0",
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
                 "orchestra/testbench": "^6.23|^7.0"
             },
-            "time": "2022-01-25T20:15:56+00:00",
+            "time": "2022-02-08T14:19:32+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2463,7 +2463,7 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/laravel/ui/tree/v3.4.2"
+                "source": "https://github.com/laravel/ui/tree/v3.4.3"
             },
             "install-path": "../laravel/ui"
         },
@@ -3705,23 +3705,23 @@
         },
         {
             "name": "phar-io/version",
-            "version": "3.1.0",
-            "version_normalized": "3.1.0.0",
+            "version": "3.1.1",
+            "version_normalized": "3.1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phar-io/version.git",
-                "reference": "bae7c545bef187884426f042434e561ab1ddb182"
+                "reference": "15a90844ad40f127afd244c0cad228de2a80052a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phar-io/version/zipball/bae7c545bef187884426f042434e561ab1ddb182",
-                "reference": "bae7c545bef187884426f042434e561ab1ddb182",
+                "url": "https://api.github.com/repos/phar-io/version/zipball/15a90844ad40f127afd244c0cad228de2a80052a",
+                "reference": "15a90844ad40f127afd244c0cad228de2a80052a",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
-            "time": "2021-02-23T14:00:09+00:00",
+            "time": "2022-02-07T21:56:48+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -3753,7 +3753,7 @@
             "description": "Library for handling version information and constraints",
             "support": {
                 "issues": "https://github.com/phar-io/version/issues",
-                "source": "https://github.com/phar-io/version/tree/3.1.0"
+                "source": "https://github.com/phar-io/version/tree/3.1.1"
             },
             "install-path": "../phar-io/version"
         },
@@ -4468,11 +4468,11 @@
             },
             "installation-source": "dist",
             "autoload": {
-                "classmap": [
-                    "src/"
-                ],
                 "files": [
                     "src/Framework/Assert/Functions.php"
+                ],
+                "classmap": [
+                    "src/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -5872,17 +5872,17 @@
         },
         {
             "name": "sebastian/global-state",
-            "version": "5.0.3",
-            "version_normalized": "5.0.3.0",
+            "version": "5.0.4",
+            "version_normalized": "5.0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/global-state.git",
-                "reference": "23bd5951f7ff26f12d4e3242864df3e08dec4e49"
+                "reference": "19c519631c5a511b7ed0ad64a6713fdb3fd25fe4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/23bd5951f7ff26f12d4e3242864df3e08dec4e49",
-                "reference": "23bd5951f7ff26f12d4e3242864df3e08dec4e49",
+                "url": "https://api.github.com/repos/sebastianbergmann/global-state/zipball/19c519631c5a511b7ed0ad64a6713fdb3fd25fe4",
+                "reference": "19c519631c5a511b7ed0ad64a6713fdb3fd25fe4",
                 "shasum": ""
             },
             "require": {
@@ -5897,7 +5897,7 @@
             "suggest": {
                 "ext-uopz": "*"
             },
-            "time": "2021-06-11T13:31:12+00:00",
+            "time": "2022-02-10T07:01:19+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -5927,7 +5927,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/global-state/issues",
-                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.3"
+                "source": "https://github.com/sebastianbergmann/global-state/tree/5.0.4"
             },
             "funding": [
                 {
@@ -6357,29 +6357,29 @@
         },
         {
             "name": "sven/artisan-view",
-            "version": "3.4.0",
-            "version_normalized": "3.4.0.0",
+            "version": "v3.5.0",
+            "version_normalized": "3.5.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/svenluijten/artisan-view.git",
-                "reference": "d7ea982974767ee69753294a8141259bf6d75703"
+                "reference": "af278a435f1a22ec8aafd04570310a98412fd189"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/svenluijten/artisan-view/zipball/d7ea982974767ee69753294a8141259bf6d75703",
-                "reference": "d7ea982974767ee69753294a8141259bf6d75703",
+                "url": "https://api.github.com/repos/svenluijten/artisan-view/zipball/af278a435f1a22ec8aafd04570310a98412fd189",
+                "reference": "af278a435f1a22ec8aafd04570310a98412fd189",
                 "shasum": ""
             },
             "require": {
-                "laravel/framework": "^5.4 || ^6.0 || ^7.0 || ^8.0",
-                "php": "^7.1 || ^8.0"
+                "laravel/framework": "^8.0 || ^9.0",
+                "php": "^8.0"
             },
             "require-dev": {
-                "graham-campbell/testbench": "^4.0 || ^5.0",
+                "graham-campbell/testbench": "^5.6",
                 "mockery/mockery": "^1.4",
-                "phpunit/phpunit": "^6.5 || ^7.0 || ^8.0"
+                "phpunit/phpunit": "^9.0 || ^10.0"
             },
-            "time": "2020-12-18T14:54:32+00:00",
+            "time": "2022-02-09T18:31:34+00:00",
             "type": "library",
             "extra": {
                 "laravel": {
@@ -6401,7 +6401,7 @@
             "authors": [
                 {
                     "name": "Sven Luijten",
-                    "email": "svenluijten1995@gmail.com",
+                    "email": "contact@svenluijten.com",
                     "homepage": "https://svenluijten.com"
                 }
             ],
@@ -6415,7 +6415,7 @@
             ],
             "support": {
                 "issues": "https://github.com/svenluijten/artisan-view/issues",
-                "source": "https://github.com/svenluijten/artisan-view/tree/3.4.0"
+                "source": "https://github.com/svenluijten/artisan-view/tree/v3.5.0"
             },
             "install-path": "../sven/artisan-view"
         },

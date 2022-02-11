@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Programme;
 use App\Models\Student;
+use App\Models\Internship;
 
 class StudentInfo extends Model
 {
@@ -21,5 +22,10 @@ class StudentInfo extends Model
     public function students()
     {
         return $this->belongsTo(Student::class, 'stud_id', 'id');
+    }
+
+    public function internship()
+    {
+        return $this->hasMany(Internship::class);
     }
 }

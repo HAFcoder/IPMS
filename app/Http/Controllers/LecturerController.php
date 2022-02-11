@@ -8,6 +8,7 @@ use App\Models\Lecturer;
 use App\Models\LecturerInfo;
 use App\Models\Internship;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -147,7 +148,9 @@ class LecturerController extends Controller
     //view supervisee for that session
     public function superviseeList()
     {
-        return view('student.lectSuperviseeList');
+        $uid = Auth::id();
+        $datas = Internship::where('lecturer_id', $uid)->get();
+        return view('student.lectSuperviseeList', compact('datas'));
     }
 
 

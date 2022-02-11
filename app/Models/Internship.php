@@ -55,7 +55,7 @@ class Internship extends Model
 
     public function studentInfo()
     {
-        return $this->hasOne(StudentInfo::class, 'stud_id' ,'student_id');
+        return $this->belongsTo(StudentInfo::class, 'student_id');
     }
 
     public function lecturerInfo()
