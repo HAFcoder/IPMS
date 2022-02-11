@@ -66,7 +66,7 @@
                                             @endphp
                                             {{ $prog->code }} - {{ $prog->name }}  
                                         </td>
-                                        <th>{{ $intern->lecturerInfo->f_name }} {{ $intern->lecturerInfo->l_name }}</th>
+                                        <td>{{ $intern->lecturerInfo->f_name }} {{ $intern->lecturerInfo->l_name }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

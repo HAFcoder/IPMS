@@ -165,7 +165,27 @@ class LecturerController extends Controller
 
     public function attachSupervisee()
     {
-        return view ('lecturer.coorSuperviseeAttach');
+        $internship = Internship::with('company','session','studentInfo','lecturerInfo')->get();
+        $lect = Lecturer::get();
+        //dump($internship);
+        return view ('lecturer.coorSuperviseeAttach', compact('internship', 'lect'));
+    }
+
+    //attach sv to student from coorSuperviseeAttach blade
+    public function attachLecturer(Request $request)
+    {
+        //$lect_id = $request->get('lecturer_id');
+        $intern_id = $request->get('id');
+        $intern = Internship::find($intern_id);
+        $intern->lecturer_id = $request->get('lecturer_id');
+        $intern->save();
+
+        $internship = Internship::with('company','session','studentInfo','lecturerInfo')->get();
+        $lect = Lecturer::get();
+        //dump($internship);
+        Alert::success('Academic SV changed!', 'Student accademic SV successfully changed.');
+        //return view ('lecturer.coorSuperviseeAttach', compact('internship', 'lect'));
+        return back();
     }
 
 

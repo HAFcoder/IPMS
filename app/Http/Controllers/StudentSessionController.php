@@ -74,8 +74,12 @@ class StudentSessionController extends Controller
 
             $studSess = StudentSession::find($id);
             $studSess->status = $status;
-    
+
             $studSess->save();
+
+            $student = Student::find($id);
+            $student->status = $status;
+            $student->save();
 
         }
 

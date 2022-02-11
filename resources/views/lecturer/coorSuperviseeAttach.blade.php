@@ -45,83 +45,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>
-                                        <select class="custom-select">
-                                            <option selected="selected">Open this select menu</option>
-                                            <option value="1">Zaliha binti Othman</option>
-                                            <option value="2">Roslan bin Ahmad</option>
-                                            <option value="3">Naziffa Raha</option>
-                                        </select>
-                                    </td>
 
+                                @if($internship->isEmpty())
+                                   <tr>
+                                       <td colspan="10" class="bg-light">There is no data.</td>
+                                   </tr>
+                               @endif
+
+                               @foreach ($internship as $intern)
                                     <tr>
-                                        <td>65675765675</td>
-                                        <td>Ali</td>
-                                        <td>BK101 -  Diploma of Accounting</td>
-                                        <td>Zaleha binti Otdman</td>
-                                    </tr>
-                                    <tr>
-                                        <td>65675765675</td>
-                                        <td>Muhammd</td>
-                                        <td>BK101 -  Diploma of Language</td>
+                                        <td>{{ $intern->session->session_code }}</td>
+                                        <td>{{ $intern->studentInfo->studentID }}</td>
+                                        <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
+                                        {{-- <td>
+                                            @php
+                                                $prog = $programme->find($intern->studSession->programme_id)->first();
+                                            @endphp
+                                            {{ $prog->code }} - {{ $prog->name }}  
+                                        </td> --}}
                                         <td>
-                                            <select class="custom-select">
-                                                <option selected="selected">Open this select menu</option>
-                                                <option value="1">Zaliha binti Othman</option>
-                                                <option value="2">Roslan bin Ahmad</option>
-                                                <option value="3">Naziffa Raha</option>
-                                            </select>
+                                            <form action="{{ route('attach.supervisee') }}" method="POST">
+                                                @csrf
+
+                                                <input type="hidden" id="id" name="id" value="{{ $intern->id }}">
+
+                                                <select id="lecturer_id" class="custom-select" name="lecturer_id" required onchange=" this.form.submit()">>
+                                                    @foreach ($lect as $data)
+                                                        
+                                                        <option value="{{ $data->id }}" @if( $intern->lecturer_id == $data->id) selected @endif>{{ $data->lecturerInfo->f_name }} {{ $data->lecturerInfo->f_name }}</option>
+                                                       
+                                                    @endforeach
+                                                </select>
+
+                                            </form>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>65675765675</td>
-                                        <td>Ain</td>
-                                        <td>BK101 -  Diploma of Language</td>
-                                        <td>Zaleha binti Otdman</td>
-                                    </tr>
-                                    <tr>
-                                        <td>65675765675</td>
-                                        <td>Sarah</td>
-                                        <td>BK101 -  Diploma of Language</td>
-                                        <td>Zaleha binti Otdman</td>
-                                    </tr>
-                                    <tr>
-                                        <td>65675765675</td>
-                                        <td>Amiera</td>
-                                        <td>BK101 -  Diploma of Language</td>
-                                        <td>Rolsan bin Ahmad</td>
-                                    </tr>
-                                    <tr>
-                                        <td>65675765675</td>
-                                        <td>Muhammd</td>
-                                        <td>BK101 -  Diploma of Language</td>
-                                        <td>
-                                            <select class="custom-select">
-                                                <option selected="selected">Open this select menu</option>
-                                                <option value="1">Zaliha binti Othman</option>
-                                                <option value="2">Roslan bin Ahmad</option>
-                                                <option value="3">Naziffa Raha</option>
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>65675765675</td>
-                                        <td>Muhammd</td>
-                                        <td>BK101 -  Diploma of Language</td>
-                                        <td>Rolsan bin Ahmad</td>
-                                    </tr>
-                                    <tr>
-                                        <td>65675765675</td>
-                                        <td>Farhan</td>
-                                        <td>BK101 -  Diploma of Language</td>
-                                        <td>Rolsan bin Ahmad</td>
-                                    </tr>
+                                @endforeach
 
-                                </tr>
                             </tbody>
                         </table>
                     </div>

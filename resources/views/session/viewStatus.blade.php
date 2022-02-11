@@ -62,7 +62,7 @@
                                         <td>{{ $sess->programme->code}} - {{ $sess->programme->name}}</td>
                                         <td>
                                             @php
-                                                if ($sess->status == 'rejected') {
+                                                if ($sess->status == 'reject') {
                                                     $style = 'badge-danger';
                                                     $status = 'Rejected';
                                                 } elseif ($sess->status == 'approve') {

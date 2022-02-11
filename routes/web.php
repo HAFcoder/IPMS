@@ -141,6 +141,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     //under lecturer
     Route::get('coordinator/view-all/supervisee', [LecturerController::class, 'viewSupervisee']);
     Route::get('coordinator/attach/supervisee', [LecturerController::class, 'attachSupervisee']);
+    Route::post('coordinator/attach/supervisee/lecturer', [LecturerController::class, 'attachLecturer'])->name('attach.supervisee');
 
     //under company letter
     Route::get('coordinator/company/acceptence-letter', [companiesController::class, 'acceptance']);
