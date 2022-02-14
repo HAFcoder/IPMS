@@ -7,6 +7,17 @@
     <!-- Start datatable css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/jquery.dataTables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/dataTables.bootstrap4.min.css') }}">
+
+    <style>
+        .btn_width{
+            width:110px;
+            margin: 2px;
+        }
+
+        .noHover{
+            pointer-events: none;
+        }
+    </style>
 @endsection
 
 @section('breadcrumbs')
@@ -90,9 +101,24 @@
                     <div class="data-tables datatable-primary">
                         <div class="text-right p-2">
                             <h5 class="header-title">Action Button Note :</h5>
-                            <p><span class="badge badge-pill badge-success">Accepted</span> - Your internship request have been accepted by company.</p>
-                            <p><span class="badge badge-pill badge-danger">Declined</span> - Your have declined the internship offer from company.</p>
-                            <p><span class="badge badge-pill badge-warning">Rejected</span> - Your internship request have been rejected by company.</p>
+                            <ul class="profile-page-user list-group list-group-flush">
+                                <li class="mb-2">
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-success btn_width noHover">Accept</a></span>
+                                    <span class="btn-note-detail"> - Your internship application has been accepted by the company.</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-danger btn_width noHover">Decline</a></span>
+                                    <span class="btn-note-detail">- You declined internship offer from the company.</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-warning btn_width noHover">Reject</a></span>
+                                    <span class="btn-note-detail">- Your internship application has been rejected by the company.</span>
+                                </li>
+                                <li class="mb-2">
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-primary btn_width noHover">See Details</a></span>
+                                    <span class="btn-note-detail">- View more details of your internship application.</span>
+                                </li>
+                            </ul>
                         </div>
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
@@ -142,13 +168,13 @@
                                     </td>
                                     <td>
                                         @if($intern->status == 'accepted')
-                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-primary">See Details</a>
+                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-primary btn_width">See Details</a>
                                         @elseif($intern->status == 'declined' || $intern->status == 'rejected')
                                             -
                                         @else
-                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-success">Accepted</a>
-                                            <a href="{{ route('company.student-decline',$intern->id) }}" class="btn btn-sm btn-danger">Declined</a>
-                                            <a href="{{ route('company.student-reject',$intern->id) }}" class="btn btn-sm btn-warning">Rejected</a>
+                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-success mb-2 btn_width">Accept</a> <br>
+                                            <a href="{{ route('company.student-decline',$intern->id) }}" class="btn btn-sm btn-danger mb-2 btn_width">Decline</a> <br>
+                                            <a href="{{ route('company.student-reject',$intern->id) }}" class="btn btn-sm btn-warning btn_width">Reject</a>
                                         @endif
                                     </td>
                                 </tr>

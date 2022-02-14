@@ -2845,14 +2845,14 @@ table.dataTable thead td {
 }
 
 .profile-page-content {
-    padding: 5px !important;
+    padding: 2px !important;
 }
 
 .profile-page-name {
     font-size: 17px;
     font-weight: bold;
     display: inline-block;
-    width: 30%;
+    width: 35%;
     text-align: right;
     color: #502BA7;
     padding-right: 10px;
@@ -2866,3 +2866,25 @@ table.dataTable thead td {
     width: 60%;
     padding-left: 20px;
 }
+
+.btn-note-content {
+    /* display: inline-block; */
+    padding: 2px !important;
+}
+
+.btn-note {
+    display: inline-block;
+    width: 60%;
+    text-align: right;
+    padding-right: 5px;
+    vertical-align: baseline;
+}
+
+.btn-note-detail {
+    /* float: right; */
+    display: inline-block;
+    width: 30%;
+    text-align: left;
+    padding-left: 5px;
+}
+
