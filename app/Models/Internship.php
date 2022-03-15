@@ -18,6 +18,7 @@ use App\Models\LectEvaluate;
 use App\Models\StudentFeedback;
 use App\Models\Logbook;
 use App\Models\CompanySv;
+use App\Models\GradSurveyAnswer;
 
 class Internship extends Model
 {
@@ -87,5 +88,10 @@ class Internship extends Model
     public function logbook()
     {
         return $this->hasOne(Logbook::class);
+    }
+
+    public function graduateAnswer()
+    {
+        return $this->hasOne(GradSurveyAnswer::class, 'internship_id' ,'id');
     }
 }

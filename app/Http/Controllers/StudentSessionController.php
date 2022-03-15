@@ -38,7 +38,9 @@ class StudentSessionController extends Controller
 
         // $sessions = Session::where('status', '=', 'active')->get();
         Alert::success('Success!', 'Your session registration has been successful.');
-        return view('student.index');
+
+        // student register sesison in studnet page
+        return $this->viewStatus();
     }
 
     public function index()
@@ -60,7 +62,7 @@ class StudentSessionController extends Controller
 
         return redirect()->back();
     }
-
+ 
     public function updateStatus(Request $request)
     {
         $status = $request->get('status');
@@ -72,12 +74,8 @@ class StudentSessionController extends Controller
 
             $studSess = StudentSession::find($id);
             $studSess->status = $status;
-
+    
             $studSess->save();
-
-            $student = Student::find($id);
-            $student->status = $status;
-            $student->save();
 
         }
 

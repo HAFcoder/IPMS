@@ -28,23 +28,40 @@
             <div class="card">
                 <div class="card-body">
 
-                    <div class="text-center mb-4">
-                        <h4>
-                            Please choose your session :
-                        </h4>
-                        <select class="custom-select" name="session" id="session" onchange="selectSession()">
-                            <option selected value="">Please select one</option>
-                            @foreach ($internship as $intern)
-                                <option value="{{$intern->id}}">{{ $intern->session->session_code }} - {{ $intern->company->name }}</option>
-                            @endforeach
-                        </select>
+                    <p><b>Details of Internship</b></p>
+                            
+                    <div class="table-responsive table-bordered">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th>Session Code</th>
+                                    <td>{{ $internship->session->session_code }}</td>
+                                </tr>
+                                <tr>
+                                    <th>Company Name</th>
+                                    <td>{{ $internship->company->name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <div class="col-10 mt-5 mx-auto" id="form_section">
+        @if(!empty($internship->graduateAnswer))
+        
+        <div class="col-10 mt-5 mx-auto" id="complete_section">
+            <div class="card">
+                <div class="card-body bg-success">
+                    <p class=" text-white">Attention : Your graduate survey submission for this session has been submitted.</p>
+                </div>
+            </div>
+        </div>
+
+        @else
+
+        <div class="col-10 mt-5 mx-auto" id="form_section" @if(!empty($internship->graduateAnswer)) hidden @endif>
             <div class="card">
                 <div class="card-body">
 
@@ -288,6 +305,9 @@
                 </div>
             </div>
         </div>
+        
+        @endif
+
 
     </div>
     
@@ -298,7 +318,7 @@
     <script>
 
         $(document).ready(function() {
-            $('#form_section').hide();
+            //$('#form_section').hide();
             //alert("hi");
         });
 

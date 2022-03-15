@@ -98,8 +98,9 @@ class FormEvaluateController extends Controller
         $stud = Student::find($id);
         $stud_info = StudentInfo::where('stud_id', $id)->first();
 
-        $internship = Internship::where('student_id',$id)->where('status','accepted')->with('session','company')->get();
+        $internship = Internship::where('student_id',$id)->where('status','accepted')->with('session','company','graduateAnswer')->first();
         //dump($internship);
+
         return view('feedback.graduate', compact('stud', 'stud_info','internship'));
     }
 
