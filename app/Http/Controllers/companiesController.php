@@ -311,14 +311,16 @@ class companiesController extends Controller
 
     public function companySV()
     {
-        return view('company.coorCompanySVEva');
+        $internship = Internship::with('company','session','studentInfo','svEvaluation')->where('status','accepted')->get();
+        //dump($internship);
+        return view('company.coorCompanySVEva',compact('internship'));
     }
 
     //studnet-company
     public function statusAll()
     {
-        $internship = Internship::with('company','session','studentInfo')->get();
-        //dump($internship);
+        $internship = Internship::with('company','session','studentInfo')->orderBy('id','DESC')->get();
+        //dump($internship->groupBy('company_id'));
         return view('company.coorStudentStatusAll',compact('internship'));
     }
     

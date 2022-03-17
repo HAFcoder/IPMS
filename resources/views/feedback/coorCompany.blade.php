@@ -26,11 +26,14 @@
 
 @endsection
 
+<!-- access model class inside blade -->
+@inject('programme', 'App\Models\Programme')
+
 @section('content')
 
     <div class="row">
 
-        <div class="col-8 mt-5 mx-auto">
+        <div class="col-12 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Student List</h4>
@@ -38,78 +41,51 @@
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th>Session Code</th>
                                     <th>Student ID</th>
                                     <th>Name</th>
                                     <th>Programme</th>
                                     <th>Company</th>
+                                    <th>Feedback</th>
                                     <th>View Result</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>ABS Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
 
+                                @if($internship->isEmpty())
+                                   <tr>
+                                       <td colspan="10" class="bg-light">There is no data.</td>
+                                   </tr>
+                               @endif
+
+                               @foreach ($internship as $intern)
                                 <tr>
-                                    <td>65675765675</td>
-                                    <td>Ali</td>
-                                    <td>BK101 -  Diploma of Accounting</td>
-                                    <td>Oil and Gas Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
+                                    <td>{{ $intern->session->session_code }}</td>
+                                    <td>{{ $intern->studentInfo->studentID }}</td>
+                                    <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
+                                    <td>
+                                        @php
+                                            $prog = $programme->find($intern->studSession->programme_id)->first();
+                                        @endphp
+                                        {{ $prog->code }} - {{ $prog->name }}  
+                                    </td>
+                                    <td>{{ $intern->company->name }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-paper-plane"></i> Send Form</a>
+                                    </td>
+                                    <td>
+                                        
+                                        @if ($intern->empIndustrySurvey == null)
+                                                
+                                            <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
+                                        @else
+
+                                            <a href="#" class="btn btn-success btn-sm">View Result</a>
+                                        @endif
+
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>One Learning Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Ain</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>HJGYTG Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Sarah</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>DIY Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Amiera</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>MAYBANK Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>CIMB Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Muhammd</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>TESCO Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>65675765675</td>
-                                    <td>Farhan</td>
-                                    <td>BK101 -  Diploma of Language</td>
-                                    <td>RHB Sdn Bhd</td>
-                                    <td><a href="#"><i class="ti-eye"></i></a></td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

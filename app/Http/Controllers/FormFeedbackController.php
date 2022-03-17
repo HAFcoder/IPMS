@@ -6,6 +6,7 @@ use App\Models\FormFeedback;
 use App\Models\StudentInfo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Internship;
 
 class FormFeedbackController extends Controller
 {
@@ -97,7 +98,9 @@ class FormFeedbackController extends Controller
     //for compnay
     public function company()
     {
-        return view('feedback.coorCompany');
+        $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->get();
+        //dump($internship);
+        return view('feedback.coorCompany',compact('internship'));
     }
 
     public function logbookReport()

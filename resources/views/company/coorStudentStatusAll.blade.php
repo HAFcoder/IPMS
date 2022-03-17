@@ -10,7 +10,7 @@
 
 <div class="col-sm-6">
     <div class="breadcrumbs-area clearfix">
-        <h4 class="page-title pull-left">Stundent Application Status</h4>
+        <h4 class="page-title pull-left">Student Application Status</h4>
         <ul class="breadcrumbs pull-left">
 
             @if (Auth::guard('lecturer')->user()->role == 'coordinator')
@@ -111,10 +111,16 @@
 
 @endsection
 
-
 @section('scripts')
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/dw/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+
+        } );
+    </script>
+
 @endsection

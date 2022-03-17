@@ -19,6 +19,8 @@ use App\Models\StudentFeedback;
 use App\Models\Logbook;
 use App\Models\CompanySv;
 use App\Models\GradSurveyAnswer;
+use App\Models\SvEvaluationMarks;
+use App\Models\EmpIndustrySurveyAnswer;
 
 class Internship extends Model
 {
@@ -94,4 +96,15 @@ class Internship extends Model
     {
         return $this->hasOne(GradSurveyAnswer::class, 'internship_id' ,'id');
     }
+
+    public function svEvaluation()
+    {
+        return $this->hasOne(SvEvaluationMarks::class);
+    }
+
+    public function empIndustrySurvey()
+    {
+        return $this->hasOne(EmpIndustrySurveyAnswer::class);
+    }
+
 }

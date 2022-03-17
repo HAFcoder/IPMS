@@ -221,7 +221,7 @@
                                             class="ti-agenda"></i> <span>By Session</span></a></li>
                                 {{-- <li><a href="{{ url('/lecturer/report-student') }}"><i class="ti-file"></i> <span>Report</span></a></li> --}}
                             @else
-                                <li><a href="{{ url('coordinator/feedback/company') }}"><i class="ti-agenda"></i> <span>Company</span></a></li>
+                                <li><a href="{{ url('coordinator/feedback/company') }}"><i class="ti-agenda"></i> <span>Company Feedback</span></a></li>
                                 <li><a href="{{ url('coordinator/feedback/logbook-report') }}"><i class="ti-agenda"></i> <span>Logbook & Report</span></a></li>
                                 <li><a href="invoice.html"><i class="ti-file"></i> <span>Presentation</span></a>
                                     <li><a href="invoice.html"><i class="ti-file"></i> <span>Graduate Survey</span></a>
