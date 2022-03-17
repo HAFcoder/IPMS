@@ -78,7 +78,7 @@
                         <div class="form-control-feedback">Write 2-4 short & energetic sentences to interest the reader! Mention your role, experience & most importantly - your biggest achievements, best qualities and skills.</div>
 
                         <div class="form-group"> 
-                            <textarea class="form-control" name="description" id="description" rows="3" required></textarea> 
+                            <textarea class="form-control" name="description" id="description" rows="3" required>@if ($yesno == 'yes'){{$resume->summary}} @endif</textarea> 
                         </div> 
 
                         <hr>
@@ -164,7 +164,6 @@
 <script src="{{ asset('assets/dw/select2.min.js') }}"></script>
 <script>
     $(document).ready(function() {
-
         
         $('.custom-select').select2();
 
@@ -370,15 +369,75 @@
 
     });
 
-    
-
-
 </script>
 
 <script>
 
-var i = 0;
-var j = 0;
+    var i = 0;
+    var j = 0;
+
+    $(document).ready(function() {
+        @php
+            if ($yesno == 'yes'){
+                $countSkill = count($skillArr);
+                $countLang = count($langArr);
+
+                for ($y = 0; $y < $countSkill; $y++){
+                    @endphp
+                        // var val = $('#valskill').val();
+                        var val = @php echo "'".$skillArr[$y]."'"; @endphp ;
+
+                        if(val != ""){
+                    
+                        $('#areaskill').append(
+                            '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
+                                '<input class="border-0 text-center" type="text" readonly name="skill['+ j +']" id="skill['+ j +']" value="'+val+'">'+
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                                '<span aria-hidden="true">&times;</span>'+
+                                '</button>'+
+                            '</div>'
+                        );
+                        }
+
+                        console.log(val);
+                        j++;
+                        console.log(j);
+
+                        $('#valskill').val("");
+
+                    @php
+                }
+
+                for ($x = 0; $x < $countLang; $x++){
+                    @endphp
+                        // var val = $('#valskill').val();
+                        var val = @php echo "'".$langArr[$x]."'"; @endphp ;
+        
+                        if(val != ""){
+
+                            $('#arealanguage').append(
+                                '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
+                                    '<input class="border-0 text-center" readonly type="text" name="language['+ i +']" id="language['+ i +']" value="'+val+'">'+
+                                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
+                                    '<span aria-hidden="true">&times;</span>'+
+                                    '</button>'+
+                                '</div>'
+                                
+                            );
+                        }
+
+                        console.log(val);
+                        i++;
+                        console.log(i);
+
+                        $('#vallanguage').val("");
+
+                    @php
+                }
+            }
+        @endphp
+    
+    });
 
     function addskill(){
     
@@ -414,11 +473,9 @@ var j = 0;
     
     }
     
-    
     function addlanguage(){
     
         var val = $('#vallanguage').val();
-        
         
         if(val != ""){
 
@@ -432,7 +489,6 @@ var j = 0;
                 
             );
         }
-        
 
         console.log(val);
         i++;
@@ -442,10 +498,7 @@ var j = 0;
     
     }
 
-
 </script>
-
-
 
 @endsection
 

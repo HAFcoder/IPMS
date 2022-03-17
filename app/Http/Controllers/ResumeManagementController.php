@@ -96,14 +96,13 @@ class ResumeManagementController extends Controller
 
         if(!empty($resume)){
             $yesno = 'yes';
-            
-            //$markArr = explode(',' , $presentMark->marks);
-
+            $skillArr = explode(',' , $resume->skills);
+            $langArr = explode(',' , $resume->language);
         }
 
         //dump($stud);
 
-        return view('resume.createResume',compact('stud', 'resume','yesno'));
+        return view('resume.createResume',compact('stud', 'resume','yesno', 'skillArr', 'langArr'));
     }
 
     public function getDataResume(Request $request)
