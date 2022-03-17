@@ -33,6 +33,16 @@
                     <form action="{{ route('student.resume.show') }}" method="post" target="_blank">
                         @csrf
 
+                        <input name="resumeId" id="resumeId" 
+                        @if ($yesno == 'yes')
+                            value="{{$resume->id}}"
+                        @else
+                            value="0"
+                        @endif
+                        style="display: none">
+                        <input name="studentId" id="studentId" value="{{ Auth::user()->id }}" style="display: none">
+
+
                         <div class="form-group ">
                             <label for="example-text-input" class="col-form-label">Full Name</label>
                             <input class="form-control" type="text" name="name" required value="{{ $stud->student_info->f_name }} {{ $stud->student_info->l_name }}">
@@ -367,6 +377,8 @@
 
 <script>
 
+var i = 0;
+var j = 0;
 
     function addskill(){
     
@@ -385,7 +397,7 @@
             
             $('#areaskill').append(
                 '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
-                    '<input class="border-0 text-center" type="text" readonly name="skill[]" value="'+val+'">'+
+                    '<input class="border-0 text-center" type="text" readonly name="skill['+ j +']" id="skill['+ j +']" value="'+val+'">'+
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
                       '<span aria-hidden="true">&times;</span>'+
                     '</button>'+
@@ -395,6 +407,8 @@
         }
 
         console.log(val);
+        j++;
+        console.log(j);
 
         $('#valskill').val("");
     
@@ -405,20 +419,24 @@
     
         var val = $('#vallanguage').val();
         
+        
         if(val != ""){
 
             $('#arealanguage').append(
                 '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
-                    '<input class="border-0 text-center" readonly type="text" name="language[]" value="'+val+'">'+
+                    '<input class="border-0 text-center" readonly type="text" name="language['+ i +']" id="language['+ i +']" value="'+val+'">'+
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
-                      '<span aria-hidden="true">&times;</span>'+
+                    '<span aria-hidden="true">&times;</span>'+
                     '</button>'+
                 '</div>'
+                
             );
-                    
         }
+        
 
         console.log(val);
+        i++;
+        console.log(i);
 
         $('#vallanguage').val("");
     

@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Resume;
 use App\Models\ResumeManagement;
 
 class ResumeManagementController extends Controller
@@ -88,31 +90,68 @@ class ResumeManagementController extends Controller
         //$resume = $request->session()->get('resume');
 
         $stud = $this->getStudentInfo();
+        $resume = Resume::where('stud_id', Auth::user()->id)->first();
+
+        $yesno= 'no';
+
+        if(!empty($resume)){
+            $yesno = 'yes';
+            
+            //$markArr = explode(',' , $presentMark->marks);
+
+        }
 
         //dump($stud);
 
-        return view('resume.createResume',compact('stud'));
+        return view('resume.createResume',compact('stud', 'resume','yesno'));
     }
 
     public function getDataResume(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required',
-        //     'phone' => 'required',
-        //     'city' => 'required',
-        //     'state' => 'required',
-        // ]);
+        //dump($request);
+        $langArr = array();
+        $skillArr = array();
+
+        $request->validate([
+            'description'=>'required',
+        ]);
+
+        if($request->resumeId == 0){
+            $resumedb = new Resume();
+        }else{
+            $resumedb = Resume::find($request->resumeId);
+        }
+
+        $size = count(collect($request)->get('language'));
+        for ($x = 0; $x < $size; $x++)
+        {
+            if($request->language[$x] != null)
+                array_push($langArr, $request->language[$x]);            
+        }
+
+        $size = count(collect($request)->get('skill'));
+        for ($y = 0; $y < $size; $y++)
+        {
+            if($request->skill[$y] != null)
+                array_push($skillArr, $request->skill[$y]);            
+        }
+
+        $langStr = implode(',' , $langArr);
+        $skillStr = implode(',' , $skillArr);
+
+        $resumedb->stud_id = $request->studentId;
+        $resumedb->summary = $request->description;
+        $resumedb->language = $langStr;
+        $resumedb->skills = $skillStr;
  
         //     $resume = $request->session()->get('resume');
         //     $resume->fill($validatedData);
         //     $request->session()->put('resume', $resume);
-
-        $resume = $request;
+        $resumedb->save();
         
         //dump($resume);
 
-
+        $resume = $request;
         return view('resume.showResume',compact('resume'));
     }
 }
