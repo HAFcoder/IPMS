@@ -60,18 +60,6 @@
                             </div>
                         </div>
 
-                        {{-- <div class="row">
-                            <div class="form-group col-md-6">
-                                <label for="example-text-input" class="col-form-label">City</label>
-                                <input class="form-control" type="text" vname="city" required>
-                            </div>
-    
-                            <div class="form-group col-md-6">
-                                <label for="example-text-input" class="col-form-label">State</label>
-                                <input class="form-control" type="text" name="state" required>
-                            </div>
-                        </div> --}}
-
                         <hr>
 
                         <h2 >Professional Summary</h2>
@@ -167,13 +155,189 @@
         
         $('.custom-select').select2();
 
-        var max_fields = 10;
+        var max_fields = 3;
 
         //experience form part
         var experience = $(".expForm_area");
         var btn_experience = $(".add_exp_form");
+        var x = 0;
+        var y = 0;
+        var z = 0;
+        var h = 1;
+        var a = 0;
+        var max_ref = 3;
 
-        var x = 1;
+        //load data from db
+        @php
+            if ($yesno == 'yes'){
+                $countExp = count($expTitleArr);
+                $countEdu = count($eduCourseArr);
+                $countCert = count($certTitleArr);
+                $countRef = count($refCompanyArr);
+
+                for ($y = 0; $y < $countExp; $y++){
+                    @endphp
+                    
+                        $(experience).append( 
+                            '<div>                                                                                                             '+ 
+                            '    <div class="row">                                                                                             '+                         
+                            '        <div class="form-group col-md-6">                                                                         '+                             
+                            '                <label for="example-text-input" class="col-form-label">Job Title</label>                          '+ 
+                            '                <input class="form-control" type="text" name="experience_title['+ x +']"                          '+
+                            '               id="experience_title['+ x +']" value="'+ @php echo "'".$expTitleArr[$y]."'"; @endphp +'" required> '+                                 
+                            '        </div>                                                                                                    '+             
+                            '        <div class="form-group col-md-6">                                                                         '+
+                            '                <label for="example-text-input" class="col-form-label">Company</label>                            '+     
+                            '                <input class="form-control" type="text" name="experience_company['+ x +']"                        '+
+                            '               id="experience_company['+ x +']" value="'+ @php echo "'".$expCompanyArr[$y]."'"; @endphp +'" required>'+                     
+                            '        </div>                                                                                                    '+                     
+                            '    </div>                                                                                                        '+             
+                            '    <div class="row">                                                                                             '+             
+                            '        <div class="form-group col-md-6">                                                                         '+
+                            '                <label for="example-text-input" class="col-form-label">Start Date</label>                         '+         
+                            '                <input class="form-control" type="month" name="experience_start['+ x +']"                         '+
+                            '               id="experience_start['+ x +']" value="'+ @php echo "'".$expStartArr[$y]."'"; @endphp +'" required> '+
+                            '        </div>                                                                                                    '+                 
+                            '        <div class="form-group col-md-6">                                                                         '+
+                            '                <label for="example-text-input" class="col-form-label">End Date</label>                           '+                 
+                            '                <input class="form-control" type="month" name="experience_end['+ x +']"                           '+
+                            '               id="experience_end['+ x +']" value="'+ @php echo "'".$expEndArr[$y]."'"; @endphp +'" required>     '+                                         
+                            '        </div>                                                                                                    '+                                     
+                            '    </div>                                                                                                        '+                         
+                            '    <div class="form-group">                                                                                      '+
+                            '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
+                            '            <textarea class="form-control" name="experience_desc['+ x +']" id="experience_desc['+ x +']" '+
+                            '           rows="3" required>'+ @php echo "'".$expDescArr[$y]."'"; @endphp +'</textarea>                 '+                                     
+                            '    </div>                                                                                                        '+                     
+                            '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                            '<hr>                                                                                                              '+                         
+                            '</div>                                                                                                            '                     
+                        );
+
+                        x++;
+                        console.log(x);
+
+                    @php
+                }
+
+                for ($y = 0; $y < $countEdu; $y++){
+                    @endphp
+                    
+                        $(education).append( 
+                        '<div>                                                                                                             '+ 
+                        '    <div class="row">                                                                                             '+                         
+                        '        <div class="form-group col-md-6">                                                                         '+                             
+                        '                <label for="example-text-input" class="col-form-label">Course Name</label>                        '+ 
+                        '                <input class="form-control" type="text" name="education_course['+ y +']"                          '+
+                        '               id="education_course['+ y +']" value="'+ @php echo "'".$eduCourseArr[$y]."'"; @endphp +'" required>'+                                 
+                        '        </div>                                                                                                    '+             
+                        '        <div class="form-group col-md-6">                                                                         '+
+                        '                <label for="example-text-input" class="col-form-label">University Name</label>                    '+     
+                        '                <input class="form-control" type="text" name="education_uni['+ y +']" id="education_uni['+ y +']" '+
+                        '               value="'+ @php echo "'".$eduUniArr[$y]."'"; @endphp +'" required>                          '+                     
+                        '        </div>                                                                                                    '+                     
+                        '    </div>                                                                                                        '+             
+                        '    <div class="row">                                                                                             '+             
+                        '        <div class="form-group col-md-6">                                                                         '+
+                        '                <label for="example-text-input" class="col-form-label">Start Date</label>                         '+         
+                        '                <input class="form-control" type="month" name="education_start['+ y +']"                          '+
+                        '               id="education_start['+ y +']" value="'+ @php echo "'".$eduStartArr[$y]."'"; @endphp +'" required>                       '+                                             
+                        '        </div>                                                                                                    '+                 
+                        '        <div class="form-group col-md-6">                                                                         '+
+                        '                <label for="example-text-input" class="col-form-label">End Date</label>                           '+                 
+                        '                <input class="form-control" type="month" name="education_end['+ y +']" id="education_end['+ y +']" '+
+                        '               value="'+ @php echo "'".$eduEndArr[$y]."'"; @endphp +'" required>                         '+                                         
+                        '        </div>                                                                                                    '+                                     
+                        '    </div>                                                                                                        '+                                                                                                           
+                        '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                        '<hr>                                                                                                              '+                         
+                        '</div>                                                                                                            '                     
+                    );
+
+                    y++;
+                    console.log(y);
+
+                    @php
+                }
+
+                for ($y = 0; $y < $countCert; $y++){
+                    @endphp
+                    
+                    $(certificate).append( 
+                        '<div>                                                                                                             '+ 
+                        '    <div class="row">                                                                                             '+                         
+                        '        <div class="form-group col-md-6">                                                                         '+                             
+                        '                <label for="example-text-input" class="col-form-label">Achievement Title</label>                  '+ 
+                        '                <input class="form-control" type="text" name="certificate_title['+ z +']"                         '+
+                        '               id="certificate_title['+ z +']" value="'+ @php echo "'".$certTitleArr[$y]."'"; @endphp +'" required>'+                                 
+                        '        </div>                                                                                                    '+                
+                        '        <div class="form-group col-md-6">                                                                         '+
+                        '                <label for="example-text-input" class="col-form-label">Achieve Date</label>                   '+         
+                        '                <input class="form-control" type="month" name="certificate_date['+ z +']"                         '+
+                        '               id="certificate_date['+ z +']" value="'+ @php echo "'".$certDateArr[$y]."'"; @endphp +'" required>'+                                             
+                        '        </div>                                                                                                    '+                   
+                        '    </div>                                                                                                        '+                           
+                        '    <div class="form-group">                                                                                      '+
+                        '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
+                        '            <textarea class="form-control" name="certificate_desc['+ z +']" id="certificate_desc['+ z +']" rows="3" required>'+
+                        '            '+ @php echo "'".$certDescArr[$y]."'"; @endphp +'</textarea>                '+                                     
+                        '    </div>                                                                                                        '+                     
+                        '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                        '<hr>                                                                                                              '+                         
+                        '</div>                                                                                                            '                     
+                    );
+                    z++;
+                    console.log(z);
+
+                    @php
+                }
+
+                for ($y = 0; $y < $countRef; $y++){
+                    @endphp
+                    
+                    $(reference).append( 
+                        '<h5 class="text-muted mt-10 d-block"><strong>Reference '+ h +':</strong></h5>            '+                            
+                        '<div class="form-group ">                                                              '+     
+                        '    <label for="example-text-input" class="col-form-label">Full Name</label>           '+                 
+                        '    <input class="form-control" type="text" name="reference_name['+ a +']"             '+
+                        '    id="reference_name['+ a +']" value="'+ @php echo "'".$refNameArr[$y]."'"; @endphp +'" required>'+                         
+                        '</div>                                                                                 '+                                 
+                        '<div class="row">                                                                      '+                                 
+                        '    <div class="form-group col-md-6">                                                  '+                                     
+                        '        <label for="example-text-input" class="col-form-label">Company Name</label>    '+                                             
+                        '        <input class="form-control" type="text" name="reference_company['+ a +']"      '+
+                        '       id="reference_company['+ a +']" value="'+ @php echo "'".$refCompanyArr[$y]."'"; @endphp +'" required>   '+                             
+                        '    </div>                                                                             '+                                     
+                        '    <div class="form-group col-md-6">                                                  '+                                         
+                        '        <label for="example-text-input" class="col-form-label">Position</label>        '+                                 
+                        '        <input class="form-control" type="text" name="reference_position['+ a +']"     '+
+                        '       id="reference_position['+ a +']" value="'+ @php echo "'".$refPositionArr[$y]."'"; @endphp +'" required>  '+                                     
+                        '    </div>                                                                             '+                                     
+                        '</div>                                                                                 '+                                     
+                        '<div class="row">                                                                      '+                                             
+                        '    <div class="form-group col-md-6">                                                  '+                                     
+                        '        <label for="example-text-input" class="col-form-label">Email</label>           '+                         
+                        '        <input class="form-control" type="email" name="reference_email['+ a +']"       '+
+                        '       id="reference_email['+ a +']" value="'+ @php echo "'".$refEmailArr[$y]."'"; @endphp +'" required>    '+                     
+                        '    </div>                                                                             '+                 
+                        '    <div class="form-group col-md-6">                                                  '+                         
+                        '        <label for="example-text-input" class="col-form-label">Phone Number</label>    '+                         
+                        '        <input class="form-control" type="text" name="reference_phone['+ a +']"        '+
+                        '       id="reference_phone['+ a +']" value="'+ @php echo "'".$refPhoneArr[$y]."'"; @endphp +'" required>    '+                 
+                        '    </div>                                                                             '+                    
+                        '</div>                                                                                 '+                 
+                        '<hr />                                                                                 '                 
+                    );
+                    h++;
+                    a++;
+                    console.log(a);
+
+                    @php
+                }
+
+            }
+        @endphp
+
         $(btn_experience).click(function(e) {
             e.preventDefault();
             if (x < max_fields) {
@@ -183,32 +347,33 @@
                     '    <div class="row">                                                                                             '+                         
                     '        <div class="form-group col-md-6">                                                                         '+                             
                     '                <label for="example-text-input" class="col-form-label">Job Title</label>                          '+ 
-                    '                <input class="form-control" type="text" name="experience_title[]" required>                       '+                                 
+                    '                <input class="form-control" type="text" name="experience_title['+ x +']" id="experience_title['+ x +']" required>                       '+                                 
                     '        </div>                                                                                                    '+             
                     '        <div class="form-group col-md-6">                                                                         '+
                     '                <label for="example-text-input" class="col-form-label">Company</label>                            '+     
-                    '                <input class="form-control" type="text" name="experience_company[]" required>                     '+                     
+                    '                <input class="form-control" type="text" name="experience_company['+ x +']" id="experience_company['+ x +']" required>                     '+                     
                     '        </div>                                                                                                    '+                     
                     '    </div>                                                                                                        '+             
                     '    <div class="row">                                                                                             '+             
                     '        <div class="form-group col-md-6">                                                                         '+
                     '                <label for="example-text-input" class="col-form-label">Start Date</label>                         '+         
-                    '                <input class="form-control" type="month" name="experience_start[]" required>                      '+                                             
+                    '                <input class="form-control" type="month" name="experience_start['+ x +']" id="experience_start['+ x +']" required>                      '+                                             
                     '        </div>                                                                                                    '+                 
                     '        <div class="form-group col-md-6">                                                                         '+
                     '                <label for="example-text-input" class="col-form-label">End Date</label>                           '+                 
-                    '                <input class="form-control" type="month" name="experience_end[]" required>                        '+                                         
+                    '                <input class="form-control" type="month" name="experience_end['+ x +']" id="experience_end['+ x +']" required>                        '+                                         
                     '        </div>                                                                                                    '+                                     
                     '    </div>                                                                                                        '+                         
                     '    <div class="form-group">                                                                                      '+
                     '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
-                    '            <textarea class="form-control" name="experience_desc[]" rows="3" required></textarea>                 '+                                     
+                    '            <textarea class="form-control" name="experience_desc['+ x +']" id="experience_desc['+ x +']" rows="3" required></textarea>                 '+                                     
                     '    </div>                                                                                                        '+                     
                     '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                     '<hr>                                                                                                              '+                         
                     '</div>                                                                                                            '                     
                 );
                 x++;
+                console.log(x);
 
             } else {
                 alert('You Reached the limits')
@@ -219,6 +384,7 @@
             e.preventDefault();
             $(this).parent('div').remove();
             x--;
+            console.log(x);
         })
 
 
@@ -226,7 +392,6 @@
         var education = $(".eduForm_area");
         var btn_education = $(".add_edu_form");
 
-        var y = 1;
         $(btn_education).click(function(e) {
             e.preventDefault();
             if (y < max_fields) {
@@ -236,21 +401,21 @@
                     '    <div class="row">                                                                                             '+                         
                     '        <div class="form-group col-md-6">                                                                         '+                             
                     '                <label for="example-text-input" class="col-form-label">Course Name</label>                        '+ 
-                    '                <input class="form-control" type="text" name="education_course[]" required>                       '+                                 
+                    '                <input class="form-control" type="text" name="education_course['+ y +']" id="education_course['+ y +']" required>                       '+                                 
                     '        </div>                                                                                                    '+             
                     '        <div class="form-group col-md-6">                                                                         '+
                     '                <label for="example-text-input" class="col-form-label">University Name</label>                    '+     
-                    '                <input class="form-control" type="text" name="education_uni[]" required>                          '+                     
+                    '                <input class="form-control" type="text" name="education_uni['+ y +']" id="education_uni['+ y +']" required>                          '+                     
                     '        </div>                                                                                                    '+                     
                     '    </div>                                                                                                        '+             
                     '    <div class="row">                                                                                             '+             
                     '        <div class="form-group col-md-6">                                                                         '+
                     '                <label for="example-text-input" class="col-form-label">Start Date</label>                         '+         
-                    '                <input class="form-control" type="month" name="education_start[]" required>                       '+                                             
+                    '                <input class="form-control" type="month" name="education_start['+ y +']" id="education_start['+ y +']" required>                       '+                                             
                     '        </div>                                                                                                    '+                 
                     '        <div class="form-group col-md-6">                                                                         '+
                     '                <label for="example-text-input" class="col-form-label">End Date</label>                           '+                 
-                    '                <input class="form-control" type="month" name="education_end[]" required>                         '+                                         
+                    '                <input class="form-control" type="month" name="education_end['+ y +']" id="education_end['+ y +']" required>                         '+                                         
                     '        </div>                                                                                                    '+                                     
                     '    </div>                                                                                                        '+                                                                                                           
                     '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
@@ -259,6 +424,7 @@
                 );
 
                 y++;
+                console.log(y);
 
             } else {
                 alert('You Reached the limits')
@@ -269,6 +435,7 @@
             e.preventDefault();
             $(this).parent('div').remove();
             y--;
+            console.log(y);
         })
 
 
@@ -276,7 +443,6 @@
         var certificate = $(".certForm_area");
         var btn_certificate = $(".add_cert_form");
 
-        var z = 1;
         $(btn_certificate).click(function(e) {
             e.preventDefault();
             if (z < max_fields) {
@@ -286,22 +452,23 @@
                     '    <div class="row">                                                                                             '+                         
                     '        <div class="form-group col-md-6">                                                                         '+                             
                     '                <label for="example-text-input" class="col-form-label">Achievement Title</label>                  '+ 
-                    '                <input class="form-control" type="text" name="certificate_title[]" required>                      '+                                 
+                    '                <input class="form-control" type="text" name="certificate_title['+ z +']" id="certificate_title['+ z +']" required>                      '+                                 
                     '        </div>                                                                                                    '+                
                     '        <div class="form-group col-md-6">                                                                         '+
                     '                <label for="example-text-input" class="col-form-label">Achieve Date</label>                   '+         
-                    '                <input class="form-control" type="month" name="certificate_date[]" required>                      '+                                             
+                    '                <input class="form-control" type="month" name="certificate_date['+ z +']" id="certificate_date['+ z +']" required>                      '+                                             
                     '        </div>                                                                                                    '+                   
                     '    </div>                                                                                                        '+                           
                     '    <div class="form-group">                                                                                      '+
                     '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
-                    '            <textarea class="form-control" name="certificate_desc[]" rows="3" required></textarea>                '+                                     
+                    '            <textarea class="form-control" name="certificate_desc['+ z +']" id="certificate_desc['+ z +']" rows="3" required></textarea>                '+                                     
                     '    </div>                                                                                                        '+                     
                     '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                     '<hr>                                                                                                              '+                         
                     '</div>                                                                                                            '                     
                 );
                 z++;
+                console.log(z);
 
             } else {
                 alert('You Reached the limits')
@@ -312,47 +479,49 @@
             e.preventDefault();
             $(this).parent('div').remove();
             z--;
+            console.log(z);
         })
 
 
         //reference form part
         var reference = $(".referForm_area");
         var btn_reference = $(".add_refer_form");
-
-        var a = 1;
+        
         $(btn_reference).click(function(e) {
             e.preventDefault();
-            if (a < max_fields) {
+            if (h < max_ref) {
 
                 $(reference).append( 
-                    '<h5 class="text-muted mt-10 d-block"><strong>Reference '+a+':</strong></h5>            '+                            
+                    '<h5 class="text-muted mt-10 d-block"><strong>Reference '+ h +':</strong></h5>            '+                            
                     '<div class="form-group ">                                                              '+     
                     '    <label for="example-text-input" class="col-form-label">Full Name</label>           '+                 
-                    '    <input class="form-control" type="text" name="reference_name[]" required>          '+                         
+                    '    <input class="form-control" type="text" name="reference_name['+ a +']" id="reference_name['+ a +']" required>          '+                         
                     '</div>                                                                                 '+                                 
                     '<div class="row">                                                                      '+                                 
                     '    <div class="form-group col-md-6">                                                  '+                                     
                     '        <label for="example-text-input" class="col-form-label">Company Name</label>    '+                                             
-                    '        <input class="form-control" type="text" name="reference_company[]" required>   '+                             
+                    '        <input class="form-control" type="text" name="reference_company['+ a +']" id="reference_company['+ a +']" required>   '+                             
                     '    </div>                                                                             '+                                     
                     '    <div class="form-group col-md-6">                                                  '+                                         
                     '        <label for="example-text-input" class="col-form-label">Position</label>        '+                                 
-                    '        <input class="form-control" type="text" name="reference_position[]" required>  '+                                     
+                    '        <input class="form-control" type="text" name="reference_position['+ a +']" id="reference_position['+ a +']" required>  '+                                     
                     '    </div>                                                                             '+                                     
                     '</div>                                                                                 '+                                     
                     '<div class="row">                                                                      '+                                             
                     '    <div class="form-group col-md-6">                                                  '+                                     
                     '        <label for="example-text-input" class="col-form-label">Email</label>           '+                         
-                    '        <input class="form-control" type="email" name="reference_email[]" required>    '+                     
+                    '        <input class="form-control" type="email" name="reference_email['+ a +']" id="reference_email['+ a +']" required>    '+                     
                     '    </div>                                                                             '+                 
                     '    <div class="form-group col-md-6">                                                  '+                         
                     '        <label for="example-text-input" class="col-form-label">Phone Number</label>    '+                         
-                    '        <input class="form-control" type="text" vname="reference_phone[]" required>    '+                 
+                    '        <input class="form-control" type="text" name="reference_phone['+ a +']" id="reference_phone['+ a +']" required>    '+                 
                     '    </div>                                                                             '+                    
                     '</div>                                                                                 '+                 
                     '<hr />                                                                                 '                 
                 );
+                h++;
                 a++;
+                console.log(a);
 
             } else {
                 alert('You Reached the limits')
@@ -363,6 +532,7 @@
             e.preventDefault();
             $(this).parent('div').remove();
             a--;
+            console.log(a);
         })
 
 
@@ -472,6 +642,11 @@
         $('#valskill').val("");
     
     }
+
+    $('#areaskill').on("click", ".close", function(e) {
+        j--;
+        console.log(j);
+    })
     
     function addlanguage(){
     
@@ -497,6 +672,11 @@
         $('#vallanguage').val("");
     
     }
+
+    $('#arealanguage').on("click", ".close", function(e) {
+        i--;
+        console.log(i);
+    })
 
 </script>
 
