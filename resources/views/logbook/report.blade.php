@@ -2,7 +2,7 @@
 
 @section('head')
     
-<script src="https://cdn.ckeditor.com/ckeditor5/11.0.1/classic/ckeditor.js"></script>
+<link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
 
 @endsection
 
@@ -24,7 +24,7 @@
 
 <div class="row">
 
-    <div class="col-lg-11 mt-5 mx-auto">
+    <div class="col-lg-12 mt-5 mx-auto">
         <div class="card">
             <div class="card-body">
                 <h4 class="header-title">INDUSTRIAL TRAINING REPORT - {{ strtoupper(Auth::user()->student_info->f_name) }} {{ strtoupper(Auth::user()->student_info->l_name) }}</h4>
@@ -35,92 +35,71 @@
 
                     <div class="form-group">
                         <label class="h5">1.0 &emsp; Abstract</label>
-                        <textarea name="abstract" id="abstract"></textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#abstract' ) )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
+                        <div id="abstract"></div>
+
+                        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+                        <script> 
+                            var editor = new FroalaEditor('#abstract');
                         </script>
                     </div>
 
                     <div class="form-group">
                         <label class="h5">2.0 &emsp; Objectives</label>
-                        <textarea name="objective" id="objective"></textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#objective' ) )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
+                        <div id="objective"></div>
+
+                        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+                        <script> 
+                            var editor = new FroalaEditor('#objective');
                         </script>
                     </div>
 
                     <div class="form-group">
                         <label class="h5">3.0 &emsp; Company Profile</label>
-                        <textarea name="comp_profile" id="comp_profile">
-                            &lt;p&gt;3.1 Company background&lt;p&gt;	
-                            &lt;p&gt;3.2 Organisation chart&lt;p&gt;
-                            &lt;p&gt;3.3 Details of industrial supervisor&lt;/p&gt;
-                        </textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#comp_profile' ) )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
+                        <div id="comp_profile"></div>
+
+                        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+                        <script> 
+                            var editor = new FroalaEditor('#comp_profile');
                         </script>
                     </div>
 
                     <div class="form-group">
                         <label class="h5">4.0 &emsp; Details of Experience</label>
-                        <textarea name="exp_details" id="exp_details"></textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#exp_details' ) )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
+                        <div id="exp_details"></div>
+
+                        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+                        <script> 
+                            var editor = new FroalaEditor('#exp_details');
                         </script>
                     </div>
 
                     <div class="form-group">
                         <label class="h5">5.0 &emsp; Discussion and Conclusion</label>
-                        <textarea name="conclusion" id="conclusion">
-                            &lt;p&gt;5.1 Discussion&lt;p&gt;
-                            &lt;p&gt;5.2 Conclusion&lt;p&gt;
-                        </textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#conclusion' ) )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
+                        <div id="conclusion"></div>
+
+                        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+                        <script> 
+                            var editor = new FroalaEditor('#conclusion');
                         </script>
                     </div>
 
                     <div class="form-group">
                         <label class="h5">6.0 &emsp; References</label>
-                        <textarea name="reference" id="reference"></textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#reference' ) )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
+                        <div id="reference"></div>
+
+                        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+                        <script> 
+                            var editor = new FroalaEditor('#reference');
                         </script>
                     </div>
 
                     <div class="form-group">
                         <label class="h5">Appendix</label>
-                        <textarea name="appendix" id="appendix"></textarea>
-                        <script>
-                            ClassicEditor
-                                .create( document.querySelector( '#appendix' ) )
-                                .catch( error => {
-                                    console.error( error );
-                                } );
+                        <div id="appendix"></div>
+
+                        <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>  
+                        <script> 
+                            var editor = new FroalaEditor('#appendix');
                         </script>
                     </div>
 
@@ -136,7 +115,6 @@
 @endsection
 
 @section('scripts')
-
     
 @endsection
 
