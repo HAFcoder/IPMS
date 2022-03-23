@@ -81,7 +81,6 @@
                                 @foreach ($stud as $data)
                                     <tr>
                                         <td>
-                                            
                                             <input name="stud_id" type="checkbox" class="form-control" value="{{ $data->students->id }}" > 
                                         </td>
                                         <td>{{ strtoupper($data->studentID) }}</td>

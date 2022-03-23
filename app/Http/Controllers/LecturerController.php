@@ -7,6 +7,8 @@ use App\Models\Faculty;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
 use App\Models\Internship;
+use App\Models\Programme;
+use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -167,8 +169,10 @@ class LecturerController extends Controller
     {
         $internship = Internship::with('company','session','studentInfo','lecturerInfo')->get();
         $lect = Lecturer::get();
+        $session = Session::get();
+        $programme = Programme::get();
         //dump($internship);
-        return view ('lecturer.coorSuperviseeAttach', compact('internship', 'lect'));
+        return view ('lecturer.coorSuperviseeAttach', compact('internship', 'lect', 'session', 'programme'));
     }
 
     //attach sv to student from coorSuperviseeAttach blade
