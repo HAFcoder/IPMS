@@ -160,6 +160,15 @@
         //experience form part
         var experience = $(".expForm_area");
         var btn_experience = $(".add_exp_form");
+        // education form part
+        var education = $(".eduForm_area");
+        var btn_education = $(".add_edu_form");
+         //certificate form part
+         var certificate = $(".certForm_area");
+        var btn_certificate = $(".add_cert_form");
+        //reference form part
+        var reference = $(".referForm_area");
+        var btn_reference = $(".add_refer_form");
         var x = 0;
         var y = 0;
         var z = 0;
@@ -170,178 +179,200 @@
         //load data from db
         @php
             if ($yesno == 'yes'){
-                $countExp = count($expTitleArr);
-                $countEdu = count($eduCourseArr);
-                $countCert = count($certTitleArr);
-                $countRef = count($refCompanyArr);
 
-                for ($y = 0; $y < $countExp; $y++){
-                    @endphp
-                    
-                        $(experience).append( 
+                $countExp = 0;
+                $countEdu = 0;
+                $countCert = 0;
+                $countRef = 0;
+
+                if($expTitleArr[0] != null){
+                    $countExp = count($expTitleArr);
+                }
+                if($eduCourseArr[0] != null){
+                    $countEdu = count($eduCourseArr);
+                }
+                if($certTitleArr[0] != null){
+                    $countCert = count($certTitleArr);
+                }
+                if($refCompanyArr[0] != null){
+                    $countRef = count($refCompanyArr);
+                }
+
+                if($countExp > 0){
+                    for ($y = 0; $y < $countExp; $y++){
+                        @endphp
+                        
+                            $(experience).append( 
+                                '<div>                                                                                                             '+ 
+                                '    <div class="row">                                                                                             '+                         
+                                '        <div class="form-group col-md-6">                                                                         '+                             
+                                '                <label for="example-text-input" class="col-form-label">Job Title</label>                          '+ 
+                                '                <input class="form-control" type="text" name="experience_title['+ x +']"                          '+
+                                '               id="experience_title['+ x +']" value="'+ @php echo "'".$expTitleArr[$y]."'"; @endphp +'" required> '+                                 
+                                '        </div>                                                                                                    '+             
+                                '        <div class="form-group col-md-6">                                                                         '+
+                                '                <label for="example-text-input" class="col-form-label">Company</label>                            '+     
+                                '                <input class="form-control" type="text" name="experience_company['+ x +']"                        '+
+                                '               id="experience_company['+ x +']" value="'+ @php echo "'".$expCompanyArr[$y]."'"; @endphp +'" required>'+                     
+                                '        </div>                                                                                                    '+                     
+                                '    </div>                                                                                                        '+             
+                                '    <div class="row">                                                                                             '+             
+                                '        <div class="form-group col-md-6">                                                                         '+
+                                '                <label for="example-text-input" class="col-form-label">Start Date</label>                         '+         
+                                '                <input class="form-control" type="month" name="experience_start['+ x +']"                         '+
+                                '               id="experience_start['+ x +']" value="'+ @php echo "'".$expStartArr[$y]."'"; @endphp +'" required> '+
+                                '        </div>                                                                                                    '+                 
+                                '        <div class="form-group col-md-6">                                                                         '+
+                                '                <label for="example-text-input" class="col-form-label">End Date</label>                           '+                 
+                                '                <input class="form-control" type="month" name="experience_end['+ x +']"                           '+
+                                '               id="experience_end['+ x +']" value="'+ @php echo "'".$expEndArr[$y]."'"; @endphp +'" required>     '+                                         
+                                '        </div>                                                                                                    '+                                     
+                                '    </div>                                                                                                        '+                         
+                                '    <div class="form-group">                                                                                      '+
+                                '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
+                                '            <textarea class="form-control" name="experience_desc['+ x +']" id="experience_desc['+ x +']" '+
+                                '           rows="3" required>'+ @php echo "'".$expDescArr[$y]."'"; @endphp +'</textarea>                 '+                                     
+                                '    </div>                                                                                                        '+                     
+                                '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                                '<hr>                                                                                                              '+                         
+                                '</div>                                                                                                            '                     
+                            );
+
+                            x++;
+                            console.log(x);
+
+                        @php
+                    } 
+                }
+
+                if($countEdu != 0){
+                    for ($y = 0; $y < $countEdu; $y++){
+                        @endphp
+                        
+                            $(education).append( 
                             '<div>                                                                                                             '+ 
                             '    <div class="row">                                                                                             '+                         
                             '        <div class="form-group col-md-6">                                                                         '+                             
-                            '                <label for="example-text-input" class="col-form-label">Job Title</label>                          '+ 
-                            '                <input class="form-control" type="text" name="experience_title['+ x +']"                          '+
-                            '               id="experience_title['+ x +']" value="'+ @php echo "'".$expTitleArr[$y]."'"; @endphp +'" required> '+                                 
+                            '                <label for="example-text-input" class="col-form-label">Course Name</label>                        '+ 
+                            '                <input class="form-control" type="text" name="education_course['+ y +']"                          '+
+                            '               id="education_course['+ y +']" value="'+ @php echo "'".$eduCourseArr[$y]."'"; @endphp +'" required>'+                                 
                             '        </div>                                                                                                    '+             
                             '        <div class="form-group col-md-6">                                                                         '+
-                            '                <label for="example-text-input" class="col-form-label">Company</label>                            '+     
-                            '                <input class="form-control" type="text" name="experience_company['+ x +']"                        '+
-                            '               id="experience_company['+ x +']" value="'+ @php echo "'".$expCompanyArr[$y]."'"; @endphp +'" required>'+                     
+                            '                <label for="example-text-input" class="col-form-label">University Name</label>                    '+     
+                            '                <input class="form-control" type="text" name="education_uni['+ y +']" id="education_uni['+ y +']" '+
+                            '               value="'+ @php echo "'".$eduUniArr[$y]."'"; @endphp +'" required>                          '+                     
                             '        </div>                                                                                                    '+                     
                             '    </div>                                                                                                        '+             
                             '    <div class="row">                                                                                             '+             
                             '        <div class="form-group col-md-6">                                                                         '+
                             '                <label for="example-text-input" class="col-form-label">Start Date</label>                         '+         
-                            '                <input class="form-control" type="month" name="experience_start['+ x +']"                         '+
-                            '               id="experience_start['+ x +']" value="'+ @php echo "'".$expStartArr[$y]."'"; @endphp +'" required> '+
+                            '                <input class="form-control" type="month" name="education_start['+ y +']"                          '+
+                            '               id="education_start['+ y +']" value="'+ @php echo "'".$eduStartArr[$y]."'"; @endphp +'" required>                       '+                                             
                             '        </div>                                                                                                    '+                 
                             '        <div class="form-group col-md-6">                                                                         '+
                             '                <label for="example-text-input" class="col-form-label">End Date</label>                           '+                 
-                            '                <input class="form-control" type="month" name="experience_end['+ x +']"                           '+
-                            '               id="experience_end['+ x +']" value="'+ @php echo "'".$expEndArr[$y]."'"; @endphp +'" required>     '+                                         
+                            '                <input class="form-control" type="month" name="education_end['+ y +']" id="education_end['+ y +']" '+
+                            '               value="'+ @php echo "'".$eduEndArr[$y]."'"; @endphp +'" required>                         '+                                         
                             '        </div>                                                                                                    '+                                     
-                            '    </div>                                                                                                        '+                         
-                            '    <div class="form-group">                                                                                      '+
-                            '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
-                            '            <textarea class="form-control" name="experience_desc['+ x +']" id="experience_desc['+ x +']" '+
-                            '           rows="3" required>'+ @php echo "'".$expDescArr[$y]."'"; @endphp +'</textarea>                 '+                                     
-                            '    </div>                                                                                                        '+                     
+                            '    </div>                                                                                                        '+                                                                                                           
                             '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                             '<hr>                                                                                                              '+                         
                             '</div>                                                                                                            '                     
                         );
 
-                        x++;
-                        console.log(x);
+                        y++;
+                        console.log(y);
 
-                    @php
+                        @php
+                    }
                 }
 
-                for ($y = 0; $y < $countEdu; $y++){
-                    @endphp
-                    
-                        $(education).append( 
-                        '<div>                                                                                                             '+ 
-                        '    <div class="row">                                                                                             '+                         
-                        '        <div class="form-group col-md-6">                                                                         '+                             
-                        '                <label for="example-text-input" class="col-form-label">Course Name</label>                        '+ 
-                        '                <input class="form-control" type="text" name="education_course['+ y +']"                          '+
-                        '               id="education_course['+ y +']" value="'+ @php echo "'".$eduCourseArr[$y]."'"; @endphp +'" required>'+                                 
-                        '        </div>                                                                                                    '+             
-                        '        <div class="form-group col-md-6">                                                                         '+
-                        '                <label for="example-text-input" class="col-form-label">University Name</label>                    '+     
-                        '                <input class="form-control" type="text" name="education_uni['+ y +']" id="education_uni['+ y +']" '+
-                        '               value="'+ @php echo "'".$eduUniArr[$y]."'"; @endphp +'" required>                          '+                     
-                        '        </div>                                                                                                    '+                     
-                        '    </div>                                                                                                        '+             
-                        '    <div class="row">                                                                                             '+             
-                        '        <div class="form-group col-md-6">                                                                         '+
-                        '                <label for="example-text-input" class="col-form-label">Start Date</label>                         '+         
-                        '                <input class="form-control" type="month" name="education_start['+ y +']"                          '+
-                        '               id="education_start['+ y +']" value="'+ @php echo "'".$eduStartArr[$y]."'"; @endphp +'" required>                       '+                                             
-                        '        </div>                                                                                                    '+                 
-                        '        <div class="form-group col-md-6">                                                                         '+
-                        '                <label for="example-text-input" class="col-form-label">End Date</label>                           '+                 
-                        '                <input class="form-control" type="month" name="education_end['+ y +']" id="education_end['+ y +']" '+
-                        '               value="'+ @php echo "'".$eduEndArr[$y]."'"; @endphp +'" required>                         '+                                         
-                        '        </div>                                                                                                    '+                                     
-                        '    </div>                                                                                                        '+                                                                                                           
-                        '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
-                        '<hr>                                                                                                              '+                         
-                        '</div>                                                                                                            '                     
-                    );
+                if($countCert != 0){
+                    for ($y = 0; $y < $countCert; $y++){
+                        @endphp
+                        
+                        $(certificate).append( 
+                            '<div>                                                                                                             '+ 
+                            '    <div class="row">                                                                                             '+                         
+                            '        <div class="form-group col-md-6">                                                                         '+                             
+                            '                <label for="example-text-input" class="col-form-label">Achievement Title</label>                  '+ 
+                            '                <input class="form-control" type="text" name="certificate_title['+ z +']"                         '+
+                            '               id="certificate_title['+ z +']" value="'+ @php echo "'".$certTitleArr[$y]."'"; @endphp +'" required>'+                                 
+                            '        </div>                                                                                                    '+                
+                            '        <div class="form-group col-md-6">                                                                         '+
+                            '                <label for="example-text-input" class="col-form-label">Achieve Date</label>                   '+         
+                            '                <input class="form-control" type="month" name="certificate_date['+ z +']"                         '+
+                            '               id="certificate_date['+ z +']" value="'+ @php echo "'".$certDateArr[$y]."'"; @endphp +'" required>'+                                             
+                            '        </div>                                                                                                    '+                   
+                            '    </div>                                                                                                        '+                           
+                            '    <div class="form-group">                                                                                      '+
+                            '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
+                            '            <textarea class="form-control" name="certificate_desc['+ z +']" id="certificate_desc['+ z +']" rows="3" required>'+
+                            '            '+ @php echo "'".$certDescArr[$y]."'"; @endphp +'</textarea>                '+                                     
+                            '    </div>                                                                                                        '+                     
+                            '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                            '<hr>                                                                                                              '+                         
+                            '</div>                                                                                                            '                     
+                        );
+                        z++;
+                        console.log(z);
 
-                    y++;
-                    console.log(y);
-
-                    @php
+                        @php
+                    }
                 }
 
-                for ($y = 0; $y < $countCert; $y++){
-                    @endphp
-                    
-                    $(certificate).append( 
-                        '<div>                                                                                                             '+ 
-                        '    <div class="row">                                                                                             '+                         
-                        '        <div class="form-group col-md-6">                                                                         '+                             
-                        '                <label for="example-text-input" class="col-form-label">Achievement Title</label>                  '+ 
-                        '                <input class="form-control" type="text" name="certificate_title['+ z +']"                         '+
-                        '               id="certificate_title['+ z +']" value="'+ @php echo "'".$certTitleArr[$y]."'"; @endphp +'" required>'+                                 
-                        '        </div>                                                                                                    '+                
-                        '        <div class="form-group col-md-6">                                                                         '+
-                        '                <label for="example-text-input" class="col-form-label">Achieve Date</label>                   '+         
-                        '                <input class="form-control" type="month" name="certificate_date['+ z +']"                         '+
-                        '               id="certificate_date['+ z +']" value="'+ @php echo "'".$certDateArr[$y]."'"; @endphp +'" required>'+                                             
-                        '        </div>                                                                                                    '+                   
-                        '    </div>                                                                                                        '+                           
-                        '    <div class="form-group">                                                                                      '+
-                        '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
-                        '            <textarea class="form-control" name="certificate_desc['+ z +']" id="certificate_desc['+ z +']" rows="3" required>'+
-                        '            '+ @php echo "'".$certDescArr[$y]."'"; @endphp +'</textarea>                '+                                     
-                        '    </div>                                                                                                        '+                     
-                        '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
-                        '<hr>                                                                                                              '+                         
-                        '</div>                                                                                                            '                     
-                    );
-                    z++;
-                    console.log(z);
+                if($countRef != 0){
+                    for ($k = 0; $k < $countRef; $k++){
+                        @endphp
 
-                    @php
-                }
+                        $(reference).append( 
+                            '<h5 class="text-muted mt-10 d-block"><strong>Reference '+ h +':</strong></h5>            '+                            
+                            '<div class="form-group ">                                                              '+     
+                            '    <label for="example-text-input" class="col-form-label">Full Name</label>           '+                 
+                            '    <input class="form-control" type="text" name="reference_name['+ a +']"             '+
+                            '    id="reference_name['+ a +']" value="'+ @php echo "'".$refNameArr[$k]."'"; @endphp +'" required>'+                         
+                            '</div>                                                                                 '+                                 
+                            '<div class="row">                                                                      '+                                 
+                            '    <div class="form-group col-md-6">                                                  '+                                     
+                            '        <label for="example-text-input" class="col-form-label">Company Name</label>    '+                                             
+                            '        <input class="form-control" type="text" name="reference_company['+ a +']"      '+
+                            '       id="reference_company['+ a +']" value="'+ @php echo "'".$refCompanyArr[$k]."'"; @endphp +'" required>   '+                             
+                            '    </div>                                                                             '+                                     
+                            '    <div class="form-group col-md-6">                                                  '+                                         
+                            '        <label for="example-text-input" class="col-form-label">Position</label>        '+                                 
+                            '        <input class="form-control" type="text" name="reference_position['+ a +']"     '+
+                            '       id="reference_position['+ a +']" value="'+ @php echo "'".$refPositionArr[$k]."'"; @endphp +'" required>  '+                                     
+                            '    </div>                                                                             '+                                     
+                            '</div>                                                                                 '+                                     
+                            '<div class="row">                                                                      '+                                             
+                            '    <div class="form-group col-md-6">                                                  '+                                     
+                            '        <label for="example-text-input" class="col-form-label">Email</label>           '+                         
+                            '        <input class="form-control" type="email" name="reference_email['+ a +']"       '+
+                            '       id="reference_email['+ a +']" value="'+ @php echo "'".$refEmailArr[$k]."'"; @endphp +'" required>    '+                     
+                            '    </div>                                                                             '+                 
+                            '    <div class="form-group col-md-6">                                                  '+                         
+                            '        <label for="example-text-input" class="col-form-label">Phone Number</label>    '+                         
+                            '        <input class="form-control" type="text" name="reference_phone['+ a +']"        '+
+                            '       id="reference_phone['+ a +']" value="'+ @php echo "'".$refPhoneArr[$k]."'"; @endphp +'" required>    '+                 
+                            '    </div>                                                                             '+                    
+                            '</div>                                                                                 '+                 
+                            '<hr />                                                                                 '                 
+                        );
+                        h++;
+                        a++;
+                        console.log(a);
 
-                for ($y = 0; $y < $countRef; $y++){
-                    @endphp
-                    
-                    $(reference).append( 
-                        '<h5 class="text-muted mt-10 d-block"><strong>Reference '+ h +':</strong></h5>            '+                            
-                        '<div class="form-group ">                                                              '+     
-                        '    <label for="example-text-input" class="col-form-label">Full Name</label>           '+                 
-                        '    <input class="form-control" type="text" name="reference_name['+ a +']"             '+
-                        '    id="reference_name['+ a +']" value="'+ @php echo "'".$refNameArr[$y]."'"; @endphp +'" required>'+                         
-                        '</div>                                                                                 '+                                 
-                        '<div class="row">                                                                      '+                                 
-                        '    <div class="form-group col-md-6">                                                  '+                                     
-                        '        <label for="example-text-input" class="col-form-label">Company Name</label>    '+                                             
-                        '        <input class="form-control" type="text" name="reference_company['+ a +']"      '+
-                        '       id="reference_company['+ a +']" value="'+ @php echo "'".$refCompanyArr[$y]."'"; @endphp +'" required>   '+                             
-                        '    </div>                                                                             '+                                     
-                        '    <div class="form-group col-md-6">                                                  '+                                         
-                        '        <label for="example-text-input" class="col-form-label">Position</label>        '+                                 
-                        '        <input class="form-control" type="text" name="reference_position['+ a +']"     '+
-                        '       id="reference_position['+ a +']" value="'+ @php echo "'".$refPositionArr[$y]."'"; @endphp +'" required>  '+                                     
-                        '    </div>                                                                             '+                                     
-                        '</div>                                                                                 '+                                     
-                        '<div class="row">                                                                      '+                                             
-                        '    <div class="form-group col-md-6">                                                  '+                                     
-                        '        <label for="example-text-input" class="col-form-label">Email</label>           '+                         
-                        '        <input class="form-control" type="email" name="reference_email['+ a +']"       '+
-                        '       id="reference_email['+ a +']" value="'+ @php echo "'".$refEmailArr[$y]."'"; @endphp +'" required>    '+                     
-                        '    </div>                                                                             '+                 
-                        '    <div class="form-group col-md-6">                                                  '+                         
-                        '        <label for="example-text-input" class="col-form-label">Phone Number</label>    '+                         
-                        '        <input class="form-control" type="text" name="reference_phone['+ a +']"        '+
-                        '       id="reference_phone['+ a +']" value="'+ @php echo "'".$refPhoneArr[$y]."'"; @endphp +'" required>    '+                 
-                        '    </div>                                                                             '+                    
-                        '</div>                                                                                 '+                 
-                        '<hr />                                                                                 '                 
-                    );
-                    h++;
-                    a++;
-                    console.log(a);
-
-                    @php
+                        @php
+                    }
                 }
 
             }
         @endphp
 
+        console.log("test" + a);
         $(btn_experience).click(function(e) {
             e.preventDefault();
             if (x < max_fields) {
-
                 $(experience).append( 
                     '<div>                                                                                                             '+ 
                     '    <div class="row">                                                                                             '+                         
@@ -386,11 +417,6 @@
             x--;
             console.log(x);
         })
-
-
-        // education form part
-        var education = $(".eduForm_area");
-        var btn_education = $(".add_edu_form");
 
         $(btn_education).click(function(e) {
             e.preventDefault();
@@ -438,11 +464,6 @@
             console.log(y);
         })
 
-
-        //certificate form part
-        var certificate = $(".certForm_area");
-        var btn_certificate = $(".add_cert_form");
-
         $(btn_certificate).click(function(e) {
             e.preventDefault();
             if (z < max_fields) {
@@ -481,11 +502,6 @@
             z--;
             console.log(z);
         })
-
-
-        //reference form part
-        var reference = $(".referForm_area");
-        var btn_reference = $(".add_refer_form");
         
         $(btn_reference).click(function(e) {
             e.preventDefault();
@@ -535,8 +551,6 @@
             console.log(a);
         })
 
-
-
     });
 
 </script>
@@ -549,8 +563,16 @@
     $(document).ready(function() {
         @php
             if ($yesno == 'yes'){
-                $countSkill = count($skillArr);
-                $countLang = count($langArr);
+
+                $countSkill = 0;
+                $countLang = 0;
+
+                if($skillArr[0] != null){
+                    $countSkill = count($skillArr);
+                }
+                if($langArr[0] != null){
+                    $countLang = count($langArr);
+                }
 
                 for ($y = 0; $y < $countSkill; $y++){
                     @endphp

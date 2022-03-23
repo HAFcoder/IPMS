@@ -170,7 +170,7 @@ class ResumeManagementController extends Controller
             }
         }
 
-        if($request->skill != null){
+        if(isset($request->skill)){
             $sizeSkill = count(collect($request)->get('skill'));
             for ($y = 0; $y < $sizeSkill; $y++)
             {
@@ -178,7 +178,7 @@ class ResumeManagementController extends Controller
             }
         }
 
-        if($request->experience_title != null){
+        if(isset($request->experience_title)){
             $sizeExp = count(collect($request)->get('experience_title'));
             for ($y = 0; $y < $sizeExp; $y++)
             {
@@ -190,11 +190,11 @@ class ResumeManagementController extends Controller
             }
         }
 
-        if($request->education_course != null){
+        if(isset($request->education_course)){
             $sizeEdu = count(collect($request)->get('education_course'));
             for ($y = 0; $y < $sizeEdu; $y++)
             {
-                array_push($eduCourseArr, $request->experience_title[$y]);
+                array_push($eduCourseArr, $request->education_course[$y]);
                 array_push($eduUniArr, $request->education_uni[$y]);
                 array_push($eduStartArr, $request->education_start[$y]);
                 array_push($eduEndArr, $request->education_end[$y]);       
