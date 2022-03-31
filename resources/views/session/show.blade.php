@@ -214,7 +214,8 @@
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body text-center">
-                                        <i class="fa fa-spinner fa-spin"></i> Please wait updating table...
+                                        <img src="{{ asset('assets/images/media/loader5.gif') }}" >
+                                        <i class="fa fa-spinner fa-spin"></i> Please wait while updating table...
                                     </div>
                                     <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>

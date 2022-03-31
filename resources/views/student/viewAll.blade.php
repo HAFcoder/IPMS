@@ -347,7 +347,6 @@
                             $('#btnCloseLoad').click();
                         });
                     
-                    
                         location.reload();
                         //setTimeout(function(){ $('#btnCloseLoad').click(); }, 8000);
                     

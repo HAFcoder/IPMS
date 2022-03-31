@@ -5,6 +5,23 @@
 <script src="{{ asset('assets/dw/jquery.min.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('assets/dw/select2.min.css') }}">
 
+
+
+@endsection
+
+@section('head')
+<style>
+    .btn-rounded .btn-warning {
+        border-radius: 50px;
+        font-size: 17px;
+        font-weight: bolder
+    }
+
+    .ti-trash{
+        font-size: 15px;
+        font-weight: bolder
+    }
+</style>
 @endsection
 
 @section('breadcrumbs')
@@ -80,7 +97,7 @@
                             </div>
                             <div class="form-inline"> 
                                 <input class="form-control" type="text" id="valskill" placeholder="Please enter skill here.">
-                                <a class="btn btn-outline-primary btn-sm" onclick="addskill()">Add Skill</a>
+                                <a class="btn btn-warning btn-sm ml-3" onclick="addskill()"><span class="ti-plus"></span> Add</a>
                             </div> 
                         </div>
 
@@ -89,13 +106,13 @@
                             <h5 class="text-muted mt-10 d-block">
                                 <strong>Language:</strong>
                             </h5>
-                            <span class="text-muted"><i>Enter verbal language that you know.</i></span>
+                            <span class="text-muted"><i>Add languages that you know.</i></span>
                             
                             <div id="arealanguage" class="row pl-3">
                             </div>
                             <div class="form-inline"> 
                                 <input class="form-control" type="text" id="vallanguage" placeholder="Please enter language here.">
-                                <a class="btn btn-outline-primary btn-sm" onclick="addlanguage()">Add Language</a>
+                                <a class="btn btn-warning btn-sm ml-3" onclick="addlanguage()"><span class="ti-plus"></span> Add</a>
                             </div>                          
                         </div>
 
@@ -105,7 +122,7 @@
 
                         <div class="form-group">
                             <div class="expForm_area"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_exp_form"><span class="ti-plus"></span> Add information</button>
+                            <button type="button" class="btn btn-warning mb-3 btn-lg add_exp_form"><span class="ti-plus"></span> Add information</button>
                         </div>
 
                         <hr>
@@ -114,7 +131,7 @@
 
                         <div class="form-group">
                             <div class="eduForm_area"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_edu_form"><span class="ti-plus"></span> Add information</button>
+                            <button type="button" class="btn btn-warning mb-3 btn-lg add_edu_form"><span class="ti-plus"></span> Add information</button>
                         </div>
 
                         <hr>
@@ -123,7 +140,7 @@
 
                         <div class="form-group">
                             <div class="certForm_area"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_cert_form"><span class="ti-plus"></span> Add information</button>
+                            <button type="button" class="btn btn-warning mb-3 btn-lg add_cert_form"><span class="ti-plus"></span> Add information</button>
                         </div>
 
                         <hr>
@@ -132,7 +149,7 @@
 
                         <div class="form-group">
                             <div class="referForm_area"></div>
-                            <button type="button" class="btn btn-outline-primary mb-3 btn-lg add_refer_form"><span class="ti-plus"></span> Add information</button>
+                            <button type="button" class="btn btn-warning mb-3 btn-lg add_refer_form"><span class="ti-plus"></span> Add information</button>
                         </div>
                         <hr>
 
@@ -233,7 +250,7 @@
                                 '            <textarea class="form-control" name="experience_desc['+ x +']" id="experience_desc['+ x +']" '+
                                 '           rows="3" required>'+ @php echo "'".$expDescArr[$y]."'"; @endphp +'</textarea>                 '+                                     
                                 '    </div>                                                                                                        '+                     
-                                '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                                '<a href="#" class="delete btn btn-flat btn-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                                 '<hr>                                                                                                              '+                         
                                 '</div>                                                                                                            '                     
                             );
@@ -275,7 +292,7 @@
                             '               value="'+ @php echo "'".$eduEndArr[$y]."'"; @endphp +'" required>                         '+                                         
                             '        </div>                                                                                                    '+                                     
                             '    </div>                                                                                                        '+                                                                                                           
-                            '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                            '<a href="#" class="delete btn btn-flat btn-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                             '<hr>                                                                                                              '+                         
                             '</div>                                                                                                            '                     
                         );
@@ -310,7 +327,7 @@
                             '            <textarea class="form-control" name="certificate_desc['+ z +']" id="certificate_desc['+ z +']" rows="3" required>'+
                             '            '+ @php echo "'".$certDescArr[$y]."'"; @endphp +'</textarea>                '+                                     
                             '    </div>                                                                                                        '+                     
-                            '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                            '<a href="#" class="delete btn btn-flat btn-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                             '<hr>                                                                                                              '+                         
                             '</div>                                                                                                            '                     
                         );
@@ -399,7 +416,7 @@
                     '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
                     '            <textarea class="form-control" name="experience_desc['+ x +']" id="experience_desc['+ x +']" rows="3" required></textarea>                 '+                                     
                     '    </div>                                                                                                        '+                     
-                    '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                    '<a href="#" class="delete btn btn-flat btn-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                     '<hr>                                                                                                              '+                         
                     '</div>                                                                                                            '                     
                 );
@@ -444,7 +461,7 @@
                     '                <input class="form-control" type="month" name="education_end['+ y +']" id="education_end['+ y +']" required>                         '+                                         
                     '        </div>                                                                                                    '+                                     
                     '    </div>                                                                                                        '+                                                                                                           
-                    '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                    '<a href="#" class="delete btn btn-flat btn-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                     '<hr>                                                                                                              '+                         
                     '</div>                                                                                                            '                     
                 );
@@ -484,7 +501,7 @@
                     '            <label for="example-text-input" class="col-form-label">Description</label>                            '+                             
                     '            <textarea class="form-control" name="certificate_desc['+ z +']" id="certificate_desc['+ z +']" rows="3" required></textarea>                '+                                     
                     '    </div>                                                                                                        '+                     
-                    '<a href="#" class="delete btn btn-flat btn-outline-danger mb-3"><span class="ti-trash"></span></a>                '+                     
+                    '<a href="#" class="delete btn btn-flat btn-danger mb-3"><span class="ti-trash"></span></a>                '+                     
                     '<hr>                                                                                                              '+                         
                     '</div>                                                                                                            '                     
                 );
@@ -582,7 +599,7 @@
                         if(val != ""){
                     
                         $('#areaskill').append(
-                            '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
+                            '<div class="alert alert-warning alert-dismissible fade show ml-2" role="alert">'+
                                 '<input class="border-0 text-center" type="text" readonly name="skill['+ j +']" id="skill['+ j +']" value="'+val+'">'+
                                 '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
                                 '<span aria-hidden="true">&times;</span>'+
@@ -608,7 +625,7 @@
                         if(val != ""){
 
                             $('#arealanguage').append(
-                                '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
+                                '<div class="alert alert-warning alert-dismissible fade show ml-2" role="alert">'+
                                     '<input class="border-0 text-center" readonly type="text" name="language['+ i +']" id="language['+ i +']" value="'+val+'">'+
                                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
                                     '<span aria-hidden="true">&times;</span>'+
@@ -647,7 +664,7 @@
             //);
             
             $('#areaskill').append(
-                '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
+                '<div class="alert alert-warning alert-dismissible fade show ml-2" role="alert">'+
                     '<input class="border-0 text-center" type="text" readonly name="skill['+ j +']" id="skill['+ j +']" value="'+val+'">'+
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
                       '<span aria-hidden="true">&times;</span>'+
@@ -677,7 +694,7 @@
         if(val != ""){
 
             $('#arealanguage').append(
-                '<div class="alert alert-warning alert-dismissible fade show col ml-2" role="alert">'+
+                '<div class="alert alert-warning alert-dismissible fade show ml-2" role="alert">'+
                     '<input class="border-0 text-center" readonly type="text" name="language['+ i +']" id="language['+ i +']" value="'+val+'">'+
                     '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'+
                     '<span aria-hidden="true">&times;</span>'+

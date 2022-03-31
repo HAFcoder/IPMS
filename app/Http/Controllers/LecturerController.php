@@ -167,28 +167,44 @@ class LecturerController extends Controller
 
     public function attachSupervisee()
     {
-        $internship = Internship::with('company','session','studentInfo','lecturerInfo')->get();
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+        //dump($sessions);
+
+        return view('lecturer.coorSuperviseeAttach',compact('sessions','lect'));
+    }
+
+    public function attachSupervisee2($id)
+    {
+        
+        $internship = Internship::where('session_id',$id)->orderBy('student_id', 'ASC')->with('company','session','studentInfo','lecturerInfo')->get();
         $lect = Lecturer::get();
-        $session = Session::get();
+        $session = Session::where('id',$id)->with('sessionProgramme','lecturerInfo')->first();
         $programme = Programme::get();
         //dump($internship);
-        return view ('lecturer.coorSuperviseeAttach', compact('internship', 'lect', 'session', 'programme'));
+        return view ('lecturer.coorSuperviseeAttach2', compact('internship', 'lect', 'session', 'programme'));
+    }
+
+    public function fetchIntern(Request $request)
+    {
+        $data['interns'] = Internship::where("session_id",$request->session_id)
+                        ->distinct()
+                        ->get(["id", "id"]);
+        return response()->json($data);
     }
 
     //attach sv to student from coorSuperviseeAttach blade
     public function attachLecturer(Request $request)
     {
-        //$lect_id = $request->get('lecturer_id');
-        $intern_id = $request->get('id');
-        $intern = Internship::find($intern_id);
-        $intern->lecturer_id = $request->get('lecturer_id');
-        $intern->save();
+        $lecturer_id = $request->get('lect_id');
 
-        $internship = Internship::with('company','session','studentInfo','lecturerInfo')->get();
-        $lect = Lecturer::get();
-        //dump($internship);
-        Alert::success('Academic SV changed!', 'Student accademic SV successfully changed.');
-        //return view ('lecturer.coorSuperviseeAttach', compact('internship', 'lect'));
+        foreach($request->input('intern_id') as $value){
+            $intern = Internship::find($value);
+            $intern->lecturer_id = $lecturer_id;
+    
+            $intern->save();
+        }
+
         return back();
     }
 
