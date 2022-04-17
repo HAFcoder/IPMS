@@ -255,3 +255,8 @@ Route::get('/evaluation/mail/{encryptedstudentid}', [MailingController::class, '
 //Encryption
 // /{{Crypt::encryptString($studentid)}}
 // $decrypted = Crypt::decryptString($encryptedValue);
+
+//industrial sv evaluation from
+Route::get('/company-sv/evaluation-form', [FormFeedbackController::class, 'compEvaluationForm']);
+Route::get('/company-sv/peo-form', [FormFeedbackController::class, 'peoForm']);
+

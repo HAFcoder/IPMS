@@ -107,4 +107,14 @@ class FormFeedbackController extends Controller
     {
         return view('feedback.coorLogbook');
     }
+
+    public function compEvaluationForm()
+    {
+        return view('feedback.compEvaluationForm');
+    }
+
+    public function peoForm()
+    {
+        return view('feedback.peoForm');
+    }
 }
