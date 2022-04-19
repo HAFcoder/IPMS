@@ -75,7 +75,7 @@
 
                 <p><strong>PART B: STUDENT’S PERFORMANCE EVALUATION </strong></p>
                 <p>For each of the criteria, please rate the appropriate scale based on the statement given:</p>
-                <form action="" method="POST">
+                <form action="{{ route('company.peoAnswer',$internship->id) }}" method="POST">
                     @method('POST') 
                     @csrf
                     
@@ -464,7 +464,7 @@
                             @php
                                 $comment = "";
                                 if(!empty($markArr)){
-                                    $comment = $internship->svEvaluation->comment;
+                                    $comment = $internship->empIndustrySurvey->comment;
                                 }
                             @endphp
 

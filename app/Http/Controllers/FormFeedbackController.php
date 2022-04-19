@@ -194,9 +194,9 @@ class FormFeedbackController extends Controller
         return view('feedback.peoForm',compact('internship'));
     }
 
-    public function peoAnswer(Request $request, $id){
-
-        
+    public function peoAnswer(Request $request, $id)
+    {
+        //dump($id);
         $internship = Internship::where('id',$id)->first();
         $markArr = array();
 
@@ -244,16 +244,15 @@ class FormFeedbackController extends Controller
         );
         $markStr = implode(',' , $markArr);
 
-        if(empty($internship->svEvaluation)){
+        if(empty($internship->empIndustrySurvey)){
             $evaluation = new EmpIndustrySurveyAnswer;
         }else{
             $evaluation = EmpIndustrySurveyAnswer::find($internship->svEvaluation->id);
         }
-
-        $evaluation->internship_id = $internship->id;
+        //dump($evaluation);
+        $evaluation->internship_id = $id;
         $evaluation->marks = $markStr;
         $evaluation->comment = $request->comment;
-        $evaluation->suggestion = $request->suggestion;
         $evaluation->save();
 
         return redirect()->back()->with('success', 'EMPLOYER / INDUSTRY QUESTIONNAIRE (PEO) has been successfully sent. Thank you');

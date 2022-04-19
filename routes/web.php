@@ -263,4 +263,5 @@ Route::get('/evaluation/mail/{encryptedstudentid}', [MailingController::class, '
 Route::get('/company-sv/{id}/evaluation-form', [FormFeedbackController::class, 'compEvaluationForm'])->name('company.feedbackForm');
 Route::post('/company-sv/{id}/evaluation-form', [FormFeedbackController::class, 'compEvaluationAnswer'])->name('company.feedbackAnswer');
 Route::get('/company-sv/{id}/peo-form', [FormFeedbackController::class, 'peoForm'])->name('company.peoForm');
+Route::post('/company-sv/{id}/peo-form', [FormFeedbackController::class, 'peoAnswer'])->name('company.peoAnswer');
 
