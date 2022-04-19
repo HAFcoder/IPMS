@@ -58,7 +58,7 @@
     <div class="row">
 
         <!-- table start -->
-        <div class="col-10 mt-5 mx-auto">
+        <div class="col-12 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">List of Students</h4>

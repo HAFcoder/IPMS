@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\SvEvaluationMarks;
 use App\Http\Controllers\Controller;
+use App\Models\EmpIndustrySurveyAnswer;
+use App\Models\FinalEvaluationMarks;
+use App\Models\Internship;
+use App\Models\PresentMarks;
 use Illuminate\Http\Request;
 
 class SvEvaluationMarksController extends Controller
@@ -82,5 +86,17 @@ class SvEvaluationMarksController extends Controller
     public function destroy(SvEvaluationMarks $svEvaluationMarks)
     {
         //
+    }
+
+    //coor view marks all
+    public function viewAll()
+    {
+        $intern = Internship::all();
+        $evaluationMarks = FinalEvaluationMarks::all();
+        $svMarks = SvEvaluationMarks::all();
+        $presentMarks = PresentMarks::all();
+        $peoMarks = EmpIndustrySurveyAnswer::all();
+
+        return view('feedback.coorMarksAll', compact('intern', 'evaluationMarks', 'svMarks', 'presentMarks', 'peoMarks'));
     }
 }

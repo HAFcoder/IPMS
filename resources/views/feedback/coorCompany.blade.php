@@ -4,6 +4,22 @@
     <!-- Start datatable css -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/jquery.dataTables.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/dataTables.bootstrap4.min.css') }}">
+
+    <style>
+        .btn_width{
+            width:105px;
+            margin: 2px;
+        }
+
+        .btn_width2{
+            width:145px;
+            margin: 2px;
+        }
+
+        .noHover{
+            pointer-events: none;
+        }
+    </style>
 @endsection
 
 @section('breadcrumbs')
@@ -46,7 +62,7 @@
                                     <th>Name</th>
                                     <th>Programme</th>
                                     <th>Company</th>
-                                    <th>Feedback</th>
+                                    <th>Send Feedback</th>
                                     <th>View Result</th>
                                 </tr>
                             </thead>
@@ -71,8 +87,8 @@
                                     </td>
                                     <td>{{ $intern->company->name }}</td>
                                     <td>
-                                        <a href="{{ route('feedback.sendForm',$intern->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-paper-plane"></i> Send Evaluation Form</a>
-                                        <a href="{{ route('feedback.sendPoe',$intern->id) }}" class="btn btn-info btn-xs"><i class="fa fa-paper-plane"></i> Send POE Form</a>
+                                        <a href="{{ route('feedback.sendForm',$intern->id) }}" class="btn btn-xs btn-primary mb-2 btn_width2"><i class="fa fa-paper-plane"></i> Evaluation Form</a> <br>
+                                        <a href="{{ route('feedback.sendPoe',$intern->id) }}" class="btn btn-xs btn-info mb-2 btn_width2"><i class="fa fa-paper-plane"></i> POE Form</a>
                                     </td>
                                     <td>
                                         
@@ -81,14 +97,14 @@
                                             <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
                                         @else
 
-                                            <a target="_blank" href="{{ route('feedback.viewForm',$intern->id) }}" class="btn btn-success btn-xs">View Evaluation</a>
+                                            <a target="_blank" href="{{ route('feedback.viewForm',$intern->id) }}" class="btn btn-xs btn-success mb-2 btn_width"><i class="fa fa-eye"></i> Evaluation</a> <br>
                                         @endif
                                         @if ($intern->empIndustrySurvey == null)
                                                 
                                             <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
                                         @else
 
-                                            <a target="_blank" href="{{ route('feedback.viewPoe',$intern->id) }}" class="btn btn-success btn-xs">View Survey</a>
+                                            <a target="_blank" href="{{ route('feedback.viewPoe',$intern->id) }}" class="btn btn-xs btn-success mb-2 btn_width"><i class="fa fa-eye"></i> Survey</a>
                                         @endif
 
                                     </td>

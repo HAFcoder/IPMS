@@ -20,6 +20,7 @@ use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\FormFeedbackController;
 use App\Http\Controllers\LectEvaluateController;
 use App\Http\Controllers\MailingController;
+use App\Http\Controllers\SvEvaluationMarksController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -165,6 +166,8 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
 
     Route::get('coordinator/feedback/{id}/sendPoeForm/', [FormFeedbackController::class, 'sendFormPeo'])->name('feedback.sendPoe');
     Route::get('coordinator/feedback/{id}/viewPoeForm/', [FormFeedbackController::class, 'viewFormPeo'])->name('feedback.viewPoe');
+
+    Route::get('coordinator/view-marks/all', [SvEvaluationMarksController::class, 'viewAll']);
 
 
 });
