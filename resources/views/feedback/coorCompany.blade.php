@@ -81,14 +81,14 @@
                                             <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
                                         @else
 
-                                            <a href="#" class="btn btn-success btn-xs">View Evaluation</a>
+                                            <a target="_blank" href="{{ route('feedback.viewForm',$intern->id) }}" class="btn btn-success btn-xs">View Evaluation</a>
                                         @endif
                                         @if ($intern->empIndustrySurvey == null)
                                                 
                                             <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
                                         @else
 
-                                            <a href="#" class="btn btn-success btn-xs">View Survey</a>
+                                            <a target="_blank" href="{{ route('feedback.viewPoe',$intern->id) }}" class="btn btn-success btn-xs">View Survey</a>
                                         @endif
 
                                     </td>

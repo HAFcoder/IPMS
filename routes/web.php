@@ -159,8 +159,12 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     //feedback menu
     Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);
     Route::get('coordinator/feedback/logbook-report', [FormFeedbackController::class, 'logbookReport']);
+
     Route::get('coordinator/feedback/{id}/sendForm/', [FormFeedbackController::class, 'sendFormFeedback'])->name('feedback.sendForm');
+    Route::get('coordinator/feedback/{id}/viewForm/', [FormFeedbackController::class, 'viewForm'])->name('feedback.viewForm');
+
     Route::get('coordinator/feedback/{id}/sendPoeForm/', [FormFeedbackController::class, 'sendFormPeo'])->name('feedback.sendPoe');
+    Route::get('coordinator/feedback/{id}/viewPoeForm/', [FormFeedbackController::class, 'viewFormPeo'])->name('feedback.viewPoe');
 
 
 });

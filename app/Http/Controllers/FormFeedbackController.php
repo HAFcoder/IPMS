@@ -119,6 +119,13 @@ class FormFeedbackController extends Controller
         return view('feedback.compEvaluationForm',compact('internship'));
     }
 
+    public function viewForm($id)
+    {
+        $internship = Internship::where('id',$id)->first();
+        //dump('test');
+        return view('feedback.compEvaluationFormView',compact('internship'));
+    }
+
     public function compEvaluationAnswer(Request $request, $id)
     {
         //dump('answer');
@@ -192,6 +199,12 @@ class FormFeedbackController extends Controller
     {
         $internship = Internship::where('id',$id)->first();
         return view('feedback.peoForm',compact('internship'));
+    }
+    
+    public function viewFormPeo($id)
+    {
+        $internship = Internship::where('id',$id)->first();
+        return view('feedback.peoView',compact('internship'));
     }
 
     public function peoAnswer(Request $request, $id)
