@@ -168,6 +168,9 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/{id}/viewPoeForm/', [FormFeedbackController::class, 'viewFormPeo'])->name('feedback.viewPoe');
 
     Route::get('coordinator/view-marks/all', [SvEvaluationMarksController::class, 'viewAll']);
+    Route::get('coordinator/view-marks/sessions', [SvEvaluationMarksController::class, 'viewBySess']);
+    Route::get('coordinator/view-marks/sessions/{id}', [SvEvaluationMarksController::class, 'viewBySess2'])->name('view.marks');;
+
 
 
 });

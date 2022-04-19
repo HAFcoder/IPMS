@@ -35,17 +35,32 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Supervisee</h4>
-            <ul class="breadcrumbs pull-left">
+            @if (\Request::is('coordinator/view-marks/sessions'))
+                <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
+                <ul class="breadcrumbs pull-left">
 
-                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                @else
-                    <li><a href="{{ url('/lecturer') }}">Home</a></li>
-                @endif
-                {{-- <li><a >Feedback & Evaluation</a></li> --}}
-                <li><span>Supervisee</span></li>
-            </ul>
+                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                        <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                    @else
+                        <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                    @endif
+                    {{-- <li><a >Feedback & Evaluation</a></li> --}}
+                    <li><span>Session</span></li>
+                </ul>
+            @else
+                <h4 class="page-title pull-left">Supervisee</h4>
+                <ul class="breadcrumbs pull-left">
+
+                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                        <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                    @else
+                        <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                    @endif
+                    {{-- <li><a >Feedback & Evaluation</a></li> --}}
+                    <li><span>Supervisee</span></li>
+                </ul>
+            @endif
+            
         </div>
     </div>
 
@@ -89,8 +104,14 @@
                                 @foreach($sessions as $ss)
                                 <tr>
                                     <td>
-                                        <a data-toggle="tooltip" data-placement="top" title="View" 
-                                        href="{{ route('attach.view.supervisee',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
+                                        @if (\Request::is('coordinator/view-marks/sessions'))
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="{{ route('view.marks',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>  
+                                        @else
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="{{ route('attach.view.supervisee',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>    
+                                        @endif
+                                        
                                     </td>
                                     <td>{{ $ss->session_code }}</td>
                                     <td>{{ date('d/m/Y', strtotime($ss->start_date)) }} - {{ date('d/m/Y', strtotime($ss->end_date)) }}</td>

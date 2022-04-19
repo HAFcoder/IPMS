@@ -221,7 +221,18 @@
                                 <li><a href="{{ url('coordinator/feedback/logbook-report') }}"><i class="ti-agenda"></i> <span>Logbook & Report</span></a></li>
                                 <li><a href="invoice.html"><i class="ti-file"></i> <span>Presentation</span></a></li>
                                 <li><a href="invoice.html"><i class="ti-file"></i> <span>Graduate Survey</span></a></li>
-                                <li><a href="{{ url('/coordinator/view-marks/all') }}"><i class="ti-medall-alt"></i> <span>Marks</span></a></li>
+                                {{-- <li><a href="{{ url('/coordinator/view-marks/all') }}"><i class="ti-medall-alt"></i> <span>Marks</span></a></li> --}}
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-medall-alt"></i><span>Marks</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/view-marks/all') }}">View All</a></li>
+                                    </ul>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/view-marks/sessions') }}">By Session</a></li>
+                                    </ul>
+                                </li>
                             @endif
 
                         </ul>

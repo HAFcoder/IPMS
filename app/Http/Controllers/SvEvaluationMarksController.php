@@ -8,6 +8,7 @@ use App\Models\EmpIndustrySurveyAnswer;
 use App\Models\FinalEvaluationMarks;
 use App\Models\Internship;
 use App\Models\PresentMarks;
+use App\Models\Session;
 use Illuminate\Http\Request;
 
 class SvEvaluationMarksController extends Controller
@@ -98,5 +99,24 @@ class SvEvaluationMarksController extends Controller
         $peoMarks = EmpIndustrySurveyAnswer::all();
 
         return view('feedback.coorMarksAll', compact('intern', 'evaluationMarks', 'svMarks', 'presentMarks', 'peoMarks'));
+    }
+
+    public function viewBySess()
+    {
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+        //dump($sessions);
+
+        return view('lecturer.coorSuperviseeAttach',compact('sessions','lect'));
+    }
+
+    public function viewBySess2($id)
+    {
+        $intern = Internship::where('session_id',$id)->get();
+        $evaluationMarks = FinalEvaluationMarks::all();
+        $svMarks = SvEvaluationMarks::all();
+        $presentMarks = PresentMarks::all();
+        $peoMarks = EmpIndustrySurveyAnswer::all();
+        return view('feedback.coorMarksSess', compact('intern', 'evaluationMarks', 'svMarks', 'presentMarks', 'peoMarks'));
     }
 }

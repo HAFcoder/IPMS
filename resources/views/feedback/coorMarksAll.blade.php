@@ -59,6 +59,7 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th>Session</th>
                                     <th>Student ID</th>
                                     <th>Student Name</th>
                                     <th>Programme</th>
@@ -73,6 +74,7 @@
 
                                 @foreach ($intern as $data)
                                     <tr>
+                                        <td>{{ $data->session->session_code}}</td>
                                         <td>{{ strtoupper($data->studentInfo->studentID) }}</td>
                                         <td>{{ ucwords($data->studentInfo->f_name . " " . $data->studentInfo->l_name ) }}</td>
                                         <td>{{ $data->studentInfo->programmes->name }}</td>
