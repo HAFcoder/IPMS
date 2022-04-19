@@ -4,12 +4,6 @@
 
 @endsection
 
-@section('head')
-    <style>
-        input[disabled]
-    </style>
-@endsection
-
 @section('content')
 
 <div class="row ">
