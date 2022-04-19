@@ -83,7 +83,7 @@ class SessionController extends Controller
 
         $session->save();
         $sid = $session->id;
-
+        
         foreach($request->programme as $prog){
 
             //dump($prog);
@@ -94,6 +94,8 @@ class SessionController extends Controller
             $ses_prog->save();
 
         }
+
+        $createfolder = (new FileManagementController)->createDirectory($request->session_code);
 
         return redirect()->back()->with('success', 'Session data has been successfully added.');
     }

@@ -159,6 +159,8 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     //feedback menu
     Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);
     Route::get('coordinator/feedback/logbook-report', [FormFeedbackController::class, 'logbookReport']);
+    Route::get('coordinator/feedback/{id}/sendForm/', [FormFeedbackController::class, 'sendFormFeedback'])->name('feedback.sendForm');
+    Route::get('coordinator/feedback/{id}/sendPoeForm/', [FormFeedbackController::class, 'sendFormPeo'])->name('feedback.sendPoe');
 
 
 });
@@ -186,6 +188,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:lecturer']], function() {
     //lecturer student
     Route::get('lecturer/supervisee', [LecturerController::class, 'superviseeSess']);
     Route::get('lecturer/supervisee/list', [LecturerController::class, 'superviseeList']);
+    Route::get('lecturer/supervisee/{id}/list', [LecturerController::class, 'superviseeList']);
 });
 
 //super amdin group route
@@ -257,6 +260,7 @@ Route::get('/evaluation/mail/{encryptedstudentid}', [MailingController::class, '
 // $decrypted = Crypt::decryptString($encryptedValue);
 
 //industrial sv evaluation from
-Route::get('/company-sv/evaluation-form', [FormFeedbackController::class, 'compEvaluationForm']);
-Route::get('/company-sv/peo-form', [FormFeedbackController::class, 'peoForm']);
+Route::get('/company-sv/{id}/evaluation-form', [FormFeedbackController::class, 'compEvaluationForm'])->name('company.feedbackForm');
+Route::post('/company-sv/{id}/evaluation-form', [FormFeedbackController::class, 'compEvaluationAnswer'])->name('company.feedbackAnswer');
+Route::get('/company-sv/{id}/peo-form', [FormFeedbackController::class, 'peoForm'])->name('company.peoForm');
 

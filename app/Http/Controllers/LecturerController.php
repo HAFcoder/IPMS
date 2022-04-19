@@ -144,14 +144,23 @@ class LecturerController extends Controller
     //view session for lecturer
     public function superviseeSess()
     {
-        return view('student.lectSuperviseeSess');
+        $uid = Auth::id();
+        $datas = Internship::where('lecturer_id', $uid)
+                            ->distinct('session_id')
+                            ->get();
+
+        //dump($datas);
+        return view('student.lectSuperviseeSess',compact('datas'));
     }
 
     //view supervisee for that session
-    public function superviseeList()
+    public function superviseeList($id)
     {
         $uid = Auth::id();
-        $datas = Internship::where('lecturer_id', $uid)->get();
+        $datas = Internship::where('lecturer_id', $uid)
+                            ->where('session_id', $id)
+                            ->get();
+        dump($datas);
         return view('student.lectSuperviseeList', compact('datas'));
     }
 
@@ -177,8 +186,8 @@ class LecturerController extends Controller
     public function attachSupervisee2($id)
     {
         
-        $internship = Internship::where('session_id',$id)->orderBy('student_id', 'ASC')->with('company','session','studentInfo','lecturerInfo')->get();
-        $lect = Lecturer::get();
+        $internship = Internship::where('session_id',$id)->where('status','accepted')->orderBy('student_id', 'ASC')->with('company','session','studentInfo','lecturerInfo')->get();
+        $lect = Lecturer::where('status','approve')->get();
         $session = Session::where('id',$id)->with('sessionProgramme','lecturerInfo')->first();
         $programme = Programme::get();
         //dump($internship);

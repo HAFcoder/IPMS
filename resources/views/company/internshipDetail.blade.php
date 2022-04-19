@@ -52,6 +52,9 @@
                         <li class="nav-item">
                             <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Academic Supervisor</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="document-tab" data-toggle="tab" href="#document" role="tab" aria-controls="document" aria-selected="false">Related Document</a>
+                        </li>
                     </ul>
                     <div class="tab-content mt-3" id="myTabContent">
 
@@ -107,7 +110,7 @@
 
                                     @php
                                         
-                                        if($internship->lecturer != null){
+                                        if(!empty($internship->lecturer) || $internship->lecturer != null){
                                             $lectid = $internship->lecturer->id;
                                         }else{
                                             $lectid = 0;
@@ -126,6 +129,50 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Update Supervisor</button>
                             </form>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="document" role="tabpanel" aria-labelledby="document-tab">
+                            <p><b>List of Related Document</b></p>
+                            
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Document Name</th>
+                                            <th>View Document</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Organisation Reply Form (ORF)</td>
+                                            <td>
+                                                @if(empty($orf_doc) || $orf_doc == null)
+
+                                                <span class="badge badge-pill badge-secondary">Not upload yet.</span>
+
+                                                @else
+
+                                                <a target="_blank" href="{{ url($orf_doc) }}">Download Document</a>
+
+                                                @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Report Duty Notification (RDN)</td>
+                                            <td>
+                                                @if(empty($rdn_doc) || $rdn_doc == null)
+
+                                                <span class="badge badge-pill badge-secondary">Not upload yet.</span>
+
+                                                @else
+
+                                                <a target="_blank" href="{{ url($rdn_doc) }}">Download Document</a>
+
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
 

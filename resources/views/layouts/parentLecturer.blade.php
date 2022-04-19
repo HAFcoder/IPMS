@@ -190,11 +190,6 @@
                                     </a>
                                     <ul class="collapse">
                                         <li><a href="{{ url('coordinator/student-company/status-all') }}">All Applications</a></li>
-                                        <!--
-                                        <li><a href="login2.html">Accepted</a></li>
-                                        <li><a href="login3.html">Rejected</a></li>
-                                        <li><a href="register.html">Decline</a></li>
-                                        -->
                                     </ul>
                                 </li>
 
@@ -205,6 +200,7 @@
                             @else
 
                                 <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li>
+                                {{-- <li><a href="{{ url('/lecturer/supervisee/list') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li> --}}
                                 {{-- <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-id-badge"></i><span>View Student</span></a></li> --}}
 
                             @endif

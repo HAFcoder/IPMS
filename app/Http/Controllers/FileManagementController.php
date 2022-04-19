@@ -24,6 +24,8 @@ class FileManagementController extends Controller
                 'downloadUrl' => url('/internfile/download/'.base64_encode(basename($file)))
             ];
         }
+
+        //dump($files);
  
         return view('files.index', ['files' => $data]);
     }
@@ -62,13 +64,18 @@ class FileManagementController extends Controller
 
     // Directory or Folder Handler
 
-    public function createDirectory(Request $request) {
+    /*public function createDirectory(Request $request) {
 
         $this->validate($request, [
             'folder_name' => 'required'
         ]);
 
         Storage::disk('s3')->makeDirectory($request->folder_name);
+    }*/
+    
+    public function createDirectory($foldername) {
+
+        Storage::disk('s3')->makeDirectory($foldername);
     }
 
     public function deleteDirectory(Request $request) {
@@ -88,14 +95,53 @@ class FileManagementController extends Controller
 
     public function getAllFile($location) {
         $files = Storage::disk('s3')->files($location.'/');
+
+        $data = [];
+        foreach($files as $file) {
+            $data[] = [
+                'filename' => basename($file),
+                'downloadUrl' => url('/internfile/download/'.base64_encode(basename($file)))
+            ];
+        }
+
+        return $data;
     }
 
     public function getFile($location, $filename) {
-        $contents = Storage::disk('s3')->get($location.'/'.$filename);
+        $files = Storage::disk('s3')->get($location.'/'.$filename);
+
+        $data = [];
+
+        if(!empty($files)){
+            
+            $data[] = [
+                'filename' => basename($files),
+                'downloadUrl' => url('/internfile/download/'.base64_encode(basename($files)))
+            ];
+
+        }else{
+            $data = null;
+        }
+
+        return $data;
     }
 
-    public function uploadFile($location, $filename) {
-        Storage::disk('s3')->put($location.'/'.$filename, $contents);
+    public function getUrlFIle($location, $filename){
+
+        $url = Storage::disk('s3')->temporaryUrl(
+            $location."/". $filename,
+            now()->addMinutes(5),
+            [
+                'ResponseContentType' => 'application/octet-stream',
+                'ResponseContentDisposition' => 'attachment; filename='.$filename,
+            ]
+        );
+
+        return $url;
+    }
+
+    public function uploadFile($location, $filename, $file) {
+        Storage::disk('s3')->put($location.'/'.$filename, file_get_contents($file));
     }
 
     public function deleteFile($location, $filename) {

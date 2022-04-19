@@ -7,6 +7,9 @@ use App\Models\StudentInfo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Internship;
+use App\Models\SvEvaluationMarks;
+use App\Models\EmpIndustrySurveyAnswer;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FormFeedbackController extends Controller
 {
@@ -105,16 +108,218 @@ class FormFeedbackController extends Controller
 
     public function logbookReport()
     {
-        return view('feedback.coorLogbook');
+        $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->get();
+        return view('feedback.coorLogbook',compact('internship'));
     }
 
-    public function compEvaluationForm()
+    public function compEvaluationForm($id)
     {
-        return view('feedback.compEvaluationForm');
+        $internship = Internship::where('id',$id)->first();
+        //dump('test');
+        return view('feedback.compEvaluationForm',compact('internship'));
     }
 
-    public function peoForm()
+    public function compEvaluationAnswer(Request $request, $id)
     {
-        return view('feedback.peoForm');
+        //dump('answer');
+        $internship = Internship::where('id',$id)->first();
+        $markArr = array();
+
+        $request->validate([
+            'q1'=>'required',
+            'q2'=>'required',
+            'q3'=>'required',
+            'q4'=>'required',
+            'q5'=>'required',
+            'q6'=>'required',
+            'q7'=>'required',
+            'q8'=>'required',
+            'q9'=>'required',
+            'q10'=>'required',
+            'q11'=>'required',
+            'q12'=>'required',
+            'q13'=>'required',
+            'q14'=>'required',
+            'q15'=>'required',
+            'q16'=>'required',
+            'q17'=>'required',
+            'q18'=>'required',
+            'q19'=>'required',
+            'q20'=>'required',
+            'comment'=>'required',
+        ]);
+
+        array_push($markArr, 
+         $request->q1,
+         $request->q2, 
+         $request->q3, 
+         $request->q4,
+         $request->q5,
+         $request->q6,
+         $request->q7,
+         $request->q8,
+         $request->q9,
+         $request->q10,
+         $request->q11,
+         $request->q12,
+         $request->q13,
+         $request->q14,
+         $request->q15,
+         $request->q16,
+         $request->q17,
+         $request->q18,
+         $request->q19,
+         $request->q20
+        );
+        $markStr = implode(',' , $markArr);
+
+        if(empty($internship->svEvaluation)){
+            $evaluation = new SvEvaluationMarks;
+        }else{
+            $evaluation = SvEvaluationMarks::find($internship->svEvaluation->id);
+        }
+
+        $evaluation->internship_id = $internship->id;
+        $evaluation->marks = $markStr;
+        $evaluation->comment = $request->comment;
+        $evaluation->suggestion = $request->suggestion;
+        $evaluation->save();
+
+        return redirect()->back()->with('success', 'Feedback and Evaluation has been successfully sent. Thank you');
     }
+
+    public function peoForm($id)
+    {
+        $internship = Internship::where('id',$id)->first();
+        return view('feedback.peoForm',compact('internship'));
+    }
+
+    public function peoAnswer(Request $request, $id){
+
+        
+        $internship = Internship::where('id',$id)->first();
+        $markArr = array();
+
+        $request->validate([
+            'q1'=>'required',
+            'q2'=>'required',
+            'q3'=>'required',
+            'q4'=>'required',
+            'q5'=>'required',
+            'q6'=>'required',
+            'q7'=>'required',
+            'q8'=>'required',
+            'q9'=>'required',
+            'q10'=>'required',
+            'q11'=>'required',
+            'q12'=>'required',
+            'q13'=>'required',
+            'q14'=>'required',
+            'q15'=>'required',
+            'q16'=>'required',
+            'q17'=>'required',
+            'q18'=>'required',
+            'comment'=>'required',
+        ]);
+
+        array_push($markArr, 
+         $request->q1,
+         $request->q2, 
+         $request->q3, 
+         $request->q4,
+         $request->q5,
+         $request->q6,
+         $request->q7,
+         $request->q8,
+         $request->q9,
+         $request->q10,
+         $request->q11,
+         $request->q12,
+         $request->q13,
+         $request->q14,
+         $request->q15,
+         $request->q16,
+         $request->q17,
+         $request->q18
+        );
+        $markStr = implode(',' , $markArr);
+
+        if(empty($internship->svEvaluation)){
+            $evaluation = new EmpIndustrySurveyAnswer;
+        }else{
+            $evaluation = EmpIndustrySurveyAnswer::find($internship->svEvaluation->id);
+        }
+
+        $evaluation->internship_id = $internship->id;
+        $evaluation->marks = $markStr;
+        $evaluation->comment = $request->comment;
+        $evaluation->suggestion = $request->suggestion;
+        $evaluation->save();
+
+        return redirect()->back()->with('success', 'EMPLOYER / INDUSTRY QUESTIONNAIRE (PEO) has been successfully sent. Thank you');
+
+    }
+
+    public function sendFormFeedback($id){
+
+        $type = 'evaluation';
+
+        $internship = Internship::with('company','session','studentInfo','student')->where('id',$id)->first();
+
+        //get student details
+        $studentname = $internship->studentInfo->f_name . " " . $internship->studentInfo->l_name;
+        $studentid = $internship->studentInfo->studentID;
+        $studentemail = $internship->student->email;
+
+        //company details
+        $companyname = $internship->company->name;
+        $companyemail = $internship->company->email;
+
+        //sv details
+        $svemail = $internship->supervisor->email;
+
+        //set url
+        $url = route('company.feedbackForm',$internship->id);
+
+        //dump($url);
+
+        $subject = "KUPTMKL INTERNSHIP - INDUSTRIAL SUPERVISOR EVALUATION REPORT";
+        
+        $email = (new MailingController)->sendEmail($internship,$svemail, $studentemail, $subject,$type);
+        
+        return redirect()->back()->with('success', 'Email has been sent to ' . $companyemail);
+
+    }
+
+    public function sendFormPeo($id){
+
+        $type = 'peo';
+
+        $internship = Internship::with('company','session','studentInfo','student')->where('id',$id)->first();
+
+        //get student details
+        $studentname = $internship->studentInfo->f_name . " " . $internship->studentInfo->l_name;
+        $studentid = $internship->studentInfo->studentID;
+        $studentemail = $internship->student->email;
+
+        //company details
+        $companyname = $internship->company->name;
+        $companyemail = $internship->company->email;
+
+        //sv details
+        $svemail = $internship->supervisor->email;
+
+        //set url
+        $url = route('company.feedbackForm',$internship->id);
+
+        //dump($url);
+
+        $subject = "KUPTMKL INTERNSHIP - EMPLOYER / INDUSTRY QUESTIONNAIRE";
+        
+        $email = (new MailingController)->sendEmail($internship,$svemail, $studentemail, $subject, $type);
+        
+        return redirect()->back()->with('success', 'Email has been sent to ' . $companyemail);
+
+    }
+
 }

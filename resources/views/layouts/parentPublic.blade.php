@@ -54,7 +54,7 @@
                             <div class="user-profile m-0">
                                 <img class="avatar user-thumb" src="{{ asset('assets/images/author/employee.png') }}" alt="avatar">
                                 <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-                                    ###company name
+                                    {{$internship->company->name}}
                                 </h4>
                             </div>
                         </div>

@@ -103,19 +103,19 @@
                             <h5 class="header-title">Action Button Note :</h5>
                             <ul class="profile-page-user list-group list-group-flush">
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-success btn_width noHover">Accept</a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-success btn_width noHover"></a></span>
                                     <span class="btn-note-detail"> - Your internship application has been accepted by the company.</span>
                                 </li>
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-danger btn_width noHover">Decline</a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-danger btn_width noHover"></a></span>
                                     <span class="btn-note-detail">- You declined internship offer from the company.</span>
                                 </li>
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-warning btn_width noHover">Reject</a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-warning btn_width noHover"></a></span>
                                     <span class="btn-note-detail">- Your internship application has been rejected by the company.</span>
                                 </li>
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-primary btn_width noHover">See Details</a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-primary btn_width noHover"></a></span>
                                     <span class="btn-note-detail">- View more details of your internship application.</span>
                                 </li>
                             </ul>
@@ -168,13 +168,13 @@
                                     </td>
                                     <td>
                                         @if($intern->status == 'accepted')
-                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-primary btn_width">See Details</a>
+                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-xs btn-primary btn_width">See Details</a>
                                         @elseif($intern->status == 'declined' || $intern->status == 'rejected')
                                             -
                                         @else
-                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-sm btn-success mb-2 btn_width">Accept</a> <br>
-                                            <a href="{{ route('company.student-decline',$intern->id) }}" class="btn btn-sm btn-danger mb-2 btn_width">Decline</a> <br>
-                                            <a href="{{ route('company.student-reject',$intern->id) }}" class="btn btn-sm btn-warning btn_width">Reject</a>
+                                            <a href="{{ route('company.student-accept',$intern->id) }}" class="btn btn-xs btn-success mb-2 btn_width">Accept</a> <br>
+                                            <a href="{{ route('company.student-decline',$intern->id) }}" class="btn btn-xs btn-danger mb-2 btn_width">Decline</a> <br>
+                                            <a href="{{ route('company.student-reject',$intern->id) }}" class="btn btn-xs btn-warning btn_width">Reject</a>
                                         @endif
                                     </td>
                                 </tr>

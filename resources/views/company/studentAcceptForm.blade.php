@@ -31,7 +31,7 @@
                 <div class="card-body">
                     <h4 class="header-title">Internship Information Form</h4>
                     <hr/>
-                    <form method="post" action="{{ route('company.internship.update',$internship->id) }}">
+                    <form method="post" action="{{ route('company.internship.update',$internship->id) }}" enctype="multipart/form-data">
                         @method('PUT') 
                         @csrf
                         <h4 class="header-title text-muted">Company Details</h4>
@@ -144,11 +144,26 @@
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Organization Reply Form (ORF)</label>
                             <input class="form-control" type="file" name="orf_file" placeholder="Select ORF file" required>
+                            @if( !empty($orf_doc) || $orf_doc != null)
+                            
+                            <br/>
+                            <a class="col-form-label" target="_blank" href="{{ url($orf_doc) }}">Download Uploaded Document</a>
+
+                            @endif
+
                         </div>
 
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Report Duty Notification (RDN)</label>
-                            <input class="form-control" type="file" name="rdn_file" placeholder="Select RDN file">
+                            <input class="form-control" type="file" name="rdn_file" placeholder="Select RDN file" @if( empty($rdn_doc) || $rdn_doc == null) required @endif>
+
+                            @if( !empty($rdn_doc) || $rdn_doc != null)
+                            
+                            <br/>
+                            <a class="col-form-label" target="_blank" href="{{ url($rdn_doc) }}">Download Uploaded Document</a>
+
+                            @endif
+
                         </div>
 
                         <input class="d-display-none" hidden name='status' value='accepted'>

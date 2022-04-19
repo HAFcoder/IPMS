@@ -13,6 +13,8 @@ use App\Models\Supervisor;
 use App\Models\Lecturer;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use Illuminate\Support\Facades\Storage;
+
 class companiesController extends Controller
 {
     /**
@@ -210,10 +212,36 @@ class companiesController extends Controller
     }
 
     public function studentAccept($id){
+        
+        $orf_doc = null;
+        $rdn_doc = null;
+
         //dump($id);
         $internship = Internship::where('id',$id)->with('company','supervisor')->first();
         //dump($internship);
-        return view('company.studentAcceptForm',compact('internship'));
+
+        $sessioncode = $internship->session->session_code;
+
+        if(!empty($internship->orf_file)){
+
+            $orf_name = $internship->orf_file;
+
+            $orf_doc = (new FileManagementController)->getUrlFile($sessioncode, $orf_name);
+            //dump($orf_name . " - " . $sessioncode);
+
+        }
+
+        if(!empty($internship->rdn_file)){
+                
+            $rdn_name = $internship->rdn_file;
+
+            $rdn_doc = (new FileManagementController)->getUrlFile($sessioncode, $rdn_name);
+        }
+
+        //dump($orf_doc);
+
+        return view('company.studentAcceptForm',compact('internship','orf_doc','rdn_doc'));
+
     }
 
     public function studentDecline($id){
@@ -236,6 +264,8 @@ class companiesController extends Controller
         //dump($request);
         $status = $request->status;
 
+        $location = $internship->session->session_code;
+
         if($status == 'accepted'){ //if status is accepted, get duration,start date, end date data and update
 
             $duration = $request->duration;
@@ -246,13 +276,23 @@ class companiesController extends Controller
             $supervisor_id = $request->supervisor_id;
 
             if ($request->hasFile('orf_file')) {
-                $orf_file = $request->file('orf_file')->getClientOriginalName();
-                $internship->orf_file = $orf_file;
+                //dump("oii");
+                $filename = $request->file('orf_file')->getClientOriginalName();
+                $internship->orf_file = $filename;
+
+                $file = $request->file('orf_file');
+
+                $orf_doc = (new FileManagementController)->uploadFile($location, $filename, $file);
+
             }
 
             if ($request->hasFile('rdn_file')) {
-                $rdn_file = $request->file('rdn_file')->getClientOriginalName();
-                $internship->rdn_file = $rdn_file;
+                $filename = $request->file('rdn_file')->getClientOriginalName();
+                $internship->rdn_file = $filename;
+
+                $file = $request->file('rdn_file');
+
+                $orf_doc = (new FileManagementController)->uploadFile($location, $filename, $file);
             }
 
             if($supervisor_id == 0){
@@ -291,6 +331,22 @@ class companiesController extends Controller
         $internship->status = $status;
 
         $internship->save();
+
+        //set all pending into reject status
+        $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
+
+        foreach($internship2 as $intern){
+
+            $rejectstat = 'declined';
+
+            //dump('id' . $intern->id);
+            
+            $intern->updated_at = now();
+            $intern->status = $rejectstat;
+
+            $intern->save();
+
+        }
         
         Alert::success('Success!', 'Your internship details has been updated.');
 
@@ -326,14 +382,34 @@ class companiesController extends Controller
     
     public function internship_details($id)
     {
+        $orf_doc = null;
+        $rdn_doc = null;
 
-        $internship = Internship::find($id)->with('company','session','studentInfo','lecturer')->first();
+        $internship = Internship::where('id',$id)->with('company','session','studentInfo','lecturer')->first();
         //dump($internship);
+
+        $sessioncode = $internship->session->session_code;
 
         $lecturers = Lecturer::where('status','approve')->with('lecturerInfo')->get();
 
-        return view('company.internshipDetail',compact('internship','lecturers'));
+        if(!empty($internship->orf_file)){
 
+            $orf_name = $internship->orf_file;
+
+            $orf_doc = (new FileManagementController)->getUrlFile($sessioncode, $orf_name);
+
+        }
+
+        if(!empty($internship->rdn_file)){
+                
+            $rdn_name = $internship->rdn_file;
+
+            $rdn_doc = (new FileManagementController)->getUrlFile($sessioncode, $rdn_name);
+        }
+
+        //dump($orf_doc);
+
+        return view('company.internshipDetail',compact('internship','lecturers','orf_doc','rdn_doc'));
 
     }
     
@@ -341,7 +417,7 @@ class companiesController extends Controller
     {
         $lectid = $request->lecturer;
 
-        $internship = Internship::where('id',$id);
+        $internship = Internship::where('id',$id)->first();
         $internship->lecturer_id = $lectid;
 
         $internship->save();

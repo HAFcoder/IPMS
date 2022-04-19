@@ -77,7 +77,7 @@
                             <select id="lect_id" class="custom-select" name="lect_id" required>
                                 <option value="">Select one</option>
                                 @foreach ($lect as $data)
-                                    <option value="{{ $data->id }}">{{ $data->lecturerInfo->f_name }} {{ $data->lecturerInfo->f_name }}</option>
+                                    <option value="{{ $data->id }}">{{ Str::upper($data->lecturerInfo->f_name)  }} {{ Str::upper($data->lecturerInfo->l_name)  }}</option>
                                 @endforeach
                             </select>
                         </div>

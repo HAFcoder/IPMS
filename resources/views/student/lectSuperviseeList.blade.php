@@ -38,6 +38,7 @@
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
+                                    <th>Session Code</th>
                                     <th>Student ID</th>
                                     <th>Name</th>
                                     <th>Programme</th>
@@ -49,12 +50,13 @@
                             <tbody>
                                 @foreach ($datas as $data)
                                     <tr>
-                                        <th>{{ $data->studentInfo->studentID }}</th>
-                                        <th>{{ $data->studentInfo->f_name }} {{ $data->studentInfo->l_name }}</th>
-                                        <th>{{ $data->studentInfo->programmes->name }}</th>
-                                        <th>{{ $data->studentInfo->address }}</th>
-                                        <th>{{ $data->company->name }}</th>
-                                        <th><a href="#"><i class="fa fa-eye"></i></a></th>
+                                        <td>{{ $data->session->session_code }}</td>
+                                        <td>{{ $data->studentInfo->studentID }}</td>
+                                        <td>{{ $data->studentInfo->f_name }} {{ $data->studentInfo->l_name }}</td>
+                                        <td>{{ $data->studentInfo->programmes->name }}</td>
+                                        <td>{{ $data->studentInfo->address }}</td>
+                                        <td>{{ $data->company->name }}</td>
+                                        <td><a href="#"><i class="fa fa-eye"></i></a></td>
                                     </tr>
                                 @endforeach
                                                                 

@@ -71,16 +71,24 @@
                                     </td>
                                     <td>{{ $intern->company->name }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-paper-plane"></i> Send Form</a>
+                                        <a href="{{ route('feedback.sendForm',$intern->id) }}" class="btn btn-primary btn-xs"><i class="fa fa-paper-plane"></i> Send Evaluation Form</a>
+                                        <a href="{{ route('feedback.sendPoe',$intern->id) }}" class="btn btn-info btn-xs"><i class="fa fa-paper-plane"></i> Send POE Form</a>
                                     </td>
                                     <td>
                                         
+                                        @if ($intern->svEvaluation == null)
+                                                
+                                            <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
+                                        @else
+
+                                            <a href="#" class="btn btn-success btn-xs">View Evaluation</a>
+                                        @endif
                                         @if ($intern->empIndustrySurvey == null)
                                                 
                                             <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
                                         @else
 
-                                            <a href="#" class="btn btn-success btn-sm">View Result</a>
+                                            <a href="#" class="btn btn-success btn-xs">View Survey</a>
                                         @endif
 
                                     </td>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Mail\InternMail;
 use App\Mail\LogbookApprovalMail;
 use App\Mail\StudentEvaluationMail;
+use App\Mail\CustomEmail;
 use Illuminate\Support\Facades\Crypt;
 use Mail;
 
@@ -109,4 +110,15 @@ class MailingController extends Controller
    
         return "Evaluation mail sent successfully";
     }
+
+    public function sendEmail($details, $touser, $ccuser, $subject, $type){
+        
+        Mail::to($touser)
+            ->cc($ccuser)
+            ->send(new CustomEmail($details,$subject,$type));
+
+        return true;
+
+    }
+
 }

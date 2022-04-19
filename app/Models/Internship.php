@@ -52,9 +52,14 @@ class Internship extends Model
         return $this->hasOne(StudentSession::class, 'session_id' ,'session_id');
     }
 
+    public function sessionProgramme()
+    {
+        return $this->hasMany(SessionProgramme::class, 'session_id' ,'session_id');
+    }
+
     public function student()
     {
-        return $this->hasOne(Student::class, 'student_id');
+        return $this->hasOne(Student::class, 'id' ,'student_id');
     }
 
     public function studentInfo()
@@ -99,12 +104,12 @@ class Internship extends Model
 
     public function svEvaluation()
     {
-        return $this->hasOne(SvEvaluationMarks::class);
+        return $this->hasOne(SvEvaluationMarks::class, 'internship_id' ,'id');
     }
 
     public function empIndustrySurvey()
     {
-        return $this->hasOne(EmpIndustrySurveyAnswer::class);
+        return $this->hasOne(EmpIndustrySurveyAnswer::class, 'internship_id' ,'id');
     }
 
 }
