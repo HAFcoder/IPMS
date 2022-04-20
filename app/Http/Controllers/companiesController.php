@@ -530,17 +530,17 @@ class companiesController extends Controller
 
         $lecturers = Lecturer::where('status','approve')->with('lecturerInfo')->get();
 
-        if(!empty($internship->orf_file)){
+        if(!empty($internship->orfForm)){
 
-            $orf_name = $internship->orf_file;
+            $orf_name = $internship->orfForm->filename;
 
             $orf_doc = (new FileManagementController)->getUrlFile($sessioncode, $orf_name);
 
         }
 
-        if(!empty($internship->rdn_file)){
+        if(!empty($internship->rdnForm)){
                 
-            $rdn_name = $internship->rdn_file;
+            $rdn_name = $internship->rdnForm->filename;
 
             $rdn_doc = (new FileManagementController)->getUrlFile($sessioncode, $rdn_name);
         }
