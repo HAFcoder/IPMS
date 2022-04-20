@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Internship;
 use App\Models\SvEvaluationMarks;
+use App\Models\FinalEvaluationMarks;
+use App\Models\Session;
 use App\Models\EmpIndustrySurveyAnswer;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -109,7 +111,32 @@ class FormFeedbackController extends Controller
     public function logbookReport()
     {
         $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->get();
-        return view('feedback.coorLogbook',compact('internship'));
+        $evaluationMarks = FinalEvaluationMarks::all();
+        return view('feedback.coorLogbook',compact('internship', 'evaluationMarks'));
+    }
+
+    public function reportViewSess()
+    {
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+
+        return view('feedback.coorGraduateSess',compact('sessions','lect'));
+    }
+
+    public function reportViewSess2($id)
+    {
+        $internship = Internship::with('company','session','studentInfo')->where('status','accepted')->where('session_id', $id)->get();
+        //dump($internship);
+        $evaluationMarks = FinalEvaluationMarks::all();
+        $findme   = 'Bachelor';
+        return view('feedback.coorLogbook',compact('internship', 'evaluationMarks', 'findme'));
+    }
+
+    public function viewReportMark($id)
+    {
+        $evaluationMarks = FinalEvaluationMarks::where('internship_id',$id)->first();
+        $internship = Internship::where('id',$id)->first();
+        return view('feedback.reportLogbookView',compact('evaluationMarks', 'internship'));
     }
 
     public function compEvaluationForm($id)

@@ -18,8 +18,8 @@
             @else
                 <li><a href="{{ url('/lecturer') }}">Home</a></li>
             @endif
-            {{-- <li><a >Company</a></li> --}}
-            <li><span>Logbook & Report</span></li>
+            <li><a >Logbook & Report</a></li>
+            <li><span>View All</span></li>
         </ul>
     </div>
 </div>
@@ -41,12 +41,16 @@
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th>Session ID</th>
+                                    @if (\Request::is('coordinator/feedback/logbook-report'))
+                                        <th>Session Code</th>
+                                    @endif
                                     <th>Student ID</th>
                                     <th>Name</th>
                                     <th>Programme</th>
                                     <th>Company</th>
-                                    <th>View Result</th>
+                                    <th>Lecturer</th>
+                                    <th>Marks</th>
+                                    <th>View Marks</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,7 +63,9 @@
 
                                @foreach ($internship as $intern)
                                 <tr>
-                                    <td>{{ $intern->session->session_code }}</td>
+                                    @if (\Request::is('coordinator/feedback/logbook-report'))
+                                        <td>{{ $intern->session->session_code }}</td>
+                                    @endif
                                     <td>{{ $intern->studentInfo->studentID }}</td>
                                     <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
                                     <td>
@@ -69,16 +75,38 @@
                                         {{ $prog->code }} - {{ $prog->name }}  
                                     </td>
                                     <td>{{ $intern->company->name }}</td>
+                                    <td>{{ $intern->lecturerInfo->f_name }} {{ $intern->lecturerInfo->l_name }}</td>
                                     <td>
-                                        
-                                        @if ($intern->empIndustrySurvey == null)
-                                                
-                                            <span style="font-size:15px" class="badge badge-pill badge-secondary">No Result</span>
+                                        @foreach($evaluationMarks as $evamark)
+                                            @php 
+                                            $evaTot = 0;
+                                                if ( $evamark->internship_id == $intern->id ) {
+                                                    
+                                                        $evaArr = explode(",", $evamark->marks);
+                                                        $evaTotal = array_sum($evaArr);
+                                                        $findme   = 'Bachelor';
+                                                        
+                                                        if (strpos($intern->studentInfo->programmes->name, $findme) !== false) {
+                                                            $evaTot = $evaTotal / 100 * 40;
+                                                            echo "".$evaTot." % / 40 %";
+                                                        } else {
+                                                            $evaTot = $evaTotal / 100 * 60;
+                                                            echo "".$evaTot." % / 60 %";
+                                                        }
+                                                        
+                                                    
+                                                } else {
+                                                    echo "No data";
+                                                }
+                                            @endphp
+                                        @endforeach
+                                    </td>
+                                    <td>
+                                        @if ($intern->finalEvaluation == null)
+                                            <span style="font-size:15px" class="badge badge-pill badge-secondary">No Data</span>
                                         @else
-
-                                            <a href="#" class="btn btn-success btn-sm">View Result</a>
+                                            <a target="_blank" href="{{ route('feedback.view.reportLog',$intern->id) }}" class="btn btn-xs btn-success mb-2 "><i class="fa fa-eye"></i> Report & Logbook</a>
                                         @endif
-
                                     </td>
                                 </tr>
                                 @endforeach
