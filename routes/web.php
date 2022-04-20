@@ -22,6 +22,7 @@ use App\Http\Controllers\LectEvaluateController;
 use App\Http\Controllers\MailingController;
 use App\Http\Controllers\SvEvaluationMarksController;
 use App\Http\Controllers\GradSurveyAnswerController;
+use App\Http\Controllers\PresentMarksController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -176,6 +177,13 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/graduate-survey/sessions', [GradSurveyAnswerController::class, 'viewBySessGrad']);
     Route::get('coordinator/feedback/graduate-survey/sessions/{id}', [GradSurveyAnswerController::class, 'viewBySessGrad2'])->name('view.graduate.survey');
     Route::get('coordinator/feedback/view/graduate-survey/{id}', [GradSurveyAnswerController::class, 'viewGradSurvey'])->name('feedback.viewGrad');
+
+    Route::get('coordinator/feedback/presentation', [PresentMarksController::class, 'presentViewAll']);
+    Route::get('coordinator/feedback/presentation/sessions', [PresentMarksController::class, 'presentViewSess']);
+    Route::get('coordinator/feedback/presentation/sessions/{id}', [PresentMarksController::class, 'presentViewSess2'])->name('view.present.marks');
+    Route::get('coordinator/feedback/view/presentation/sessions/{id}', [PresentMarksController::class, 'viewPresentMark'])->name('feedback.view.present');
+
+
 
 });
 

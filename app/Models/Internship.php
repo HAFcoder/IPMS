@@ -20,6 +20,7 @@ use App\Models\Logbook;
 use App\Models\CompanySv;
 use App\Models\GradSurveyAnswer;
 use App\Models\SvEvaluationMarks;
+use App\Models\PresentMarks;
 use App\Models\EmpIndustrySurveyAnswer;
 
 class Internship extends Model
@@ -110,6 +111,11 @@ class Internship extends Model
     public function empIndustrySurvey()
     {
         return $this->hasOne(EmpIndustrySurveyAnswer::class, 'internship_id' ,'id');
+    }
+
+    public function presentMarks()
+    {
+        return $this->hasOne(PresentMarks::class, 'internship_id' ,'id');
     }
 
 }

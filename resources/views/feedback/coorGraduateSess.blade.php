@@ -37,14 +37,23 @@
         <div class="breadcrumbs-area clearfix">
             <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
             <ul class="breadcrumbs pull-left">
-
-                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                @if (\Request::is('coordinator/feedback/presentation/sessions'))
+                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                        <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                    @else
+                        <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                    @endif
+                    <li><a >Presentation Marks</a></li>
+                    <li><span>Session</span></li>
                 @else
-                    <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                        <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                    @else
+                        <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                    @endif
+                    <li><a >Graduate Survey</a></li>
+                    <li><span>Session</span></li>
                 @endif
-                <li><a >Graduate Survey</a></li>
-                <li><span>Session</span></li>
             </ul>
         </div>
     </div>
@@ -89,8 +98,13 @@
                                 @foreach($sessions as $ss)
                                 <tr>
                                     <td>
-                                        <a data-toggle="tooltip" data-placement="top" title="View" 
-                                        href="{{ route('view.graduate.survey',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a> 
+                                        @if (\Request::is('coordinator/feedback/presentation/sessions'))
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="{{ route('view.present.marks',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a> 
+                                        @else
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="{{ route('view.graduate.survey',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a> 
+                                        @endif
                                     </td>
                                     <td>{{ $ss->session_code }}</td>
                                     <td>{{ date('d/m/Y', strtotime($ss->start_date)) }} - {{ date('d/m/Y', strtotime($ss->end_date)) }}</td>

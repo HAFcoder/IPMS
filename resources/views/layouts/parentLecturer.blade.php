@@ -219,7 +219,18 @@
                             @else
                                 <li><a href="{{ url('coordinator/feedback/company') }}"><i class="ti-agenda"></i> <span>Company Feedback</span></a></li>
                                 <li><a href="{{ url('coordinator/feedback/logbook-report') }}"><i class="ti-agenda"></i> <span>Logbook & Report</span></a></li>
-                                <li><a href="invoice.html"><i class="ti-file"></i> <span>Presentation</span></a></li>
+
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-medall-alt"></i><span>Presentation</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/feedback/presentation') }}">View All</a></li>
+                                    </ul>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/feedback/presentation/sessions') }}">By Session</a></li>
+                                    </ul>
+                                </li>
 
                                 <li>
                                     <a href="javascript:void(0)" aria-expanded="true">

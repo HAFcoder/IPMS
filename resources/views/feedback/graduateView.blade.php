@@ -350,7 +350,7 @@
 
                                     <div class="form-group mt-5 "> 
                                         <label for="example-text-input" class="col-form-label">Comments</label> 
-                                        <textarea class="form-control" name="comment" id="comments" rows="3" placeholder="Please fill in" required>{{$comment}}</textarea> 
+                                        <textarea class="form-control" name="comment" id="comments" rows="3" placeholder="Please fill in" readonly>{{$comment}}</textarea> 
                                     </div> 
 
                                 </div>

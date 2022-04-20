@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\PresentMarks;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Internship;
+use App\Models\Session;
+
 
 class PresentMarksController extends Controller
 {
@@ -82,5 +85,38 @@ class PresentMarksController extends Controller
     public function destroy(PresentMarks $presentMarks)
     {
         //
+    }
+
+    public function presentViewAll()
+    {
+        $internship = Internship::with('company','session','studentInfo')->where('status','accepted')->get();
+        //dump($internship);
+        $presentMarks = PresentMarks::all();
+        $findme   = 'Bachelor';
+        return view('feedback.coorPresentView',compact('internship', 'presentMarks', 'findme'));
+    }
+
+    public function presentViewSess()
+    {
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+
+        return view('feedback.coorGraduateSess',compact('sessions','lect'));
+    }
+
+    public function presentViewSess2($id)
+    {
+        $internship = Internship::with('company','session','studentInfo')->where('status','accepted')->get();
+        //dump($internship);
+        $presentMarks = PresentMarks::all();
+        $findme   = 'Bachelor';
+        return view('feedback.coorPresentView',compact('internship', 'presentMarks', 'findme'));
+    }
+
+    public function viewPresentMark($id)
+    {
+        $presentMarks = PresentMarks::where('internship_id',$id)->first();
+        $internship = Internship::where('id',$id)->first();
+        return view('feedback.presentationView',compact('presentMarks', 'internship'));
     }
 }
