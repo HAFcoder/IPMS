@@ -70,9 +70,6 @@
                                     </td>
                                     <td>{{ $intern->company->name }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="fa fa-paper-plane"></i> Send Form</a>
-                                    </td>
-                                    <td>
                                         
                                         @if ($intern->empIndustrySurvey == null)
                                                 

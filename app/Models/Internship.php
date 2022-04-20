@@ -21,6 +21,9 @@ use App\Models\CompanySv;
 use App\Models\GradSurveyAnswer;
 use App\Models\SvEvaluationMarks;
 use App\Models\EmpIndustrySurveyAnswer;
+use App\Models\FinalEvaluationMarks;
+use App\Models\OrfForm;
+use App\Models\RdnForm;
 
 class Internship extends Model
 {
@@ -110,6 +113,26 @@ class Internship extends Model
     public function empIndustrySurvey()
     {
         return $this->hasOne(EmpIndustrySurveyAnswer::class, 'internship_id' ,'id');
+    }
+
+    public function finalEvaluation()
+    {
+        return $this->hasOne(FinalEvaluationMarks::class, 'internship_id' ,'id');
+    }
+
+    public function presentMarks()
+    {
+        return $this->hasOne(FinalEvaluationMarks::class, 'internship_id' ,'id');
+    }
+
+    public function orfForm()
+    {
+        return $this->hasOne(OrfForm::class, 'internship_id' ,'id');
+    }
+
+    public function rdnForm()
+    {
+        return $this->hasOne(RdnForm::class, 'internship_id' ,'id');
     }
 
 }

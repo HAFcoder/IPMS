@@ -54,19 +54,15 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            @foreach ($finaleva as $eva)
-                                                @if ($eva->internship_id == $intern->id)
-                                                    <i class="fa fa-check-square" style="color: green"></i>
-                                                @endif
-                                            @endforeach
-                                            <a href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/details') }}"><i class="ti-write"></i></a></td>
+                                            @if (!empty($intern->finalEvaluation))
+                                                <i class="fa fa-check-square" style="color: green"></i>
+                                            @endif
+                                            <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/details') }}"><i class="ti-write"></i></a></td>
                                         <td>
-                                            @foreach ($presentMarks as $present)
-                                                @if ($present->internship_id == $intern->id)
-                                                    <i class="fa fa-check-square" style="color: green"></i>
-                                                @endif
-                                            @endforeach
-                                            <a href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/presentation') }}"><i class="ti-layout-media-left-alt"></i></a>
+                                            @if (!empty($intern->presentMarks))
+                                                <i class="fa fa-check-square" style="color: green"></i>
+                                            @endif
+                                            <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/presentation') }}"><i class="ti-layout-media-left-alt"></i></a>
                                         </td>
                                     </tr>
 
