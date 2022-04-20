@@ -57,12 +57,15 @@
                         <table id="dataTable2" class="text-center">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th>Session Code</th>
+                                    @if (\Request::is('coordinator/feedback/company'))
+                                        <th>Session Code</th>
+                                    @endif
                                     <th>Student ID</th>
                                     <th>Name</th>
                                     <th>Programme</th>
                                     <th>Company</th>
                                     <th>Send Feedback</th>
+                                    <th>Evaluation Marks (%)</th>
                                     <th>View Result</th>
                                 </tr>
                             </thead>
@@ -76,7 +79,9 @@
 
                                @foreach ($internship as $intern)
                                 <tr>
-                                    <td>{{ $intern->session->session_code }}</td>
+                                    @if (\Request::is('coordinator/feedback/company'))
+                                        <td>{{ $intern->session->session_code }}</td>
+                                    @endif
                                     <td>{{ $intern->studentInfo->studentID }}</td>
                                     <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
                                     <td>
@@ -89,6 +94,24 @@
                                     <td>
                                         <a href="{{ route('feedback.sendForm',$intern->id) }}" class="btn btn-xs btn-primary mb-2 btn_width2"><i class="fa fa-paper-plane"></i> Evaluation Form</a> <br>
                                         <a href="{{ route('feedback.sendPoe',$intern->id) }}" class="btn btn-xs btn-info mb-2 btn_width2"><i class="fa fa-paper-plane"></i> POE Form</a>
+                                    </td>
+                                    <td>
+                                        @foreach($svMarks as $svmark)
+                                        @php
+                                        $svTot = 0;
+                                            if ( $svmark->internship_id == $intern->id ){
+                                                 
+                                                $svArr = explode(",", $svmark->marks);
+                                                $svTotal = array_sum($svArr);
+
+                                                $svTot = $svTotal / 100 * 40;
+                                                echo "".$svTot." / 40 ";
+                                                
+                                            } else {
+                                                echo "No data";
+                                            }
+                                         @endphp
+                                        @endforeach
                                     </td>
                                     <td>
                                         

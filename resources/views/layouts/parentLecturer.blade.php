@@ -216,7 +216,18 @@
                                 <li><a href="{{ url('/lecturer/fedbacks-evaluation/session') }}"><i class="ti-agenda"></i> <span>By Session</span></a></li>
 
                             @elseif(Auth::guard('lecturer')->user()->role == 'coordinator')
-                                <li><a href="{{ url('coordinator/feedback/company') }}"><i class="ti-agenda"></i> <span>Company Feedback</span></a></li>
+
+                                <li>
+                                    <a href="javascript:void(0)" aria-expanded="true">
+                                        <i class="ti-medall-alt"></i><span>Company Feedback</span>
+                                    </a>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/feedback/company') }}">View All</a></li>
+                                    </ul>
+                                    <ul class="collapse">
+                                        <li><a href="{{ url('coordinator/feedback/company/sessions') }}">By Session</a></li>
+                                    </ul>
+                                </li>
 
                                 <li>
                                     <a href="javascript:void(0)" aria-expanded="true">

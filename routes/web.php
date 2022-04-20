@@ -164,6 +164,8 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
 
     //feedback menu
     Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);
+    Route::get('coordinator/feedback/company/sessions', [FormFeedbackController::class, 'companySess']);
+    Route::get('coordinator/feedback/company/sessions/{id}', [FormFeedbackController::class, 'reportViewSess2'])->name('view.company.feed');
 
     Route::get('coordinator/feedback/logbook-report', [FormFeedbackController::class, 'logbookReport']);
     Route::get('coordinator/feedback/logbook-report/sessions', [FormFeedbackController::class, 'reportViewSess']);

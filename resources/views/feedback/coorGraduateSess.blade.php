@@ -41,6 +41,10 @@
                     <li><a href="{{ url('/coordinator') }}">Home</a></li>
                     <li><a >Presentation Marks</a></li>
                     <li><span>Session</span></li>
+                @elseif (\Request::is('coordinator/feedback/company/sessions'))
+                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                    <li><a >Company Feedbacks</a></li>
+                    <li><span>Session</span></li>
                 @elseif (\Request::is('coordinator/feedback/logbook-report/sessions'))
                     <li><a href="{{ url('/coordinator') }}">Home</a></li>
                     <li><a >Report & Logbook Marks</a></li>
@@ -101,6 +105,9 @@
                                         @if (\Request::is('coordinator/feedback/presentation/sessions'))
                                             <a data-toggle="tooltip" data-placement="top" title="View" 
                                             href="{{ route('view.present.marks',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a> 
+                                        @elseif (\Request::is('coordinator/feedback/company/sessions'))
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="{{ route('view.company.feed',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
                                         @elseif (\Request::is('coordinator/feedback/logbook-report/sessions'))
                                             <a data-toggle="tooltip" data-placement="top" title="View" 
                                                 href="{{ route('view.reportLog.marks',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
