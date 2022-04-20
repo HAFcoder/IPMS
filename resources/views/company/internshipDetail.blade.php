@@ -145,7 +145,7 @@
                                         <tr>
                                             <td>Organisation Reply Form (ORF)</td>
                                             <td>
-                                                @if(empty($orf_doc) || $orf_doc == null)
+                                                @if(empty($internship->orfForm))
 
                                                 <span class="badge badge-pill badge-secondary">Not upload yet.</span>
 
@@ -159,7 +159,7 @@
                                         <tr>
                                             <td>Report Duty Notification (RDN)</td>
                                             <td>
-                                                @if(empty($rdn_doc) || $rdn_doc == null)
+                                                @if(empty($internship->rdnForm))
 
                                                 <span class="badge badge-pill badge-secondary">Not upload yet.</span>
 
