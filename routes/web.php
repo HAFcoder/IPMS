@@ -163,7 +163,11 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
 
     //feedback menu
     Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);
+
     Route::get('coordinator/feedback/logbook-report', [FormFeedbackController::class, 'logbookReport']);
+    Route::get('coordinator/feedback/logbook-report/sessions', [FormFeedbackController::class, 'reportViewSess']);
+    Route::get('coordinator/feedback/logbook-report/sessions/{id}', [FormFeedbackController::class, 'reportViewSess2'])->name('view.reportLog.marks');
+    Route::get('coordinator/feedback/view/logbook-report/{id}', [FormFeedbackController::class, 'viewReportMark'])->name('feedback.view.reportLog');
 
     Route::get('coordinator/feedback/{id}/sendForm/', [FormFeedbackController::class, 'sendFormFeedback'])->name('feedback.sendForm');
     Route::get('coordinator/feedback/{id}/viewForm/', [FormFeedbackController::class, 'viewForm'])->name('feedback.viewForm');
@@ -183,7 +187,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/presentation', [PresentMarksController::class, 'presentViewAll']);
     Route::get('coordinator/feedback/presentation/sessions', [PresentMarksController::class, 'presentViewSess']);
     Route::get('coordinator/feedback/presentation/sessions/{id}', [PresentMarksController::class, 'presentViewSess2'])->name('view.present.marks');
-    Route::get('coordinator/feedback/view/presentation/sessions/{id}', [PresentMarksController::class, 'viewPresentMark'])->name('feedback.view.present');
+    Route::get('coordinator/feedback/view/presentation/{id}', [PresentMarksController::class, 'viewPresentMark'])->name('feedback.view.present');
 
 
 
