@@ -21,6 +21,7 @@ use App\Http\Controllers\FormFeedbackController;
 use App\Http\Controllers\LectEvaluateController;
 use App\Http\Controllers\MailingController;
 use App\Http\Controllers\SvEvaluationMarksController;
+use App\Http\Controllers\GradSurveyAnswerController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -169,11 +170,14 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/{id}/sendPoeForm/', [FormFeedbackController::class, 'sendFormPeo'])->name('feedback.sendPoe');
     Route::get('coordinator/feedback/{id}/viewPoeForm/', [FormFeedbackController::class, 'viewFormPeo'])->name('feedback.viewPoe');
 
-    Route::get('coordinator/view-marks/all', [SvEvaluationMarksController::class, 'viewAll']);
-    Route::get('coordinator/view-marks/sessions', [SvEvaluationMarksController::class, 'viewBySess']);
-    Route::get('coordinator/view-marks/sessions/{id}', [SvEvaluationMarksController::class, 'viewBySess2'])->name('view.marks');;
+    Route::get('coordinator/feedback/view-marks/all', [SvEvaluationMarksController::class, 'viewAll']);
+    Route::get('coordinator/feedback/view-marks/sessions', [SvEvaluationMarksController::class, 'viewBySess']);
+    Route::get('coordinator/feedback/view-marks/sessions/{id}', [SvEvaluationMarksController::class, 'viewBySess2'])->name('view.marks');;
 
-
+    Route::get('coordinator/feedback/graduate-survey', [GradSurveyAnswerController::class, 'gradViewAll']);
+    Route::get('coordinator/feedback/graduate-survey/sessions', [GradSurveyAnswerController::class, 'viewBySessGrad']);
+    Route::get('coordinator/feedback/graduate-survey/sessions/{id}', [GradSurveyAnswerController::class, 'viewBySessGrad2'])->name('view.graduate.survey');
+    Route::get('coordinator/feedback/view/graduate-survey/{id}', [GradSurveyAnswerController::class, 'viewGradSurvey'])->name('feedback.viewGrad');
 
 });
 

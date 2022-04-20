@@ -39,29 +39,46 @@
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="horizontal-main-wrapper">
+        @if  (\Request::is('coordinator/*'))
 
-        <div class="mainheader-area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-md-3">
-                        <div class="logo">
-                            <a href="#"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+            <div class="mainheader-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <div class="logo">
+                                <a href="#"><img style="height: 80px; width: auto;" src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+                            </div>
                         </div>
+                        
                     </div>
-                    <!-- profile info & task notification -->
-                    <div class="col-md-9 clearfix text-right">
-                        <div class="clearfix d-md-inline-block d-block">
-                            <div class="user-profile m-0">
-                                <img class="avatar user-thumb" src="{{ asset('assets/images/author/employee.png') }}" alt="avatar">
-                                <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
-                                    {{$internship->company->name}}
-                                </h4>
+                </div>
+            </div>
+            
+        @else
+            <div class="mainheader-area">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <div class="logo">
+                                <a href="#"><img src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+                            </div>
+                        </div>
+                        <!-- profile info & task notification -->
+                        <div class="col-md-9 clearfix text-right">
+                            <div class="clearfix d-md-inline-block d-block">
+                                <div class="user-profile m-0">
+                                    <img class="avatar user-thumb" src="{{ asset('assets/images/author/employee.png') }}" alt="avatar">
+                                    <h4 class="user-name dropdown-toggle" data-toggle="dropdown">
+                                        {{$internship->company->name}}
+                                    </h4>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endif
+
 
         {{-- lecturer's layout --}}
         <!-- main content area start -->

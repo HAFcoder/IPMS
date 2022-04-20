@@ -117,7 +117,7 @@
                                             @method('POST') 
                                             @csrf
 
-                                            <input name="internship_id" id="internship_id" value="" class="d-none">
+                                            <input name="internship_id" id="internship_id" value="{{ $internship->id }}" class="d-none">
 
                                         <table class="table table-hover text-center">
                                             
@@ -136,151 +136,151 @@
                                                 <tr>
                                                     <th scope="row">1</th>
                                                     <td class="text-left">I am able to apply the basic principles of computing relevant to my program of study.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q1" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q1" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q1" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q1" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q1" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q1" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q1" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q1" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q1" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q1" ></td>
                                                 </tr>
                                                 
                                                 <tr>
                                                     <th scope="row">2</th>
                                                     <td class="text-left">I am able to select relevant tools and techniques in completing computing tasks.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q2" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q2" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q2" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q2" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q2" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q2" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q2" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q2" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q2" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q2" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">3</th>
                                                     <td class="text-left">I can use the relevant skills using the appropriate computing tools and techniques effectively.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q3" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q3" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q3" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q3" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q3" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q3" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q3" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q3" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q3" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q3" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">4</th>
                                                     <td class="text-left">I am able to apply appropriate tools and techniques in completing computing tasks.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q4" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q4" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q4" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q4" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q4" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q4" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q4" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q4" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q4" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q4" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">5</th>
                                                     <td class="text-left">I am able to produce ethical computing solution to meet specified needs of stakeholders.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q5" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q5" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q5" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q5" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q5" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q5" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q5" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q5" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q5" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q5" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">6</th>
                                                     <td class="text-left">I am able to perform assigned tasks and manage work- related issues conscientiously and ethically.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q6" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q6" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q6" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q6" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q6" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q6" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q6" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q6" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q6" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q6" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">7</th>
                                                     <td class="text-left">I am able to recognize ethical, professional and legal responsibilities in computing situations and make informed judgments.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q7" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q7" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q7" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q7" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q7" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q7" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q7" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q7" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q7" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q7" ></td>
                                                 </tr>
                                                 
                                                 <tr>
                                                     <th scope="row">8</th>
                                                     <td class="text-left">I am able to perform computing tasks professionally.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q8" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q8" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q8" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q8" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q8" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q8" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q8" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q8" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q8" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q8" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">9</th>
                                                     <td class="text-left">I am able to work collaboratively as part of a team undertaking different roles in a range of tasks.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q9" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q9" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q9" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q9" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q9" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q9" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q9" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q9" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q9" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q9" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">10</th>
                                                     <td class="text-left">I am able to communicate effectively with a wide range of people in various professional contexts.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q10" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q10" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q10" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q10" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q10" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q10" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q10" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q10" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q10" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q10" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">11</th>
                                                     <td class="text-left">I am able to develop the computer-based systems using relevant and current computing methods and tools.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q11" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q11" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q11" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q11" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q11" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q11" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q11" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q11" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q11" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q11" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">12</th>
                                                     <td class="text-left">I am able to recognize the needs and ability to engage in continuing professional development.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q12" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q12" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q12" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q12" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q12" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q12" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q12" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q12" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q12" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q12" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">13</th>
                                                     <td class="text-left">I am able to continuously learn new skills and knowledge in computing related field for lifelong learning.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q13" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q13" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q13" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q13" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q13" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q13" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q13" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q13" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q13" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q13" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">14</th>
                                                     <td class="text-left">I am able to apply managerial skills in computing practice.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q14" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q14" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q14" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q14" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q14" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q14" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q14" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q14" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q14" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q14" ></td>
                                                 </tr>
 
                                                 <tr>
                                                     <th scope="row">15</th>
                                                     <td class="text-left">I have the ability and capability to design and develop computer applications with potential economic/commercial value.</td>
-                                                    <td><input type="radio" id="customRadio5" name="q15" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q15" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q15" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q15" ></td>
-                                                    <td><input type="radio" id="customRadio5" name="q15" ></td>
+                                                    <td><input value="1" type="radio" id="customRadio5" name="q15" ></td>
+                                                    <td><input value="2" type="radio" id="customRadio5" name="q15" ></td>
+                                                    <td><input value="3" type="radio" id="customRadio5" name="q15" ></td>
+                                                    <td><input value="4" type="radio" id="customRadio5" name="q15" ></td>
+                                                    <td><input value="5" type="radio" id="customRadio5" name="q15" ></td>
                                                 </tr>
 
                                             </tbody>
