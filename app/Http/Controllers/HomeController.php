@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
+use App\Models\Lecturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
@@ -87,7 +89,11 @@ class HomeController extends Controller
 
     public function coordinatorHome()
     {
-        return view('coordinator.index');
+        $student = Student::count();
+        $lecturer = Lecturer::count();
+        $company = Company::count();
+        $sessions = Session::count();
+        return view('coordinator.index', compact('student', 'lecturer', 'company', 'sessions'));
     }
 
     public function sadminHome()

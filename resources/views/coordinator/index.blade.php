@@ -41,7 +41,7 @@
                         <div class="seo-fact sbg1">
                             <div class="p-4 d-flex justify-content-between align-items-center">
                                 <div class="seofct-icon"><i class="ti-user"></i> Student Registered</div>
-                                <h2>153</h2>
+                                <h2>{{ $student }}</h2>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <div class="seo-fact sbg2">
                             <div class="p-4 d-flex justify-content-between align-items-center">
                                 <div class="seofct-icon"><i class="ti-bag"></i> Lecturer Registered</div>
-                                <h2>45</h2>
+                                <h2>{{ $lecturer }}</h2>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                         <div class="seo-fact sbg3">
                             <div class="p-4 d-flex justify-content-between align-items-center">
                                 <div class="seofct-icon"><i class="ti-bag"></i> Company Registered</div>
-                                <h2>176</h2>
+                                <h2>{{ $company }}</h2>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                         <div class="seo-fact sbg4">
                             <div class="p-4 d-flex justify-content-between align-items-center">
                                 <div class="seofct-icon"><i class="ti-bag"></i> Session Created</div>
-                                <h2>6</h2>
+                                <h2>{{ $sessions }}</h2>
                             </div>
                         </div>
                     </div>
