@@ -98,7 +98,7 @@ class LectEvaluateController extends Controller
     // view session list lect in charge
     public function feedbackSess ()
     {   
-        $sessions = Session::with('programmes')->get();
+        $sessions = Session::all();
         //dump($sessions);
         return view('feedback.lectStudSession',compact('sessions'));
     }
@@ -108,14 +108,14 @@ class LectEvaluateController extends Controller
     {
         //$sessions = Session::where('id',$id)->with('sessionProgramme','lecturerInfo')->first();
         //$student_session = StudentSession::orderBy('status', 'ASC')->where('session_id',$id)->with('studentInfo','programme')->get();
-        $internship = Internship::where('lecturer_id',Auth::user()->id)->with('company','session','studentInfo','lecturerInfo')->get();
+        $internship = Internship::where('lecturer_id',Auth::user()->id)
+                                ->where('session_id',$id)
+                                ->get();
         $programme = Programme::all();
-        $presentMarks = PresentMarks::all();
-        $finaleva = FinalEvaluationMarks::all();
         //dump($internship);
         //dump($sessions);
         //dump(Auth::user()->id);
-        return view('feedback.lectStudList',compact('internship','programme','presentMarks','finaleva'));
+        return view('feedback.lectStudList',compact('internship','programme'));
     }
 
     //lect logbook evaluation for student

@@ -213,10 +213,9 @@
 
                             {{-- for fedbacks and evaluation --}}
                             @if (Auth::guard('lecturer')->user()->role == 'lecturer')
-                                <li><a href="{{ url('/lecturer/fedbacks-evaluation/session') }}"><i
-                                            class="ti-agenda"></i> <span>By Session</span></a></li>
-                                {{-- <li><a href="{{ url('/lecturer/report-student') }}"><i class="ti-file"></i> <span>Report</span></a></li> --}}
-                            @else
+                                <li><a href="{{ url('/lecturer/fedbacks-evaluation/session') }}"><i class="ti-agenda"></i> <span>By Session</span></a></li>
+
+                            @elseif(Auth::guard('lecturer')->user()->role == 'coordinator')
                                 <li><a href="{{ url('coordinator/feedback/company') }}"><i class="ti-agenda"></i> <span>Company Feedback</span></a></li>
                                 <li><a href="{{ url('coordinator/feedback/logbook-report') }}"><i class="ti-agenda"></i> <span>Logbook & Report</span></a></li>
 
@@ -255,6 +254,8 @@
                                         <li><a href="{{ url('coordinator/feedback/view-marks/sessions') }}">By Session</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="invoice.html"><i class="ti-file"></i> <span>Presentation</span></a>
+                                <li><a href="invoice.html"><i class="ti-file"></i> <span>Graduate Survey</span></a></li>
                             @endif
 
                         </ul>

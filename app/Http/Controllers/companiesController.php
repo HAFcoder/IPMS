@@ -11,6 +11,8 @@ use App\Models\Internship;
 use App\Models\CompanySv;
 use App\Models\Supervisor;
 use App\Models\Lecturer;
+use App\Models\OrfForm;
+use App\Models\RdnForm;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Illuminate\Support\Facades\Storage;
@@ -211,39 +213,6 @@ class companiesController extends Controller
         return $this->applyList();
     }
 
-    public function studentAccept($id){
-        
-        $orf_doc = null;
-        $rdn_doc = null;
-
-        //dump($id);
-        $internship = Internship::where('id',$id)->with('company','supervisor')->first();
-        //dump($internship);
-
-        $sessioncode = $internship->session->session_code;
-
-        if(!empty($internship->orf_file)){
-
-            $orf_name = $internship->orf_file;
-
-            $orf_doc = (new FileManagementController)->getUrlFile($sessioncode, $orf_name);
-            //dump($orf_name . " - " . $sessioncode);
-
-        }
-
-        if(!empty($internship->rdn_file)){
-                
-            $rdn_name = $internship->rdn_file;
-
-            $rdn_doc = (new FileManagementController)->getUrlFile($sessioncode, $rdn_name);
-        }
-
-        //dump($orf_doc);
-
-        return view('company.studentAcceptForm',compact('internship','orf_doc','rdn_doc'));
-
-    }
-
     public function studentDecline($id){
         //dump($id);
         $internship = Internship::where('id',$id)->with('company')->first();
@@ -256,6 +225,175 @@ class companiesController extends Controller
         $internship = Internship::where('id',$id)->with('company')->first();
         //dump($internship);
         return view('company.studentRejectForm',compact('internship'));
+    }
+
+    public function studentAccept($id){
+        
+        $orf_doc = null;
+        $rdn_doc = null;
+
+        //dump($id);
+        $internship = Internship::where('id',$id)->first();
+        //dump($internship);
+
+        $sessioncode = $internship->session->session_code;
+
+        if(!empty($internship->orfForm)){
+
+            $orf_name = $internship->orfForm->filename;
+
+            $orf_doc = (new FileManagementController)->getUrlFile($sessioncode, $orf_name);
+            //dump($orf_name . " - " . $sessioncode);
+
+        }
+
+        if(!empty($internship->rdnForm)){
+                
+            $rdn_name = $internship->rdnForm->filename;
+
+            $rdn_doc = (new FileManagementController)->getUrlFile($sessioncode, $rdn_name);
+        }
+
+        //dump($orf_doc);
+
+        return view('company.studentAcceptForm',compact('internship','orf_doc','rdn_doc'));
+
+    }
+
+    public function internship_updateOrf(Request $request, $id){
+
+        $internship = Internship::where('id',$id)->first();
+        $status = $request->status;
+        
+        if($request->orf_id == 0){
+            $orf = new OrfForm;
+            $orf->internship_id = $internship->id;
+            $orf->created_at = now();
+        }else{
+            $orf = OrfForm::where('id',$request->orf_id)->first();
+        }
+
+        $orf->start_training = $request->start_training;
+        $orf->end_training = $request->end_training;
+        $orf->department = $request->department;
+        $orf->represent_name = $request->represent_name;
+        $orf->represent_position = $request->represent_position;
+        $orf->contact = $request->contact;
+        $orf->email = $request->email;
+        
+        $location = $internship->session->session_code;
+
+        if ($request->hasFile('filename')) {
+            //dump("oii");
+            $filename = $request->file('filename')->getClientOriginalName();
+            $orf->filename = $filename;
+
+            $file = $request->file('filename');
+
+            $orf_doc = (new FileManagementController)->uploadFile($location, $filename, $file);
+
+        }
+
+        $orf->updated_at = now();
+        $orf->save();
+
+        $internship->updated_at = now();
+        $internship->status = $status;
+        $internship->save();
+
+        //set all pending into reject status
+        $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
+
+        foreach($internship2 as $intern){
+
+            $rejectstat = 'declined';
+
+            //dump('id' . $intern->id);
+            
+            $intern->updated_at = now();
+            $intern->status = $rejectstat;
+
+            $intern->save();
+
+        }
+        
+        Alert::success('Success!', 'Your ORF details has been updated.');
+
+        return $this->studentAccept($id);
+
+    }
+
+    public function internship_updateRdn(Request $request, $id){
+
+        $internship = Internship::where('id',$id)->first();
+        $status = $request->status;
+        
+        //add to rdnForm table
+        if($request->rdn_id == 0){
+            $rdn = new RdnForm;
+            $rdn->internship_id = $internship->id;
+            $rdn->created_at = now();
+        }else{
+            $rdn = RdnForm::where('id',$request->rdn_id)->first();
+        }
+
+        //update or add file to s3
+        $location = $internship->session->session_code;
+
+        if ($request->hasFile('filename')) {
+            $filename = $request->file('filename')->getClientOriginalName();
+            $rdn->filename = $filename;
+
+            $file = $request->file('filename');
+
+            $orf_doc = (new FileManagementController)->uploadFile($location, $filename, $file);
+        }
+
+        $rdn->report_duty = $request->report_duty;
+        $rdn->department = $request->department;
+        $rdn->job_scope = $request->job_scope;
+        $rdn->represent_name = $request->represent_name;
+        $rdn->represent_position = $request->represent_position;
+
+
+        //add or update supervisor
+        if($request->supervisor_id == 0){
+            $sv = new Supervisor;
+
+            $sv->company_id = $internship->company_id;
+            $sv->name = $request->sv_name;
+            $sv->position = $request->sv_position;
+            $sv->contact = $request->sv_telephone;
+            $sv->email = $request->sv_email;
+
+            $sv->save();
+            $internship->supervisor_id = $sv->id;
+
+        }else{
+            
+            $sv = Supervisor::where('id',$request->supervisor_id)->first();
+
+            $sv->company_id = $internship->company_id;
+            $sv->name = $request->sv_name;
+            $sv->position = $request->sv_position;
+            $sv->contact = $request->sv_telephone;
+            $sv->email = $request->sv_email;
+
+            $sv->save();
+        }
+
+        $rdn->updated_at = now();
+        $rdn->save();
+
+        $internship->job_scope = $request->job_scope;
+        $internship->updated_at = now();
+        $internship->status = $status;
+        $internship->save();
+        
+        Alert::success('Success!', 'Your RDN details has been updated.');
+
+        return $this->studentAccept($id);
+        
     }
 
     public function studentInternship_update(Request $request, $id){
