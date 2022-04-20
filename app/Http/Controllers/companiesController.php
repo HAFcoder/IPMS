@@ -15,6 +15,9 @@ use App\Models\OrfForm;
 use App\Models\RdnForm;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use Mail;
+use App\Mail\InternMail;
+
 use Illuminate\Support\Facades\Storage;
 
 class companiesController extends Controller
@@ -566,6 +569,35 @@ class companiesController extends Controller
 
         return $this->internship_details($id);
 
+    }
+
+    public function internship_sendDecline($id){
+
+        $internship = Internship::where('id',$id)->first();
+
+        //get student details
+        $studentname = $internship->studentInfo->f_name . " " . $internship->studentInfo->l_name;
+        $studentid = $internship->studentInfo->studentID;
+        $studentemail = $internship->student->email;
+
+        //company details
+        $companyname = $internship->company->name;
+        $companyemail = $internship->company->email;
+   
+        $details = [
+            'title' => 'Internship Declination',
+            'url' => 'https://www.kuptm.edu.my/',
+            'name' => $studentname,
+            'id' => $studentid,
+            'company' => $companyname
+        ];
+  
+        Mail::to($companyemail)
+            ->cc($studentemail)
+            ->send(new InternMail($details));
+
+
+        return redirect()->back()->with('success', 'Decline letter has been sent to ' . $companyemail);
     }
 
 }

@@ -91,7 +91,7 @@
                                         @if($intern->status == 'accepted')
                                             <a href="{{ route('internship.student.detail',$intern->id) }}" class="btn btn-sm btn-primary">See Details</a>
                                         @elseif($intern->status == 'declined')
-                                            <button class="btn btn-sm btn-warning">Send Declined Letter</button>
+                                            <a href="{{ route('internship.student.decline',$intern->id) }}" class="btn btn-sm btn-warning">Send Declined Letter</a>
                                         @elseif($intern->status == 'rejected')
                                             -
                                         @else
