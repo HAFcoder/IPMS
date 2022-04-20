@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\GradSurveyAnswer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Internship;
+use App\Models\Session;
 
 class GradSurveyAnswerController extends Controller
 {
@@ -82,5 +84,33 @@ class GradSurveyAnswerController extends Controller
     public function destroy(GradSurveyAnswer $gradSurveyAnswer)
     {
         //
+    }
+
+    public function gradViewAll()
+    {
+        $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->get();
+        //dump($internship);
+        return view('feedback.coorGraduateAll',compact('internship'));
+    }
+
+    public function viewBySessGrad()
+    {
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+
+        return view('feedback.coorGraduateSess',compact('sessions','lect'));
+    }
+
+    public function viewBySessGrad2($id)
+    {
+        $internship = Internship::where('session_id',$id)->get();
+        //dump('test');
+        return view('feedback.coorGraduateAll',compact('internship'));
+    }
+
+    public function viewGradSurvey($id)
+    {
+        $internship = Internship::where('id',$id)->first();
+        return view('feedback.graduateView',compact('internship'));
     }
 }

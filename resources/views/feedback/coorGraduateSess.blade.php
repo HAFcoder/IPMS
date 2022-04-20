@@ -35,44 +35,17 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            @if (\Request::is('coordinator/feedback/view-marks/sessions'))
-                <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
-                <ul class="breadcrumbs pull-left">
+            <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
+            <ul class="breadcrumbs pull-left">
 
-                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                        <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                    @else
-                        <li><a href="{{ url('/lecturer') }}">Home</a></li>
-                    @endif
-                    <li><a >View Marks</a></li>
-                    <li><span>Session</span></li>
-                </ul>
-            @elseif (\Request::is('coordinator/feedback/graduate-survey/sessions'))
-                <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
-                <ul class="breadcrumbs pull-left">
-
-                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                        <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                    @else
-                        <li><a href="{{ url('/lecturer') }}">Home</a></li>
-                    @endif
-                    <li><a >Graduate Survey</a></li>
-                    <li><span>Session</span></li>
-                </ul>
-            @else
-                <h4 class="page-title pull-left">Supervisee</h4>
-                <ul class="breadcrumbs pull-left">
-
-                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                        <li><a href="{{ url('/coordinator') }}">Home</a></li>
-                    @else
-                        <li><a href="{{ url('/lecturer') }}">Home</a></li>
-                    @endif
-                    {{-- <li><a >Feedback & Evaluation</a></li> --}}
-                    <li><span>Supervisee</span></li>
-                </ul>
-            @endif
-            
+                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                @else
+                    <li><a href="{{ url('/lecturer') }}">Home</a></li>
+                @endif
+                <li><a >Graduate Survey</a></li>
+                <li><span>Session</span></li>
+            </ul>
         </div>
     </div>
 
@@ -116,17 +89,8 @@
                                 @foreach($sessions as $ss)
                                 <tr>
                                     <td>
-                                        @if (\Request::is('coordinator/feedback/view-marks/sessions'))
-                                            <a data-toggle="tooltip" data-placement="top" title="View" 
-                                            href="{{ route('view.marks',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>  
-                                        @elseif (\Request::is('coordinator/feedback/graduate-survey/sessions'))
-                                            <a data-toggle="tooltip" data-placement="top" title="View" 
-                                            href="{{ route('view.graduate.survey',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a> 
-                                        @else
-                                            <a data-toggle="tooltip" data-placement="top" title="View" 
-                                            href="{{ route('attach.view.supervisee',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>    
-                                        @endif
-                                        
+                                        <a data-toggle="tooltip" data-placement="top" title="View" 
+                                        href="{{ route('view.graduate.survey',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a> 
                                     </td>
                                     <td>{{ $ss->session_code }}</td>
                                     <td>{{ date('d/m/Y', strtotime($ss->start_date)) }} - {{ date('d/m/Y', strtotime($ss->end_date)) }}</td>
