@@ -505,9 +505,12 @@ class companiesController extends Controller
 
     public function companySV()
     {
-        $internship = Internship::with('company','session','studentInfo','svEvaluation')->where('status','accepted')->get();
+        // $internship = Internship::with('company','session','studentInfo','svEvaluation')->where('status','accepted')->get();
+        // return view('company.coorCompanySVEva',compact('internship'));
+
+        $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->get();
         //dump($internship);
-        return view('company.coorCompanySVEva',compact('internship'));
+        return view('feedback.coorCompany',compact('internship'));
     }
 
     //studnet-company

@@ -149,7 +149,7 @@
                                             <th>Programme</th>
                                             <th>Register Date</th>
                                             <th>Status</th>
-                                            <th>Other</th>
+                                            {{-- <th>Other</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -185,7 +185,7 @@
                                                 @endif
 
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <div class="dropdown">
                                                     <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                       Action
@@ -195,7 +195,7 @@
                                                       <a class="dropdown-item" href="https://www.google.com" target="_blank">Resume</a>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                         
                                         @endforeach
