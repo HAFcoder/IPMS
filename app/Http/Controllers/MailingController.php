@@ -27,7 +27,7 @@ class MailingController extends Controller
         return "Email sent successfully";
     }
 
-    public function logbookApprovalMail()
+    public function logbookApprovalMail($logid,$week)
     {
         $myEmail = 'novatechdevelopers@gmail.com';
    

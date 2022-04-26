@@ -30,7 +30,7 @@
                 <h4 class="header-title">INDUSTRIAL TRAINING REPORT - {{ strtoupper(Auth::user()->student_info->f_name) }} {{ strtoupper(Auth::user()->student_info->l_name) }}</h4>
                 
                 {{-- ubah !!!!! --}}
-                <form action="{{ route('attach.supervisee') }}" method="POST">
+                {{-- <form action="{{ route('attach.supervisee') }}" method="POST"> --}}
                     @csrf
 
                     <div class="form-group">
@@ -103,9 +103,9 @@
                         </script>
                     </div>
 
-                    <button type="submit" class="btn btn-rounded btn-primary btn-lg btn-block" style="font-size : 20px;">Submit</button>
-                </form>
-
+                    <button onclick="testedit()" class="btn btn-rounded btn-primary btn-lg btn-block" style="font-size : 20px;">Submit</button>
+                {{-- </form> --}}
+                
             </div>
         </div>
     </div>
@@ -115,6 +115,7 @@
 @endsection
 
 @section('scripts')
+
     
 @endsection
 

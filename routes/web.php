@@ -104,6 +104,10 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::get('/session/register-session', [StudentSessionController::class, 'createStudSession'])->name('register.session');
     Route::get('/session/view-status', [StudentSessionController::class, 'viewStatus']);
 
+    //logbook
+    Route::get('/logbook', [LogbookController::class, 'showLogbook']);
+    Route::post('/logbook/{id}/update', [LogbookController::class, 'updateLogbook'])->name('logbook.update');
+    Route::get('/logbook/{id}/{week}/send', [LogbookController::class, 'studEmailLogbook'])->name('logbook.email');
 
 });
 
@@ -267,8 +271,8 @@ Route::delete('/resume/delete', [ResumeManagementController::class, 'destroyResu
 Route::get('/resume/download/{filename}',[ResumeManagementController::class, 'downloadResume']);
 
 //Logbook
-Route::get('/logbook', [LogbookController::class, 'showLogbook']);
-Route::get('/logbook/supervisor/view', [LogbookController::class, 'showLogbookSupervisor']);
+Route::get('/logbook/supervisor/{id}/view', [LogbookController::class, 'showLogbookSupervisor'])->name('logbook.view.supervisor');
+Route::get('/logbook/supervisor/{id}/approve', [LogbookController::class, 'approveLogbookSupervisor'])->name('logbook.approved.supervisor');
 // Route::get('/logbooktest', [LogbookController::class, 'testlistLogbook']);
 // Route::post('/logbooks', [LogbookController::class, 'testcreateLogbook']);
 // Route::put('/logbook/week/{week_number}', [LogbookController::class, 'testupdateLogbook']);
@@ -277,7 +281,7 @@ Route::get('/logbook/supervisor/view', [LogbookController::class, 'showLogbookSu
 
 //Mailing
 Route::get('/internship/mail/send/{encryptedstudentid}', [MailingController::class, 'declineMail']);
-Route::get('/logbook/mail/send', [MailingController::class, 'logbookApprovalMail']);
+//Route::get('/logbook/{id}/mail/send', [MailingController::class, 'logbookApprovalMail'])->name('logbook.email');
 // Route::get('evaluation/mail/send/{encryptedstudentid}', [MailingController::class, 'studentEvaluationMail']);
 
 //Test Mailing

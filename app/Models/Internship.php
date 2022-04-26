@@ -98,7 +98,7 @@ class Internship extends Model
 
     public function logbook()
     {
-        return $this->hasOne(Logbook::class);
+        return $this->hasMany(Logbook::class, 'internship_id' ,'id');
     }
 
     public function graduateAnswer()
