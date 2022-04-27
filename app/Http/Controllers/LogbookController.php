@@ -20,6 +20,14 @@ use Carbon\Carbon;
 
 class LogbookController extends Controller
 {
+    public function studSubmission(){
+        
+        $student_id = Auth::user()->id;
+        $internship = Internship::where('student_id', $student_id)->where('status','accepted')->first();
+
+        return view('logbook.studSubmission',compact('internship'));
+
+    }
     
     public function createLogbook(Request $request)
     {

@@ -77,8 +77,9 @@
                             </div>
 
                             <li><a href="{{url('/internfile')}}"><i class="ti-receipt"></i> <span>Intern Document</span></a></li>
-                            <li><a href="{{url('/logbook')}}"><i class="ti-receipt"></i> <span>Logbook</span></a></li>
-                            <li><a href="{{url('/report')}}"><i class="ti-receipt"></i> <span>Report</span></a></li>
+                            <li><a href="{{route('student.submission')}}"><i class="ti-receipt"></i> <span>Submission</span></a></li>
+                            {{-- <li><a href="{{url('/logbook')}}"><i class="ti-receipt"></i> <span>Logbook</span></a></li>
+                            <li><a href="{{url('/report')}}"><i class="ti-receipt"></i> <span>Report</span></a></li> --}}
 
                             {{-- @if (auth()->user()->status == 'approve') --}}
                             

@@ -13,6 +13,7 @@ use App\Models\Supervisor;
 use App\Models\Lecturer;
 use App\Models\OrfForm;
 use App\Models\RdnForm;
+use App\Models\SvEvaluationMarks;
 use RealRashid\SweetAlert\Facades\Alert;
 
 use Mail;
@@ -494,6 +495,23 @@ class companiesController extends Controller
         return $this->applyList();
     }
 
+    public function internship_updateReport(Request $request, $id){
+        
+        $internship = Internship::where('id',$id)->first();
+        //dump($request);
+        $request->validate([
+            'report'=>'required',
+        ]);
+
+        $report = $request->report;
+
+        $internship->report_link = $report;
+        $internship->save();
+
+        return redirect()->back()->with('success', 'Your report document link has been updated.');
+
+    }
+
     //coordinator menu
     //letter
     public function acceptance()
@@ -512,8 +530,9 @@ class companiesController extends Controller
         // return view('company.coorCompanySVEva',compact('internship'));
 
         $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->get();
+        $svMarks = SvEvaluationMarks::all();
         //dump($internship);
-        return view('feedback.coorCompany',compact('internship'));
+        return view('feedback.coorCompany',compact('internship','svMarks'));
     }
 
     //studnet-company

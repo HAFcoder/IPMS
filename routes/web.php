@@ -87,6 +87,7 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 
     //report
     Route::get('/report', [StudentController::class, 'report']);
+    Route::put('submission/report/{id}/update', [companiesController::class, 'internship_updateReport'])->name('internship.update.reportlink');
 
     //feedbacks and survey
     Route::get('/graduate-survey', [FormEvaluateController::class, 'graduate']);
@@ -108,6 +109,10 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::get('/logbook', [LogbookController::class, 'showLogbook']);
     Route::post('/logbook/{id}/update', [LogbookController::class, 'updateLogbook'])->name('logbook.update');
     Route::get('/logbook/{id}/{week}/send', [LogbookController::class, 'studEmailLogbook'])->name('logbook.email');
+
+    //submission
+    Route::get('/submission', [LogbookController::class, 'studSubmission'])->name('student.submission');
+
 
 });
 
