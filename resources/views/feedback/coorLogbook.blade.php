@@ -49,8 +49,10 @@
                                     <th>Programme</th>
                                     <th>Company</th>
                                     <th>Lecturer</th>
-                                    <th>Marks</th>
+                                    <th>Marks (%)</th>
                                     <th>View Marks</th>
+                                    <th>View Logbook</th>
+                                    <th>View Report</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -91,7 +93,7 @@
                                                             echo "".$evaTot." % / 40 %";
                                                         } else {
                                                             $evaTot = $evaTotal / 100 * 60;
-                                                            echo "".$evaTot." % / 60 %";
+                                                            echo "".$evaTot." / 60";
                                                         }
                                                         
                                                     
@@ -105,7 +107,23 @@
                                         @if ($intern->finalEvaluation == null)
                                             <span style="font-size:15px" class="badge badge-pill badge-secondary">No Data</span>
                                         @else
-                                            <a target="_blank" href="{{ route('feedback.view.reportLog',$intern->id) }}" class="btn btn-xs btn-success mb-2 "><i class="fa fa-eye"></i> Report & Logbook</a>
+                                            <a target="_blank" href="{{ route('feedback.view.reportLog',$intern->id) }}" class="btn btn-xs btn-success mb-2 "><i class="fa fa-eye"></i></a>
+                                        @endif
+                                    </td>
+                                    {{-- logbook --}}
+                                    <td>
+                                        @if ($intern->finalEvaluation == null)
+                                            <span style="font-size:15px" class="badge badge-pill badge-secondary">No Data</span>
+                                        @else
+                                            <a target="_blank" href="{{ route('feedback.view.reportLog',$intern->id) }}" class="btn btn-xs btn-warning mb-2 "><i class="fa fa-eye"></i></a>
+                                        @endif
+                                    </td>
+                                     {{-- report --}}
+                                    <td>
+                                        @if ($intern->finalEvaluation == null)
+                                            <span style="font-size:15px" class="badge badge-pill badge-secondary">No Data</span>
+                                        @else
+                                            <a target="_blank" href="{{ route('feedback.view.reportLog',$intern->id) }}" class="btn btn-xs btn-info mb-2 "><i class="fa fa-eye"></i></a>
                                         @endif
                                     </td>
                                 </tr>
