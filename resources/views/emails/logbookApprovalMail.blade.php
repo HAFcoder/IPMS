@@ -2,16 +2,16 @@
 # {{ $details['title'] }}
 ## Week {{ $details['week'] }}
 
-Please click on the button below to look at {{ $details['name'] }} logbook weekly updates at {{ $details['company'] }}
+Please click on the button below to view {{ $details['name'] }} weekly logbook updates at {{ $details['company'] }}
 
 @component('mail::button', ['url' => $details['logbookurl']])
 Go to student's logbook
 @endcomponent
 
-Thanks,<br>
-KUPTM Internship Placement Management<br>
+Best regards,<br>
+UPTM Internship Placement Management<br>
 @component('mail::button', ['url' => $details['url']])
-Kuptm Official Site
+UPTM Official Site
 @endcomponent
 
 @endcomponent

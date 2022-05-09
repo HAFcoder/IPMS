@@ -3,6 +3,8 @@
 @slot('header')
 @component('mail::header', ['url' => config('app.url')])
 {{ config('app.name') }}
+{{-- {{<img src="{{ asset('assets/images/icon/ipms_logo.png') }}" class="logo" alt="Logo">}} --}}
+
 @endcomponent
 @endslot
 

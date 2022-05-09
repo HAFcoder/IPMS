@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/dw/all.min.css') }}">
-    <title>KUPTM Template Resume</title>
+    <title>UPTM Template Resume</title>
 </head>
 <body class="bg-light">
     <div class="container p-5">

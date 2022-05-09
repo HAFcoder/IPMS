@@ -80,7 +80,7 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #edf2f7;
+    background-color: #f4f0f9;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -112,9 +112,9 @@ img {
 /* Logo */
 
 .logo {
-    height: 75px;
-    max-height: 75px;
-    width: 75px;
+    height: 150px;
+    max-height: 150px;
+    width: 150px;
 }
 
 /* Body */
@@ -123,9 +123,9 @@ img {
     -premailer-cellpadding: 0;
     -premailer-cellspacing: 0;
     -premailer-width: 100%;
-    background-color: #edf2f7;
-    border-bottom: 1px solid #edf2f7;
-    border-top: 1px solid #edf2f7;
+    background-color: #f4f0f9;
+    border-bottom: 1px solid #f4f0f9;
+    border-top: 1px solid #f4f0f9;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -197,7 +197,7 @@ img {
 }
 
 .table td {
-    color: #74787e;
+    color: #e5c7ff;
     font-size: 15px;
     line-height: 18px;
     margin: 0;
@@ -232,11 +232,11 @@ img {
 
 .button-blue,
 .button-primary {
-    background-color: #2d3748;
-    border-bottom: 8px solid #2d3748;
-    border-left: 18px solid #2d3748;
-    border-right: 18px solid #2d3748;
-    border-top: 8px solid #2d3748;
+    background-color: #6f42c1;
+    border-bottom: 8px solid #6f42c1;
+    border-left: 18px solid #6f42c1;
+    border-right: 18px solid #6f42c1;
+    border-top: 8px solid #6f42c1;
 }
 
 .button-green,
@@ -260,12 +260,12 @@ img {
 /* Panels */
 
 .panel {
-    border-left: #2d3748 solid 4px;
+    border-left: #6f42c1 solid 4px;
     margin: 21px 0;
 }
 
 .panel-content {
-    background-color: #edf2f7;
+    background-color: #f4f0f9;
     color: #718096;
     padding: 16px;
 }

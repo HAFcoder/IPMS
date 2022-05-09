@@ -341,7 +341,7 @@ class FormFeedbackController extends Controller
 
         //dump($url);
 
-        $subject = "KUPTMKL INTERNSHIP - INDUSTRIAL SUPERVISOR EVALUATION REPORT";
+        $subject = "UPTM INTERNSHIP - INDUSTRIAL SUPERVISOR EVALUATION REPORT";
         
         $email = (new MailingController)->sendEmail($internship,$svemail, $studentemail, $subject,$type);
         
@@ -372,7 +372,7 @@ class FormFeedbackController extends Controller
 
         //dump($url);
 
-        $subject = "KUPTMKL INTERNSHIP - EMPLOYER / INDUSTRY QUESTIONNAIRE";
+        $subject = "UPTM INTERNSHIP - EMPLOYER / INDUSTRY QUESTIONNAIRE";
         
         $email = (new MailingController)->sendEmail($internship,$svemail, $studentemail, $subject, $type);
         

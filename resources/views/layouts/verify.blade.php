@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     @yield('meta')
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>IPMS KUPTM</title>
+    <title>IPMS UPTM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/icon/ipms_logo.ico') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">

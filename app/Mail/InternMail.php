@@ -29,6 +29,7 @@ class InternMail extends Mailable
      */
     public function build()
     {
+
         return $this->markdown('emails.declineMail')
                     ->with('details', $this->details);
     }

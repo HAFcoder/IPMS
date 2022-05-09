@@ -1,7 +1,7 @@
 @component('mail::message')
 {{$subject}}
 
-Mr./Ms., <br>
+Dear Mr./Ms., <br>
 
 @if($type == 'evaluation')
 
@@ -18,6 +18,6 @@ Mr./Ms., <br>
 @endif
 
 
-Thanks,<br>
-KUPTM Internship Placement Management
+Best regards,<br>
+UPTM Internship Placement Management
 @endcomponent

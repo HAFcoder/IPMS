@@ -66,7 +66,7 @@
                     </div> --}}
 
                     <div class="form-group">
-                        <label class="col-form-label">Names of Department/Section/Unit that KUPTM student is attached for industry training</label>
+                        <label class="col-form-label">Names of Department/Section/Unit that UPTM student is attached for industry training</label>
                         <input disabled class="form-control" type="text" name="dept" placeholder="Enter department name." required value="{{ $internship->job_scope }}">
                     </div>
 
@@ -417,7 +417,7 @@
                                                         }
                                                     @endphp
                                                     <th scope="row">1</th>
-                                                    <td class="text-left">KUPTM student’s attributes match my organisation’s requirement.</td>                                                 
+                                                    <td class="text-left">UPTM student’s attributes match my organisation’s requirement.</td>                                                 
                                                     <td><input @if($q16=='yes') checked @endif value="yes" type="radio" id="customRadio5" name="q16" ></td>
                                                     <td><input @if($q16=='no') checked @endif  value="no" type="radio" id="customRadio5" name="q16" ></td>
                                                 </tr>
@@ -430,7 +430,7 @@
                                                         }
                                                     @endphp
                                                     <th scope="row">2</th>
-                                                    <td class="text-left">I am willing to employ KUPTM’s graduates in my organisation.</td>                                                 
+                                                    <td class="text-left">I am willing to employ UPTM’s graduates in my organisation.</td>                                                 
                                                     <td><input @if($q17=='yes') checked @endif value="yes" type="radio" id="customRadio5" name="q17" ></td>
                                                     <td><input @if($q17=='no') checked @endif  value="no" type="radio" id="customRadio5" name="q17" ></td>
                                                 </tr>
@@ -443,7 +443,7 @@
                                                         }
                                                     @endphp
                                                     <th scope="row">3</th>
-                                                    <td class="text-left">I am willing to  accept KUPTM’s students(s) to undergo practical training in my organisation in the future.</td>                                                 
+                                                    <td class="text-left">I am willing to  accept UPTM’s students(s) to undergo practical training in my organisation in the future.</td>                                                 
                                                     <td><input @if($q18=='yes') checked @endif  value="yes" type="radio" id="customRadio5" name="q18" ></td>
                                                     <td><input @if($q18=='no') checked @endif   value="no" type="radio" id="customRadio5" name="q18" ></td>
                                                 </tr>

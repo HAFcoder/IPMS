@@ -18,7 +18,7 @@ class MailingController extends Controller
         $myEmail = 'novatechdevelopers@gmail.com';
    
         $details = [
-            'title' => 'Internship Declination',
+            'title' => 'Rejection of Internship Position',
             'url' => 'http://www.kuptm.edu.my/'
         ];
   
@@ -32,7 +32,7 @@ class MailingController extends Controller
         $myEmail = 'novatechdevelopers@gmail.com';
    
         $details = [
-            'title' => 'Internship weekly logbook Update',
+            'title' => 'Internship Weekly Logbook Update',
             'week' => 1,
             'url' => 'http://www.kuptm.edu.my/',
             'logbookurl' => "http://localhost:8000/logbook/supervisor/view",

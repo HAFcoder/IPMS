@@ -58,7 +58,7 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="studentID" class="col-form-label">KUPTM Student ID</label>
+                            <label for="studentID" class="col-form-label">UPTM Student ID</label>
                             <input class="form-control text-uppercase" pattern="[A-Za-z]{2}\d{9}" id="studentID" name="studentID" type="text" value="{{ $studInfo->studentID }}" required>
                         </div>
 

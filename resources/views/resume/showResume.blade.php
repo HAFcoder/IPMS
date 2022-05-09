@@ -12,7 +12,7 @@
             color-adjust: exact !important; /*Firefox*/
         }
     </style>
-    <title>KUPTM Template Resume</title>
+    <title>UPTM Template Resume</title>
 </head>
 <body class="bg-light" id="content-resume">
     <div class="container p-5">
