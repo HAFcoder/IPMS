@@ -195,6 +195,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/graduate-survey/sessions', [GradSurveyAnswerController::class, 'viewBySessGrad']);
     Route::get('coordinator/feedback/graduate-survey/sessions/{id}', [GradSurveyAnswerController::class, 'viewBySessGrad2'])->name('view.graduate.survey');
     Route::get('coordinator/feedback/view/graduate-survey/{id}', [GradSurveyAnswerController::class, 'viewGradSurvey'])->name('feedback.viewGrad');
+    Route::get('coordinator/feedback/graduate-survey/chart', [GradSurveyAnswerController::class, 'viewChart']);
 
     Route::get('coordinator/feedback/presentation', [PresentMarksController::class, 'presentViewAll']);
     Route::get('coordinator/feedback/presentation/sessions', [PresentMarksController::class, 'presentViewSess']);

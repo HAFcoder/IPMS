@@ -259,7 +259,7 @@ if ($('#highpiechart4').length) {
             type: 'pie'
         },
         title: {
-            text: 'Dollar market Values, 2018'
+            text: ''
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -285,9 +285,11 @@ if ($('#highpiechart4').length) {
         series: [{
             name: 'Share',
             data: [
-                { name: 'USD', y: 61.41 },
-                { name: 'BTC', y: 11.84 },
-                { name: 'TCN', y: 10.85 }
+                { name: '1', y: 61.41 },
+                { name: '2', y: 11.84 },
+                { name: '3', y: 11.84 },
+                { name: '4', y: 11.84 },
+                { name: '5', y: 10.85 }
             ]
         }]
     });

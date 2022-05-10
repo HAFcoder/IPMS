@@ -10,8 +10,7 @@
 @inject('programme', 'App\Models\Programme')
 
 <div class="row ">
-
-                                        
+                             
     @php
     $markArr = array();
     if(!empty($internship->graduateAnswer)){

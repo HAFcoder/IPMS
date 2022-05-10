@@ -113,4 +113,10 @@ class GradSurveyAnswerController extends Controller
         $internship = Internship::where('id',$id)->first();
         return view('feedback.graduateView',compact('internship'));
     }
+
+    public function viewChart()
+    {
+        $graduateMarks = GradSurveyAnswer::all();
+        return view('feedback.coorGraduatePie', compact('graduateMarks'));
+    }
 }

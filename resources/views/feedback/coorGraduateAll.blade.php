@@ -45,6 +45,10 @@
     <div class="row">
 
         <div class="col-12 mt-5 mx-auto">
+            <a class="btn btn-primary mb-3 float-right" href="{{ url('/coordinator/feedback/graduate-survey/chart') }}">View Summary Charts</a>
+        </div>
+
+        <div class="col-12 mt-2 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Student List</h4>
