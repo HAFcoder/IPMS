@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Internship;
 use App\Models\Lecturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use App\Models\LecturerInfo;
 use App\models\Session;
 use App\Models\Student;
 use App\Models\StudentInfo;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -84,7 +86,9 @@ class HomeController extends Controller
             'lect_id' => $uid,
          ])->first(); 
         //print_r($lect);
-        return view('lecturer.index', compact('lect'));
+        $studIntern = Internship::where('lecturer_id', $uid)->count();
+        $session = Session::whereDate('start_date', '>', Carbon::now())->count();
+        return view('lecturer.index', compact('lect', 'studIntern', 'session'));
     }
 
     public function coordinatorHome()

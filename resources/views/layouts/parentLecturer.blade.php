@@ -65,218 +65,212 @@
                                         <span>Dashboard</span></a></li>
                             @endif
 
-                            <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-calendar"></i> <span>Session</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="{{ route('session.index') }}">View All</a></li>
-
-                                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                                        <li><a href="{{ route('session.create') }}">Generate New</a></li>
-                                    @endif
-                                </ul>
-                            </li>
-
-                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                                {{-- Lecturer menu --}}
-                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                    <p class="font-weight-normal mb-3">LECTURER</p>
-                                </div>
-
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
-                                        <span>Lecturer </span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ route('lecturer.viewAll') }}">View All</a></li>
-                                        <li><a href="{{ url('coordinator/lecturers') }}">By Faculty</a></li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
-                                        <span>Supervisee </span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/view-all/supervisee') }}">View All</a></li>
-                                        
-                                        <li><a href="{{ url('coordinator/attach/supervisee') }}">Assign Supervisee</a></li>
-                                    
-                                    </ul>
-                                </li>
-                            @endif
-
-                            {{-- <li>
-                                <a href="javascript:void(0)" aria-expanded="true">
-                                    <i class="ti-write"></i><span>Evaluation</span>
-                                </a>
-                                <ul class="collapse">
-                                    <li><a href="barchart.html">Student</a></li>
-                                </ul>
-                            </li> --}}
-
-                            {{-- company menu --}}
-
-                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-
-                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                    <p class="font-weight-normal mb-3">COMPANY</p>
-                                </div>
+                            @if (Auth::user()->status == 'approve')
 
                                 <li>
                                     <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-briefcase"></i><span>Company</span>
+                                        <i class="ti-calendar"></i> <span>Session</span>
                                     </a>
                                     <ul class="collapse">
+                                        <li><a href="{{ route('session.index') }}">View All</a></li>
+
                                         @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                                            <li><a href="{{ route('company.list.coordinator') }}">View All</a></li>
-                                            <li><a href="{{ route('company.create.coordinator') }}">Add New</a></li>
-
-                                        @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
-                                            <li><a href="{{ route('company.list.lecturer') }}">View All</a></li>
-
+                                            <li><a href="{{ route('session.create') }}">Generate New</a></li>
                                         @endif
-
-                                    </ul>
-                                </li>
-                                <!--
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-email"></i><span>Generate Letter</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/company/acceptence-letter') }}">Acceptance Letter</a></li>
-                                        <li><a href="{{ url('coordinator/company/decline-letter') }}">Decline Letter</a></li>
-                                    </ul>
-                                </li>
-                                -->
-
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-write"></i><span>Evaluation</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/company/evaluation-company') }}">Industrial Supervisor</a></li>
                                     </ul>
                                 </li>
 
-                            @endif
-
-                            {{-- Student menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">STUDENT</p>
-                            </div>
-
-                            <li>
                                 @if (Auth::guard('lecturer')->user()->role == 'coordinator')
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-user"></i><span>Student</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        {{-- view all registered students --}}
-                                        <li><a href="{{ url('coordinator/students') }}">View All</a></li>
-                                        {{-- approve pending student registration session --}}
-                                        {{-- <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li> --}}
-                                    </ul>
+                                    {{-- Lecturer menu --}}
+                                    <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                        <p class="font-weight-normal mb-3">LECTURER</p>
+                                    </div>
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
+                                            <span>Lecturer </span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ route('lecturer.viewAll') }}">View All</a></li>
+                                            <li><a href="{{ url('coordinator/lecturers') }}">By Faculty</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true"><i class="ti-ruler-pencil"></i>
+                                            <span>Supervisee </span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/view-all/supervisee') }}">View All</a></li>
+                                            
+                                            <li><a href="{{ url('coordinator/attach/supervisee') }}">Assign Supervisee</a></li>
+                                        
+                                        </ul>
+                                    </li>
                                 @endif
-                            </li>
 
-                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                {{-- company menu --}}
 
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-briefcase"></i><span>Company</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/student-company/status-all') }}">All Applications</a></li>
-                                    </ul>
-                                </li>
+                                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
 
-                                {{-- <li><a href="{{ url('/internfile') }}"><i class="ti-folder"></i><span>Internship Form</span></a></li>
+                                    <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                        <p class="font-weight-normal mb-3">COMPANY</p>
+                                    </div>
 
-                                <li><a href="{{ url('/resume') }}"><i class="ti-id-badge"></i> <span>Internship Resume</span></a></li> --}}
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-briefcase"></i><span>Company</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                                <li><a href="{{ route('company.list.coordinator') }}">View All</a></li>
+                                                <li><a href="{{ route('company.create.coordinator') }}">Add New</a></li>
 
-                            @else
+                                            @elseif(Auth::guard('lecturer')->user()->role == "lecturer")
+                                                <li><a href="{{ route('company.list.lecturer') }}">View All</a></li>
 
-                                <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li>
-                                {{-- <li><a href="{{ url('/lecturer/supervisee/list') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li> --}}
-                                {{-- <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-id-badge"></i><span>View Student</span></a></li> --}}
+                                            @endif
 
-                            @endif
+                                        </ul>
+                                    </li>
+                                    <!--
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-email"></i><span>Generate Letter</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/company/acceptence-letter') }}">Acceptance Letter</a></li>
+                                            <li><a href="{{ url('coordinator/company/decline-letter') }}">Decline Letter</a></li>
+                                        </ul>
+                                    </li>
+                                    -->
 
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-write"></i><span>Evaluation</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/company/evaluation-company') }}">Industrial Supervisor</a></li>
+                                        </ul>
+                                    </li>
 
-                            {{-- Feedabck and evaluation --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">FEEDBACKS & EVALUATION</p>
-                            </div>
+                                @endif
 
-                            {{-- for fedbacks and evaluation --}}
-                            @if (Auth::guard('lecturer')->user()->role == 'lecturer')
-                                <li><a href="{{ url('/lecturer/fedbacks-evaluation/session') }}"><i class="ti-agenda"></i> <span>By Session</span></a></li>
-
-                            @elseif(Auth::guard('lecturer')->user()->role == 'coordinator')
-
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-medall-alt"></i><span>Company Feedback</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/company') }}">View All</a></li>
-                                    </ul>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/company/sessions') }}">By Session</a></li>
-                                    </ul>
-                                </li>
-
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-medall-alt"></i><span>Logbook & Report</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/logbook-report') }}">View All</a></li>
-                                    </ul>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/logbook-report/sessions') }}">By Session</a></li>
-                                    </ul>
-                                </li>
+                                {{-- Student menu --}}
+                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                    <p class="font-weight-normal mb-3">STUDENT</p>
+                                </div>
 
                                 <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-medall-alt"></i><span>Presentation</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/presentation') }}">View All</a></li>
-                                    </ul>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/presentation/sessions') }}">By Session</a></li>
-                                    </ul>
+                                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-user"></i><span>Student</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            {{-- view all registered students --}}
+                                            <li><a href="{{ url('coordinator/students') }}">View All</a></li>
+                                            {{-- approve pending student registration session --}}
+                                            {{-- <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li> --}}
+                                        </ul>
+                                    @endif
                                 </li>
 
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-medall-alt"></i><span>Graduate Survey</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/graduate-survey') }}">View All</a></li>
-                                    </ul>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/graduate-survey/sessions') }}">By Session</a></li>
-                                    </ul>
-                                </li>
+                                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
 
-                                <li>
-                                    <a href="javascript:void(0)" aria-expanded="true">
-                                        <i class="ti-medall-alt"></i><span>Marks</span>
-                                    </a>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/view-marks/all') }}">View All</a></li>
-                                    </ul>
-                                    <ul class="collapse">
-                                        <li><a href="{{ url('coordinator/feedback/view-marks/sessions') }}">By Session</a></li>
-                                    </ul>
-                                </li>
-                            @endif
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-briefcase"></i><span>Company</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/student-company/status-all') }}">All Applications</a></li>
+                                        </ul>
+                                    </li>
+
+                                    {{-- <li><a href="{{ url('/internfile') }}"><i class="ti-folder"></i><span>Internship Form</span></a></li>
+
+                                    <li><a href="{{ url('/resume') }}"><i class="ti-id-badge"></i> <span>Internship Resume</span></a></li> --}}
+
+                                @else
+
+                                    <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li>
+                                    {{-- <li><a href="{{ url('/lecturer/supervisee/list') }}"><i class="ti-folder"></i><span>View Supervisee</span></a></li> --}}
+                                    {{-- <li><a href="{{ url('/lecturer/supervisee') }}"><i class="ti-id-badge"></i><span>View Student</span></a></li> --}}
+
+                                @endif
+
+                                {{-- Feedabck and evaluation --}}
+                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                    <p class="font-weight-normal mb-3">FEEDBACKS & EVALUATION</p>
+                                </div>
+
+                                {{-- for fedbacks and evaluation --}}
+                                @if (Auth::guard('lecturer')->user()->role == 'lecturer')
+                                    <li><a href="{{ url('/lecturer/fedbacks-evaluation/session') }}"><i class="ti-agenda"></i> <span>By Session</span></a></li>
+
+                                @elseif(Auth::guard('lecturer')->user()->role == 'coordinator')
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-medall-alt"></i><span>Company Feedback</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/company') }}">View All</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/company/sessions') }}">By Session</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-medall-alt"></i><span>Logbook & Report</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/logbook-report') }}">View All</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/logbook-report/sessions') }}">By Session</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-medall-alt"></i><span>Presentation</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/presentation') }}">View All</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/presentation/sessions') }}">By Session</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-medall-alt"></i><span>Graduate Survey</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/graduate-survey') }}">View All</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/graduate-survey/sessions') }}">By Session</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-medall-alt"></i><span>Marks</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/view-marks/all') }}">View All</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/feedback/view-marks/sessions') }}">By Session</a></li>
+                                        </ul>
+                                    </li>
+                                @endif
+                            
+                                @endif
 
                         </ul>
                     </nav>
