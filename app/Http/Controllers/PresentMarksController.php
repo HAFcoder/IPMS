@@ -6,6 +6,7 @@ use App\Models\PresentMarks;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Internship;
+use App\Models\Programme;
 use App\Models\Session;
 
 
@@ -117,6 +118,7 @@ class PresentMarksController extends Controller
     {
         $presentMarks = PresentMarks::where('internship_id',$id)->first();
         $internship = Internship::where('id',$id)->first();
-        return view('feedback.presentationView',compact('presentMarks', 'internship'));
+        $programme = Programme::all();
+        return view('feedback.presentationView',compact('presentMarks', 'internship', 'programme'));
     }
 }

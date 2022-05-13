@@ -4,7 +4,7 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Logbook</h4>
+            <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
             <ul class="breadcrumbs pull-left">
 
                 @if(Auth::guard('lecturer')->user()->role == "coordinator")
@@ -41,31 +41,46 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($internship as $intern)
-                                        
-                                    <tr>
-                                        <th scope="row">{{ $intern->studentInfo->studentID }}</th>
-                                        <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }}</td>
-                                        <td>
-                                            @foreach ($programme as $prog)
-                                                @if ($prog->id == $intern->studentInfo->programme_id)
-                                                    {{ $prog->code }} - {{ $prog->name }}
-                                                @endif
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            @if (!empty($intern->finalEvaluation))
-                                                <i class="fa fa-check-square" style="color: green"></i>
-                                            @endif
-                                            <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/details') }}"><i class="ti-write"></i></a></td>
-                                        <td>
-                                            @if (!empty($intern->presentMarks))
-                                                <i class="fa fa-check-square" style="color: green"></i>
-                                            @endif
-                                            <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/presentation') }}"><i class="ti-layout-media-left-alt"></i></a>
-                                        </td>
-                                    </tr>
 
+                                    @if($internship->isEmpty())
+                                        <tr>
+                                            <td colspan="10" class="bg-light">There is no data.</td>
+                                        </tr>
+                                    @endif
+
+                                    @foreach ($internship as $intern)
+                                        <tr>
+                                            <th scope="row">{{ $intern->studentInfo->studentID }}</th>
+                                            <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }}</td>
+                                            <td>
+                                                @foreach ($programme as $prog)
+                                                    @if ($prog->id == $intern->studentInfo->programme_id)
+                                                        {{ $prog->code }} - {{ $prog->name }}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                @if (!empty($intern->finalEvaluation))
+                                                    <i class="fa fa-check-square" style="color: green"></i>
+                                                @endif
+                                                <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/details') }}"><i class="ti-write"></i></a></td>
+                                            <td>
+                                                @php
+                                                $findme   = 'Bachelor';
+                                                    if (strpos($intern->studentInfo->programmes->name, $findme) !== false) {
+                                                @endphp
+
+                                                    @if (!empty($intern->presentMarks))
+                                                        <i class="fa fa-check-square" style="color: green"></i>
+                                                    @endif
+                                                    <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/presentation') }}"><i class="ti-layout-media-left-alt"></i></a>
+                                                @php
+                                                    } else {
+                                                        echo "Not applicable";
+                                                    }
+                                                @endphp
+                                            </td>
+                                        </tr>
                                     @endforeach
                                 {{--
                                     <tr>

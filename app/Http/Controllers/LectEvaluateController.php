@@ -215,6 +215,8 @@ class LectEvaluateController extends Controller
     public function presentationEva ($id)
     {
         $presentMark = PresentMarks::where('internship_id',$id)->first();
+        $internship = Internship::where('id',$id)->first();
+        $programme = Programme::all();
 
         $yesno= 'no';
         $markArr = null;
@@ -225,7 +227,7 @@ class LectEvaluateController extends Controller
             $markArr = explode(',' , $presentMark->marks);
 
         }
-        return view('feedback.lectPresentation',compact('id','yesno','presentMark','markArr'));
+        return view('feedback.lectPresentation',compact('id','yesno','presentMark','markArr', 'internship', 'programme'));
     }
 
     public function update_presentationEva (Request $request, $id)

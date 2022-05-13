@@ -143,7 +143,9 @@
                                 <table id="dataTableArea" class="text-center display" style="width:100%">
                                     <thead class="text-capitalize">
                                         <tr>
-                                            <th class="noExport"></th>
+                                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
+                                                <th class="noExport"></th>
+                                            @endif
                                             <th>Student ID</th>
                                             <th>Name</th>
                                             <th>Programme</th>
@@ -157,13 +159,13 @@
                                         @foreach($student_session as $stud_ss)
 
                                         <tr>
+                                            @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                             <td>
-                                                @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                                 <div class="form-check form-group">
                                                      <input type="checkbox" value="{{ $stud_ss->id }}" name="studsession_id" class="form-control form-check-input" id="studsession_id">
                                                 </div>
-                                                @endif
                                             </td>
+                                            @endif
                                             <td>{{ $stud_ss->studentInfo->studentID }}</td>
                                             <td>{{ $stud_ss->studentInfo->f_name }} {{ $stud_ss->studentInfo->l_name }}</td>
                                             <td>{{ $stud_ss->programme->code }} - {{ $stud_ss->programme->name }}</td>
@@ -248,6 +250,9 @@
                 "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 buttons:{
                             buttons: [
+                                @php
+                                    if(Auth::guard('lecturer')->user()->role == "coordinator"){
+                                @endphp
                                         {
                                             text: 'Approve',
                                             className: 'btn-success',
@@ -280,6 +285,9 @@
                                                 unselectAllRow();
                                             }
                                         },
+                                    @php
+                                        }
+                                    @endphp
                                         {
                                             extend: 'pdfHtml5',
                                             text: '<i class="fa fa-file-pdf-o"></i>',

@@ -32,6 +32,18 @@
                     <h4>PRESENTATION EVALUATION REPORT</h4>
                 </div>
 
+                <div class="mb-5">
+                    <p><strong>STUDENT DETAILS</strong></p>
+                    <p><b>Name:</b> {{ $internship->studentInfo->f_name }} {{ $internship->studentInfo->l_name }}</p>
+
+                    @php
+                        $prog = $programme->find($internship->studentInfo->programme_id)->first();
+                    @endphp
+                    
+                    <p><b>Programme Code:</b> {{ $prog->code }} - {{ $prog->name }}</p>
+                    <p><b>NRIC:</b> {{ $internship->studentInfo->no_ic }}</p>
+                </div>
+
                 <p><strong>INSTRUCTION</strong></p>
                 <p>1.	This form is to be completed by Academic Supervisor.</p>
                 <p>2.	Each presentation should last 10 to 15 minutes (inclusive of Question & Answer session).</p>
@@ -105,7 +117,11 @@
 
                                 <div class="form-group "> 
                                     <label for="example-text-input" class="col-form-label">Comments / Suggestions:</label> 
-                                    <textarea class="form-control" name="comment" id="comment" rows="3">{{ $presentMark->comment }}</textarea> 
+                                    <textarea class="form-control" name="comment" id="comment" rows="3">
+                                        @if ($yesno == 'yes')
+                                        {{ $presentMark->comment }}
+                                        @endif
+                                    </textarea> 
                                 </div> 
 
                                 <button type="submit" class="btn btn-rounded btn-primary btn-lg btn-block mt-5">Submit</button>
