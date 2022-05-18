@@ -55,6 +55,17 @@ class companiesController extends Controller
 
         return view('company.addNew',compact('postcode','state','city','lect'));
     }
+
+    public function addForm()
+    {
+        $postcode = LookupAddress::orderBy('postcode', 'ASC')->distinct()->get(['postcode']);
+
+        $state = LookupAddress::orderBy('state', 'ASC')->distinct()->get(['state']);
+
+        $city = LookupAddress::orderBy('city', 'ASC')->distinct(['city'])->get(['city']);
+
+        return view('company.studAddNew',compact('postcode','state','city'));
+    }
     
     public function createCompany(Request $request)
     {
@@ -91,6 +102,42 @@ class companiesController extends Controller
         $companies->save();
 
         return redirect()->back()->with('success', 'Company data has been successfully added.');
+        
+    }
+
+    public function studCreateCompany(Request $request)
+    {
+        //print('<script>console.log("hollaaaa create");</script>');
+        
+        $student_id = Auth::user()->id;
+        $companies = new Company;
+
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'postal_code'=>'required',
+            'city'=>'required',
+            'state'=>'required',
+            'status'=>'required',
+            'email'=>'required',
+            'phoneNumber'=>'required',
+        ]);
+
+        $companies->name = $request->name;
+        $companies->address = $request->address;
+        $companies->postal_code = $request->postal_code;
+        $companies->city = $request->city;
+        $companies->state = $request->state;
+        $companies->student_id = $student_id;
+        $companies->status = $request->status;
+        $companies->email = $request->email;
+        $companies->phoneNumber = $request->phoneNumber;
+        $companies->webURL = $request->webURL;
+
+        $companies->save();
+
+        Alert::success('Success!', 'Company successfully registered but need to be approved by the coordinator.');
+        return redirect('/company-all');
         
     }
     
@@ -172,10 +219,13 @@ class companiesController extends Controller
     //student website
     public function companyAll()
     {
-        $company = Company::orderBy('status', 'ASC')->get();
+        $state = LookupAddress::orderBy('state', 'ASC')
+                ->distinct()
+                ->get(['state']);
+        $company = Company::orderBy('status', 'ASC')->where('status', '=', 'approved')->get();
         //dump($company);
         
-        return view('company.studViewList',compact('company'));
+        return view('company.studViewList',compact('company', 'state'));
     }
 
     public function applyList()
@@ -303,23 +353,24 @@ class companiesController extends Controller
 
         $internship->updated_at = now();
         $internship->status = $status;
+        $internship->allowance = $request->allowance;
         $internship->save();
 
         //set all pending into reject status
-        $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
+        // $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
 
-        foreach($internship2 as $intern){
+        // foreach($internship2 as $intern){
 
-            $rejectstat = 'declined';
+        //     $rejectstat = 'declined';
 
-            //dump('id' . $intern->id);
+        //     //dump('id' . $intern->id);
             
-            $intern->updated_at = now();
-            $intern->status = $rejectstat;
+        //     $intern->updated_at = now();
+        //     $intern->status = $rejectstat;
 
-            $intern->save();
+        //     $intern->save();
 
-        }
+        // }
         
         Alert::success('Success!', 'Your ORF details has been updated.');
 
@@ -475,24 +526,27 @@ class companiesController extends Controller
         $internship->save();
 
         //set all pending into reject status
-        $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
+        // $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
 
-        foreach($internship2 as $intern){
 
-            $rejectstat = 'declined';
+        //     foreach($internship2 as $intern){
 
-            //dump('id' . $intern->id);
-            
-            $intern->updated_at = now();
-            $intern->status = $rejectstat;
+        //         $rejectstat = 'declined';
 
-            $intern->save();
+        //         //dump('id' . $intern->id);
+                
+        //         $intern->updated_at = now();
+        //         $intern->status = $rejectstat;
 
-        }
+        //         $intern->save();
+
+        //     }
+        
         
         Alert::success('Success!', 'Your internship details has been updated.');
 
-        return $this->applyList();
+        // return $this->applyList();
+        return redirect('/apply-list');
     }
 
     public function internship_updateReport(Request $request, $id){

@@ -106,13 +106,13 @@
                                         <td>{{ $comp->address }} , <br> {{ $comp->city }} , {{ $comp->postal_code }} , {{ $comp->state }}</td>
                                         <td>{{ date('d/m/Y', strtotime($comp->created_at)) }}</td>
                                         <td>
-                                            @if($comp->lecturerInfo->f_name != '')
+                                            @if($comp->lecturer_id != '')
 
                                                 <b>Lecturer : </b>{{ $comp->lecturerInfo->f_name }} {{ $comp->lecturerInfo->l_name }} ( {{ $comp->lecturerInfo->lecturerID }} )
 
-                                            @elseif($comp->studentInfo->f_name != '')
+                                            @else
 
-                                                <b>Student : </b>{{ $comp->studentInfo->f_name }} {{ $comp->studentInfo->l_name }} ( {{ $comp->studentInfo->studentID }} )
+                                                <b>Student : </b>{{ $comp->studentInfo->f_name }} {{ $comp->studentInfo->l_name }} ( {{ strtoupper( $comp->studentInfo->studentID  ) }} )
 
                                             @endif
                                         </td>

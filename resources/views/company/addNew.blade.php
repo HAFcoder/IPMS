@@ -82,7 +82,7 @@
                             <label class="col-form-label">Postal Code</label>
                             <div id="postal_area">
                                 <select id="postalcode" onchange="getcity()" class="custom-select" name="postal_code">
-                                    <option selected="selected">Select Postal Code</option>
+                                    <option disabled selected value>Select Postal Code</option>
                                     @foreach($postcode as $key => $ps)
                                         <option value="{{ $ps->postcode }}">{{ $ps->postcode }}</option>
                                     @endforeach
@@ -106,7 +106,7 @@
                             <label class="col-form-label">State</label>
 
                             <select id="state" class="custom-select" name="state">
-                                <option selected="selected">Select State</option>
+                                <option disabled selected value>Select State</option>
                                 @foreach($state as $key => $st)
                                     <option value="{{ $st->state }}">{{ $st->state }}</option>
                                 @endforeach

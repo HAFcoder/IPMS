@@ -10,11 +10,11 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Dashboard</h4>
+            <h4 class="page-title pull-left">Register Session</h4>
             <ul class="breadcrumbs pull-left">
                 <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a >Session</a></li>
-                <li><span>View Status</span></li>
+                <li><span>Register Session</span></li>
             </ul>
         </div>
     </div>
@@ -36,15 +36,17 @@
                         <div class="form-group">
                             <label class="col-form-label">Session</label>
                             <select id="session_id" name="session_id" class="custom-select" required>
-                                <option value="">Open dropdown</option>
+                                <option disabled selected value>Open dropdown</option>
                                 {{-- @if (count($sessions) > 0) --}}
                                 @foreach ($sessions as $session)
-                                    {{-- @foreach ($session->programmes as $key) --}}
+                                    @if($session->status == 'inactive' || \Carbon\Carbon::now() > $session->end_date)
+                                        {{-- <option disabled value>No active session</option> --}}
+                                    @else
                                         <option value="{{ $session->id }}">{{ $session->session_code }} - {{ $session->description }}</option>
-                                    {{-- @endforeach --}}
+                                    @endif
                                 @endforeach
-                                {{-- @endif   --}}
                             </select>
+                            <small class="form-text text-muted">If there is no session in the dropdown, it means that there is no active session at the moment.</small>
                         </div>
 
                         <div class="form-group">
@@ -61,6 +63,22 @@
             </div>
         </div>
 
+        <!-- loader -->
+        <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3"
+        data-toggle="modal" data-target="#loadingModal">loading modal</button>
+        <div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content text-center">
+                    <div class="modal-body">
+                        <img src="{{ asset('assets/images/media/loader5.gif') }}" >
+                        <h1><small class="text-muted ">Loading ...</small></h1>
+                        <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- loader -->
 
     </div>
     
@@ -72,6 +90,8 @@
         $(document).ready(function() {
             $('#session_id').on('change', function() {
                 var session_id = this.value;
+                $('#btnLoad').click();
+
                 $("#programme_id").html('');
                 $.ajax({
                     url: "{{ url('student/fetch-programmes') }}",
@@ -82,6 +102,7 @@
                     },
                     dataType: 'json',
                     success: function(res) {
+                        $('#btnCloseLoad').click();
                         $('#programme_id').prop('disabled', false);
                         $('#programme_id').html('<option value="">Select Programme</option>');
                         @php

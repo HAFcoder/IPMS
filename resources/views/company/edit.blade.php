@@ -78,7 +78,7 @@
                             <label class="col-form-label">Postal Code</label>
                             <div id="postal_area">
                                 <select id="postalcode" onchange="getcity()" class="custom-select" name="postal_code">
-                                    <option selected="selected">Select Postal Code</option>
+                                    <option disabled selected value>Select Postal Code</option>
                                     @foreach($postcode as $key => $ps)
                                         <option @if($ps->postcode==$company->postal_code) selected  @endif value="{{ $ps->postcode }}">{{ $ps->postcode }}</option>
                                     @endforeach
@@ -93,7 +93,7 @@
 
                             <div id="city_area">
                                 <select id="city" class="custom-select" name="city">
-                                    <option selected="selected">Select City</option>
+                                    <option disabled selected value>Select City</option>
                                     @foreach($city as $key => $ct)
                                         <option @if($ct->city==$company->city) selected  @endif value="{{ $ct->city }}">{{ $ct->city }}</option>
                                     @endforeach
@@ -105,7 +105,7 @@
                             <label class="col-form-label">State</label>
 
                             <select id="state" class="custom-select" name="state">
-                                <option selected="selected">Select State</option>
+                                <option disabled selected value>Select State</option>
                                 @foreach($state as $key => $st)
                                     <option @if($st->state==$company->state) selected  @endif value="{{ $st->state }}">{{ $st->state }}</option>
                                 @endforeach

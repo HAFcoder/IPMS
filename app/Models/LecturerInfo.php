@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Faculty;
 use App\Models\Lecturer;
 use App\Models\Session;
+use App\Models\Internship;
 
 class LecturerInfo extends Model
 {
@@ -28,5 +29,10 @@ class LecturerInfo extends Model
     public function session()
     {
         return $this->hasMany(Session::class);
+    }
+    
+    public function internship()
+    {
+        return $this->hasMany(Internship::class);
     }
 }

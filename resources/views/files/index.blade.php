@@ -16,17 +16,25 @@
 
 @section('content')
 
-    <div class="row">
-        <div class="card col-sm-12 mt-5">
-            @if (count($files) > 0)
-                @foreach ($files as $file)
-                    <a target="_blank" href="{{ url($file['downloadUrl']) }}">{{ $file['filename'] }}</a><br>
-                @endforeach
-            @else
-                <p>Nothing found</p>
-            @endif
+<div class="row mt-5 mb-5">
+    <div class="col-10 mx-auto">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-sm-flex justify-content-between align-items-center">
+                    <h3 class="header-title mb-4">Internship Documents</h3>
+                </div>
+
+                @if (count($files) > 0)
+                    @foreach ($files as $file)
+                    <a class="h5" target="_blank" href="{{ url($file['downloadUrl']) }}"><i class="fa fa-file-pdf-o"></i> {{ $file['filename'] }}</a><br><br>
+                    @endforeach
+                @else
+                    <p>Nothing found</p>
+                @endif
+            </div>
         </div>
     </div>
+</div>
     
 @endsection
 

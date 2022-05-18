@@ -75,7 +75,7 @@
                         <div class="form-group">
                             <label class="col-form-label pb-3" style="font-size: 17px">Select Lecturer</label>
                             <select id="lect_id" class="custom-select" name="lect_id" required>
-                                <option value="">Select one</option>
+                                <option disabled selected value>Select one</option>
                                 @foreach ($lect as $data)
                                     <option value="{{ $data->id }}">{{ Str::upper($data->lecturerInfo->f_name)  }} {{ Str::upper($data->lecturerInfo->l_name)  }}</option>
                                 @endforeach

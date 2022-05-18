@@ -65,7 +65,7 @@ class RegisterController extends Controller
         $state = LookupAddress::orderBy('state', 'ASC')
                 ->distinct()
                 ->get(['state']);
-        $programmes = Programme::orderBy('name', 'ASC')
+        $programmes = Programme::orderBy('name', 'DESC')
                     ->where('status', '=', 'active')
                     ->get();
         return view('auth.register', ['url' => '/'], compact('state', 'programmes'));

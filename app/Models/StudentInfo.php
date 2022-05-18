@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Programme;
 use App\Models\Student;
 use App\Models\Internship;
+use App\Models\Company;
 
 class StudentInfo extends Model
 {
@@ -27,5 +28,10 @@ class StudentInfo extends Model
     public function internship()
     {
         return $this->hasMany(Internship::class);
+    }
+
+    public function company()
+    {
+        return $this->hasMany(Company::class);
     }
 }

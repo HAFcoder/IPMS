@@ -102,8 +102,14 @@ class StudentController extends Controller
             'programme_id' => 'required',
         ]);
 
+        $status = 'noRequest';
+
         $studInfo = StudentInfo::where('stud_id', $id)->first();
-        $studInfo->studentID = $request->get('studentID');
+        // $studInfo->studentID = $request->get('studentID');
+        if ($request->get('studentID') != $studInfo->studentID) {
+            $studInfo->studentID = $request->get('studentID');
+            $studInfo->status = $status;
+        }         
         $studInfo->f_name = $request->get('f_name');
         $studInfo->l_name = $request->get('l_name');
         $studInfo->address = $request->get('address');
@@ -117,8 +123,8 @@ class StudentController extends Controller
         $stud = Student::find($id);
         $stud_info = StudentInfo::where('stud_id', $id)->first();
         Alert::success('Updated!', 'Profile updated.');
-        return view('student.profile', compact('stud', 'stud_info'));
-        // return redirect()->back();
+        // return view('student.profile', compact('stud', 'stud_info'));
+        return Redirect("/profile");
     }
 
     /**
@@ -141,7 +147,12 @@ class StudentController extends Controller
         $id = Auth::user()->id;
         $stud = Student::find($id);
         $stud_info = StudentInfo::where('stud_id', $id)->first();
-        return view('student.profile', compact('stud', 'stud_info'));
+        $internship = Internship::orderBy('created_at', 'DESC')
+                    ->where('student_id', $id)
+                    ->where('status', '=', 'accepted')
+                    ->with('company','session','studentInfo','lecturerInfo')
+                    ->first();
+        return view('student.profile', compact('stud', 'stud_info', 'internship'));
     }
 
     public function fetchCity(Request $request)

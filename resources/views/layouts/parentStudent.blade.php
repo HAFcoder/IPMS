@@ -63,34 +63,33 @@
                                 </ul>
                             </li>
 
-                            {{-- Company menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">COMPANY</p>
-                            </div>
+                            @if (Auth::user()->status == 'approve')
+                                {{-- Company menu --}}
+                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                    <p class="font-weight-normal mb-3">COMPANY</p>
+                                </div>
 
-                            <li><a href="{{url('/company-all')}}"><i class="ti-receipt"></i> <span>View All</span></a></li>
-                            <li><a href="{{url('/apply-list')}}"><i class="ti-receipt"></i> <span>Application List</span></a></li>
+                                <li><a href="{{url('/company-all')}}"><i class="ti-receipt"></i> <span>View All</span></a></li>
+                                <li><a href="{{url('/apply-list')}}"><i class="ti-receipt"></i> <span>Application List</span></a></li>
 
-                            {{-- Internship menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">INTERNSHIP</p>
-                            </div>
+                                {{-- Internship menu --}}
+                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                    <p class="font-weight-normal mb-3">INTERNSHIP</p>
+                                </div>
 
-                            <li><a href="{{url('/internfile')}}"><i class="ti-receipt"></i> <span>Intern Document</span></a></li>
-                            <li><a href="{{route('student.submission')}}"><i class="ti-receipt"></i> <span>Submission</span></a></li>
-                            {{-- <li><a href="{{url('/logbook')}}"><i class="ti-receipt"></i> <span>Logbook</span></a></li>
-                            <li><a href="{{url('/report')}}"><i class="ti-receipt"></i> <span>Report</span></a></li> --}}
+                                <li><a href="{{url('/internfile')}}"><i class="ti-receipt"></i> <span>Intern Document</span></a></li>
+                                <li><a href="{{route('student.submission')}}"><i class="ti-receipt"></i> <span>Submission</span></a></li>
+                                {{-- <li><a href="{{url('/logbook')}}"><i class="ti-receipt"></i> <span>Logbook</span></a></li>
+                                <li><a href="{{url('/report')}}"><i class="ti-receipt"></i> <span>Report</span></a></li> --}}
 
-                            {{-- @if (auth()->user()->status == 'approve') --}}
-                            
-                            {{-- Survey menu --}}
-                            <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
-                                <p class="font-weight-normal mb-3">FEEDBACKS & SURVEY</p>
-                            </div>
+                                {{-- Survey menu --}}
+                                <div style="padding-top: 25px; margin-left: 30px;" class="border-bottom">
+                                    <p class="font-weight-normal mb-3">FEEDBACKS & SURVEY</p>
+                                </div>
 
-                            <li><a href="{{url('/graduate-survey')}}"><i class="ti-receipt"></i> <span>Graduate Survey</span></a></li>
-
-                            {{-- @endif --}}
+                                <li><a href="{{url('/graduate-survey')}}"><i class="ti-receipt"></i> <span>Graduate Survey</span></a></li>
+                                
+                            @endif
                             
                         </ul>
                     </nav>

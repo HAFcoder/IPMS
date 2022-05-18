@@ -60,7 +60,7 @@
                                     <ul class="profile-page-user list-group list-group-flush">
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">Student ID:</span>
-                                            <span class="profile-page-amount">{{ $stud_info->studentID }}</span>
+                                            <span class="profile-page-amount">{{ strtoupper( $stud_info->studentID  ) }}</span>
                                         </li>
         
                                         <li class="profile-page-content list-group-item ">
@@ -103,74 +103,21 @@
                                             <span class="profile-page-name">State:</span>
                                             <span class="profile-page-amount">{{ $stud_info->state }}</span>
                                         </li>
+
+                                        <li class="profile-page-content list-group-item ">
+                                            <span class="profile-page-name">Academic Supervisor:</span>
+                                            @if ( $internship->lecturerInfo != null && $stud->status == 'approve')
+                                                <span class="profile-page-amount">{{ $internship->lecturerInfo->f_name }} {{ $internship->lecturerInfo->l_name }}</span>
+                                            @else
+                                                <span class="profile-page-amount">Not yet assigned</span>
+                                            @endif
+                                        </li>
                                         
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    {{-- <div class="tstu-content">
-                        <div class="card-body p-0">
-                            <ul class="profile-page-user list-group list-group-flush">
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">First Name:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->f_name }}" disabled>
-                                </li>
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">Last Name:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->l_name }}" disabled>
-                                </li>
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">IC Number:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->no_ic }}" disabled>
-                                </li>
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">Email:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud->email }}" disabled>
-                                </li>
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">Telephone:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->telephone }}" disabled>
-                                </li>
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">Student ID:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->studentID }}" disabled>
-                                </li>
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">IC Number:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->no_ic }}" disabled>
-                                </li>
-
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">Address:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->address }}, {{ $stud_info->postcode }}, {{ $stud_info->city }}" disabled>
-                                </li>
-                                
-                                <li class="profile-page-content">
-                                    <span class="profile-page-name">State:</span>
-                                    <input class="form-control input-rounded profile-page-amount" type="text" 
-                                    placeholder="{{ $stud_info->state }}" disabled>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div> --}}
 
                 </div>
             </div>

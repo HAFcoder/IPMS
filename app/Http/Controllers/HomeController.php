@@ -8,6 +8,7 @@ use App\Models\Lecturer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
+use App\Models\LookupAddress;
 use App\models\Session;
 use App\Models\Student;
 use App\Models\StudentInfo;
@@ -74,9 +75,12 @@ class HomeController extends Controller
 
     public function studentHome()
     {    
+        $uid = Auth::user()->id;
         $sessions = Session::where('status', '=', 'active')->get();
+        $companies = Company::all()->count();
+        $apply = Internship::where('student_id', $uid)->count();
         //dump($sessions);
-        return view('student.index', compact('sessions'));
+        return view('student.index', compact('sessions', 'companies', 'apply'));
     }
 
     public function lecturerHome()
@@ -105,6 +109,15 @@ class HomeController extends Controller
         $name = Auth::user()->name;
         //dump($uid);
         return view('sadmin.index'); 
+    }
+
+    public function fetchCity(Request $request)
+    {
+        $data['city'] = LookupAddress::orderBy('city', 'ASC')
+                        ->where("state",$request->state)
+                        ->distinct()
+                        ->get(["city", "city"]);
+        return response()->json($data);
     }
     
 }

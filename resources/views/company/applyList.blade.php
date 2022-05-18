@@ -62,10 +62,11 @@
                                             <label class="col-form-label">Company :</label>
                                             
                                             <select id="company" class="form-control" name="company">
-                                                <option selected="selected">Select One</option>
+                                                <option disabled selected value>Select One</option>
                                                 @foreach($company as $key => $comp)
                                                     <option value="{{ $comp->id }}">{{ $comp->name }}</option>
                                                 @endforeach
+                                                <option value="{{ $comp->id }}">{{ $comp->name }}</option>
                                             
                                             </select>
                                         </div>
@@ -103,19 +104,19 @@
                             <h5 class="header-title">Action Button Note :</h5>
                             <ul class="profile-page-user list-group list-group-flush">
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-success btn_width noHover"></a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-success btn_width noHover">Accept</a></span>
                                     <span class="btn-note-detail"> - Your internship application has been accepted by the company.</span>
                                 </li>
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-danger btn_width noHover"></a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-danger btn_width noHover">Decline</a></span>
                                     <span class="btn-note-detail">- You declined internship offer from the company.</span>
                                 </li>
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-warning btn_width noHover"></a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-warning btn_width noHover">Reject</a></span>
                                     <span class="btn-note-detail">- Your internship application has been rejected by the company.</span>
                                 </li>
                                 <li class="mb-2">
-                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-primary btn_width noHover"></a></span>
+                                    <span class="btn-note"><a href="#" class="btn btn-sm btn-primary btn_width noHover">See Details</a></span>
                                     <span class="btn-note-detail">- View more details of your internship application.</span>
                                 </li>
                             </ul>
@@ -196,13 +197,6 @@
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/dw/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/dw/dataTables.bootstrap4.min.js') }}"></script>
-
-
-    <script>
-
-
-
-    </script>
 
     
 @endsection

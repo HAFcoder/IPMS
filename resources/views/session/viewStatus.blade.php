@@ -15,7 +15,7 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Dashboard</h4>
+            <h4 class="page-title pull-left">Registration Status</h4>
             <ul class="breadcrumbs pull-left">
                 <li><a href="{{ url('/') }}">Home</a></li>
                 <li><a >Session</a></li>
@@ -35,12 +35,30 @@
                     <div class="d-sm-flex justify-content-between align-items-center">
                         <h4 class="header-title mb-0">Session Registration Status</h4>
                     </div>
+
+                    <div class="mt-3 text-right">
+                        <ul class="profile-page-user list-group list-group-flush justify-content-end">
+                            <li class="mb-2">
+                                <span class="h5"><span class="badge badge-pill badge-success">Approved</span></span>
+                                <span class="btn-note-detail"> - Session registration approved by coordinator.</span>
+                            </li>
+                            <li class="mb-2">
+                                <span class="h5"><span class="badge badge-pill badge-danger">Rejected</span></span>
+                                <span class="btn-note-detail">- Session regstration rejected by coordinator.</span>
+                            </li>
+                            <li>
+                                <span class="h5"><span class="badge badge-pill badge-warning">Pending</span></span>
+                                <span class="btn-note-detail">- Session registration not yet approved by coordinator.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
                     <div class="market-status-table mt-4">
                         <div class="table-responsive">
                             <table class="table text-center">
                                 <thead class="text-uppercase">
                                     <tr style="background-color: rgb(225, 159, 245)" class="heading-td">
-                                        <th>Date</th>
+                                        <th>Date Registered</th>
                                         <th>Session ID</th>
                                         <th>Programmme</th>
                                         <th>Status</th>

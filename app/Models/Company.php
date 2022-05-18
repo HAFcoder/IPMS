@@ -35,6 +35,6 @@ class Company extends Model
 
     public function studentInfo()
     {
-        return $this->hasOne(StudentInfo::class,'stud_id');
+        return $this->hasOne(StudentInfo::class,'stud_id','student_id');
     }
 }

@@ -84,6 +84,9 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::put('company/apply/{id}/update', [companiesController::class, 'studentInternship_update'])->name('company.internship.update');
     Route::put('company/apply/{id}/orf/update/', [companiesController::class, 'internship_updateOrf'])->name('internship.update.orf');
     Route::put('company/apply/{id}/rdn/update', [companiesController::class, 'internship_updateRdn'])->name('internship.update.rdn');
+    Route::get('company/form-add', [companiesController::class, 'addForm']);
+    Route::post('api/fetch-cities/form', [HomeController::class, 'fetchCity']);
+    Route::post('company/add', [companiesController::class, 'studCreateCompany'])->name('company.create.student');
 
     //report
     Route::get('/report', [StudentController::class, 'report']);
@@ -95,6 +98,7 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
 
     // profile
     Route::get('/profile', [StudentController::class, 'profileStudent']);
+    // Route::resource('/profile', StudentController::class);
     Route::get('/profile/edit/{id}', [StudentController::class, 'edit'])->name('student.edit');
     Route::put('/profile/edit/{id}/update', [StudentController::class, 'update'])->name('student.update');
     Route::post('/profile/edit/api/fetch-cities', [StudentController::class, 'fetchCity']);

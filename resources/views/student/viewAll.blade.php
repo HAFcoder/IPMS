@@ -68,7 +68,7 @@
                         <table id="dataTableSession" class="text-center display ">
                             <thead class="text-capitalize">
                                 <tr>
-                                    <th class="noExport"><i class="fa fa-check" aria-hidden="true"></i></th>
+                                    {{-- <th class="noExport"><i class="fa fa-check" aria-hidden="true"></i></th> --}}
                                     <th>Student ID</th>
                                     <th>Student Name</th>
                                     <th>IC Number</th>
@@ -80,9 +80,9 @@
 
                                 @foreach ($stud as $data)
                                     <tr>
-                                        <td>
+                                        {{-- <td>
                                             <input name="stud_id" type="checkbox" class="form-control" value="{{ $data->students->id }}" > 
-                                        </td>
+                                        </td> --}}
                                         <td>{{ strtoupper($data->studentID) }}</td>
                                         <td>{{ ucwords($data->f_name . " " . $data->l_name ) }}</td>
                                         <td>{{ $data->no_ic }}</td>
@@ -242,38 +242,38 @@
                 ],
                 buttons: {
                     buttons: [
-                        {
-                            text: 'Approve',
-                            className: 'btn-success',
-                            action: function(e, dt, node, config) {
-                                //alert( 'Button Approved' );
-                                var status = "approve";
-                                updateStatus(status);
-                            }
-                        },
-                        {
-                            text: 'Reject',
-                            className: 'btn-danger',
-                            action: function(e, dt, node, config) {
-                                //alert( 'Button Rejected' );
-                                var status = "reject";
-                                updateStatus(status);
-                            }
-                        },
-                        {
-                            text: '<i class="fa fa-check-square-o"></i> Select All',
-                            action: function(e, dt, node, config) {
-                                //alert( 'Button Select All' );
-                                selectAllRow();
-                            }
-                        },
-                        {
-                            text: '<i class="fa fa-square-o"></i> Unselect All',
-                            action: function(e, dt, node, config) {
-                                //alert( 'Button Select All' );
-                                unselectAllRow();
-                            }
-                        },
+                        // {
+                        //     text: 'Approve',
+                        //     className: 'btn-success',
+                        //     action: function(e, dt, node, config) {
+                        //         //alert( 'Button Approved' );
+                        //         var status = "approve";
+                        //         updateStatus(status);
+                        //     }
+                        // },
+                        // {
+                        //     text: 'Reject',
+                        //     className: 'btn-danger',
+                        //     action: function(e, dt, node, config) {
+                        //         //alert( 'Button Rejected' );
+                        //         var status = "reject";
+                        //         updateStatus(status);
+                        //     }
+                        // },
+                        // {
+                        //     text: '<i class="fa fa-check-square-o"></i> Select All',
+                        //     action: function(e, dt, node, config) {
+                        //         //alert( 'Button Select All' );
+                        //         selectAllRow();
+                        //     }
+                        // },
+                        // {
+                        //     text: '<i class="fa fa-square-o"></i> Unselect All',
+                        //     action: function(e, dt, node, config) {
+                        //         //alert( 'Button Select All' );
+                        //         unselectAllRow();
+                        //     }
+                        // },
                         {
                             extend: 'pdfHtml5',
                             text: '<i class="fa fa-file-pdf-o"></i>',

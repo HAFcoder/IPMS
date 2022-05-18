@@ -49,79 +49,79 @@
                              @endphp
                             @foreach($internship->logbook as $logbook)
 
-                            @php $i++; 
-                                $status = "";
-                                if($logbook->validate == 'unvalidate'){
-                                    $status = "Not Validate";
-                                }else if($logbook->validate == "validate"){
-                                    $status = "Validated";
-                                }else if($logbook->validate == "pending"){
-                                    $status = "Pending";
-                                }
-                            
-                            @endphp
-                            <div class="card">
-                                <div class="card-header">
-                                    <a class="collapsed card-link" data-toggle="collapse" href="#w{{$i}}">Week {{$i}} </a>
-                                    <span class="badge badge-light"></span>
-                                </div>
-                                <div id="w{{$i}}" class="collapse" data-parent="#log">
-                                    <div class="card-body">
-                                        <div>
-                                            <h3 class="text-center"><span class="badge badge-pill badge-light">Status: {{ $status }}</span></h3>
-                                            <form method="post" action="{{ route('logbook.update',$internship->id) }}">
-                                                @method('POST')
-                                                @csrf 
-                                                <input class="d-none" name="logbookid" id="logbookid" value="{{ $logbook->id }}">
-                                                <div class="form-group col-lg-3 text-center mx-auto">
-                                                    <label for="start_date">Select Date of the Week</label>
-                                                    <input value="{{ date('d-m-Y', strtotime($logbook->start_date)) }}" class="form-control text-center date-start" name="start_date" type="text" id="start_date{{$i}}" placeholder="Example : 19-01-2021" required/>
-                                                </div>
+                                @php $i++; 
+                                    $status = "";
+                                    if($logbook->validate == 'unvalidate'){
+                                        $status = "Not Validate";
+                                    }else if($logbook->validate == "validate"){
+                                        $status = "Validated";
+                                    }else if($logbook->validate == "pending"){
+                                        $status = "Pending";
+                                    }
+                                
+                                @endphp
+                                <div class="card">
+                                    <div class="card-header">
+                                        <a class="collapsed card-link" data-toggle="collapse" href="#w{{$i}}">Week {{$i}} </a>
+                                        <span class="badge badge-light"></span>
+                                    </div>
+                                    <div id="w{{$i}}" class="collapse" data-parent="#log">
+                                        <div class="card-body">
+                                            <div>
+                                                <h3 class="text-center"><span class="badge badge-pill badge-light">Status: {{ $status }}</span></h3>
+                                                <form method="post" action="{{ route('logbook.update',$internship->id) }}">
+                                                    @method('POST')
+                                                    @csrf 
+                                                    <input class="d-none" name="logbookid" id="logbookid" value="{{ $logbook->id }}">
+                                                    <div class="form-group col-lg-3 text-center mx-auto">
+                                                        <label for="start_date">Select Date of the Week</label>
+                                                        <input value="{{ date('d-m-Y', strtotime($logbook->start_date)) }}" class="form-control text-center date-start" name="start_date" type="text" id="start_date{{$i}}" placeholder="Example : 19-01-2021" required/>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="monday">Monday</label>
-                                                    <textarea class="form-control" name="monday" id="monday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->monday }}</textarea>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="monday">Monday</label>
+                                                        <textarea class="form-control" name="monday" id="monday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->monday }}</textarea>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="tuesday">Tuesday</label>
-                                                    <textarea class="form-control" name="tuesday" id="tuesday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->tuesday }}</textarea>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="tuesday">Tuesday</label>
+                                                        <textarea class="form-control" name="tuesday" id="tuesday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->tuesday }}</textarea>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="wednesday">Wednesday</label>
-                                                    <textarea class="form-control" name="wednesday" id="wednesday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->wednesday }}</textarea>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="wednesday">Wednesday</label>
+                                                        <textarea class="form-control" name="wednesday" id="wednesday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->wednesday }}</textarea>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="thursday">Thursday</label>
-                                                    <textarea class="form-control" name="thursday" id="thursday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->thursday }}</textarea>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="thursday">Thursday</label>
+                                                        <textarea class="form-control" name="thursday" id="thursday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->thursday }}</textarea>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="friday">Friday</label>
-                                                    <textarea class="form-control" name="friday" id="friday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->friday }}</textarea>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="friday">Friday</label>
+                                                        <textarea class="form-control" name="friday" id="friday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->friday }}</textarea>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="saturday">Saturday</label>
-                                                    <textarea class="form-control" name="saturday" id="saturday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->saturday }}</textarea>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="saturday">Saturday</label>
+                                                        <textarea class="form-control" name="saturday" id="saturday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->saturday }}</textarea>
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label for="sunday">Sunday</label>
-                                                    <textarea class="form-control" name="sunday" id="sunday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->sunday }}</textarea>
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label for="sunday">Sunday</label>
+                                                        <textarea class="form-control" name="sunday" id="sunday" cols="20" rows="2" placeholder="Not more than 350 characters">{{ $logbook->sunday }}</textarea>
+                                                    </div>
 
-                                                <div class="form-group-inline "@if($logbook->validate == 'validate') hidden @endif>
-                                                    <input class="btn btn-primary btn-sm pull-right mb-3" type="submit" value="Save"/>
-                                                    <a href="{{ route('logbook.email',['id'=>$logbook->id,'week'=>$i]) }}" class="btn btn-secondary btn-sm pull-right mb-3 mr-3">Request for Validation</a>
-                                                </div>                                              
-                                            </form>
+                                                    <div class="form-group-inline "@if($logbook->validate == 'validate') hidden @endif>
+                                                        <input class="btn btn-primary btn-sm pull-right mb-3" type="submit" value="Save"/>
+                                                        <a href="{{ route('logbook.email',['id'=>$logbook->id,'week'=>$i]) }}" class="btn btn-secondary btn-sm pull-right mb-3 mr-3">Request for Validation</a>
+                                                    </div>                                              
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
                         @endif
 
@@ -129,7 +129,7 @@
 
                         </div>
 
-                        <div id="card-week" hidden>   
+                        {{-- <div id="card-week" hidden>   
                             <div class="card">
                                 <div class="card-header">
                                     <a class="collapsed card-link" data-toggle="collapse" href="#w1">Week 1</a>
@@ -138,6 +138,19 @@
                                 <div id="w1" class="collapse" data-parent="#log">
                                     <div class="card-body">
                                         <div>
+
+                                            @php $i++; 
+                                                $status = "";
+                                                if($logbook->validate == 'unvalidate'){
+                                                    $status = "Not Validate";
+                                                }else if($logbook->validate == "validate"){
+                                                    $status = "Validated";
+                                                }else if($logbook->validate == "pending"){
+                                                    $status = "Pending";
+                                                }
+                                            
+                                            @endphp
+                                            
                                             <h3 class="text-center"><span class="badge badge-pill badge-light">Status: {{ $status }}</span></h3>
                                             <form method="post" action="{{ route('logbook.update',$internship->id) }}">
                                                 @method('POST')
@@ -191,7 +204,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

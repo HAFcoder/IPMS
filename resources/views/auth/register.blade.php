@@ -116,7 +116,7 @@
                 <div class="form-group">
                     <label for="state">State</label>
                     <select id="state" class="custom-select " name="state" required>
-                        <option value="">Select State</option>
+                        <option disabled selected value>Select State</option>
                         @foreach ($state as $data)
                             <option value="{{ $data->state }}">{{ $data->state }}</option>
                         @endforeach
