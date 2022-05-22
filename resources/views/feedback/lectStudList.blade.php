@@ -50,7 +50,7 @@
 
                                     @foreach ($internship as $intern)
                                         <tr>
-                                            <th scope="row">{{ $intern->studentInfo->studentID }}</th>
+                                            <th scope="row">{{ strtoupper($intern->studentInfo->studentID)}}</th>
                                             <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }}</td>
                                             <td>
                                                 @foreach ($programme as $prog)

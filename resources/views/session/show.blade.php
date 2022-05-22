@@ -37,12 +37,21 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Session</h4>
-            <ul class="breadcrumbs pull-left">
-                <li><a href="{{ url('/admin') }}">Home</a></li>
-                <li><a href="{{ route('session.index') }}">View All Session</a></li>
-                <li><span>View Session</span></li>
-            </ul>
+            @if (\Request::is('coordinator/student/by-session/*'))
+                <h4 class="page-title pull-left">Student</h4>
+                <ul class="breadcrumbs pull-left">
+                    <li><a href="{{ url('/admin') }}">Home</a></li>
+                    <li><a href="{{ route('session.index') }}">View Session</a></li>
+                    <li><span>View Students</span></li>
+                </ul>
+            @else
+                <h4 class="page-title pull-left">Session</h4>
+                <ul class="breadcrumbs pull-left">
+                    <li><a href="{{ url('/admin') }}">Home</a></li>
+                    <li><a href="{{ route('session.index') }}">View All Session</a></li>
+                    <li><span>View Session</span></li>
+                </ul>
+            @endif
         </div>
     </div>
 
@@ -55,7 +64,8 @@
         <div class="col-12 mt-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">View Session</h4>
+
+                    <h4 class="header-title">View Session Details</h4>
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -151,7 +161,7 @@
                                             <th>Programme</th>
                                             <th>Register Date</th>
                                             <th>Status</th>
-                                            {{-- <th>Other</th> --}}
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -166,7 +176,7 @@
                                                 </div>
                                             </td>
                                             @endif
-                                            <td>{{ $stud_ss->studentInfo->studentID }}</td>
+                                            <td>{{ strtoupper($stud_ss->studentInfo->studentID) }}</td>
                                             <td>{{ $stud_ss->studentInfo->f_name }} {{ $stud_ss->studentInfo->l_name }}</td>
                                             <td>{{ $stud_ss->programme->code }} - {{ $stud_ss->programme->name }}</td>
                                             <td>{{ date('d/m/Y', strtotime($stud_ss->created_at)) }}</td>
@@ -187,17 +197,108 @@
                                                 @endif
 
                                             </td>
-                                            {{-- <td>
-                                                <div class="dropdown">
-                                                    <button class="btn btn-secondary btn-xs dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                      Action
-                                                    </button>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                      <a class="dropdown-item" href="https://www.google.com" target="_blank">Logbook</a>
-                                                      <a class="dropdown-item" href="https://www.google.com" target="_blank">Resume</a>
+                                            <td id="student_id_{{ $stud_ss->stud_id }}">
+                                                <form action="{{ route('students.destroy', $stud_ss->student_id) }}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+    
+                                                    <a data-toggle="modal" data-target="#bd-example-modal-lg{{$stud_ss->student_id}}"
+                                                        data-placement="top" title="View" 
+                                                        class="btn btn-info btn-xs"><span class="ti-eye"></span>
+                                                    </a>
+    
+                                                    @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+    
+                                                        {{-- <a data-toggle="tooltip" data-placement="top" title="Edit" 
+                                                href="{{ route('session.edit',$data->id) }}" class="btn btn-primary btn-xs"><span class="ti-pencil"></span></a> --}}
+    
+                                                        <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
+                                                        type="submit"><span class="ti-trash"></span></button>
+    
+                                                    @endif
+                                                </form>
+                                                
+                                                {{-- show student info model --}}
+                                                <div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg{{$stud_ss->student_id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Student Info</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body">
+    
+                                                                <div class="tstu-content">
+                                                                    <div class="card-body p-0">
+                                                                        <ul class="profile-page-user list-group list-group-flush">
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Student ID:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->student_info->studentID }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Full Name:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->student_info->f_name }} {{ $stud_ss->student->student_info->l_name }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Programme:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->student_info->programmes->code }} - {{ $stud_ss->student->student_info->programmes->name }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">IC Number:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->student_info->no_ic }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Email:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->email }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Telephone:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->student_info->telephone }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Address:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->student_info->address }}, {{ $stud_ss->student->student_info->postcode }}, {{ $stud_ss->student->student_info->city }}" disabled>
+                                                                            </li>
+                                                                            
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">State:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $stud_ss->student->student_info->state }}" disabled>
+                                                                            </li class="profile-page-content">
+                                                                                
+                                                                            {{-- <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Student's Logbook:</span>
+                                                                                <a href="{{ route('coordinator.view.logbook') }}" target="_blank" class="btn btn-secondary btn-xs">
+                                                                                    <span class="ti-book"></span>
+                                                                                </a>
+                                                                            </li> --}}
+    
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+    
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </td> --}}
+    
+                                            </td>
                                         </tr>
                                         
                                         @endforeach
@@ -395,6 +496,28 @@
             chk_arr[k].checked = false;
         }
     }
+
+    </script>
+
+    <script type="text/javascript">
+        
+        $('.show_confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+            });
+        });
 
     </script>
 

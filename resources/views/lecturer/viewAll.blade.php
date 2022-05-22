@@ -83,7 +83,7 @@
                                         <tr>
                                             <td>
                                                 <div class="form-check form-group">
-                                                    <input type="checkbox" value="{{ $lect->lect_id }}" name="lect_id"
+                                                    <input type="checkbox" value="{{ strtoupper($lect->lect_id) }}" name="lect_id"
                                                         class="form-control form-check-input mx-auto" id="lect_id">
                                                 </div>
                                             </td>
@@ -119,9 +119,12 @@
                                                 <form action="{{ route('lecturers.destroy', $lect->lect_id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button data-toggle="tooltip" data-placement="top" title="Delete"
+                                                    {{-- <button data-toggle="tooltip" data-placement="top" title="Delete"
                                                     class="btn btn-danger btn-xs"
                                                     onclick="return confirm('Are you sure you want to delete this data?')"
+                                                    type="submit"><span class="ti-trash"></span></button> --}}
+
+                                                    <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
                                                     type="submit"><span class="ti-trash"></span></button>
                                                 </form>
                                             </td>
@@ -362,6 +365,28 @@
             });
         });
     </script>
+
+<script type="text/javascript">
+ 
+    $('.show_confirm').click(function(event) {
+         var form =  $(this).closest("form");
+         var name = $(this).data("name");
+         event.preventDefault();
+         swal({
+             title: `Are you sure you want to delete this record?`,
+             text: "If you delete this, it will be gone forever.",
+             icon: "warning",
+             buttons: true,
+             dangerMode: true,
+         })
+         .then((willDelete) => {
+           if (willDelete) {
+             form.submit();
+           }
+         });
+     });
+ 
+</script>
 
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>

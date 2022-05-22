@@ -70,7 +70,7 @@
                                         </tr>
                                         <tr>
                                             <th>Student ID</th>
-                                            <td>{{ $internship->studentInfo->studentID }}</td>
+                                            <td>{{ strtoupper($internship->studentInfo->studentID) }}</td>
                                         </tr>
                                         <tr>
                                             <th>Student Name</th>
@@ -122,7 +122,7 @@
                                     <select style="width: 50%" id="lecturer" class="form-control custom-select" name="lecturer">
                                         <option selected="selected">Select One</option>
                                         @foreach($lecturers as $key => $lect)
-                                            <option @if($lectid == $lect->id) selected @endif value="{{ $lect->id }}">{{ $lect->lecturerInfo->lecturerID }} - {{ $lect->lecturerInfo->f_name }} {{ $lect->lecturerInfo->l_name }}</option>
+                                            <option @if($lectid == $lect->id) selected @endif value="{{ $lect->id }}">{{ strtoupper($lect->lecturerInfo->lecturerID) }} - {{ $lect->lecturerInfo->f_name }} {{ $lect->lecturerInfo->l_name }}</option>
                                         @endforeach
                                     
                                     </select>

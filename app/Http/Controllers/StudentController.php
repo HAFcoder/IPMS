@@ -63,6 +63,23 @@ class StudentController extends Controller
         return view('students.show', compact('student'));
     }
 
+    public function bySess()
+    {
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+
+        return view('student.bySession',compact('sessions','lect'));
+    }
+
+    public function bySess2($id)
+    {
+        $sessions = Session::where('id',$id)->with('sessionProgramme','lecturerInfo')->first();
+        $student_session = StudentSession::orderBy('status', 'ASC')->where('session_id',$id)->with('studentInfo','programme')->get();
+        //dump($sessions);
+
+        return view('session.show',compact('sessions','student_session'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -138,6 +155,7 @@ class StudentController extends Controller
         //dump("des");
         $stud = Student::find($id);
         $stud->delete();
+        Alert::success('Success!', 'User deleted.');
         return redirect()->back();
     }
 

@@ -51,7 +51,7 @@
                                 @foreach ($datas as $data)
                                     <tr>
                                         <td>{{ $data->session->session_code }}</td>
-                                        <td>{{ $data->studentInfo->studentID }}</td>
+                                        <td>{{ strtoupper($data->studentInfo->studentID) }}</td>
                                         <td>{{ $data->studentInfo->f_name }} {{ $data->studentInfo->l_name }}</td>
                                         <td>{{ $data->studentInfo->programmes->name }}</td>
                                         <td>{{ $data->studentInfo->address }}</td>

@@ -84,7 +84,7 @@
                                 @endif
 
                                 @foreach($company as $comp)
-                                
+                                    <tr>
                                         <td>
                                             @if(Auth::guard('lecturer')->user()->role == "coordinator")
                                             <div class="form-check form-group">

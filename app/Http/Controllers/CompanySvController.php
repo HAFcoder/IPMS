@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\CompanySv;
 use App\Http\Controllers\Controller;
+use App\Models\Internship;
+use App\Models\Session;
+use App\Models\Supervisor;
 use Illuminate\Http\Request;
 
 class CompanySvController extends Controller
@@ -15,7 +18,26 @@ class CompanySvController extends Controller
      */
     public function index()
     {
-        //
+        $intern = Internship::where('status', 'accepted')->get();
+        $sv = Supervisor::all();
+
+        return view('company.coorIndustrySV', compact('intern', 'sv'));
+    }
+
+    public function bySess()
+    {
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+
+        return view('company.bySession',compact('sessions','lect'));
+    }
+
+    public function bySess2($id)
+    {
+        $intern = Internship::where('status', 'accepted')->where('session_id', $id)->get();
+        $sv = Supervisor::all();
+
+        return view('company.coorIndustrySV', compact('intern', 'sv'));
     }
 
     /**

@@ -121,10 +121,8 @@
                                                     {{-- <a data-toggle="tooltip" data-placement="top" title="Edit" 
                                             href="{{ route('session.edit',$data->id) }}" class="btn btn-primary btn-xs"><span class="ti-pencil"></span></a> --}}
 
-                                                    <button data-toggle="tooltip" data-placement="top" title="Delete"
-                                                        class="btn btn-danger btn-xs"
-                                                        onclick="return confirm('Are you sure you want to delete this session?')"
-                                                        type="submit button"><span class="ti-trash"></span></button>
+                                                    <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
+                                                    type="submit"><span class="ti-trash"></span></button>
 
                                                 @endif
                                             </form>
@@ -190,12 +188,12 @@
                                                                             placeholder="{{ $data->state }}" disabled>
                                                                         </li class="profile-page-content">
                                                                             
-                                                                        <li class="profile-page-content">
+                                                                        {{-- <li class="profile-page-content">
                                                                             <span class="profile-page-name">Student's Logbook:</span>
                                                                             <a href="{{ route('coordinator.view.logbook') }}" target="_blank" class="btn btn-secondary btn-xs">
                                                                                 <span class="ti-book"></span>
                                                                             </a>
-                                                                        </li>
+                                                                        </li> --}}
 
                                                                     </ul>
                                                                 </div>
@@ -386,6 +384,28 @@
 
 
 
+    </script>
+
+    <script type="text/javascript">
+    
+        $('.show_confirm').click(function(event) {
+            var form =  $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                title: `Are you sure you want to delete this record?`,
+                text: "If you delete this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                form.submit();
+            }
+            });
+        });
+    
     </script>
     
 

@@ -118,10 +118,14 @@
                                                 <form action="{{ route('lecturers.destroy', $lect->lect_id ) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button data-toggle="tooltip" data-placement="top" title="Delete"
+
+                                                    <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
+                                                    type="submit"><span class="ti-trash"></span></button>
+
+                                                    {{-- <button data-toggle="tooltip" data-placement="top" title="Delete"
                                                     class="btn btn-danger btn-xs"
                                                     onclick="return confirm('Are you sure you want to delete this data?')"
-                                                    type="submit"><span class="ti-trash"></span></button>
+                                                    type="submit"><span class="ti-trash"></span></button> --}}
                                                 </form>
                                             </td>
                                         </tr>
@@ -358,6 +362,28 @@
             });
         });
     </script>
+
+<script type="text/javascript">
+ 
+    $('.show_confirm').click(function(event) {
+         var form =  $(this).closest("form");
+         var name = $(this).data("name");
+         event.preventDefault();
+         swal({
+             title: `Are you sure you want to delete this record?`,
+             text: "If you delete this, it will be gone forever.",
+             icon: "warning",
+             buttons: true,
+             dangerMode: true,
+         })
+         .then((willDelete) => {
+           if (willDelete) {
+             form.submit();
+           }
+         });
+     });
+ 
+</script>
 
     <!-- Start datatable js -->
     <script src="{{ asset('assets/dw/jquery.dataTables.js') }}"></script>

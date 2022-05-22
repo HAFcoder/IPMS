@@ -35,7 +35,14 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
+            @if (\Request::is('coordinator/feedback/*'))
+                <h4 class="page-title pull-left">Feedbacks & Evaluation</h4>
+            @elseif(\Request::is('coordinator/company/evaluation-company/by-session'))
+                <h4 class="page-title pull-left">Company</h4>
+            @else
+                <h4 class="page-title pull-left">Student</h4>
+            @endif
+            
             <ul class="breadcrumbs pull-left">
                 @if (\Request::is('coordinator/feedback/presentation/sessions'))
                     <li><a href="{{ url('/coordinator') }}">Home</a></li>
@@ -49,6 +56,16 @@
                     <li><a href="{{ url('/coordinator') }}">Home</a></li>
                     <li><a >Report & Logbook Marks</a></li>
                     <li><span>Session</span></li>
+                @elseif (\Request::is('coordinator/student-company/status-by-session'))
+                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                    <li><a >Student</a></li>
+                    <li><a >Company</a></li>
+                    <li><span>Session</span></li>
+                @elseif(\Request::is('coordinator/company/evaluation-company/by-session'))
+                    <li><a href="{{ url('/coordinator') }}">Home</a></li>
+                    <li><a >Company</a></li>
+                    <li><a >Evaluation Form</a></li>
+                <li><span>Session</span></li>
                 @else
                     @if (Auth::guard('lecturer')->user()->role == 'coordinator')
                         <li><a href="{{ url('/coordinator') }}">Home</a></li>
@@ -111,6 +128,12 @@
                                         @elseif (\Request::is('coordinator/feedback/logbook-report/sessions'))
                                             <a data-toggle="tooltip" data-placement="top" title="View" 
                                                 href="{{ route('view.reportLog.marks',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
+                                        @elseif (\Request::is('coordinator/student-company/status-by-session'))
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                                href="{{ route('internship.view.status-by-session',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
+                                        @elseif(\Request::is('coordinator/company/evaluation-company/by-session'))
+                                            <a data-toggle="tooltip" data-placement="top" title="View" 
+                                            href="{{ route('view.company.feed2',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a>
                                         @else
                                             <a data-toggle="tooltip" data-placement="top" title="View" 
                                             href="{{ route('view.graduate.survey',$ss->id) }}" class="btn btn-info btn-xs"><span class="ti-eye"></span></a> 

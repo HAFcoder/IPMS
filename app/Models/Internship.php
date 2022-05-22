@@ -71,9 +71,14 @@ class Internship extends Model
         return $this->belongsTo(StudentInfo::class, 'student_id');
     }
 
+    // public function lecturerInfo()
+    // {
+    //     return $this->hasOne(LecturerInfo::class, 'lect_id' ,'lecturer_id');
+    // }
+
     public function lecturerInfo()
     {
-        return $this->hasOne(LecturerInfo::class, 'lect_id' ,'lecturer_id');
+        return $this->belongsTo(LecturerInfo::class, 'lect_id', 'lecturer_id');
     }
 
     public function lectEvaluate()

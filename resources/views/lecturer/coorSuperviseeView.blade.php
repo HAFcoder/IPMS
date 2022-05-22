@@ -58,7 +58,7 @@
                                @foreach ($internship as $intern)
                                     <tr>
                                         <td>{{ $intern->session->session_code }}</td>
-                                        <td>{{ $intern->studentInfo->studentID }}</td>
+                                        <td>{{ strtoupper($intern->studentInfo->studentID) }}</td>
                                         <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
                                         <td>
                                             @php

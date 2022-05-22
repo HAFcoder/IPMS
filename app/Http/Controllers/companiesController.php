@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Company;
 use App\Models\LookupAddress;
 use App\Models\Internship;
-use App\Models\CompanySv;
 use App\Models\Supervisor;
 use App\Models\Lecturer;
 use App\Models\OrfForm;
@@ -18,7 +17,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 use Mail;
 use App\Mail\InternMail;
-
+use App\Models\Session;
 use Illuminate\Support\Facades\Storage;
 
 class companiesController extends Controller
@@ -593,6 +592,21 @@ class companiesController extends Controller
     public function statusAll()
     {
         $internship = Internship::with('company','session','studentInfo')->orderBy('id','DESC')->get();
+        //dump($internship->groupBy('company_id'));
+        return view('company.coorStudentStatusAll',compact('internship'));
+    }
+
+    public function statusSess()
+{
+        $lect = $this->getLecturerInfo();
+        $sessions = Session::with('sessionProgramme','lecturerInfo')->get();
+
+        return view('feedback.coorGraduateSess',compact('sessions','lect'));
+    }
+
+    public function statusSess2($id)
+    {
+        $internship = Internship::with('company','session','studentInfo')->where('session_id', $id)->orderBy('id','DESC')->get();
         //dump($internship->groupBy('company_id'));
         return view('company.coorStudentStatusAll',compact('internship'));
     }

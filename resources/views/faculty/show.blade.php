@@ -163,7 +163,7 @@
                                                 </div>
                                                 @endif
                                             </td>
-                                            <td>{{ $stud_ss->studentInfo->studentID }}</td>
+                                            <td>{{ strtoupper($stud_ss->studentInfo->studentID) }}</td>
                                             <td>{{ $stud_ss->studentInfo->f_name }} {{ $stud_ss->studentInfo->l_name }}</td>
                                             <td>{{ $stud_ss->programme->code }} - {{ $stud_ss->programme->name }}</td>
                                             <td>{{ date('d/m/Y', strtotime($stud_ss->created_at)) }}</td>

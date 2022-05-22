@@ -10,6 +10,7 @@ use App\Http\Controllers\FileManagementController;
 use App\Http\Controllers\companiesController;
 use App\Http\Controllers\StudentSessionController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\CompanySvController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ResumeManagementController;
@@ -168,9 +169,18 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/company/acceptence-letter', [companiesController::class, 'acceptance']);
     Route::get('coordinator/company/decline-letter', [companiesController::class, 'reject']);
     Route::get('coordinator/company/evaluation-company', [companiesController::class, 'companySV']);
+    Route::get('coordinator/company/evaluation-company/by-session', [FormFeedbackController::class, 'companySess']);
+    Route::get('coordinator/company/evaluation-company/by-session/{id}', [FormFeedbackController::class, 'companySess2'])->name('view.company.feed2');
+    //indsutrial sv
+    Route::get('coordinator/company/industrial-sv', [CompanySvController::class, 'index']);
+    Route::get('coordinator/company/industrial-sv/by-session', [CompanySvController::class, 'bySess']);
+    Route::get('coordinator/company/industrial-sv/by-session/{id}', [CompanySvController::class, 'bySess2'])->name('view.industry.sv');
 
     //under student company 
     Route::get('coordinator/student-company/status-all', [companiesController::class, 'statusAll'])->name('internship.status-all');
+    Route::get('coordinator/student-company/status-by-session', [companiesController::class, 'statusSess'])->name('internship.status-by-session');
+    Route::get('coordinator/student-company/status-by-session/{id}', [companiesController::class, 'statusSess2'])->name('internship.view.status-by-session');
+
     Route::get('coordinator/student/internship/{id}', [companiesController::class, 'internship_details'])->name('internship.student.detail');
     Route::put('coordinator/student/internship/{id}/assign', [companiesController::class, 'internship_assignLect'])->name('internship.assign-lecturer');
     Route::get('coordinator/student/internship/{id}/decline', [companiesController::class, 'internship_sendDecline'])->name('internship.student.decline');
@@ -178,7 +188,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     //feedback menu
     Route::get('coordinator/feedback/company', [FormFeedbackController::class, 'company']);
     Route::get('coordinator/feedback/company/sessions', [FormFeedbackController::class, 'companySess']);
-    Route::get('coordinator/feedback/company/sessions/{id}', [FormFeedbackController::class, 'reportViewSess2'])->name('view.company.feed');
+    Route::get('coordinator/feedback/company/sessions/{id}', [FormFeedbackController::class, 'companySess2'])->name('view.company.feed');
 
     Route::get('coordinator/feedback/logbook-report', [FormFeedbackController::class, 'logbookReport']);
     Route::get('coordinator/feedback/logbook-report/sessions', [FormFeedbackController::class, 'reportViewSess']);
@@ -200,6 +210,8 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/graduate-survey/sessions/{id}', [GradSurveyAnswerController::class, 'viewBySessGrad2'])->name('view.graduate.survey');
     Route::get('coordinator/feedback/view/graduate-survey/{id}', [GradSurveyAnswerController::class, 'viewGradSurvey'])->name('feedback.viewGrad');
     Route::get('coordinator/feedback/graduate-survey/chart', [GradSurveyAnswerController::class, 'viewChart']);
+    Route::get('coordinator/feedback/graduate-survey/chart/{id}', [GradSurveyAnswerController::class, 'viewChartId'])->name('chart.session');
+
 
     Route::get('coordinator/feedback/presentation', [PresentMarksController::class, 'presentViewAll']);
     Route::get('coordinator/feedback/presentation/sessions', [PresentMarksController::class, 'presentViewSess']);

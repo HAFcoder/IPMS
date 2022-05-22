@@ -77,7 +77,7 @@
                             <select id="lect_id" class="custom-select" name="lect_id" required>
                                 <option disabled selected value>Select one</option>
                                 @foreach ($lect as $data)
-                                    <option value="{{ $data->id }}">{{ Str::upper($data->lecturerInfo->f_name)  }} {{ Str::upper($data->lecturerInfo->l_name)  }}</option>
+                                    <option value="{{ $data->id }}">{{ Str::upper($data->lecturerInfo->f_name) }} {{ Str::upper($data->lecturerInfo->l_name)  }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -109,7 +109,7 @@
                                             <td>
                                                 <input type="checkbox" value="{{ $intern->id }}" name="intern_id[]" class="form-control" id="intern_id[]">
                                             </td>
-                                            <td>{{ $intern->studentInfo->studentID }}</td>
+                                            <td>{{ strtoupper($intern->studentInfo->studentID) }}</td>
                                             <td>{{ $intern->studentInfo->f_name }} {{ $intern->studentInfo->l_name }} </td>
                                             <td>
                                                 @php

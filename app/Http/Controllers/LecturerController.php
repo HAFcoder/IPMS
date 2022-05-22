@@ -214,6 +214,7 @@ class LecturerController extends Controller
             $intern->save();
         }
 
+        Alert::success('Success!', 'Student(s) successfully assigned to a lecturer.');
         return back();
     }
 

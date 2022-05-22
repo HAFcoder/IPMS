@@ -90,7 +90,7 @@ class PresentMarksController extends Controller
 
     public function presentViewAll()
     {
-        $internship = Internship::with('company','session','studentInfo')->where('status','accepted')->get();
+        $internship = Internship::with('company','session','studentInfo', 'lecturerInfo', 'presentMarks')->where('status','accepted')->get();
         //dump($internship);
         $presentMarks = PresentMarks::all();
         $findme   = 'Bachelor';
@@ -107,7 +107,7 @@ class PresentMarksController extends Controller
 
     public function presentViewSess2($id)
     {
-        $internship = Internship::with('company','session','studentInfo')->where('status','accepted')->where('session_id', $id)->get();
+        $internship = Internship::with('company','session','studentInfo', 'lecturerInfo')->where('status','accepted')->where('session_id', $id)->get();
         //dump($internship);
         $presentMarks = PresentMarks::all();
         $findme   = 'Bachelor';

@@ -120,16 +120,16 @@ class FormFeedbackController extends Controller
 
     public function companySess2($id)
     {
-        $internship = Internship::with('company','session','studentInfo')->where('status','accepted')->where('session_id', $id)->get();
+        $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->where('session_id', $id)->get();
         //dump($internship);
         $svMarks = SvEvaluationMarks::all();
-        $findme   = 'Bachelor';
-        return view('feedback.coorLogbook',compact('internship', 'svMarks', 'findme'));
+        $peoMarks = EmpIndustrySurveyAnswer::all();
+        return view('feedback.coorCompany',compact('internship', 'peoMarks', 'svMarks'));
     }
 
     public function logbookReport()
     {
-        $internship = Internship::with('company','session','studentInfo','empIndustrySurvey')->where('status','accepted')->get();
+        $internship = Internship::with('company','session','studentInfo','empIndustrySurvey','lecturerInfo')->where('status','accepted')->get();
         $evaluationMarks = FinalEvaluationMarks::all();
         return view('feedback.coorLogbook',compact('internship', 'evaluationMarks'));
     }

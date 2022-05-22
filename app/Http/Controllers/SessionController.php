@@ -11,8 +11,10 @@ use App\Models\Session;
 use App\Models\Lecturer;
 use App\Models\LecturerInfo;
 use App\Models\SessionProgramme;
+use App\Models\Student;
 use App\Models\StudentSession;
 use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SessionController extends Controller
 {
@@ -190,6 +192,15 @@ class SessionController extends Controller
         SessionProgramme::where('session_id', $id)->delete();
 
         return redirect()->back()->with('delete', $code.' has been successfully deleted.');
+    }
+
+    public function destroyStud($id)
+    {
+        //dump("des");
+        $stud = Student::find($id);
+        $stud->delete();
+        Alert::success('Success!', 'User deleted.');
+        return redirect()->back();
     }
 
 

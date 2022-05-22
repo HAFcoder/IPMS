@@ -104,8 +104,9 @@ class GradSurveyAnswerController extends Controller
     public function viewBySessGrad2($id)
     {
         $internship = Internship::where('session_id',$id)->get();
+        $internId = $id;
         //dump('test');
-        return view('feedback.coorGraduateAll',compact('internship'));
+        return view('feedback.coorGraduateAll',compact('internship', 'internId'));
     }
 
     public function viewGradSurvey($id)
@@ -117,6 +118,15 @@ class GradSurveyAnswerController extends Controller
     public function viewChart()
     {
         $graduateMarks = GradSurveyAnswer::all();
+        return view('feedback.coorGraduatePie', compact('graduateMarks'));
+    }                                                                                                       
+
+    public function viewChartId($id)
+    {
+        $intern = Internship::where('session_id', $id)->pluck('id');
+ 
+        $graduateMarks = GradSurveyAnswer::whereIn('internship_id', $intern)->get();
+
         return view('feedback.coorGraduatePie', compact('graduateMarks'));
     }
 }

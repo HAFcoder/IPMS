@@ -147,10 +147,25 @@
 
                                     <li>
                                         <a href="javascript:void(0)" aria-expanded="true">
-                                            <i class="ti-write"></i><span>Evaluation</span>
+                                            <i class="ti-write"></i><span>Industrial Supervisor</span>
                                         </a>
                                         <ul class="collapse">
-                                            <li><a href="{{ url('coordinator/company/evaluation-company') }}">Industrial Supervisor</a></li>
+                                            <li><a href="{{ url('coordinator/company/industrial-sv') }}">View All</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/company/industrial-sv/by-session') }}">By Session</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0)" aria-expanded="true">
+                                            <i class="ti-write"></i><span>Evaluation Form</span>
+                                        </a>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/company/evaluation-company') }}">View All</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/company/evaluation-company/by-session') }}">By Session</a></li>
                                         </ul>
                                     </li>
 
@@ -172,6 +187,9 @@
                                             {{-- approve pending student registration session --}}
                                             {{-- <li><a href="{{ url('coordinator/student-pending') }}">Pending</a></li> --}}
                                         </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ route('session.index') }}">By Session</a></li>
+                                        </ul>
                                     @endif
                                 </li>
 
@@ -183,6 +201,9 @@
                                         </a>
                                         <ul class="collapse">
                                             <li><a href="{{ url('coordinator/student-company/status-all') }}">All Applications</a></li>
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li><a href="{{ url('coordinator/student-company/status-by-session') }}">By Session</a></li>
                                         </ul>
                                     </li>
 
