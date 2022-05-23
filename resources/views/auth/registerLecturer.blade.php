@@ -48,7 +48,7 @@
                 <div class="form-group">
                     <label style="color: #f3302c" for="faculty_id">Faculty</label>
                     <select name="faculty_id" id="faculty_id" class="custom-select" required>
-                        <option value="">Select one</option>
+                        <option disabled selected value>Select one</option>
                         @foreach ($faculties as $faculty)
                             <option value="{{ $faculty->id }}" name="faculty_id">{{ $faculty->faculty_name }}</option>
                         @endforeach

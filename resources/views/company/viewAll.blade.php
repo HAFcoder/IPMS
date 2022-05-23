@@ -73,6 +73,7 @@
                                     <th>Registered By</th>
                                     <th>Website</th>
                                     <th>Status</th>
+                                    <th class="noExport">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,7 +109,7 @@
                                         <td>
                                             @if($comp->lecturer_id != '')
 
-                                                <b>Lecturer : </b>{{ $comp->lecturerInfo->f_name }} {{ $comp->lecturerInfo->l_name }} ( {{ $comp->lecturerInfo->lecturerID }} )
+                                                <b>Lecturer : </b>{{ $comp->lecturerInfo->f_name }} {{ $comp->lecturerInfo->l_name }} ( {{ strtoupper($comp->lecturerInfo->lecturerID) }} )
 
                                             @else
 
@@ -132,6 +133,23 @@
 
                                             @endphp
                                             <span class="badge badge-pill {{ $style }}">{{ ucfirst(trans($comp->status)) }}</span>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('company.destroy', $comp->id) }}" method="post">
+                                                @method('DELETE')
+                                                @csrf
+
+                                                <a data-toggle="tooltip" data-placement="top" title="Edit" 
+                                                href="{{ route('company.edit.coordinator',$comp->id) }}" 
+                                                class="btn btn-primary btn-xs"><span class="ti-pencil"></span></a>
+
+                                                @if (Auth::guard('lecturer')->user()->role == 'coordinator')
+
+                                                    <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
+                                                    type="submit"><span class="ti-trash"></span></button>
+
+                                                @endif
+                                            </form>
                                         </td>
                                     </tr>
 
@@ -315,6 +333,28 @@
             chk_arr[k].checked = false;
         }
     }
+
+</script>
+
+<script type="text/javascript">
+    
+    $('.show_confirm').click(function(event) {
+        var form =  $(this).closest("form");
+        var name = $(this).data("name");
+        event.preventDefault();
+        swal({
+            title: `Are you sure you want to delete this record?`,
+            text: "If you delete this, it will be gone forever.",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+            form.submit();
+        }
+        });
+    });
 
 </script>
 

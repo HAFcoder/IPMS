@@ -184,7 +184,10 @@ class companiesController extends Controller
 
         $companies->save();
 
-        return redirect()->back()->with('success', 'Company data has been successfully updated.');
+        // return redirect()->back()->with('success', 'Company data has been successfully updated.');
+
+        Alert::success('Success!', 'Company data has been successfully updated.');
+        return redirect('/coordinator/company/list');
 
     }
 
@@ -194,7 +197,9 @@ class companiesController extends Controller
         $companies = Company::find($id)->first();
         $name = $companies->name;
         $companies->delete();
-        return redirect()->back()->with('delete', $name.' has been successfully deleted.');
+
+        Alert::success('Success!', 'Company has been successfully deleted.');
+        return redirect('/coordinator/company/list');
     }
 
     public function updateStatus(Request $request)

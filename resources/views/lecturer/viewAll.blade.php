@@ -26,15 +26,16 @@
 
         div.dataTables_length select
         {
-        min-width: 75px;
+            min-width: 75px;
         }
+
     </style>
 
     {{-- toggle button --}}
-    <link rel="stylesheet" href="{{ asset('assets/dw/switchery.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dw/switchery.min.js') }}">
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css"> --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/dw/switchery.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('assets/dw/switchery.min.js') }}"> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
 
 @endsection
 
@@ -119,10 +120,10 @@
                                                 <form action="{{ route('lecturers.destroy', $lect->lect_id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
-                                                    {{-- <button data-toggle="tooltip" data-placement="top" title="Delete"
-                                                    class="btn btn-danger btn-xs"
-                                                    onclick="return confirm('Are you sure you want to delete this data?')"
-                                                    type="submit"><span class="ti-trash"></span></button> --}}
+
+                                                    <a data-toggle="tooltip" data-placement="top" title="Edit" 
+                                                    href="{{ route('lecturers.edit',$lect->lect_id) }}" class="btn btn-primary btn-xs">
+                                                    <span class="ti-pencil"></span></a>
 
                                                     <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
                                                     type="submit"><span class="ti-trash"></span></button>

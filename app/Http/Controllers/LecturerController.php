@@ -72,7 +72,10 @@ class LecturerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lect_info = LecturerInfo::where('lect_id', $id)->first();
+        $lecturer = Lecturer::where('id', $id)->first();
+        $faculties = Faculty::orderBy('faculty_name', 'ASC')->where('status', '=', 'active')->get();
+        return view('lecturer.edit', compact('lect_info', 'faculties'));
     }
 
     /**
@@ -84,7 +87,23 @@ class LecturerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $lecturer = Lecturer::find($id);
+        $lecturerInfo = LecturerInfo::where('lect_id', $id)->first();
+
+        $lecturer->email = $request->email;
+        $lecturerInfo->lecturerID = $request->lecturerID;
+        $lecturerInfo->f_name = $request->f_name;
+        $lecturerInfo->l_name = $request->l_name;
+        $lecturerInfo->telephone = $request->telephone;
+        $lecturerInfo->faculty_id = $request->faculty_id;
+        $lecturerInfo->position = $request->position;
+
+        $lecturer->save();
+        $lecturerInfo->save();
+
+        Alert::success('Success!', 'Lecturer data has been successfully updated.');
+        return redirect()->back();
+
     }
 
     /**
@@ -97,6 +116,8 @@ class LecturerController extends Controller
     {
         $lect = Lecturer::find($id);
         $lect->delete();
+
+        Alert::success('Success!', 'Lecturer has been successfully deleted.');
         return redirect()->back();
     }
 

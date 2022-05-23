@@ -60,7 +60,7 @@
 
                                         <li class="profile-page-content list-group-item ">
                                             <span class="profile-page-name">Lecturer ID:</span>
-                                            <span class="profile-page-amount">{{ $lect->lecturerID }}</span>
+                                            <span class="profile-page-amount">{{ strtoupper($lect->lecturerID) }}</span>
                                         </li>
 
                                         <li class="profile-page-content list-group-item ">
