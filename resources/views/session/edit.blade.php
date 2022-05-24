@@ -33,8 +33,8 @@
                     <h4 class="header-title">Edit Session</h4>
 
                     <form method="POST" action="{{ route('session.update',$sessions->id) }}">
-                        @method('PATCH') 
-                        {{ csrf_field() }}
+                        @method('PUT') 
+                        @csrf
                     
                         @if ($errors->any())
                         <div class="form-group">

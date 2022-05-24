@@ -127,7 +127,7 @@ class SessionController extends Controller
     {
         //dump("id = " . $id);
         //$sessions = Session::find($id);
-        $sessions = Session::find($id)->with('sessionProgramme')->first();
+        $sessions = Session::where('id', $id)->with('sessionProgramme')->first();
         $programme = Programme::all();
         //dump($sessions);
 
@@ -185,13 +185,13 @@ class SessionController extends Controller
      */
     public function destroy($id)
     {
-        $session = Session::find($id)->first();
+        $session = Session::where('id', $id)->first();
         $code = $session->session_code;
         $session->delete();
 
         SessionProgramme::where('session_id', $id)->delete();
-
-        return redirect()->back()->with('delete', $code.' has been successfully deleted.');
+        Alert::success('Success!', $code. 'has been successfully deleted.');
+        return redirect()->back();
     }
 
     public function destroyStud($id)
