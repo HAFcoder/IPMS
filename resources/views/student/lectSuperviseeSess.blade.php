@@ -40,7 +40,7 @@
                                         <th scope="col">Duration</th>
                                         <th scope="col">Programme</th>
                                         <th scope="col">Total Supervisee</th>
-                                        <th scope="col">view supervisees List</th>
+                                        <th scope="col">View supervisees List</th>
                                     </tr>
                                 </thead>
                                 <tbody>

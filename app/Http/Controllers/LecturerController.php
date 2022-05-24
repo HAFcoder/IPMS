@@ -181,7 +181,7 @@ class LecturerController extends Controller
         $datas = Internship::where('lecturer_id', $uid)
                             ->where('session_id', $id)
                             ->get();
-        dump($datas);
+        // dump($datas);
         return view('student.lectSuperviseeList', compact('datas'));
     }
 
