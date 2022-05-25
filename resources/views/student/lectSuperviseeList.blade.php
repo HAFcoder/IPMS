@@ -205,13 +205,13 @@
                                                                         <li class="profile-page-content">
                                                                             <span class="profile-page-name">Start Date:</span>
                                                                             <input class="form-control input-rounded profile-page-amount" type="text" 
-                                                                            placeholder="{{ $data->start_date }}" disabled>
+                                                                            placeholder="{{ date('d/m/Y', strtotime($data->orfForm->start_training)) }}" disabled>
                                                                         </li>
 
                                                                         <li class="profile-page-content">
                                                                             <span class="profile-page-name">End Date:</span>
                                                                             <input class="form-control input-rounded profile-page-amount" type="text" 
-                                                                            placeholder="{{ $data->end_date }}" disabled>
+                                                                            placeholder="{{ date('d/m/Y', $data->orfForm->start_training) }}" disabled>
                                                                         </li>
 
                                                                         <li class="profile-page-content">

@@ -87,7 +87,7 @@
                                         </tr>
                                         <tr>
                                             <th>Duration</th>
-                                            <td>{{ date('d/m/Y', strtotime($internship->start_date)) }} - {{ date('d/m/Y', strtotime($internship->end_date)) }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($internship->orfForm->start_training)) }} - {{ date('d/m/Y', strtotime($internship->orfForm->end_training)) }}</td>
                                         </tr>
                                         <tr>
                                             </td>

@@ -18,6 +18,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Mail;
 use App\Mail\InternMail;
 use App\Models\Session;
+use DateTime;
 use Illuminate\Support\Facades\Storage;
 
 class companiesController extends Controller
@@ -338,7 +339,6 @@ class companiesController extends Controller
         $orf->represent_position = $request->represent_position;
         $orf->contact = $request->contact;
         $orf->email = $request->email;
-        
         $location = $internship->session->session_code;
 
         if ($request->hasFile('filename')) {
@@ -358,6 +358,13 @@ class companiesController extends Controller
         $internship->updated_at = now();
         $internship->status = $status;
         $internship->allowance = $request->allowance;
+        $internship->start_date = $request->start_training;
+        $internship->end_date = $request->end_training;
+        // intern duration in days
+        $d1 = new DateTime($request->start_training);
+        $d2 = new DateTime($request->end_training);
+        $interval = $d1->diff($d2);
+        $internship->duration= $interval->format('%a');
         $internship->save();
 
         //set all pending into reject status
