@@ -146,18 +146,20 @@
                                     </td>
                                     {{-- logbook --}}
                                     <td>
-                                        @if ($intern->finalEvaluation == null)
-                                            <span style="font-size:15px" class="badge badge-pill badge-secondary">No Data</span>
-                                        @else
-                                            <a target="_blank" href="{{ route('feedback.view.reportLog',$intern->id) }}" class="btn btn-xs btn-warning mb-2 "><i class="fa fa-eye"></i></a>
-                                        @endif
+                                        @foreach ($logbook as $log)
+                                            @if ($log->internship_id == $intern->id)
+                                                <a target="_blank" href="{{ route('feedback.view.logbook',$intern->id) }}" class="btn btn-xs btn-warning mb-2 "><i class="fa fa-eye"></i></a>
+                                            {{-- @else
+                                                <span style="font-size:15px" class="badge badge-pill badge-secondary">No Data</span> --}}
+                                            @endif
+                                        @endforeach
                                     </td>
                                      {{-- report --}}
                                     <td>
-                                        @if ($intern->finalEvaluation == null)
+                                        @if ($intern->report_link == null)
                                             <span style="font-size:15px" class="badge badge-pill badge-secondary">No Data</span>
                                         @else
-                                            <a target="_blank" href="{{ route('feedback.view.reportLog',$intern->id) }}" class="btn btn-xs btn-info mb-2 "><i class="fa fa-eye"></i></a>
+                                            <a target="_blank" href="{{ $intern->report_link }}" class="btn btn-xs btn-info mb-2 "><i class="fa fa-eye"></i></a>
                                         @endif
                                     </td>
                                 </tr>

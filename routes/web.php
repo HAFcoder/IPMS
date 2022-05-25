@@ -149,7 +149,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     // student view all
     Route::resource('coordinator/students', StudentController::class);
     Route::post('/edit-student/api/fetch-cities', [RegisterController::class, 'fetchCity']);
-    Route::get('coordinator/student/view-logbook', [StudentController::class, 'studentLogbook'])->name('coordinator.view.logbook');
+    // Route::get('coordinator/student/view-logbook', [StudentController::class, 'studentLogbook'])->name('coordinator.view.logbook');
 
     // student pending
     Route::get('coordinator/student-pending', [StudentSessionController::class, 'index']);
@@ -194,6 +194,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/logbook-report/sessions', [FormFeedbackController::class, 'reportViewSess']);
     Route::get('coordinator/feedback/logbook-report/sessions/{id}', [FormFeedbackController::class, 'reportViewSess2'])->name('view.reportLog.marks');
     Route::get('coordinator/feedback/view/logbook-report/{id}', [FormFeedbackController::class, 'viewReportMark'])->name('feedback.view.reportLog');
+    Route::get('coordinator/feedback/view/logbook-report/student/{id}', [LogbookController::class, 'coorViewLogbook'])->name('feedback.view.logbook');
 
     Route::get('coordinator/feedback/{id}/sendForm/', [FormFeedbackController::class, 'sendFormFeedback'])->name('feedback.sendForm');
     Route::get('coordinator/feedback/{id}/viewForm/', [FormFeedbackController::class, 'viewForm'])->name('feedback.viewForm');

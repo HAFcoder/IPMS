@@ -44,12 +44,11 @@
             <div class="mainheader-area">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-md-3">
+                        <div class="mx-auto">
                             <div class="logo">
-                                <a href="#"><img style="height: 80px; width: auto;" src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
+                                <a href="#"><img style="height: 70px; width: auto;" src="{{ asset('assets/images/icon/ipms_logo.png') }}" alt="logo"></a>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>

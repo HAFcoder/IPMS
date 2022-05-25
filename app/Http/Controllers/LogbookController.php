@@ -149,4 +149,13 @@ class LogbookController extends Controller
         
         return view('logbook.backup', compact('studentid','weeks'));
     }
+
+    //at coordinator under feedback menu, logbook and report
+    public function coorViewLogbook($id) {
+        $logbook = Logbook::where('internship_id', $id)->get();
+        $internship = Internship::where('id', $id)->first();
+        $programme = Programme::all();
+        return view('logbook.coorLogbook', compact('logbook', 'internship', 'programme'));
+
+    }
 }
