@@ -269,9 +269,11 @@ class LectEvaluateController extends Controller
         $present->marks = $markStr;
 
         $present->save();
+        
+        $intern = Internship::where('id', $id)->first();
         Alert::success('Submitted!', 'Student presentation mark has been successfully submitted.');
 
-        return $this->studList($request->internship_id);
+        return $this->studList($intern->session_id);
 
     }
 
