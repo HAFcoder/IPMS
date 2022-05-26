@@ -1,5 +1,17 @@
 @extends('layouts.parentLecturer')
 
+@section('head')
+
+    <script>
+        /* Show student */
+        $('body').on('click', '#showStudent', function() {
+            $('#studCrudModal-show').html("Student Details");
+            $('#crud-modal-show').modal('show');
+        });
+    </script>
+    
+@endsection
+
 @section('breadcrumbs')
 
     <div class="col-sm-6">
@@ -24,7 +36,7 @@
 
     <div class="row">
 
-        <div class="col-lg-10 mt-5 mx-auto">
+        <div class="col-lg-12 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">List of Students</h4>
@@ -36,8 +48,10 @@
                                         <th scope="col">Student ID</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Programme</th>
-                                        <th scope="col">Logbook & Report</th>
-                                        <th scope="col">Presentation</th>
+                                        <th scope="col">View Details</th>
+                                        <th scope="col">View Logbook & Report</th>
+                                        <th scope="col">Logbook & Report Marks</th>
+                                        <th scope="col">Presentation Marks</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,62 +73,182 @@
                                                     @endif
                                                 @endforeach
                                             </td>
+                                            {{-- view student details --}}
+                                            <td id="intern_id_{{ $intern->id }}">
+                                                {{-- <a href="#"><i class="fa fa-eye"></i></a> --}}
+                                                <a data-toggle="modal" data-target="#bd-example-modal-lg{{$intern->id}}"
+                                                    data-placement="top" title="View" ><i class="ti-eye text-primary"></i>
+                                                </a>
+    
+                                                {{-- show student info model --}}
+                                                <div class="modal fade bd-example-modal-lg" id="bd-example-modal-lg{{$intern->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">{{strtoupper($intern->student->student_info->studentID)}} Details</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                                                            </div>
+                                                            <div class="modal-body">
+    
+                                                                <div class="tstu-content">
+                                                                    <div class="card-body p-0">
+                                                                        <ul class="profile-page-user list-group list-group-flush">
+                                                                            
+                                                                            <h5 class="pt-3 pl-3 text-primary" style="text-align: left">Student Details:</h5>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Student ID:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ strtoupper($intern->student->student_info->studentID) }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Full Name:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->student->student_info->f_name }} {{ $intern->student->student_info->l_name }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Programme:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->student->student_info->programmes->code }} - {{ $intern->student->student_info->programmes->name }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">IC Number:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->student->student_info->no_ic }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Email:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->student->email }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Telephone:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->student->student_info->telephone }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Address:</span>
+                                                                                <textarea name="description" rows="2" placeholder="Enter session description" class="form-control input-rounded profile-page-amount" 
+                                                                                disabled>{{ $intern->student->student_info->address }}, {{ $intern->student->student_info->postcode }}, {{ $intern->student->student_info->city }}, {{ $intern->student->student_info->state }}</textarea>
+                                                                            </li>
+    
+                                                                            <h5 class="pt-3 pl-3 text-primary" style="text-align: left">Company Details:</h5>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Company Name:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->company->name }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Company Address:</span>
+                                                                                <textarea name="description" rows="2" placeholder="Enter session description" class="form-control input-rounded profile-page-amount" 
+                                                                                disabled>{{ $intern->company->address }}, {{ $intern->company->postcode }}, {{ $intern->company->city }}, {{ $intern->company->state }}</textarea>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Company Email:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->company->email }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Company Phone Number:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->company->phoneNumber }}" disabled>
+                                                                            </li >
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Company URL:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->company->webURL }}" disabled>
+                                                                            </li>
+    
+                                                                            <h5 class="pt-3 pl-3 text-primary" style="text-align: left">Internship Details:</h5>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Status:</span>
+                                                                                @php
+                                                                                    if ($intern->status == 'accepted') {
+                                                                                        $status = 'Approved';
+                                                                                    } elseif ($intern->status == 'declined') {
+                                                                                        $status = 'Declined';
+                                                                                    } else {
+                                                                                        $status = 'Pending';
+                                                                                    }
+                                                                                @endphp
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $status }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Start Date:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->start_date }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">End Date:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->end_date }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Job Position:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->job_scope }}" disabled>
+                                                                            </li>
+    
+                                                                            <li class="profile-page-content">
+                                                                                <span class="profile-page-name">Allowence:</span>
+                                                                                <input class="form-control input-rounded profile-page-amount" type="text" 
+                                                                                placeholder="{{ $intern->allowence }}" disabled>
+                                                                            </li>
+    
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+    
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            {{-- view logbook and report --}}
                                             <td>
-                                                @if (!empty($intern->finalEvaluation))
+                                                <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/details') }}"><i class="ti-agenda"></i></a>
+                                            </td>
+                                            {{-- logbook mark --}}
+                                            <td>
+                                                @if (!empty($intern->finalEvaluation->internship_id))
                                                     <i class="fa fa-check-square" style="color: green"></i>
+                                                @else
+                                                    <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/evaluation') }}"><i class="ti-write"></i></a>
                                                 @endif
-                                                <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/logbook-report/details') }}"><i class="ti-write"></i></a></td>
+                                            </td>
+                                            {{-- presentation marks --}}
                                             <td>
-                                                @php
-                                                $findme   = 'Bachelor';
-                                                    if (strpos($intern->studentInfo->programmes->name, $findme) !== false) {
-                                                @endphp
-
-                                                    @if (!empty($intern->presentMarks))
-                                                        <i class="fa fa-check-square" style="color: green"></i>
-                                                    @endif
-                                                    <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/presentation') }}"><i class="ti-layout-media-left-alt"></i></a>
-                                                @php
-                                                    } else {
-                                                        echo "Not applicable";
-                                                    }
-                                                @endphp
+                                                @if (strpos($intern->studentInfo->programmes->name, $findme) !== false)
+                                                        @if (!empty($intern->presentMarks))
+                                                            <i class="fa fa-check-square" style="color: green"></i>
+                                                        @else
+                                                            <a target="_blank" href="{{ url('lecturer/fedbacks-evaluation/student-list/'.$intern->id.'/presentation') }}"><i class="ti-layout-media-left-alt"></i></a>
+                                                        @endif
+                                                @else
+                                                    Not applicable
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
-                                {{--
-                                    <tr>
-                                        <th scope="row">AM123456789</th>
-                                        <td>Ain</td>
-                                        <td>BE101 - Diploma in Teaching of English As a Second Language</td>
-                                        <td><a href="{{ url('lecturer/fedbacks-evaluation/student-list/logbook-report/details') }}"><i class="ti-write"></i></a></td>
-                                        <td><i class="fa fa-times-circle" style="color: red"></i></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">AM123456789</th>
-                                        <td>Ali</td>
-                                        <td>BE101 - Diploma in Teaching of English As a Second Language</td>
-                                        <td><a href="{{ url('lecturer/fedbacks-evaluation/student-list/logbook-report/details') }}"><i class="ti-write"></i></a></td>
-                                        <td><i class="fa fa-times-circle" style="color: red"></i></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">AM123456789</th>
-                                        <td>Amirah</td>
-                                        <td>AA201 - Bachelor of Accountancy (Hons)</td>
-                                        <td><a href="{{ url('lecturer/fedbacks-evaluation/student-list/logbook-report/details') }}"><i class="ti-write"></i></a></td>
-                                        <td><a href="{{ url('lecturer/fedbacks-evaluation/student-list/presentation') }}"><i class="ti-layout-media-left-alt"></i></a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <th scope="row">AM123456789</th>
-                                        <td>Muhammad Ali</td>
-                                        <td>BE101 - Diploma in Teaching of English As a Second Language</td>
-                                        <td><i class="fa fa-check-square" style="color: green"></i></td>
-                                         <td><i class="fa fa-times-circle" style="color: red"></i></td>
-                                    </tr>
-                                --}} 
 
                                 </tbody>
                             </table>

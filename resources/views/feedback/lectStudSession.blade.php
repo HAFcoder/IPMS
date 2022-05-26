@@ -4,7 +4,7 @@
 
     <div class="col-sm-6">
         <div class="breadcrumbs-area clearfix">
-            <h4 class="page-title pull-left">Logbook</h4>
+            <h4 class="page-title pull-left">Feedback & Evaluation</h4>
             <ul class="breadcrumbs pull-left">
 
                 @if(Auth::guard('lecturer')->user()->role == "coordinator")
@@ -13,7 +13,7 @@
                 <li><a href="{{ url('/lecturer') }}">Home</a></li>
                 @endif
                 <li><a >Feedback & Evaluation</a></li>
-                <li><span>Logbook</span></li>
+                <li><span>Session</span></li>
             </ul>
         </div>
     </div>

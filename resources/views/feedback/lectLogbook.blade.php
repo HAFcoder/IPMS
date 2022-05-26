@@ -1,4 +1,4 @@
-@extends('layouts.parentLecturer')
+@extends('layouts.parentPublic')
 
 @section('breadcrumbs')
 
@@ -29,7 +29,28 @@
             <div class="card-body">
 
                 <div class="text-center mb-5 mt-4">
+                    <a href="#"><img style="height: 80px" src="{{ asset('assets/images/icon/kuptm_logo.png') }}" alt="logo"></a>
                     <h4>FINAL REPORT & LOGBOOK EVALUATION FORM</h4>
+                </div>
+
+                <div class="mb-5">
+                    <p class="mb-0 pb-0"><strong>STUDENT DETAILS</strong></p>
+                    <p class="mb-0 pb-0"><b>Name:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ $internship->studentInfo->f_name }} {{ $internship->studentInfo->l_name }}</p>
+                    <p class="mb-0 pb-0"><b>Student ID:</b> &emsp;&emsp;&emsp;&emsp;{{ strtoupper($internship->studentInfo->studentID) }}</p>
+
+                    @php
+                        $prog = $programme->find($internship->studentInfo->programme_id)->first();
+                    @endphp
+                    
+                    <p class="mb-0 pb-0"><b>Programme Code:</b> &emsp;{{ $prog->code }} - {{ $prog->name }}</p>
+                    <p class="mb-0 pb-0"><b>NRIC:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;{{ $internship->studentInfo->no_ic }}</p>
+                </div>
+
+                <div class="mb-5">
+                    <p class="mb-0 pb-0"><strong>INTERNSHIP DETAILS</strong></p>
+                    <p class="mb-0 pb-0"><b>Name:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ $internship->company->name }}</p>
+                    <p class="mb-0 pb-0"><b>Address:</b> &emsp;&emsp;&emsp;&emsp;&emsp;{{ $internship->company->address }}, {{ $internship->company->postal_code }}, {{ $internship->company->city }}, {{ $internship->company->state }}</p>
+                    <p class="mb-0 pb-0"><b>Internship date:</b> &emsp;&ensp;&nbsp;{{ $internship->start_date }} - {{ $internship->end_date }}</p>
                 </div>
 
                 <p><strong>INSTRUCTION</strong></p>

@@ -59,7 +59,7 @@
                         <p class="mb-0 pb-0"><strong>INTERNSHIP DETAILS</strong></p>
                         <p class="mb-0 pb-0"><b>Name:</b> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ $internship->company->name }}</p>
                         <p class="mb-0 pb-0"><b>Address:</b> &emsp;&emsp;&emsp;&emsp;&emsp;{{ $internship->company->address }}, {{ $internship->company->postal_code }}, {{ $internship->company->city }}, {{ $internship->company->state }}</p>
-                        <p class="mb-0 pb-0"><b>Internship date:</b> &emsp;&ensp;&nbsp;{{ $internship->orfForm->start_training }} until {{ $internship->orfForm->end_training }}</p>
+                        <p class="mb-0 pb-0"><b>Internship date:</b> &emsp;&ensp;&nbsp;{{ $internship->start_date }} - {{ $internship->end_date }}</p>
                     </div>
 
                     <div id="log" class="according accordion-s2 gradiant-bg">
@@ -179,8 +179,6 @@
             });
 
         }
-
- 
 
     </script>
     

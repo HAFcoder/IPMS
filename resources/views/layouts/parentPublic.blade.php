@@ -39,7 +39,7 @@
     <!-- preloader area end -->
     <!-- page container area start -->
     <div class="horizontal-main-wrapper">
-        @if  (\Request::is('coordinator/*'))
+        @if  (\Request::is('coordinator/*') || \Request::is('lecturer/*'))
 
             <div class="mainheader-area">
                 <div class="container">

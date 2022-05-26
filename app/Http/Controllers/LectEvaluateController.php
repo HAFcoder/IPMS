@@ -14,6 +14,7 @@ use App\Models\Internship;
 use App\Models\Programme;
 use App\Models\PresentMarks;
 use App\Models\FinalEvaluationMarks;
+use App\Models\Logbook;
 
 class LectEvaluateController extends Controller
 {
@@ -112,21 +113,27 @@ class LectEvaluateController extends Controller
                                 ->where('session_id',$id)
                                 ->get();
         $programme = Programme::all();
+        $findme   = 'Bachelor';
         //dump($internship);
         //dump($sessions);
         //dump(Auth::user()->id);
-        return view('feedback.lectStudList',compact('internship','programme'));
+        return view('feedback.lectStudList',compact('internship','programme','findme'));
     }
 
     //lect logbook evaluation for student
     public function logbookRead ($id)
     {
-        return view('logbook.lectLogbookReport',compact('id'));
+        $logbook = Logbook::where('internship_id', $id)->get();
+        $internship = Internship::where('id', $id)->first();
+        $programme = Programme::all();
+        return view('logbook.lectLogbookReport',compact('logbook', 'internship', 'programme'));
     }
 
     public function logbookEva ($id)
     {
         $finaleva = FinalEvaluationMarks::where('internship_id',$id)->first();
+        $internship = Internship::where('id',$id)->first();
+        $programme = Programme::all();
 
         $yesno= 'no';
         $markArr = null;
@@ -137,7 +144,7 @@ class LectEvaluateController extends Controller
             $markArr = explode(',' , $finaleva->marks);
 
         }
-        return view('feedback.lectLogbook',compact('id','yesno','markArr','finaleva'));
+        return view('feedback.lectLogbook',compact('id','yesno','markArr','finaleva', 'internship', 'programme'));
     }
 
     public function update_logbookEva (Request $request, $id)
@@ -206,9 +213,11 @@ class LectEvaluateController extends Controller
         $finaleva->marks = $markStr;
 
         $finaleva->save();
-        Alert::success('Submitted!', 'Student final evaluation mark has been successfully submitted.');
+        
+        $intern = Internship::where('id', $id)->first();
+        Alert::success('Submitted!', 'Student final report & logbook evaluation mark has been successfully submitted.');
 
-        return $this->studList($request->internship_id);
+        return $this->studList($intern->session_id);
 
     }
 
@@ -260,7 +269,7 @@ class LectEvaluateController extends Controller
         $present->marks = $markStr;
 
         $present->save();
-        Alert::success('Submitted!', 'Student mark has been successfully submitted.');
+        Alert::success('Submitted!', 'Student presentation mark has been successfully submitted.');
 
         return $this->studList($request->internship_id);
 

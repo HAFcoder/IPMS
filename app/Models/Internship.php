@@ -128,7 +128,7 @@ class Internship extends Model
 
     public function presentMarks()
     {
-        return $this->hasOne(FinalEvaluationMarks::class, 'internship_id' ,'id');
+        return $this->hasOne(PresentMarks::class, 'internship_id' ,'id');
     }
 
     public function orfForm()
