@@ -27,20 +27,20 @@ class MailingController extends Controller
         return "Email sent successfully";
     }
 
-    public function logbookApprovalMail($logid,$week)
+    public function logbookApprovalMail($touser,$details)
     {
-        $myEmail = 'novatechdevelopers@gmail.com';
+        // $myEmail = 'novatechdevelopers@gmail.com';
    
-        $details = [
-            'title' => 'Internship Weekly Logbook Update',
-            'week' => 1,
-            'url' => 'http://www.kuptm.edu.my/',
-            'logbookurl' => "http://localhost:8000/logbook/supervisor/view",
-            'name' => 'Muhammad Hamzah',
-            'company' => 'Nova Tech'
-        ];
+        // $details = [
+        //     'title' => 'Internship Weekly Logbook Update',
+        //     'week' => 1,
+        //     'url' => 'http://www.kuptm.edu.my/',
+        //     'logbookurl' => "http://localhost:8000/logbook/supervisor/view",
+        //     'name' => 'Muhammad Hamzah',
+        //     'company' => 'Nova Tech'
+        // ];
   
-        Mail::to($myEmail)->send(new LogbookApprovalMail($details));
+        Mail::to($touser)->send(new LogbookApprovalMail($details));
    
         return "Email sent successfully";
     }

@@ -319,6 +319,25 @@ class companiesController extends Controller
 
     }
 
+    public function studentDeclineOther($internship,$id){
+
+        //set all pending into decline status
+        $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
+        //dump($internship);
+        foreach($internship2 as $intern){
+
+            $rejectstat = 'declined';
+
+            //dump('id' . $intern->id);
+         
+            $intern->updated_at = now();
+            $intern->status = $rejectstat;
+
+            $intern->save();
+
+        }
+    }
+
     public function internship_updateOrf(Request $request, $id){
 
         $internship = Internship::where('id',$id)->first();
@@ -355,6 +374,13 @@ class companiesController extends Controller
         $orf->updated_at = now();
         $orf->save();
 
+        
+        //set remaining pending status into decline
+        if($internship->status != "accepted"){
+
+            $this->studentDeclineOther($internship,$id);
+        }
+
         $internship->updated_at = now();
         $internship->status = $status;
         $internship->allowance = $request->allowance;
@@ -367,21 +393,6 @@ class companiesController extends Controller
         $internship->duration= $interval->format('%a');
         $internship->save();
 
-        //set all pending into reject status
-        // $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
-
-        // foreach($internship2 as $intern){
-
-        //     $rejectstat = 'declined';
-
-        //     //dump('id' . $intern->id);
-            
-        //     $intern->updated_at = now();
-        //     $intern->status = $rejectstat;
-
-        //     $intern->save();
-
-        // }
         
         Alert::success('Success!', 'Your ORF details has been updated.');
 
@@ -450,6 +461,12 @@ class companiesController extends Controller
 
         $rdn->updated_at = now();
         $rdn->save();
+
+        //set remaining pending status into decline
+        if($internship->status != "accepted"){
+
+            $this->studentDeclineOther($internship,$id);
+        }
 
         $internship->job_scope = $request->job_scope;
         $internship->updated_at = now();
@@ -694,6 +711,13 @@ class companiesController extends Controller
         Mail::to($companyemail)
             ->cc($studentemail)
             ->send(new InternMail($details));
+
+        //get and update email count in database ; internship->emailCount
+        $currentCount = $internship->emailDecline;
+        $newCount = $currentCount + 1;
+        
+        $internship->emailDecline = $newCount;
+        $internship->save();
 
 
         return redirect()->back()->with('success', 'Decline letter has been sent to ' . $companyemail);

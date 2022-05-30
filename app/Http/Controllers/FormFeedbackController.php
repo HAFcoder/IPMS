@@ -348,6 +348,13 @@ class FormFeedbackController extends Controller
         
         $email = (new MailingController)->sendEmail($internship,$svemail, $studentemail, $subject,$type);
         
+        //get and update email count in database ; internship->emailEvaluationForm
+        $currentCount = $internship->emailEvaluationForm;
+        $newCount = $currentCount + 1;
+        
+        $internship->emailEvaluationForm = $newCount;
+        $internship->save();
+        
         return redirect()->back()->with('success', 'Email has been sent to ' . $companyemail);
 
     }
@@ -378,6 +385,14 @@ class FormFeedbackController extends Controller
         $subject = "UPTM INTERNSHIP - EMPLOYER / INDUSTRY QUESTIONNAIRE";
         
         $email = (new MailingController)->sendEmail($internship,$svemail, $studentemail, $subject, $type);
+
+        
+        //get and update email count in database ; internship->emailPeoForm
+        $currentCount = $internship->emailPeoForm;
+        $newCount = $currentCount + 1;
+        
+        $internship->emailPeoForm = $newCount;
+        $internship->save();
         
         return redirect()->back()->with('success', 'Email has been sent to ' . $companyemail);
 

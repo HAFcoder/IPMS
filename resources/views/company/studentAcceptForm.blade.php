@@ -26,10 +26,10 @@
 
     <div class="row">
 
-        <div class="col-8 mt-5 mx-auto">
+        <div class="col-12 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="header-title">Internship Information Form</h4>
+                    <h4 class="header-title">Internship Information Form {{ $internship->status }}</h4>
                     <hr/>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -39,7 +39,7 @@
                             <a class="nav-link" id="orf-tab" data-toggle="tab" href="#orf" role="tab" aria-controls="orf" aria-selected="false">Organisation Reply Form (ORF)</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="rdn-tab" data-toggle="tab" href="#rdn" role="tab" aria-controls="rdn" aria-selected="false">Report Duty Notification (RDN)</a>
+                            <a class="nav-link @if($internship->status != 'accepted') disabled @endif" id="rdn-tab" data-toggle="tab" href="#rdn" role="tab" aria-controls="rdn" aria-selected="false">Report Duty Notification (RDN)</a>
                         </li>
                     </ul>
                     

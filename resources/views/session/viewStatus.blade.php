@@ -29,7 +29,7 @@
 @section('content')
 
     <div class="row mt-5 mb-5">
-        <div class="col-10 mx-auto">
+        <div class="col-12 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <div class="d-sm-flex justify-content-between align-items-center">

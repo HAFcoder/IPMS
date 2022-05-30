@@ -26,5 +26,8 @@ class DropColumnSessionTable extends Migration
     public function down()
     {
         //
+        Schema::table('sessions', function (Blueprint $table) {
+            $table->integer(['programme']);
+        });
     }
 }

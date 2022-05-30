@@ -18,6 +18,8 @@ use App\Models\Internship;
 use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 
+use App\Http\Controllers\MailingController;
+
 class LogbookController extends Controller
 {
     public function studSubmission(){
@@ -79,7 +81,7 @@ class LogbookController extends Controller
     public function updateLogbook(Request $request, $id)
     {
         $statusvalid = "unvalidate";
-        $week = 0;
+        $week = $request->week;
 
         $request->validate([
             'start_date'=>'required',
@@ -90,7 +92,13 @@ class LogbookController extends Controller
         $date = strtotime($date);
         $dateformat = date('Y-m-d',$date);
 
-        $logbook = new Logbook;
+        if($request->logbookid == 0){
+            $logbook = new Logbook;
+        }else{
+            $logid = $request->logbookid;
+            $logbook = Logbook::where('id',$logid)->first();
+        }
+
 
         $logbook->internship_id = $id;
         $logbook->start_date = $dateformat;
@@ -129,7 +137,26 @@ class LogbookController extends Controller
         $logbook->validate = $statusvalid;
         $logbook->save();
 
+        $internship = Internship::where('id',$logbook->internship_id)->first();
+        $student = StudentInfo::where('stud_id',$internship->student_id)->first();
+
+        $studentname = $student->f_name . " " . $student->l_name;
+        $studentid = $student->studentID;
+
+        $companyname = $internship->company->name;
+        $companyemail = $internship->company->email;
+
         //send email here
+        $details = [
+            'title' => 'Internship Weekly Logbook Update',
+            'week' => $week,
+            'url' => 'https://www.kuptm.edu.my/',
+            'logbookurl' => route('logbook.view.supervisor',$logbook->id),
+            'name' => $studentname,
+            'company' => $companyname
+        ];
+        
+        $email = (new MailingController)->logbookApprovalMail($companyemail,$details);
 
 
         return redirect()->back()->with('info', 'Your logbook has been successfully sent to your company supervisor.');

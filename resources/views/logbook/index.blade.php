@@ -33,7 +33,7 @@
 
     <div class="row">
 
-        <div class="col-lg-12 mt-5 mx-auto">
+        <div class="col-10 mt-5 mx-auto">
             <div class="card">
                 <div class="card-body">
                     <h4 class="header-title">Student's Logbook (By Week)</h4>
@@ -73,6 +73,7 @@
                                                     @method('POST')
                                                     @csrf 
                                                     <input class="d-none" name="logbookid" id="logbookid" value="{{ $logbook->id }}">
+                                                    <input class="d-none" name="week" value="{{ $i }}">
                                                     <div class="form-group col-lg-3 text-center mx-auto">
                                                         <label for="start_date">Select Date of the Week</label>
                                                         <input value="{{ date('d-m-Y', strtotime($logbook->start_date)) }}" class="form-control text-center date-start" name="start_date" type="text" id="start_date{{$i}}" placeholder="Example : 19-01-2021" required/>
@@ -264,6 +265,7 @@
                         '                    @method("POST")' +
                         '                    @csrf ' +
                         '                    <input class="d-none" name="logbookid" id="logbookid" value="0">'+
+                        '                    <input class="d-none" name="week" value="'+count+'">'+
                         '                    <div class="form-group col-lg-3 text-center mx-auto">' +
                         '                        <label for="start_date">Select Date of the Week</label>' +
                         '                        <input class="form-control text-center date-start" name="start_date" type="text" id="start_date'+count+'" placeholder="Example : 19-01-2021" required/>' +

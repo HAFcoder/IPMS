@@ -123,7 +123,7 @@
                                         @if($intern->status == 'accepted')
                                             <a href="{{ route('internship.student.detail',$intern->id) }}" class="btn btn-sm btn-primary">See Details</a>
                                         @elseif($intern->status == 'declined')
-                                            <a href="{{ route('internship.student.decline',$intern->id) }}" class="btn btn-sm btn-warning">Send Declined Letter</a>
+                                            <a href="{{ route('internship.student.decline',$intern->id) }}" class="btn btn-sm btn-warning">Send Declined Letter ({{ $intern->emailDecline }})</a>
                                         @elseif($intern->status == 'rejected')
                                             -
                                         @else
