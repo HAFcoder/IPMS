@@ -14,6 +14,9 @@ use App\Models\Student;
 use App\Models\StudentInfo;
 use Carbon\Carbon;
 
+use App\Notifications\NotificationApps;
+use Illuminate\Support\Facades\Notification;
+
 class HomeController extends Controller
 {
     /**
@@ -101,6 +104,8 @@ class HomeController extends Controller
         $lecturer = Lecturer::count();
         $company = Company::count();
         $sessions = Session::count();
+
+
         return view('coordinator.index', compact('student', 'lecturer', 'company', 'sessions'));
     }
 

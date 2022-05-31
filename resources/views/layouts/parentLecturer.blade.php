@@ -315,77 +315,45 @@
                         </div>
                     </div>
                     <!-- profile info & task notification -->
-                    <div class="col-md-6 col-sm-4 clearfix">
+
+                    <div class="col-md-6 col-sm-4 clearfix" id="noti-div">
+
+                        @php
+    
+                        
+                        $uid = Auth::user()->id;
+    
+                        $lect = App\Models\Lecturer::where('id',$uid)->first();
+    
+                        //Notification::send($lect, new NotificationApps());
+    
+                        @endphp
+
                         <ul class="notification-area pull-right">
                             <li id="full-view"><i class="ti-fullscreen"></i></li>
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                             <li class="dropdown">
                                 <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>3</span>
+                                    <span>{{ count($lect->unreadNotifications) }}</span>
                                 </i>
                                 <div class="dropdown-menu bell-notify-box notify-box">
-                                    <span class="notify-title">You have 3 new notifications
-                                        <a href="#">view all</a>
+                                    <span class="notify-title">You have {{ count($lect->unreadNotifications) }} notifications
+                                        <a href="#" onclick="markasreadNoti({{$uid}})" >Marks All as Read</a>
                                     </span>
 
                                     <div class="nofity-list">
+                                        
+                                        @foreach ($lect->unreadNotifications as $noti)
+                                            
                                         <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
+                                            <div class="notify-thumb"><i class="ti-bell btn-info"></i></div>
                                             <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
+                                                <p>{{ $noti->data['message'] }}</p>
+                                                <span>{{ $noti->created_at }}</span>
                                             </div>
                                         </a>
 
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i>
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i>
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
+                                        @endforeach
                                     </div>
                                 </div>
                             </li>
@@ -460,6 +428,24 @@
     <script src="{{ asset('assets/js/jquery.slicknav.min.js') }}"></script>
 
     @yield('scripts')
+
+    <script>
+
+        function markasreadNoti(id){
+            $.ajax({
+                url: "{{ route('coordinator.notification.read',Auth::user()->id) }}",
+                cache: false
+            })
+            .done(function( html ) {
+                //alert("nice");
+                // $('#noti-div').load(location.href + ' #noti-div');
+                $("#noti-div").load(location.href+" #noti-div>*","");
+            });
+
+        }
+
+
+    </script>
 
     <!-- others plugins -->
     <script src="{{ asset('assets/js/plugins.js') }}"></script>

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use App\Http\Controllers\NotificationController;
 
 class LecturerController extends Controller
 {
@@ -190,7 +191,7 @@ class LecturerController extends Controller
     //see supervisee for lecturer
     public function viewSupervisee()
     {
-        $internship = Internship::where('lecturer_id','!=',null)->with('company','session','studentInfo','lecturerInfo')->get();
+        $internship = Internship::where('lecturer_id','!=',null)->get();
         //dump($internship);
         return view ('lecturer.coorSuperviseeView',compact('internship'));
     }
@@ -234,6 +235,12 @@ class LecturerController extends Controller
     
             $intern->save();
         }
+
+        //send notification to assigned supervisor
+        $message = "You have been assigned to " . count($request->input('intern_id')) . " new student as supervisor";
+        $lecturer = Lecturer::where('id',$lecturer_id)->first();  //get all coor lecturer
+        //dump($lect);
+        $notif = (new NotificationController)->addNotificationLecturer($lecturer->id,$message);
 
         Alert::success('Success!', 'Student(s) successfully assigned to a lecturer.');
         return back();

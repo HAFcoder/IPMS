@@ -16,9 +16,9 @@ class NotificationApps extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message)
     {
-        //
+        $this->message = $message;
     }
 
     /**
@@ -29,7 +29,7 @@ class NotificationApps extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +55,7 @@ class NotificationApps extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'message' => $this->message
         ];
     }
 }

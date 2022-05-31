@@ -24,6 +24,7 @@ use App\Http\Controllers\MailingController;
 use App\Http\Controllers\SvEvaluationMarksController;
 use App\Http\Controllers\GradSurveyAnswerController;
 use App\Http\Controllers\PresentMarksController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -83,7 +84,7 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::get('company/apply/{id}/accept', [companiesController::class, 'studentAccept'])->name('company.student-accept');
     Route::get('company/apply/{id}/decline', [companiesController::class, 'studentDecline'])->name('company.student-decline');
     Route::get('company/apply/{id}/reject', [companiesController::class, 'studentReject'])->name('company.student-reject');
-    
+
     Route::put('company/apply/{id}/update', [companiesController::class, 'studentInternship_update'])->name('company.internship.update');
     Route::put('company/apply/{id}/orf/update/', [companiesController::class, 'internship_updateOrf'])->name('internship.update.orf');
     Route::put('company/apply/{id}/rdn/update', [companiesController::class, 'internship_updateRdn'])->name('internship.update.rdn');
@@ -221,8 +222,8 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::get('coordinator/feedback/presentation/sessions/{id}', [PresentMarksController::class, 'presentViewSess2'])->name('view.present.marks');
     Route::get('coordinator/feedback/view/presentation/{id}', [PresentMarksController::class, 'viewPresentMark'])->name('feedback.view.present');
 
-
-
+    //notification route
+    Route::get('coordinator/notification/{id}/read', [NotificationController::class, 'markAsReadLecturer'])->name('coordinator.notification.read');
 });
 
 Route::group(['middleware' => ['auth:lecturer', 'role:lecturer']], function() {
@@ -324,4 +325,7 @@ Route::get('/company-sv/{id}/evaluation-form', [FormFeedbackController::class, '
 Route::post('/company-sv/{id}/evaluation-form', [FormFeedbackController::class, 'compEvaluationAnswer'])->name('company.feedbackAnswer');
 Route::get('/company-sv/{id}/peo-form', [FormFeedbackController::class, 'peoForm'])->name('company.peoForm');
 Route::post('/company-sv/{id}/peo-form', [FormFeedbackController::class, 'peoAnswer'])->name('company.peoAnswer');
+
+//test notification
+Route::get('/testNotification', [NotificationController::class, 'testNotification']);
 

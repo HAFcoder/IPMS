@@ -8,8 +8,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
+use App\Models\Lecturer;
 use App\Models\Student;
 use App\Models\StudentSession;
+
+use App\Http\Controllers\NotificationController;
 
 class Controller extends BaseController
 {
@@ -45,6 +48,16 @@ class Controller extends BaseController
         return $studsession;
 
     }
+
+    public function getAllCoordinator(){
+
+        $role = "coordinator";
+        $lecturer = Lecturer::where('role',$role)->get();
+
+        return $lecturer;
+
+    }
+
 
 
 }

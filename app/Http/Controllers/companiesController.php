@@ -21,6 +21,8 @@ use App\Models\Session;
 use DateTime;
 use Illuminate\Support\Facades\Storage;
 
+use App\Http\Controllers\NotificationController;
+
 class companiesController extends Controller
 {
     /**
@@ -135,6 +137,18 @@ class companiesController extends Controller
         $companies->webURL = $request->webURL;
 
         $companies->save();
+
+        $student = StudentInfo::where('stud_id',$student_id)->first();
+        $studentname = $student->f_name . " " . $student->l_name;
+
+        //send notification to coordinator
+        $message = "There is a new company has been requested for review by student - " . $studentname;
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
 
         Alert::success('Success!', 'Company successfully registered but need to be approved by the coordinator.');
         return redirect('/company-all');
@@ -336,6 +350,18 @@ class companiesController extends Controller
             $intern->save();
 
         }
+
+        //send notification to coordinator
+        $message = "There is " . count($internship2) . " new company to send Decline Letter email.";
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
+
+
+
     }
 
     public function internship_updateOrf(Request $request, $id){
@@ -379,6 +405,16 @@ class companiesController extends Controller
         if($internship->status != "accepted"){
 
             $this->studentDeclineOther($internship,$id);
+            
+            //send notification to coordinator
+            $message = "Student - " . $internship->studentInfo->f_name . " " . $internship->studentInfo->l_name . " has accept company - ". $internship->company->name;
+            $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+            foreach($lecturer as $lect){
+                //dump($lect);
+                $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+            }
+
         }
 
         $internship->updated_at = now();
@@ -466,6 +502,17 @@ class companiesController extends Controller
         if($internship->status != "accepted"){
 
             $this->studentDeclineOther($internship,$id);
+
+            
+            //send notification to coordinator
+            $message = "Student - " . $internship->studentInfo->f_name . " " . $internship->studentInfo->l_name . " has accept company - ". $internship->company->name;
+            $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+            foreach($lecturer as $lect){
+                //dump($lect);
+                $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+            }
+
         }
 
         $internship->job_scope = $request->job_scope;
@@ -553,23 +600,18 @@ class companiesController extends Controller
 
         $internship->save();
 
-        //set all pending into reject status
-        // $internship2 = Internship::where('student_id',$internship->student_id)->where('session_id',$internship->session_id)->where('id','!=',$id)->get();
+        if($status == "declined"){
 
+            //send notification to coordinator
+            $message = "There is a new company to send Decline Letter email.";
+            $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+            foreach($lecturer as $lect){
+                //dump($lect);
+                $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
 
-        //     foreach($internship2 as $intern){
+            }
 
-        //         $rejectstat = 'declined';
-
-        //         //dump('id' . $intern->id);
-                
-        //         $intern->updated_at = now();
-        //         $intern->status = $rejectstat;
-
-        //         $intern->save();
-
-        //     }
-        
+        }
         
         Alert::success('Success!', 'Your internship details has been updated.');
 

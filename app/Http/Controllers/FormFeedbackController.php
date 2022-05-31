@@ -13,6 +13,7 @@ use App\Models\EmpIndustrySurveyAnswer;
 use App\Models\Internship;
 use App\Models\Logbook;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\NotificationController;
 
 class FormFeedbackController extends Controller
 {
@@ -241,6 +242,16 @@ class FormFeedbackController extends Controller
         $evaluation->suggestion = $request->suggestion;
         $evaluation->save();
 
+        
+        //send notification to coordinator
+        $message = "Feedback and Evaluation has been submitted by company - " . $internship->company->name;
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
+
         return redirect()->back()->with('success', 'Feedback and Evaluation has been successfully sent. Thank you');
     }
 
@@ -316,6 +327,15 @@ class FormFeedbackController extends Controller
         $evaluation->marks = $markStr;
         $evaluation->comment = $request->comment;
         $evaluation->save();
+
+        //send notification to coordinator
+        $message = "EMPLOYER / INDUSTRY QUESTIONNAIRE (PEO) has been submitted by company - " . $internship->company->name;
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
 
         return redirect()->back()->with('success', 'EMPLOYER / INDUSTRY QUESTIONNAIRE (PEO) has been successfully sent. Thank you');
 

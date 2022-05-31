@@ -15,6 +15,7 @@ use App\Models\Programme;
 use App\Models\PresentMarks;
 use App\Models\FinalEvaluationMarks;
 use App\Models\Logbook;
+use App\Http\Controllers\NotificationController;
 
 class LectEvaluateController extends Controller
 {
@@ -215,6 +216,17 @@ class LectEvaluateController extends Controller
         $finaleva->save();
         
         $intern = Internship::where('id', $id)->first();
+
+        
+        //send notification to coordinator
+        $message = "Final Evaluation Marks for student has been submitted by " . $intern->lecturerInfo->f_name . " " . $intern->lecturerInfo->l_name;
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
+
         Alert::success('Submitted!', 'Student final report & logbook evaluation mark has been successfully submitted.');
 
         return $this->studList($intern->session_id);

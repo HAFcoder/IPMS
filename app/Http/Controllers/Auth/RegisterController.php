@@ -18,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use App\Http\Controllers\NotificationController;
+
 class RegisterController extends Controller
 {
     /*
@@ -132,6 +134,15 @@ class RegisterController extends Controller
             'postcode' =>  $data['postcode'],
         ]);
         $info->save();
+
+        //send notification to coordinator
+        $message = "There is new student registered - " . $data['f_name'] . " " . $data['l_name'];
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
 
         // Auth::login($user);
         // return redirect()->intended('login')->with(Auth::login($user));

@@ -78,7 +78,7 @@ class Internship extends Model
 
     public function lecturerInfo()
     {
-        return $this->belongsTo(LecturerInfo::class, 'lect_id', 'lecturer_id');
+        return $this->hasOne(LecturerInfo::class, 'lect_id', 'lecturer_id');
     }
 
     public function lectEvaluate()

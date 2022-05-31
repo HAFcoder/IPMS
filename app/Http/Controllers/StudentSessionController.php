@@ -9,6 +9,8 @@ use App\Models\Programme;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
+use App\Http\Controllers\NotificationController;
+
 class StudentSessionController extends Controller
 {
     // for student register session
@@ -35,6 +37,18 @@ class StudentSessionController extends Controller
 
         $studSess->save();
         $user->save();
+
+        $session = Session::where('id',$request->session_id)->first();
+        $sessionCode = $session->session_code;
+        
+        //send notification to coordinator
+        $message = "There is new student registered for session - " . $sessionCode;
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
 
         // $sessions = Session::where('status', '=', 'active')->get();
         Alert::success('Success!', 'Your session registration has been successful.');

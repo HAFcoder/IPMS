@@ -19,6 +19,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Carbon\Carbon;
 
 use App\Http\Controllers\MailingController;
+use App\Http\Controllers\NotificationController;
 
 class LogbookController extends Controller
 {

@@ -12,6 +12,7 @@ use App\Models\StudentInfo;
 use App\Models\Internship;
 use App\Models\GradSurveyAnswer;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Controllers\NotificationController;
 
 class FormEvaluateController extends Controller
 {
@@ -152,6 +153,18 @@ class FormEvaluateController extends Controller
         $graduate->marks = $markStr;
         $graduate->comment = $request->comment;
         $graduate->save();
+
+        $intern = Internship::where('id', $request->internship_id)->first();
+        
+        //send notification to coordinator
+        $message = "Graduate Form Answer has been submitted by student - " . $intern->lecturerInfo->f_name . " " . $intern->lecturerInfo->l_name;
+        $lecturer = $this->getAllCoordinator();  //get all coor lecturer
+        foreach($lecturer as $lect){
+            //dump($lect);
+            $notif = (new NotificationController)->addNotificationLecturer($lect->id,$message);
+
+        }
+
         Alert::success('Submitted!', 'Graduate Survey has been successfully submitted.');
 
         return $this->graduate();
