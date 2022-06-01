@@ -338,23 +338,27 @@
                                 </i>
                                 <div class="dropdown-menu bell-notify-box notify-box">
                                     <span class="notify-title">You have {{ count($lect->unreadNotifications) }} notifications
-                                        <a href="#" onclick="markasreadNoti({{$uid}})" >Marks All as Read</a>
+                                        @if ( count($lect->unreadNotifications) != 0 )
+                                            <a href="#" onclick="markasreadNoti({{$uid}})" >Marks All as Read</a>
+                                        @endif
                                     </span>
 
-                                    <div class="nofity-list">
-                                        
-                                        @foreach ($lect->unreadNotifications as $noti)
-                                            
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-bell btn-info"></i></div>
-                                            <div class="notify-text">
-                                                <p>{{ $noti->data['message'] }}</p>
-                                                <span>{{ $noti->created_at }}</span>
-                                            </div>
-                                        </a>
+                                    @if ( count($lect->unreadNotifications) != 0 )
+                                        <div class="nofity-list">
+                                            @foreach ($lect->unreadNotifications as $noti)
+                                                
+                                            <a href="#" class="notify-item">
+                                                <div class="notify-thumb"><i class="ti-bell btn-info"></i></div>
+                                                <div class="notify-text">
+                                                    <p>{{ $noti->data['message'] }}</p>
+                                                    <span>{{ $noti->created_at }}</span>
+                                                </div>
+                                            </a>
 
-                                        @endforeach
-                                    </div>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    
                                 </div>
                             </li>
                         </ul>
@@ -403,6 +407,24 @@
                 @yield('content')
 
             </div>
+
+            <!-- loader -->
+            <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3"
+            data-toggle="modal" data-target="#loadingModal">loading modal</button>
+            <div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content text-center">
+                        <div class="modal-body">
+                            <img src="{{ asset('assets/images/media/loader5.gif') }}" >
+                            <h1><small class="text-muted ">Loading ...</small></h1>
+                            <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- loader -->
+
         </div>
         <!-- main content area end -->
 
@@ -432,14 +454,20 @@
     <script>
 
         function markasreadNoti(id){
+            $('#btnLoad').click();
             $.ajax({
                 url: "{{ route('coordinator.notification.read',Auth::user()->id) }}",
                 cache: false
             })
-            .done(function( html ) {
+            .done(function( data ) {
                 //alert("nice");
                 // $('#noti-div').load(location.href + ' #noti-div');
-                $("#noti-div").load(location.href+" #noti-div>*","");
+                // $("#noti-div").load(location.href+" #noti-div>*","");
+                // setTimeout(() => {
+                //     $('#btnCloseLoad').click();
+                // }, 10000);
+                
+                location.reload();
             });
 
         }

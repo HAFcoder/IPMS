@@ -159,19 +159,22 @@
                     </div>
 
                     
-                    <!-- Button trigger modal -->
-                    <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3" data-toggle="modal" data-target="#loadingModal">loading modal</button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="loadingModal">
+                    <!-- loader -->
+                    <button hidden id="btnLoad" type="button" class="btn btn-primary btn-flat btn-lg mt-3"
+                    data-toggle="modal" data-target="#loadingModal">loading modal</button>
+                    <div class="modal fade" id="loadingModal" data-backdrop="static" data-keyboard="false" >
                         <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body text-center">
-                                    <i class="fa fa-spinner fa-spin"></i> Please wait updating table...
+                            <div class="modal-content text-center">
+                                <div class="modal-body">
+                                    <img src="{{ asset('assets/images/media/loader5.gif') }}" >
+                                    <h1><small class="text-muted ">Loading ...</small></h1>
+                                    <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Close</button>
                                 </div>
-                                <button hidden id="btnCloseLoad" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
+                    <!-- loader -->
 
                 </div>
             </div>
