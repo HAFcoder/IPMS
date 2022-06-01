@@ -20,7 +20,7 @@
         }
 
         .btn_width2{
-            width:145px;
+            width:170px;
             margin: 2px;
         }
 
@@ -132,8 +132,8 @@
                                     </td>
                                     <td>{{ $intern->company->name }}</td>
                                     <td>
-                                        <a href="{{ route('feedback.sendForm',$intern->id) }}" class="btn btn-xs btn-primary mb-2"><i class="fa fa-paper-plane"></i> Evaluation Form ({{$intern->emailEvaluationForm}})</a> <br>
-                                        <a href="{{ route('feedback.sendPoe',$intern->id) }}" class="btn btn-xs btn-info mb-2"><i class="fa fa-paper-plane"></i> POE Form ({{$intern->emailPeoForm}})</a>
+                                        <a href="{{ route('feedback.sendForm',$intern->id) }}" class="btn btn-xs btn-primary mb-2 btn_width2"><i class="fa fa-paper-plane"></i> Evaluation Form ({{$intern->emailEvaluationForm}})</a> <br>
+                                        <a href="{{ route('feedback.sendPoe',$intern->id) }}" class="btn btn-xs btn-info mb-2 btn_width2"><i class="fa fa-paper-plane"></i> POE Form ({{$intern->emailPeoForm}})</a>
                                     </td>
                                     <td>
                                         @foreach($svMarks as $svmark)
