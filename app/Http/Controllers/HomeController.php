@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\LecturerInfo;
 use App\Models\LookupAddress;
-use App\models\Session;
+use App\Models\Session;
 use App\Models\Student;
 use App\Models\StudentInfo;
 use Carbon\Carbon;
