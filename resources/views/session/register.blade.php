@@ -108,7 +108,8 @@
                         @php
                             foreach ($session->programmes as $key){
                         @endphp
-                        $("#programme_id").append('<option value="' + @json($key->id) + '">' +  @json($key->name) + '</option>');
+                        console.log(@json($key));
+                        $('#programme_id').append('<option value="' + @json($key->id) + '">' +  @json($key->name) + '</option>');
                         @php
                             }
                         @endphp

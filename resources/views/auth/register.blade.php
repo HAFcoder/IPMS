@@ -79,7 +79,7 @@
 
                 <div class="form-gp">
                     <label for="studentID">UPTM Student ID</label>
-                    <input type="text" class="text-uppercase" id="studentID" pattern="[A-Za-z]{2}\d{9}" name="studentID"
+                    <input type="text" class="text-uppercase" id="studentID" pattern="[A-Za-z]{2}\d{10}" name="studentID"
                         value="{{ old('studentID') }}" required autocomplete="studentID">
                     <i class="ti-id-badge"></i>
                     <div class="text-danger"></div>

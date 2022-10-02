@@ -58,8 +58,8 @@
 
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Session Code</label>
-                            <input id="code" class="form-control" type="text" value="{{ $randcode }}" readonly name="session_code" placeholder="Enter session code" required>
-                            <a onclick="generatenew()" class="btn-dark btn btn-sm text-white">Generate Code</a>
+                            <input id="code" class="form-control" type="text" value="" name="session_code" placeholder="Enter session code" required>
+                            <a hidden onclick="generatenew()" class="btn-dark btn btn-sm text-white">Generate Code</a>
                         </div>
 
                         <div class="form-group">

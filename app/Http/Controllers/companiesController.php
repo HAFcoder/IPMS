@@ -764,5 +764,15 @@ class companiesController extends Controller
 
         return redirect()->back()->with('success', 'Decline letter has been sent to ' . $companyemail);
     }
+   
+    public function checkCompanyName(Request $request){
+
+        $company['company'] = Company::where('name', 'ilike' ,$request->companyName)->get();
+        return response()->json($company);
+
+
+    }
+
+
 
 }

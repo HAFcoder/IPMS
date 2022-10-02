@@ -60,77 +60,81 @@
 
                         <div class="form-group">
                             <label for="example-text-input" class="col-form-label">Company Name</label>
-                            <input class="form-control" type="text" name="name" placeholder="Enter company name" required value="{{ old('name') }}">
+                            <input id="companyName" class="form-control" type="text" name="name" placeholder="Enter company name" required value="{{ old('name') }}">
+                            <a onclick="checkCompanyName()" class="btn-dark btn btn-sm text-white">Check Company</a>
+                            <div id="resultCheckCompanyName"></div>
                         </div>
                         
-                        <div class="form-group">
-                            <label class="col-form-label">Contact Number</label>
-                            <input class="form-control" type="text" name="phoneNumber" placeholder="Enter company contact number." required value="{{ old('phoneNumber') }}">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-form-label">Company Email</label>
-                            <input class="form-control" type="text" name="email" placeholder="Enter company email." required value="{{ old('email') }}">
-                        </div>
+                        <div id="companyDetailForm">
+                            <div class="form-group">
+                                <label class="col-form-label">Contact Number</label>
+                                <input class="form-control" type="text" name="phoneNumber" placeholder="Enter company contact number." required value="{{ old('phoneNumber') }}">
+                            </div>
 
-                        <div class="form-group">
-                            <label for="example-search-input" class="col-form-label">Address</label>
-                            <textarea name="address" rows="5" placeholder="Enter company address" class="form-control" required>{{ old('address') }}</textarea>
-                        </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Company Email</label>
+                                <input class="form-control" type="text" name="email" placeholder="Enter company email." required value="{{ old('email') }}">
+                            </div>
 
-                        <div class="form-group">
-                            <label class="col-form-label">Postal Code</label>
-                            <div id="postal_area">
-                                <select id="postalcode" onchange="getcity()" class="custom-select" name="postal_code">
-                                    <option disabled selected value>Select Postal Code</option>
-                                    @foreach($postcode as $key => $ps)
-                                        <option value="{{ $ps->postcode }}">{{ $ps->postcode }}</option>
+                            <div class="form-group">
+                                <label for="example-search-input" class="col-form-label">Address</label>
+                                <textarea name="address" rows="5" placeholder="Enter company address" class="form-control" required>{{ old('address') }}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-form-label">Postal Code</label>
+                                <div id="postal_area">
+                                    <select id="postalcode" onchange="getcity()" class="custom-select" name="postal_code">
+                                        <option disabled selected value>Select Postal Code</option>
+                                        @foreach($postcode as $key => $ps)
+                                            <option value="{{ $ps->postcode }}">{{ $ps->postcode }}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-form-label">City</label>
+
+                                <div id="city_area">
+                                    <select id="city" class="custom-select" name="city">
+                                        <option selected="selected">Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-form-label">State</label>
+
+                                <select id="state" class="custom-select" name="state">
+                                    <option disabled selected value>Select State</option>
+                                    @foreach($state as $key => $st)
+                                        <option value="{{ $st->state }}">{{ $st->state }}</option>
                                     @endforeach
 
                                 </select>
                             </div>
 
-                        </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Website Company <i>(Optional)</i></label>
+                                <input class="form-control" type="text" name="webURL" placeholder="Enter company website." value="{{ old('webURL') }}">
+                            </div>
 
-                        <div class="form-group">
-                            <label class="col-form-label">City</label>
 
-                            <div id="city_area">
-                                <select id="city" class="custom-select" name="city">
-                                    <option selected="selected">Select City</option>
+                            <div class="form-group">
+                                <label class="col-form-label">Status</label>
+
+                                <select class="custom-select form-control" name="status">
+                                    <option value="">Select status</option>
+                                    <option value="approved">Approved</option>
+                                    <option selected value="pending">Pending</option>
                                 </select>
                             </div>
+
+                            <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-form-label">State</label>
-
-                            <select id="state" class="custom-select" name="state">
-                                <option disabled selected value>Select State</option>
-                                @foreach($state as $key => $st)
-                                    <option value="{{ $st->state }}">{{ $st->state }}</option>
-                                @endforeach
-
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label class="col-form-label">Website Company <i>(Optional)</i></label>
-                            <input class="form-control" type="text" name="webURL" placeholder="Enter company website." value="{{ old('webURL') }}">
-                        </div>
-
-                        
-                        <div class="form-group">
-                            <label class="col-form-label">Status</label>
-
-                            <select class="custom-select form-control" name="status">
-                                <option value="">Select status</option>
-                                <option value="approved">Approved</option>
-                                <option selected value="pending">Pending</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary mt-4 pr-4 pl-4">Submit</button>
                     </form>
                 </div>
             </div>
@@ -156,7 +160,14 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });      
+
+        $('#companyDetailForm').hide();
+
+        $('#companyName').on('change', function() {
+            checkCompanyName();
         });
+
 
     });
 
@@ -237,6 +248,45 @@
 
 
     }
+    
+    function checkCompanyName(){
+
+        var companyName = $('#companyName').val();
+        console.log(companyName);
+        $('#companyDetailForm').hide();
+        $('#btnLoad').click();
+        if(companyName){
+            console.log("ada");
+        
+            $.ajax({
+                url: "{{ route('company.checkName') }}",
+                type: "POST",
+                data: {
+                    companyName: companyName,
+                    _token: '{{ csrf_token() }}'
+                },
+                dataType: 'json',
+                success: function(res) {
+                    $('#btnCloseLoad').click();
+                    console.log(res.company.length);
+                    compExist = res.company.length;
+                
+                    if(compExist > 0){
+                        console.log("company exist");
+                        $('#resultCheckCompanyName').html('<span class="alert alert-danger">Company data already exist. Please refer list of company.</span>');
+                    }else{
+                        console.log("no company data yet");
+                        $('#companyDetailForm').show();
+                        $('#resultCheckCompanyName').html('<span class="alert alert-success">Company data does not exist. Fill in the details to proceed with the request.</span>');
+                    }
+                
+                }
+            });
+        
+        }
+
+    }
+
 
     </script>
 

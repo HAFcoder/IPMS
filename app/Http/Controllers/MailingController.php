@@ -12,6 +12,7 @@ use Mail;
 
 class MailingController extends Controller
 {
+    
    
     public function declineMail($encryptedstudentid)
     {
@@ -19,7 +20,7 @@ class MailingController extends Controller
    
         $details = [
             'title' => 'Rejection of Internship Position',
-            'url' => 'http://www.kuptm.edu.my/'
+            'url' => 'https://www.kuptm.edu.my/'
         ];
   
         Mail::to($myEmail)->send(new InternMail($details));
@@ -51,7 +52,7 @@ class MailingController extends Controller
    
         $details = [
             'title' => 'Student Evaluation Form',
-            'url' => 'http://www.dummyipms.com/evaluation/' . $encryptedstudentid
+            'url' =>  env('APP_URL') . "//evaluation//" . $encryptedstudentid
         ];
   
         Mail::to($myEmail)->send(new StudentEvaluationMail($details));

@@ -81,6 +81,8 @@ Route::group(['middleware' => 'auth', 'role:student'], function() {
     Route::get('/apply-list', [companiesController::class, 'applyList']);
     Route::post('/apply-company', [companiesController::class, 'addStudentCompany'])->name('apply.student_company');
 
+    Route::post('company/checkName', [companiesController::class, 'checkCompanyName'])->name('company.checkName');
+
     Route::get('company/apply/{id}/accept', [companiesController::class, 'studentAccept'])->name('company.student-accept');
     Route::get('company/apply/{id}/decline', [companiesController::class, 'studentDecline'])->name('company.student-decline');
     Route::get('company/apply/{id}/reject', [companiesController::class, 'studentReject'])->name('company.student-reject');
@@ -145,6 +147,7 @@ Route::group(['middleware' => ['auth:lecturer', 'role:coordinator']], function()
     Route::delete('coordinator/company/{id}', [companiesController::class, 'destroy'])->name('company.destroy');
     Route::get('coordinator/company/status', [companiesController::class, 'updateStatus'])->name('company.update.status');
     Route::post('coordinator/company/add', [companiesController::class, 'createCompany'])->name('company.create');
+    Route::post('company/checkName', [companiesController::class, 'checkCompanyName'])->name('company.checkName');
 
     //session route
 

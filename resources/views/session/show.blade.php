@@ -212,7 +212,7 @@
                                                         {{-- <a data-toggle="tooltip" data-placement="top" title="Edit" 
                                                 href="{{ route('session.edit',$data->id) }}" class="btn btn-primary btn-xs"><span class="ti-pencil"></span></a> --}}
     
-                                                        <button data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
+                                                        <button hidden data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger btn-xs show_confirm"
                                                         type="submit"><span class="ti-trash"></span></button>
     
                                                     @endif

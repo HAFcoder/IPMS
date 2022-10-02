@@ -84,6 +84,8 @@ class SessionController extends Controller
         $session->lecturer_id = $uid;
 
         $session->save();
+        //dump($request->programme);
+        //$sid = 99;
         $sid = $session->id;
         
         foreach($request->programme as $prog){
@@ -96,10 +98,11 @@ class SessionController extends Controller
             $ses_prog->save();
 
         }
-
+        //dump("id sess " . $sid);
         $createfolder = (new FileManagementController)->createDirectory($request->session_code);
 
         return redirect()->back()->with('success', 'Session data has been successfully added.');
+        
     }
 
     /**
