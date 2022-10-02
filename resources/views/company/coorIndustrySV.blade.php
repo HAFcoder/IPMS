@@ -73,9 +73,14 @@
                                     <th>Student ID</th>
                                     <th>Student Name</th>
                                     <th>IC Number</th>
-                                    <th>Status</th>
+                                    <th>Supervisee</th>
                                     <th>Company</th>
-                                    <th>Action</th>
+                                    <th>Industry Supervisor</th>
+                                    <th>Position Supervisor</th>
+                                    <th>Contact Supervisor</th>
+                                    <th>Email Supervisor</th>
+                                    <th>Status</th>
+                                    <th class="noExport">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -86,13 +91,38 @@
                                 </tr>
                                 @endif
 
+
                                 @foreach($intern as $data)
+
+                                @php
+                                    //get company supervisor data
+                                    if($data->supervisor){
+                                        //echo 'ada';
+                                        $svName = $data->supervisor->name;
+                                        $svPosition = $data->supervisor->position;
+                                        $svContact = $data->supervisor->contact;
+                                        $svEmail = $data->supervisor->email;
+                                    }else{
+                                        //echo 'takda';
+                                        $svName = "";
+                                        $svPosition = "";
+                                        $svContact = "";
+                                        $svEmail = "";
+                                    }
+
+                                @endphp
                                 
                                     <tr>
                                         <td>{{ $data->session->session_code }}</td>
                                         <td>{{ strtoupper($data->student->student_info->studentID) }}</td>
                                         <td>{{ ucwords($data->student->student_info->f_name . " " . $data->student->student_info->l_name ) }}</td>
                                         <td>{{ $data->student->student_info->no_ic }}</td>
+                                        <td>{{ $data->lecturerInfo->f_name }} {{ $data->lecturerInfo->f_name }} ( {{ $data->lecturerInfo->telephone }} )</td>
+                                        <td>{{ $data->company->name }}</td>
+                                        <td>{{ $svName }}</td>
+                                        <td>{{ $svPosition }}</td>
+                                        <td>{{ $svContact }}</td>
+                                        <td>{{ $svEmail }}</td>
                                         <td>
                                             @php
                                                 if ($data->student->status == 'noRequest') {
@@ -113,7 +143,6 @@
                                                 <span class="badge badge-pill {{ $style }}">{{ $status }}</span>
                                             </p>
                                         </td>
-                                        <td>{{ $data->company->name }}</td>
                                         <td id="student_id_{{ $data->student_id }}">
 
                                             <a data-toggle="modal" data-target="#bd-example-modal-lg{{$data->student_id}}"
@@ -194,25 +223,25 @@
                                                                         <li class="profile-page-content">
                                                                             <span class="profile-page-name">Industrial SV name:</span>
                                                                             <input class="form-control input-rounded profile-page-amount" type="text" 
-                                                                            placeholder="{{ $data->supervisor->name }}" disabled>
+                                                                            placeholder="{{ $svName }}" disabled>
                                                                         </li class="profile-page-content">
 
                                                                         <li class="profile-page-content">
                                                                             <span class="profile-page-name">Industrial SV position:</span>
                                                                             <input class="form-control input-rounded profile-page-amount" type="text" 
-                                                                            placeholder="{{ $data->supervisor->position }}" disabled>
+                                                                            placeholder="{{ $svPosition }}" disabled>
                                                                         </li class="profile-page-content">
 
                                                                         <li class="profile-page-content">
                                                                             <span class="profile-page-name">Industrial SV phone:</span>
                                                                             <input class="form-control input-rounded profile-page-amount" type="text" 
-                                                                            placeholder="{{ $data->supervisor->contact }}" disabled>
+                                                                            placeholder="{{ $svContact }}" disabled>
                                                                         </li class="profile-page-content">
 
                                                                         <li class="profile-page-content">
                                                                             <span class="profile-page-name">Industrial SV email:</span>
                                                                             <input class="form-control input-rounded profile-page-amount" type="text" 
-                                                                            placeholder="{{ $data->supervisor->email }}" disabled>
+                                                                            placeholder="{{ $svEmail }}" disabled>
                                                                         </li class="profile-page-content">
                                                                             
                                                                         {{-- <li class="profile-page-content">
@@ -273,6 +302,7 @@
             // language : {
             //     sLengthMenu: "Show _MENU_"
             // },
+            responsive: true,
             dom: 'lBfrtip',
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             buttons:{
@@ -309,16 +339,16 @@
                                     //         unselectAllRow();
                                     //     }
                                     // }, 
-                                    {
-                                        extend: 'pdfHtml5',
-                                        text: '<i class="fa fa-file-pdf-o"></i>',
-                                        titleAttr: 'PDF',
-                                        footer: true,
-                                        messageTop: 'This is the list of company under IPMS database.',
-                                        exportOptions: {
-                                             columns:"thead th:not(.noExport)"
-                                        }
-                                    },
+                                    // {
+                                    //     extend: 'pdfHtml5',
+                                    //     text: '<i class="fa fa-file-pdf-o"></i>',
+                                    //     titleAttr: 'PDF',
+                                    //     footer: true,
+                                    //     messageTop: 'This is the list of company under IPMS database.',
+                                    //     exportOptions: {
+                                    //          columns:"thead th:not(.noExport)"
+                                    //     }
+                                    // },
                                     {
                                         extend: 'csvHtml5',
                                         text: '<i class="fa fa-file-text-o"></i>',
