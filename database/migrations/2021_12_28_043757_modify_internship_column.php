@@ -15,9 +15,9 @@ class ModifyInternshipColumn extends Migration
     {
         //
         Schema::table('internships', function (Blueprint $table) {
-            $table->integer('duration')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable(); 
+            $table->integer('duration')->nullable(true)->change();
+            $table->date('start_date')->nullable(true)->change();
+            $table->date('end_date')->nullable(true)->change();
         });
     }
 
@@ -30,9 +30,9 @@ class ModifyInternshipColumn extends Migration
     {
         //
         Schema::table('internships', function (Blueprint $table) {
-            $table->dropColumn('duration');
-            $table->dropColumn('start_date');
-            $table->dropColumn('end_date');
+            $table->integer('duration')->nullable(false)->change();
+            $table->date('start_date')->nullable(false)->change();
+            $table->date('end_date')->nullable(false)->change(); 
         });
     }
 }
